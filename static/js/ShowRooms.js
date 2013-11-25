@@ -2,68 +2,18 @@ define('ShowRooms', ["jquery"], function ($)
 {
     "use strict"
 
-    var FreeRoom = function(start_time, end_time, campus, house, room)
+    var FreeRoom = function(campus, house, room)
     {
-        this.start_time = start_time;
-        this.end_time = end_time;
         this.campus = campus;
         this.house = house;
         this.room = room;
-        console.log('FreeRoom', start_time, end_time, campus, house, room);
+        console.log('FreeRoom', campus, house, room);
     };
 
     FreeRoom.prototype.getRoom = function ()
     {
         return this.room;
     }
-
-    FreeRoom.prototype.getStartTime = function()
-    {
-        return this.start_time;
-    };
-
-    FreeRoom.prototype.getStartTimeAsTimeString = function()
-    {
-        return this.getDateAsTimeString(this.getStartTime());
-    };
-
-    FreeRoom.prototype.getEndTime = function()
-    {
-        return this.end_time;
-    };
-
-    FreeRoom.prototype.getEndTimeAsTimeString = function()
-    {
-        return this.getDateAsTimeString(this.getEndTime());
-    };
-
-    FreeRoom.prototype.getDateAsTimeString = function(date)
-    {
-        var hours = date.getHours();
-        var minutes = date.getMinutes();
-
-        if (hours < 10)
-        {
-            hours = "0" + hours;
-        }
-
-        if (minutes < 10)
-        {
-            minutes = "0" + minutes;
-        }
-
-        return hours + ':' + minutes;
-    };
-
-    FreeRoom.prototype.isFreeAtTime = function(time)
-    {
-        if (this.getStartTime().getTime() <= time.getTime() && time.getTime() < this.getEndTime().getTime())
-        {
-            return true;
-        }
-
-        return false;
-    };
 
     var Reservation = function(name, start_time, end_time, campus, house, room, person_name)
     {
@@ -237,6 +187,7 @@ define('ShowRooms', ["jquery"], function ($)
 //            'url': './veranstaltungen.xml?cb=' + Math.random(),
             'url': './soap.php',
             'data': {
+                // FIXME: hack to retrieve all data, since the date is not filtered properly, yet
                 'endTime': '2020-10-10T12:00:00',
                 'startTime': '2010-10-10T12:00:00',
                 'campus': that.campus,
@@ -248,44 +199,57 @@ define('ShowRooms', ["jquery"], function ($)
             console.log('found document', response);
             var returns = $(response).find('return');
 
+            // FIXME: hack to store used_rooms
+            var used_rooms = [];
 
             returns.each(function(pos, reservation_raw) {
                 reservation_raw = $(reservation_raw);
-                that.addReservation(reservation_raw.find('veranstaltung').text(), reservation_raw.find('startTime').text(), reservation_raw.find('endTime').text(), reservation_raw.find('roomList > room').text(), reservation_raw.find('personList > person:first').text());
+                var reservation = that.addReservation(reservation_raw.find('veranstaltung').text(), reservation_raw.find('startTime').text(), reservation_raw.find('endTime').text(), reservation_raw.find('roomList > room').text(), reservation_raw.find('personList > person:first').text());
+
+                // FIXME: hack to mark all used rooms
+                if (reservation && reservation.isRunningAtTime(that.now))
+                {
+                    used_rooms.push(reservation_raw.find('roomList > room').text());
+                }
             });
 
             that.sortReservationsByName();
             that.renderAllReservations();
 
-        });
 
-        $.ajax({
+
+            $.ajax({
 //            'url': './veranstaltungen.xml?cb=' + Math.random(),
-            'url': './soap.php',
-            'data': {
-//                'endTime': that.now.toISOString(),
-//                'startTime': that.now.toISOString(),
-                // FIXME: rausnehmen, sobald die filterlogik funktioniert
-                'endTime': '2020-10-10T12:00:00',
-                'startTime': '2010-10-10T12:00:00',
-                'campus': that.campus,
-                'method': 'rooms4Time',
-                'cb': Math.random()
-            },
-            'dataType': 'xml'
-        }).done(function (response) {
-            console.log('found document', response);
-            var returns = $(response).find('return');
+                'url': './soap.php',
+                'data': {
+//                    'endTime': that.now.toISOString(),
+//                    'startTime': that.now.toISOString(),
+                    // FIXME: rausnehmen, sobald die filterlogik funktioniert
+                'endTime': '2030-01-01T12:01:00',
+                'startTime': '2030-01-01T12:00:00',
+                    'campus': that.campus,
+                    'method': 'rooms4Time',
+                    'cb': Math.random()
+                },
+                'dataType': 'xml'
+            }).done(function (response) {
+                console.log('found document', response);
+                var returns = $(response).find('return');
 
 
-            returns.each(function(pos, reservation_raw) {
-                reservation_raw = $(reservation_raw);
-                that.addFreeRoom(reservation_raw.find('roomList > room').text(), reservation_raw.find('startTime').text(), reservation_raw.find('endTime').text());
+                returns.each(function(pos, reservation_raw) {
+                    reservation_raw = $(reservation_raw);
+                    // FIXME: rausnehmen, sobald die filterlogik bei rooms4Time richtig funktioniert
+                    if (used_rooms.indexOf(reservation_raw.text()) == -1)
+                    {
+                        that.addFreeRoom(reservation_raw.text());
+                    }
+                });
+
+                that.sortFreeRoomsByName();
+                that.renderAllFreeRooms();
+
             });
-
-            that.sortFreeRoomsByName();
-            that.renderAllFreeRooms();
-
         });
     };
 
@@ -452,12 +416,14 @@ define('ShowRooms', ["jquery"], function ($)
 
             if (campus == that.campus && house == that.house)
             {
-                that.reservations.push(new Reservation(name, new Date(start_time), new Date(end_time), campus, house, room, person_string));
+                var reservation = new Reservation(name, new Date(start_time), new Date(end_time), campus, house, room, person_string);
+                that.reservations.push(reservation);
+                return reservation;
             }
         }
     };
 
-    ShowRooms.prototype.addFreeRoom = function(room_string, start_time, end_time)
+    ShowRooms.prototype.addFreeRoom = function(room_string)
     {
         var that = this;
         var room_match = room_string.match(/^([^\.]+)\.([^\.]+)\.(.+)/);
@@ -468,11 +434,11 @@ define('ShowRooms', ["jquery"], function ($)
             var house = parseInt(room_match[2], 10);
             var room = room_match[3];
 
-            console.log('free', campus, house, room, start_time, end_time);
+            console.log('free', campus, house, room);
 
             if (campus == that.campus && house == that.house)
             {
-                that.free_rooms.push(new FreeRoom(new Date(start_time), new Date(end_time), campus, house, room));
+                that.free_rooms.push(new FreeRoom(campus, house, room));
             }
         }
     };

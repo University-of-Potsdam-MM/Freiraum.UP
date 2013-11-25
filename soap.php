@@ -17,7 +17,7 @@ if ($cache->contains($id))
 }
 else
 {
-    $client = new SoapClient("http://elis.soft.cs.uni-potsdam.de:7000/timeeditWS/ws?wsdl", array(
+    $client = new SoapClient("http://fossa.soft.cs.uni-potsdam.de:7000/rooms/ws?WSDL", array(
         "trace" => 1, "exception" => 0
     ));
 
