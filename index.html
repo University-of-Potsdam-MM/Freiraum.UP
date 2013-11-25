@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=devmice-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="../../assets/ico/favicon.png">
+
+    <title>rauminfo</title>
+<!--
+    <base href="" />
+-->
+
+    <!-- Bootstrap core CSS -->
+    <link href="./static/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <link href="./static/bower_components/codemirror/lib/codemirror.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="./static/css/global.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="./static/bower_components/html5shiv/dist/html5shiv.js"></script>
+    <script src="./static/bower_components/respond/respond.src.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="navbar navbar-inverse navbar-static-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand js_app_title" href="./index.html">rauminfo</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <!--
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            -->
+            <form class="navbar-form navbar-right"  method="get" action="./index.html">
+                <div class="form-group">
+                    <input type="text" name="now" class="js_now form-control" placeholder="Zeitpunkt">
+                    <input type="hidden" name="campus" class="js_campus form-control" placeholder="Campus">
+                    <input type="hidden" name="house" class="js_house form-control" placeholder="Haus">
+                </div>
+                <button type="submit" class="btn btn-default">Los</button>
+            </form>
+            <form class="navbar-form navbar-right"  method="get" action="./index.html">
+                <div class="form-group">
+                    <input type="hidden" name="now" class="js_soon form-control" placeholder="Zeitpunkt">
+                    <input type="hidden" name="campus" class="js_campus form-control" placeholder="Campus">
+                    <input type="hidden" name="house" class="js_house form-control" placeholder="Haus">
+                </div>
+                <button type="submit" class="btn btn-default">+2 Stunden</button>
+            </form>
+            <form class="navbar-form navbar-right"  method="get" action="./index.html">
+                <div class="form-group">
+                    <input type="hidden" name="now" class="js_before form-control" placeholder="Zeitpunkt">
+                    <input type="hidden" name="campus" class="js_campus form-control" placeholder="Campus">
+                    <input type="hidden" name="house" class="js_house form-control" placeholder="Haus">
+                </div>
+                <button type="submit" class="btn btn-default">-2 Stunden</button>
+            </form>
+        </div><!--/.navbar-collapse -->
+    </div>
+</div>
+
+<div class="container">
+    <div class="jsb_ jsb_ShowRooms" data-jsb="">
+        <h2>Freie Räume</h2>
+        <div class="js_free_rooms">
+
+        </div>
+
+        <h2>Laufende Veranstaltungen</h2>
+
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                <table class="js_now table table-striped table-hover">
+                    <thead>
+                        <th class="js_now_headline">Gerade</th>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <table class="js_soon table table-striped table-hover">
+                    <thead>
+                    <th class="js_soon_headline">In 2 Stunden</th>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+<!--
+<div class="container">
+    <hr>
+
+    <footer>
+        <p>&copy; Company 2013</p>
+    </footer>
+</div> <!-- /container -->
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="./static/bower_components/requirejs/require.js"></script>
+<script src="./static/bower_components/codemirror/lib/codemirror.js"></script>
+<script>
+    requirejs.config({
+        baseUrl: './static/js/',
+        map: {
+            "*": {
+                'css': './../bower_components/require-css/css'
+            }
+        },
+        urlArgs: "cb=" + (new Date()).getTime(),
+        paths: {
+            jquery: './../bower_components/jquery/jquery',
+            jsb: './../bower_components/jsb/JsBehaviourToolkit',
+            bootstrap: './../bower_components/bootstrap/dist/js/bootstrap',
+            "codemirror-clike": './../bower_components/codemirror/mode/clike/clike',
+            async: './../bower_components/requirejs-plugins/src/async',
+            font: './../bower_components/requirejs-plugins/src/font',
+            goog: './../bower_components/requirejs-plugins/src/goog',
+            image: './../bower_components/requirejs-plugins/src/image',
+            json: './../bower_components/requirejs-plugins/src/json',
+            noext: './../bower_components/requirejs-plugins/src/noext',
+            mdown: './../bower_components/requirejs-plugins/src/mdown',
+            propertyParser : './../bower_components/requirejs-plugins/src/propertyParser',
+            markdownConverter : './../bower_components/requirejs-plugins/lib/Markdown.Converter'
+        }
+    });
+
+    requirejs(['jquery'], function() {
+        require(['bootstrap'], function() {
+            require(['jsb'], function() {
+                jsb.applyBehaviour(document.body);
+            });
+        });
+    });
+</script>
+</body>
+</html>

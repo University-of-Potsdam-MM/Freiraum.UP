@@ -1,0 +1,8 @@
+body {
+}
+
+tr td em {
+    font-style: normal;
+    font-weight: bold;
+    color: #AA0000;
+}

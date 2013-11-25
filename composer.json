@@ -1,0 +1,12 @@
+{
+    "name": "dracoblue/rauminfo",
+    "require": {
+        "doctrine/cache": "*"
+    },
+    "authors": [
+        {
+            "name": "DracoBlue",
+            "email": "JanS@DracoBlue.de"
+        }
+    ]
+}

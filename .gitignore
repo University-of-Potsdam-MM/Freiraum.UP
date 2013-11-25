@@ -1,0 +1,6 @@
+.idea
+vendor
+*.xml
+composer.phar
+cache/*
+bower_components
