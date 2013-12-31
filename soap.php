@@ -21,11 +21,11 @@ else
         "trace" => 1, "exception" => 0
     ));
 
-    $client->$method(array('request' => array(
+    $client->$method(array(
         'campus' => $campus,
         'endTime' => $end_time,
         'startTime' => $start_time
-    )));
+    ));
 
     $response = $client->__getLastResponse();
 
