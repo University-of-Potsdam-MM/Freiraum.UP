@@ -166,9 +166,9 @@ define('ShowRooms', ["jquery"], function ($)
         '    </soapenv:Body>',
         '</soapenv:Envelope>'].join("\n");
 
-        /*
+/*
         $.ajax({
-           'url': 'http://elis.soft.cs.uni-potsdam.de:7000/timeeditWS/ws',
+           'url': 'http://fossa.soft.cs.uni-potsdam.de:7000/rooms/ws',
             dataType: 'xml',
             data: post_data,
             contentType: "text/xml; charset=\"utf-8\"",
@@ -181,7 +181,7 @@ define('ShowRooms', ["jquery"], function ($)
         });
 
         return ;
-        */
+*/
 
         $.ajax({
 //            'url': './veranstaltungen.xml?cb=' + Math.random(),
@@ -222,11 +222,11 @@ define('ShowRooms', ["jquery"], function ($)
 //            'url': './veranstaltungen.xml?cb=' + Math.random(),
                 'url': './soap.php',
                 'data': {
-//                    'endTime': that.now.toISOString(),
-//                    'startTime': that.now.toISOString(),
+                    'endTime': that.now.toISOString(),
+                    'startTime': that.now.toISOString(),
                     // FIXME: rausnehmen, sobald die filterlogik funktioniert
-                'endTime': '2030-01-01T12:01:00',
-                'startTime': '2030-01-01T12:00:00',
+//                'endTime': '2030-01-01T12:01:00',
+//                'startTime': '2030-01-01T12:00:00',
                     'campus': that.campus,
                     'method': 'rooms4Time',
                     'cb': Math.random()
