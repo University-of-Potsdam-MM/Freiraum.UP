@@ -113,7 +113,9 @@ define('ShowRooms', ["jquery"], function ($)
 
         this.options = options || {};
         this.dom_element = $(dom_element);
+        this.now_element = this.dom_element.find('table.js_now');
         this.now_tbody_element = this.dom_element.find('table.js_now tbody');
+        this.soon_element = this.dom_element.find('table.js_soon');
         this.soon_tbody_element = this.dom_element.find('table.js_soon tbody');
         this.free_ul_element = this.dom_element.find('.js_free_rooms');
         this.reservations = [];
@@ -213,7 +215,7 @@ define('ShowRooms', ["jquery"], function ($)
                 }
             });
 
-            that.sortReservationsByName();
+            that.sortReservationsByRoomName();
             that.renderAllReservations();
 
 
@@ -251,6 +253,37 @@ define('ShowRooms', ["jquery"], function ($)
 
             });
         });
+
+        var new_page_in = 1;
+        var current_page = 'soon';
+        var waiting_time = 30;
+        var max_progress = 30;
+
+        setInterval(function() {
+            new_page_in--;
+            if (new_page_in == 0)
+            {
+                if (current_page == 'now')
+                {
+                    that.now_element.hide();
+                    that.soon_element.show();
+                    current_page = 'soon';
+                }
+                else if (current_page == 'soon')
+                {
+                    that.now_element.show();
+                    that.soon_element.hide();
+                    current_page = 'now';
+                }
+
+                new_page_in = max_progress;
+                $('.progress-bar').css('width', 0);
+            }
+            else
+            {
+                $('.progress-bar').css('width', Math.floor(100 - 100 * (new_page_in / max_progress)) + '%');
+            }
+        }, (waiting_time / max_progress) * 1000);
     };
 
     ShowRooms.prototype.renderAllReservations = function()
@@ -269,7 +302,7 @@ define('ShowRooms', ["jquery"], function ($)
         $('.js_soon').val(soon.toISOString());
         $('.js_before').val(before.toISOString());
 
-        var last_first_letter = null;
+//        var last_first_letter = null;
         var running_count = 0;
 
         $.each(that.reservations, function(pos, reservation) {
@@ -277,17 +310,17 @@ define('ShowRooms', ["jquery"], function ($)
             if (is_running)
             {
                 running_count++;
-                var first_letter = reservation.getName().substr(0, 1);
-
-                if (last_first_letter != first_letter)
-                {
-                    last_first_letter = first_letter;
-                    that.now_tbody_element.append(that.createTrForReservation(reservation, true));
-                }
-                else
-                {
+//                var first_letter = reservation.getName().substr(0, 1);
+//
+//                if (last_first_letter != first_letter)
+//                {
+//                    last_first_letter = first_letter;
+//                    that.now_tbody_element.append(that.createTrForReservation(reservation, true));
+//                }
+//                else
+//                {
                     that.now_tbody_element.append(that.createTrForReservation(reservation, false));
-                }
+//                }
             }
         });
 
@@ -301,7 +334,7 @@ define('ShowRooms', ["jquery"], function ($)
             that.now_tbody_element.append(tr_element);
         }
 
-        last_first_letter = null;
+//        last_first_letter = null;
         running_count = 0;
 
         $.each(that.reservations, function(pos, reservation) {
@@ -310,17 +343,17 @@ define('ShowRooms', ["jquery"], function ($)
             if (is_running)
             {
                 running_count++;
-                var first_letter = reservation.getName().substr(0, 1);
+//                var first_letter = reservation.getName().substr(0, 1);
 
-                if (last_first_letter != first_letter)
-                {
-                    last_first_letter = first_letter;
-                    that.soon_tbody_element.append(that.createTrForReservation(reservation, true));
-                }
-                else
-                {
+//                if (last_first_letter != first_letter)
+//                {
+//                    last_first_letter = first_letter;
+//                    that.soon_tbody_element.append(that.createTrForReservation(reservation, true));
+//                }
+//                else
+//                {
                     that.soon_tbody_element.append(that.createTrForReservation(reservation, false));
-                }
+//                }
             }
         });
 
@@ -443,6 +476,38 @@ define('ShowRooms', ["jquery"], function ($)
         }
     };
 
+
+    ShowRooms.prototype.sortReservationsByRoomName = function()
+    {
+        this.reservations.sort(function(a, b) {
+            if (a.getRoom() == b.getRoom())
+            {
+                return 0;
+            }
+
+            var value = a.getRoom() > b.getRoom() ? 1 : -1;
+
+            /* Put H0, H1, etc at the beginning */
+            if (a.getRoom().substr(0, 1) == 'H' && b.getRoom().substr(0, 1) == 'H')
+            {
+                return value;
+            }
+
+            if (a.getRoom().substr(0, 1) == 'H' && b.getRoom().substr(0, 1) != 'H')
+            {
+                return -1;
+            }
+
+            if (a.getRoom().substr(0, 1) != 'H' && b.getRoom().substr(0, 1) == 'H')
+            {
+                return 1;
+            }
+
+            /* default behaviour, if we don't have a H-Room involved */
+
+            return value;
+        });
+    };
 
     ShowRooms.prototype.sortReservationsByName = function()
     {

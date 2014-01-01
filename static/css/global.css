@@ -1,6 +1,6 @@
 body {
 /*    margin-top: 50px;*/
-    zoom: 1.0;
+    zoom: 1.5;
 }
 
 
@@ -26,4 +26,9 @@ h2 {
     bottom: 0;
     z-index: 100;
     background-color: #fff;
+}
+
+.progress {
+    height: 5px;
+    margin-bottom: 1px;
 }
