@@ -123,17 +123,8 @@ define('ShowRooms', ["jquery"], function ($)
 
         this.campus = 3;
         this.house = 6;
-        this.now = new Date();
+        this.now = null;
 
-        var now_match = document.location.toString().match(/now=([^&$]+)/);
-        if (now_match)
-        {
-            this.now = new Date(decodeURIComponent(now_match[1]));
-        }
-
-        this.now.setHours(Math.floor(this.now.getHours() / 2) * 2);
-        this.now.setMinutes(0);
-        this.now.setSeconds(0);
         var house_match = document.location.toString().match(/house=([^&$]+)/);
         if (house_match)
         {
@@ -144,115 +135,14 @@ define('ShowRooms', ["jquery"], function ($)
         {
             this.campus = decodeURIComponent(campus_match[1]);
         }
+        this.refreshNowValue();
+        this.refreshReservations();
 
         $('.js_app_title').text('Campus ' + this.campus + ', Haus ' + this.house);
+        window.title = $('.js_app_title').text();
+
         $('.js_campus').val(that.campus);
         $('.js_house').val(that.house);
-
-        var soon = new Date();
-        soon.setTime(this.now.getTime() + 2 * 60 * 60 * 1000);
-
-        $('.js_now_headline').text('Jetzt (' + this.now.toLocaleTimeString().replace(/:\d\d$/g, '') + ' - ' + soon.toLocaleTimeString().replace(/:\d\d$/g, '') + ' Uhr)');
-        $('.js_soon_headline').text('Demnächst (ab ' + soon.toLocaleTimeString().replace(/:\d\d$/g, '') + ' Uhr)');
-
-        var post_data = ['<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tim="http://timeedit.provider.elis.unipotsdam.de/">',
-        '    <soapenv:Header/>',
-        '    <soapenv:Body>',
-        '        <tim:reservations>',
-        '            <request>',
-        '                <campus>3</campus>',
-        '                <endTime>2020-10-10T12:00:00</endTime>',
-        '                <startTime>2010-10-10T12:00:00</startTime>',
-        '            </request>',
-        '        </tim:reservations>',
-        '    </soapenv:Body>',
-        '</soapenv:Envelope>'].join("\n");
-
-/*
-        $.ajax({
-           'url': 'http://fossa.soft.cs.uni-potsdam.de:7000/rooms/ws',
-            dataType: 'xml',
-            data: post_data,
-            contentType: "text/xml; charset=\"utf-8\"",
-            crossDomain: true,
-            type: 'post'
-        }).done(function(response) {
-            console.log('Done', response);
-        }).fail(function(response) {
-            console.log('Fail', response);
-        });
-
-        return ;
-*/
-
-        $.ajax({
-//            'url': './veranstaltungen.xml?cb=' + Math.random(),
-            'url': './soap.php',
-            'data': {
-                // FIXME: hack to retrieve all data, since the date is not filtered properly, yet
-                'endTime': '2020-10-10T12:00:00',
-                'startTime': '2010-10-10T12:00:00',
-                'campus': that.campus,
-                'method': 'reservations',
-                'cb': Math.random()
-            },
-            'dataType': 'xml'
-        }).done(function (response) {
-            console.log('found document', response);
-            var returns = $(response).find('return');
-
-            // FIXME: hack to store used_rooms
-            var used_rooms = [];
-
-            returns.each(function(pos, reservation_raw) {
-                reservation_raw = $(reservation_raw);
-                var reservation = that.addReservation(reservation_raw.find('veranstaltung').text(), reservation_raw.find('startTime').text(), reservation_raw.find('endTime').text(), reservation_raw.find('roomList > room').text(), reservation_raw.find('personList > person:first').text());
-
-                // FIXME: hack to mark all used rooms
-                if (reservation && reservation.isRunningAtTime(that.now))
-                {
-                    used_rooms.push(reservation_raw.find('roomList > room').text());
-                }
-            });
-
-            that.sortReservationsByRoomName();
-            that.renderAllReservations();
-
-
-
-            $.ajax({
-//            'url': './veranstaltungen.xml?cb=' + Math.random(),
-                'url': './soap.php',
-                'data': {
-                    'endTime': that.now.toISOString(),
-                    'startTime': that.now.toISOString(),
-                    // FIXME: rausnehmen, sobald die filterlogik funktioniert
-//                'endTime': '2030-01-01T12:01:00',
-//                'startTime': '2030-01-01T12:00:00',
-                    'campus': that.campus,
-                    'method': 'rooms4Time',
-                    'cb': Math.random()
-                },
-                'dataType': 'xml'
-            }).done(function (response) {
-                console.log('found document', response);
-                var returns = $(response).find('return');
-
-
-                returns.each(function(pos, reservation_raw) {
-                    reservation_raw = $(reservation_raw);
-                    // FIXME: rausnehmen, sobald die filterlogik bei rooms4Time richtig funktioniert
-                    if (used_rooms.indexOf(reservation_raw.text()) == -1)
-                    {
-                        that.addFreeRoom(reservation_raw.text());
-                    }
-                });
-
-                that.sortFreeRoomsByName();
-                that.renderAllFreeRooms();
-
-            });
-        });
 
         var new_page_in = 1;
         var current_page = 'soon';
@@ -284,7 +174,137 @@ define('ShowRooms', ["jquery"], function ($)
                 $('.progress-bar').css('width', Math.floor(100 - 100 * (new_page_in / max_progress)) + '%');
             }
         }, (waiting_time / max_progress) * 1000);
+
+        setInterval(function() {
+            console.log('refresh!');
+            that.refreshNowValue();
+            that.refreshReservations();
+        }, 60 * 1000);
     };
+
+    ShowRooms.prototype.refreshNowValue = function()
+    {
+        this.now = new Date();
+
+        var now_match = document.location.toString().match(/now=([^&$]+)/);
+        if (now_match)
+        {
+            this.now = new Date(decodeURIComponent(now_match[1]));
+        }
+
+        this.now.setHours(Math.floor(this.now.getHours() / 2) * 2);
+        this.now.setMinutes(0);
+        this.now.setSeconds(0);
+    }
+
+    ShowRooms.prototype.refreshReservations = function()
+    {
+        var that = this;
+
+        var soon = new Date();
+        soon.setTime(this.now.getTime() + 2 * 60 * 60 * 1000);
+
+        $('.js_now_headline').text('Jetzt (' + this.now.toLocaleTimeString().replace(/:\d\d$/g, '') + ' - ' + soon.toLocaleTimeString().replace(/:\d\d$/g, '') + ' Uhr)');
+        $('.js_soon_headline').text('Demnächst (ab ' + soon.toLocaleTimeString().replace(/:\d\d$/g, '') + ' Uhr)');
+
+        var post_data = ['<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tim="http://timeedit.provider.elis.unipotsdam.de/">',
+            '    <soapenv:Header/>',
+            '    <soapenv:Body>',
+            '        <tim:reservations>',
+            '            <request>',
+            '                <campus>3</campus>',
+            '                <endTime>2020-10-10T12:00:00</endTime>',
+            '                <startTime>2010-10-10T12:00:00</startTime>',
+            '            </request>',
+            '        </tim:reservations>',
+            '    </soapenv:Body>',
+            '</soapenv:Envelope>'].join("\n");
+
+        /*
+         $.ajax({
+         'url': 'http://fossa.soft.cs.uni-potsdam.de:7000/rooms/ws',
+         dataType: 'xml',
+         data: post_data,
+         contentType: "text/xml; charset=\"utf-8\"",
+         crossDomain: true,
+         type: 'post'
+         }).done(function(response) {
+         console.log('Done', response);
+         }).fail(function(response) {
+         console.log('Fail', response);
+         });
+
+         return ;
+         */
+
+        $.ajax({
+//            'url': './veranstaltungen.xml?cb=' + Math.random(),
+            'url': './soap.php',
+            'data': {
+                // FIXME: hack to retrieve all data, since the date is not filtered properly, yet
+                'endTime': '2020-10-10T12:00:00',
+                'startTime': '2010-10-10T12:00:00',
+                'campus': that.campus,
+                'method': 'reservations',
+                'cb': Math.random()
+            },
+            'dataType': 'xml'
+        }).done(function (response) {
+            var returns = $(response).find('return');
+
+            // FIXME: hack to store used_rooms
+            var used_rooms = [];
+
+            that.clearReservations();
+
+            returns.each(function(pos, reservation_raw) {
+                reservation_raw = $(reservation_raw);
+                var reservation = that.addReservation(reservation_raw.find('veranstaltung').text(), reservation_raw.find('startTime').text(), reservation_raw.find('endTime').text(), reservation_raw.find('roomList > room').text(), reservation_raw.find('personList > person:first').text());
+
+                // FIXME: hack to mark all used rooms
+                if (reservation && reservation.isRunningAtTime(that.now))
+                {
+                    used_rooms.push(reservation_raw.find('roomList > room').text());
+                }
+            });
+
+            that.sortReservationsByRoomName();
+            that.renderAllReservations();
+
+            $.ajax({
+//            'url': './veranstaltungen.xml?cb=' + Math.random(),
+                'url': './soap.php',
+                'data': {
+                    'endTime': that.now.toISOString(),
+                    'startTime': that.now.toISOString(),
+                    // FIXME: rausnehmen, sobald die filterlogik funktioniert
+//                'endTime': '2030-01-01T12:01:00',
+//                'startTime': '2030-01-01T12:00:00',
+                    'campus': that.campus,
+                    'method': 'rooms4Time',
+                    'cb': Math.random()
+                },
+                'dataType': 'xml'
+            }).done(function (response) {
+                var returns = $(response).find('return');
+
+                that.clearFreeRooms();
+
+                returns.each(function(pos, reservation_raw) {
+                    reservation_raw = $(reservation_raw);
+                    // FIXME: rausnehmen, sobald die filterlogik bei rooms4Time richtig funktioniert
+                    if (used_rooms.indexOf(reservation_raw.text()) == -1)
+                    {
+                        that.addFreeRoom(reservation_raw.text());
+                    }
+                });
+
+                that.sortFreeRoomsByName();
+                that.renderAllFreeRooms();
+
+            });
+        });
+    }
 
     ShowRooms.prototype.renderAllReservations = function()
     {
@@ -301,6 +321,9 @@ define('ShowRooms', ["jquery"], function ($)
         $('.js_now').val(now.toISOString());
         $('.js_soon').val(soon.toISOString());
         $('.js_before').val(before.toISOString());
+
+        that.now_tbody_element.empty();
+        that.soon_tbody_element.empty();
 
 //        var last_first_letter = null;
         var running_count = 0;
@@ -432,6 +455,11 @@ define('ShowRooms', ["jquery"], function ($)
         });
     };
 
+    ShowRooms.prototype.clearReservations = function()
+    {
+        this.reservations = [];
+    };
+
     ShowRooms.prototype.addReservation = function(name, start_time, end_time, room_string, person_string)
     {
         var that = this;
@@ -454,6 +482,11 @@ define('ShowRooms', ["jquery"], function ($)
                 return reservation;
             }
         }
+    };
+
+    ShowRooms.prototype.clearFreeRooms = function()
+    {
+        this.free_rooms = [];
     };
 
     ShowRooms.prototype.addFreeRoom = function(room_string)
