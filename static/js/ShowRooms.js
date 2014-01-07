@@ -415,18 +415,21 @@ define('ShowRooms', ["jquery"], function ($)
         }
         info_element.css({
             'display': 'inline-block',
-            'margin-right': '5px'
+            'margin-right': '5px',
+            'font-weight': '700'
         });
         person_element.text('(' + reservation.getShortPersonName() + ', ');
         person_element.css({
             'display': 'inline-block',
-            'margin-right': '5px'
+            'margin-right': '5px',
+            'font-size': '0.8em'
         });
         time_element.text(reservation.getStartTimeAsTimeString() + ' - ' + reservation.getEndTimeAsTimeString());
         time_element.text('bis ' + reservation.getEndTimeAsTimeString() + ')');
         time_element.css({
             'display': 'inline-block',
-            'margin-right': '5px'
+            'margin-right': '5px',
+            'font-size': '0.8em'
         });
         td_element.append(info_element);
         td_element.append(person_element);
