@@ -220,6 +220,21 @@ define('ShowRooms', ["jquery"], function ($)
             '    </soapenv:Body>',
             '</soapenv:Envelope>'].join("\n");
 
+        // http://usb.soft.cs.uni-potsdam.de/roomsAPI/1.0?wsdl
+
+//        $.ajax({
+//            'url': 'http://usb.soft.cs.uni-potsdam.de/roomsAPI/1.0/reservations?campus=1',
+//            dataType: 'plain',
+//            contentType: "text/plain; charset=\"utf-8\"",
+//            crossDomain: true,
+//            type: 'get',
+//            beforeSend: function(xhr, settings) {  console.log(xhr); xhr.setRequestHeader('Authorization','Bearer f98df85e7d9568eb81a3a9b43f384328'); }
+//        }).done(function(response) {
+//            console.log('Done', response);
+//        }).fail(function(response) {
+//            console.log('Fail', response);
+//        });
+
         /*
          $.ajax({
          'url': 'http://fossa.soft.cs.uni-potsdam.de:7000/rooms/ws',
@@ -239,16 +254,19 @@ define('ShowRooms', ["jquery"], function ($)
 
         $.ajax({
 //            'url': './veranstaltungen.xml?cb=' + Math.random(),
-            'url': './soap.php',
+            'url': './xml.php',
             'data': {
                 // FIXME: hack to retrieve all data, since the date is not filtered properly, yet
-                'endTime': '2020-10-10T12:00:00',
-                'startTime': '2010-10-10T12:00:00',
+                'endTime': soon.toISOString(),
+                'startTime': that.now.toISOString(),
                 'campus': that.campus,
                 'method': 'reservations',
                 'cb': Math.random()
             },
             'dataType': 'xml'
+        }).fail(function(response) {
+            console.log('fail', response);
+
         }).done(function (response) {
             var returns = $(response).find('return');
 
@@ -256,11 +274,9 @@ define('ShowRooms', ["jquery"], function ($)
             var used_rooms = [];
 
             that.clearReservations();
-
             returns.each(function(pos, reservation_raw) {
                 reservation_raw = $(reservation_raw);
                 var reservation = that.addReservation(reservation_raw.find('veranstaltung').text(), reservation_raw.find('startTime').text(), reservation_raw.find('endTime').text(), reservation_raw.find('roomList > room').text(), reservation_raw.find('personList > person:first').text());
-
                 // FIXME: hack to mark all used rooms
                 if (reservation && reservation.isRunningAtTime(that.now))
                 {
@@ -273,7 +289,7 @@ define('ShowRooms', ["jquery"], function ($)
 
             $.ajax({
 //            'url': './veranstaltungen.xml?cb=' + Math.random(),
-                'url': './soap.php',
+                'url': './xml.php',
                 'data': {
                     'endTime': that.now.toISOString(),
                     'startTime': that.now.toISOString(),

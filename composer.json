@@ -1,7 +1,8 @@
 {
     "name": "dracoblue/rauminfo",
     "require": {
-        "doctrine/cache": "*"
+        "doctrine/cache": "*",
+        "guzzle/guzzle": "~3.7"
     },
     "authors": [
         {
