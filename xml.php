@@ -21,11 +21,17 @@ while ($i < 10)
 {
     try
     {
+
         $client = new Client('http://usb.soft.cs.uni-potsdam.de/roomsAPI/1.0/');
+
+ #      $client = new Client('http://fossa.soft.cs.uni-potsdam.de:8280/services/roomsAPI/');
+
 
         $request = $client->get($method, array(
             'Authorization' => 'Bearer af964849b787c7b3a37b234b83fc9bb'
         ));
+        $request->setHeader('Expect', null);
+        $request->setHeader('Accept', null);
         $request->getQuery()->set('campus', $campus)->set('endTime', $end_time)->set('startTime', $start_time);
 
         $response = $request->send();
@@ -45,6 +51,7 @@ while ($i < 10)
             header('Content-Type: text/xml');
         }
 
+        error_log('serving body with size' . strlen($body));
         echo $body;
         $cache->save($id, $body);
         die();
@@ -63,7 +70,9 @@ error_log("<error>Server does not reply with a non-empty response, after $i retr
 
 if ($cache->contains($id))
 {
-    echo $cache->fetch($id);
+    $body = $cache->fetch($id);
+    error_log('serving cached body with size' . strlen($body));
+    echo $body;
     die();
 }
 
