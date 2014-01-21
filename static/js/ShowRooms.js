@@ -203,6 +203,8 @@ define('ShowRooms', ["jquery"], function ($)
 
         var soon = new Date();
         soon.setTime(this.now.getTime() + 2 * 60 * 60 * 1000);
+        var end_of_soon = new Date();
+        end_of_soon.setTime(soon.getTime() + 2 * 60 * 60 * 1000);
 
         $('.js_now_headline').text('Jetzt (' + this.now.toLocaleTimeString().replace(/:\d\d$/g, '') + ' - ' + soon.toLocaleTimeString().replace(/:\d\d$/g, '') + ' Uhr)');
         $('.js_soon_headline').text('Demnächst (ab ' + soon.toLocaleTimeString().replace(/:\d\d$/g, '') + ' Uhr)');
@@ -252,12 +254,13 @@ define('ShowRooms', ["jquery"], function ($)
          return ;
          */
 
+
         $.ajax({
 //            'url': './veranstaltungen.xml?cb=' + Math.random(),
             'url': './xml.php',
             'data': {
                 // FIXME: hack to retrieve all data, since the date is not filtered properly, yet
-                'endTime': soon.toISOString(),
+                'endTime': end_of_soon.toISOString(),
                 'startTime': that.now.toISOString(),
                 'campus': that.campus,
                 'method': 'reservations',
