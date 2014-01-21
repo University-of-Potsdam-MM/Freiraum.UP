@@ -358,7 +358,7 @@ define('ShowRooms', ["jquery"], function ($)
 //                }
 //                else
 //                {
-                    that.now_tbody_element.append(that.createTrForReservation(reservation, false));
+                    that.now_tbody_element.append(that.createTrForReservation(reservation, false, now));
 //                }
             }
         });
@@ -391,7 +391,7 @@ define('ShowRooms', ["jquery"], function ($)
 //                }
 //                else
 //                {
-                    that.soon_tbody_element.append(that.createTrForReservation(reservation, false));
+                    that.soon_tbody_element.append(that.createTrForReservation(reservation, false, soon));
 //                }
             }
         });
@@ -407,7 +407,7 @@ define('ShowRooms', ["jquery"], function ($)
         }
     };
 
-    ShowRooms.prototype.createTrForReservation = function(reservation, highlight_first_letter)
+    ShowRooms.prototype.createTrForReservation = function(reservation, highlight_first_letter, block_start_time)
     {
         var tr_element = $(document.createElement('tr'));
         var td_element = $(document.createElement('td'));
@@ -434,14 +434,25 @@ define('ShowRooms', ["jquery"], function ($)
             'margin-right': '5px',
             'font-weight': '700'
         });
-        person_element.text('(' + reservation.getShortPersonName() + ', ');
+
+        var is_time_visible = block_start_time.getTime() + 2 * 60 * 60 * 1000 != reservation.getEndTime().getTime() ? true : false;
+
+        if (is_time_visible)
+        {
+            person_element.text('(' + reservation.getShortPersonName() + ', ');
+            time_element.text(reservation.getStartTimeAsTimeString() + ' - ' + reservation.getEndTimeAsTimeString());
+            time_element.text('bis ' + reservation.getEndTimeAsTimeString() + ')');
+        }
+        else
+        {
+            person_element.text('(' + reservation.getShortPersonName() + ')');
+            time_element.text('');
+        }
         person_element.css({
             'display': 'inline-block',
             'margin-right': '5px',
             'font-size': '0.8em'
         });
-        time_element.text(reservation.getStartTimeAsTimeString() + ' - ' + reservation.getEndTimeAsTimeString());
-        time_element.text('bis ' + reservation.getEndTimeAsTimeString() + ')');
         time_element.css({
             'display': 'inline-block',
             'margin-right': '5px',
