@@ -1,5 +1,5 @@
 body {
-    zoom: 1.8;
+    zoom: 2;
 }
 
 
@@ -7,6 +7,10 @@ tr td em {
     font-style: normal;
     font-weight: bold;
     color: #AA0000;
+}
+
+.table tbody > tr > td {
+    line-height: 0.6;
 }
 
 h2 {
