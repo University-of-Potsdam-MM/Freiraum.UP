@@ -146,8 +146,8 @@ define('ShowRooms', ["jquery"], function ($)
 
         var new_page_in = 1;
         var current_page = 'soon';
-        var waiting_time = 30;
-        var max_progress = 30;
+        var waiting_time = 10;
+        var max_progress = 10;
 
         setInterval(function() {
             new_page_in--;
@@ -465,7 +465,7 @@ define('ShowRooms', ["jquery"], function ($)
         $.each(that.free_rooms, function(pos, free_room) {
             var a_element = $(document.createElement('a'));
             a_element.addClass('btn');
-            a_element.addClass('btn-default');
+            a_element.addClass('btn-success');
 
             var text = free_room.getRoom();
             a_element.text(text);
