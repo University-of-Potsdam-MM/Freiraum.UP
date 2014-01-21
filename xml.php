@@ -37,6 +37,17 @@ while ($i < 10)
         $response = $request->send();
 
         $body = trim($response->getBody());
+
+        if (preg_match('#<([^> ]+)#', $body, $matches))
+        {
+            $first_tag_name = $matches[1];
+            $end_tag = substr($body, -1 - strlen($first_tag_name), -1);
+
+            if ($first_tag_name != $end_tag) {
+                error_log('Invalid response, because the xml does not end with the same tag: ' . $first_tag_name . ' was ' . $end_tag . ' (body size was: ' . strlen($body) . ')');
+                $body = '';
+            }
+        }
     }
     catch (Exception $exception)
     {
