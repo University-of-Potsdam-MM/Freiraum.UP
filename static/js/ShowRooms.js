@@ -209,21 +209,18 @@ define('ShowRooms', ["jquery"], function ($)
         $('.js_now_headline').text('Jetzt (' + this.now.toLocaleTimeString().replace(/:\d\d$/g, '') + ' - ' + soon.toLocaleTimeString().replace(/:\d\d$/g, '') + ' Uhr)');
         $('.js_soon_headline').text('Demnächst (ab ' + soon.toLocaleTimeString().replace(/:\d\d$/g, '') + ' Uhr)');
 
-        var post_data = ['<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tim="http://timeedit.provider.elis.unipotsdam.de/">',
-            '    <soapenv:Header/>',
-            '    <soapenv:Body>',
-            '        <tim:reservations>',
-            '            <request>',
-            '                <campus>3</campus>',
-            '                <endTime>2020-10-10T12:00:00</endTime>',
-            '                <startTime>2010-10-10T12:00:00</startTime>',
-            '            </request>',
-            '        </tim:reservations>',
-            '    </soapenv:Body>',
-            '</soapenv:Envelope>'].join("\n");
-
-        // http://usb.soft.cs.uni-potsdam.de/roomsAPI/1.0?wsdl
-
+//        var post_data = ['<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tim="http://timeedit.provider.elis.unipotsdam.de/">',
+//            '    <soapenv:Header/>',
+//            '    <soapenv:Body>',
+//            '        <tim:reservations>',
+//            '            <request>',
+//            '                <campus>3</campus>',
+//            '                <endTime>2020-10-10T12:00:00</endTime>',
+//            '                <startTime>2010-10-10T12:00:00</startTime>',
+//            '            </request>',
+//            '        </tim:reservations>',
+//            '    </soapenv:Body>',
+//            '</soapenv:Envelope>'].join("\n");
 //        $.ajax({
 //            'url': 'http://usb.soft.cs.uni-potsdam.de/roomsAPI/1.0/reservations?campus=1',
 //            dataType: 'plain',
@@ -256,7 +253,6 @@ define('ShowRooms', ["jquery"], function ($)
 
 
         $.ajax({
-//            'url': './veranstaltungen.xml?cb=' + Math.random(),
             'url': './xml.php',
             'data': {
                 // FIXME: hack to retrieve all data, since the date is not filtered properly, yet
