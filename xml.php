@@ -14,7 +14,7 @@ $method = $_GET['method'];
 
 $i = 0;
 
-$cache = new \Doctrine\Common\Cache\FilesystemCache(__DIR__ . '/cache');
+$cache = new \Doctrine\Common\Cache\ArrayCache();
 $id = md5(json_encode(array('method' => $method, 'campus' => $campus, 'startTime' => $start_time, 'endTime' => $end_time)));
 
 while ($i < 10)
@@ -28,7 +28,7 @@ while ($i < 10)
 
 
         $request = $client->get($method, array(
-            'Authorization' => 'Bearer af964849b787c7b3a37b234b83fc9bb'
+            'Authorization' => 'Bearer c06156e119040a27a4b43fa933f130'
         ));
         $request->setHeader('Expect', null);
         $request->setHeader('Accept', null);
