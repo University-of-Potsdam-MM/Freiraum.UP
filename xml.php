@@ -10,7 +10,8 @@ use Guzzle\Plugin\Oauth\OauthPlugin;
 $campus = $_GET['campus'];
 $start_time = $_GET['startTime'];
 $end_time = $_GET['endTime'];
-$method = $_GET['method'];
+$method = preg_replace('|^(/)|', '', $_SERVER['PATH_INFO']);
+$authorization = @$_SERVER['HTTP_AUTHORIZATION'];
 
 $i = 0;
 
@@ -28,7 +29,7 @@ while ($i < 10)
 
 
         $request = $client->get($method, array(
-            'Authorization' => 'Bearer c06156e119040a27a4b43fa933f130'
+            'Authorization' => $authorization
         ));
         $request->setHeader('Expect', null);
         $request->setHeader('Accept', null);

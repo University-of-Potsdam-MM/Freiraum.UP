@@ -118,6 +118,8 @@ define('ShowRooms', ["jquery"], function ($)
         this.soon_element = this.dom_element.find('table.js_soon');
         this.soon_tbody_element = this.dom_element.find('table.js_soon tbody');
         this.free_ul_element = this.dom_element.find('.js_free_rooms');
+        this.base_url = document.location.toString().indexOf('workspaces.local') > 0 ? 'http://workspaces.local/rauminfo/xml.php/' : 'http://usb.soft.cs.uni-potsdam.de/roomsAPI/1.0/';
+        this.authorization = 'Bearer c06156e119040a27a4b43fa933f130';
         this.reservations = [];
         this.free_rooms = [];
 
@@ -253,18 +255,20 @@ define('ShowRooms', ["jquery"], function ($)
 
 
         $.ajax({
-            'url': './xml.php',
+            'url': that.base_url + 'reservations',
+            headers: {
+                'Authorization': that.authorization
+            },
             'data': {
                 // FIXME: hack to retrieve all data, since the date is not filtered properly, yet
                 'endTime': end_of_soon.toISOString(),
                 'startTime': that.now.toISOString(),
                 'campus': that.campus,
-                'method': 'reservations',
                 'cb': Math.random()
             },
             'dataType': 'xml'
         }).fail(function(response) {
-            console.log('fail', response);
+            console.log('fail reservations', response);
 
         }).done(function (response) {
             var returns = $(response).find('return');
@@ -288,7 +292,10 @@ define('ShowRooms', ["jquery"], function ($)
 
             $.ajax({
 //            'url': './veranstaltungen.xml?cb=' + Math.random(),
-                'url': './xml.php',
+                'url':  that.base_url + 'rooms4Time',
+                headers: {
+                    'Authorization': that.authorization
+                },
                 'data': {
                     'endTime': that.now.toISOString(),
                     'startTime': that.now.toISOString(),
@@ -296,10 +303,12 @@ define('ShowRooms', ["jquery"], function ($)
 //                'endTime': '2030-01-01T12:01:00',
 //                'startTime': '2030-01-01T12:00:00',
                     'campus': that.campus,
-                    'method': 'rooms4Time',
                     'cb': Math.random()
                 },
                 'dataType': 'xml'
+            }).fail(function(response) {
+                console.log('fail rooms4time', response);
+
             }).done(function (response) {
                 var returns = $(response).find('return');
 
