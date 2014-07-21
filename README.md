@@ -14,6 +14,8 @@ http://workspaces.local/rauminfo/index.html?now=2013-11-18T12%3A53%3A06.000Z&cam
 
 # Tasks
 
+- Konfigurationsdatei für URL's / Endpoints
+- Dokumentation der Einbindung weiterer Darstellungsseiten
 - Darstellung
 - ? Soap-Client
 - ? Framework für views
