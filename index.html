@@ -14,7 +14,6 @@
 
     <!-- Bootstrap core CSS -->
     <link href="./static/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
-    <link href="./static/bower_components/codemirror/lib/codemirror.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="./static/css/global.css" rel="stylesheet">
@@ -130,25 +129,11 @@
 <script>
     requirejs.config({
         baseUrl: './static/js/',
-        map: {
-            "*": {
-                'css': './../bower_components/require-css/css'
-            }
-        },
         urlArgs: "cb=" + (new Date()).getTime(),
         paths: {
             jquery: './../bower_components/jquery/jquery',
             jsb: './../bower_components/jsb/JsBehaviourToolkit',
-            bootstrap: './../bower_components/bootstrap/dist/js/bootstrap',
-            async: './../bower_components/requirejs-plugins/src/async',
-            font: './../bower_components/requirejs-plugins/src/font',
-            goog: './../bower_components/requirejs-plugins/src/goog',
-            image: './../bower_components/requirejs-plugins/src/image',
-            json: './../bower_components/requirejs-plugins/src/json',
-            noext: './../bower_components/requirejs-plugins/src/noext',
-            mdown: './../bower_components/requirejs-plugins/src/mdown',
-            propertyParser : './../bower_components/requirejs-plugins/src/propertyParser',
-            markdownConverter : './../bower_components/requirejs-plugins/lib/Markdown.Converter'
+            bootstrap: './../bower_components/bootstrap/dist/js/bootstrap'
         }
     });
 
