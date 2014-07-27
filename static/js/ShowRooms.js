@@ -109,20 +109,19 @@ define('ShowRooms', ["jquery", "json!../../config.json"], function ($, config)
         var that = this;
 
         this.options = options || {};
-        this.options.use_xml_proxy == '1' ? true : false;
         this.dom_element = $(dom_element);
         this.now_element = this.dom_element.find('table.js_now');
         this.now_tbody_element = this.dom_element.find('table.js_now tbody');
         this.soon_element = this.dom_element.find('table.js_soon');
         this.soon_tbody_element = this.dom_element.find('table.js_soon tbody');
         this.free_ul_element = this.dom_element.find('.js_free_rooms');
-        this.base_url = this.options.use_xml_proxy > 0 ? 'xml.php/' : 'https://api.uni-potsdam.de/endpoints/roomsAPI/1.0/';
-        this.authorization = 'Bearer c06156e119040a27a4b43fa933f130';
+        this.base_url = config.use_xml_proxy > 0 ? 'xml.php/' : config.base_url.toString();
+        this.authorization = config.authorization.toString();
         this.reservations = [];
         this.free_rooms = [];
 
-        this.campus = 3;
-        this.house = 6;
+        this.campus = config.campus;
+        this.house = config.house;
         this.now = null;
 
         var house_match = document.location.toString().match(/house=([^&$]+)/);

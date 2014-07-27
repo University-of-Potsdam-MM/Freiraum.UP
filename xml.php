@@ -22,8 +22,9 @@ while ($i < 10)
 {
     try
     {
+        $config = json_decode(file_get_contents(dirname(__FILE__) . '/config.json'), true);
 
-        $client = new Client('https://api.uni-potsdam.de/endpoints/roomsAPI/1.0//');
+        $client = new Client($config['base_url']);
 
         $request = $client->get($method, array(
             'Authorization' => $authorization
