@@ -221,49 +221,6 @@ define('ShowRooms', ["jquery"], function ($)
         $('.js_now_headline').text('Jetzt (' + this.now.toLocaleTimeString().replace(/:\d\d$/g, '') + ' - ' + soon.toLocaleTimeString().replace(/:\d\d$/g, '') + ' Uhr)');
         $('.js_soon_headline').text('Demnächst (ab ' + soon.toLocaleTimeString().replace(/:\d\d$/g, '') + ' Uhr)');
 
-//        var post_data = ['<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tim="http://timeedit.provider.elis.unipotsdam.de/">',
-//            '    <soapenv:Header/>',
-//            '    <soapenv:Body>',
-//            '        <tim:reservations>',
-//            '            <request>',
-//            '                <campus>3</campus>',
-//            '                <endTime>2020-10-10T12:00:00</endTime>',
-//            '                <startTime>2010-10-10T12:00:00</startTime>',
-//            '            </request>',
-//            '        </tim:reservations>',
-//            '    </soapenv:Body>',
-//            '</soapenv:Envelope>'].join("\n");
-//        $.ajax({
-//            'url': 'http://usb.soft.cs.uni-potsdam.de/roomsAPI/1.0/reservations?campus=1',
-//            dataType: 'plain',
-//            contentType: "text/plain; charset=\"utf-8\"",
-//            crossDomain: true,
-//            type: 'get',
-//            beforeSend: function(xhr, settings) {  console.log(xhr); xhr.setRequestHeader('Authorization','Bearer f98df85e7d9568eb81a3a9b43f384328'); }
-//        }).done(function(response) {
-//            console.log('Done', response);
-//        }).fail(function(response) {
-//            console.log('Fail', response);
-//        });
-
-        /*
-         $.ajax({
-         'url': 'http://fossa.soft.cs.uni-potsdam.de:7000/rooms/ws',
-         dataType: 'xml',
-         data: post_data,
-         contentType: "text/xml; charset=\"utf-8\"",
-         crossDomain: true,
-         type: 'post'
-         }).done(function(response) {
-         console.log('Done', response);
-         }).fail(function(response) {
-         console.log('Fail', response);
-         });
-
-         return ;
-         */
-
-
         $.ajax({
             'url': that.base_url + 'reservations',
             headers: {
@@ -301,17 +258,14 @@ define('ShowRooms', ["jquery"], function ($)
             that.renderAllReservations();
 
             $.ajax({
-//            'url': './veranstaltungen.xml?cb=' + Math.random(),
                 'url':  that.base_url + 'rooms4Time',
                 headers: {
                     'Authorization': that.authorization
                 },
                 'data': {
+                    // FIXME: rausnehmen, sobald die filterlogik funktioniert
                     'endTime': that.now.toISOString(),
                     'startTime': that.now.toISOString(),
-                    // FIXME: rausnehmen, sobald die filterlogik funktioniert
-//                'endTime': '2030-01-01T12:01:00',
-//                'startTime': '2030-01-01T12:00:00',
                     'campus': that.campus,
                     'cb': Math.random()
                 },
@@ -367,17 +321,7 @@ define('ShowRooms', ["jquery"], function ($)
             if (is_running)
             {
                 running_count++;
-//                var first_letter = reservation.getName().substr(0, 1);
-//
-//                if (last_first_letter != first_letter)
-//                {
-//                    last_first_letter = first_letter;
-//                    that.now_tbody_element.append(that.createTrForReservation(reservation, true));
-//                }
-//                else
-//                {
-                    that.now_tbody_element.append(that.createTrForReservation(reservation, false, now));
-//                }
+                that.now_tbody_element.append(that.createTrForReservation(reservation, false, now));
             }
         });
 
@@ -400,17 +344,7 @@ define('ShowRooms', ["jquery"], function ($)
             if (is_running)
             {
                 running_count++;
-//                var first_letter = reservation.getName().substr(0, 1);
-
-//                if (last_first_letter != first_letter)
-//                {
-//                    last_first_letter = first_letter;
-//                    that.soon_tbody_element.append(that.createTrForReservation(reservation, true));
-//                }
-//                else
-//                {
-                    that.soon_tbody_element.append(that.createTrForReservation(reservation, false, soon));
-//                }
+                that.soon_tbody_element.append(that.createTrForReservation(reservation, false, soon));
             }
         });
 
