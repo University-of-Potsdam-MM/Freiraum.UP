@@ -56,7 +56,10 @@ Hier einige User die ich mir bei dem Konzeptionieren des Panels überlegt habe.
 - Zugriff von der Webanwendung per `Bearer`-Token auf die roomsAPI
 - roomsAPI auf dem USB
   - `/rooms4Time`
-  - `/reservations` 
+  - `/reservations`
+
+![Maschinen](docs/machines.png)
+
 
 ## Technologien der Webanwendung
 
