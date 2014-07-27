@@ -1,4 +1,4 @@
-define('ShowRooms', ["jquery"], function ($)
+define('ShowRooms', ["jquery", "json!../../config.json"], function ($, config)
 {
     "use strict"
 
