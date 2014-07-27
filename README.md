@@ -1,4 +1,16 @@
-http://workspaces.local/rauminfo/index.html?now=2013-11-18T12%3A53%3A06.000Z&campus=3&house=6
+# rooms
+
+## Entwicklungsumgebung aufsetzen
+
+1. Installiere nodejs von http://nodejs.org/
+2. Führe `npm install` im rooms Verzeichnis aus
+3. Führe `node_modules/.bin/bower install` im rooms Verzeichnis aus
+4. Öffne die index.html in einem Webbrowser
+
+## Release für den Server vorbereiten
+
+Wenn alle Schritte aus der Entwicklungsumgebung ausgeführt wurde, kann der komplette Ordner als `.zip` oder `.tar.gz`
+gepackt werden und auf einem beliebigen Webserver (auch ohne PHP-Unterstützung) platziert werden.
 
 # Anforderung
 

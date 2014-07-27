@@ -3,4 +3,5 @@ vendor
 *.xml
 composer.phar
 cache/*
-bower_components
+static/bower_components
+node_modules
