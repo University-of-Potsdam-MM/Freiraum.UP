@@ -7,7 +7,6 @@ define('ShowRooms', ["jquery"], function ($)
         this.campus = campus;
         this.house = house;
         this.room = room;
-        console.log('FreeRoom', campus, house, room);
     };
 
     FreeRoom.prototype.getRoom = function ()
@@ -24,8 +23,6 @@ define('ShowRooms', ["jquery"], function ($)
         this.house = house;
         this.room = room;
         this.person_name = person_name;
-
-        //console.log('res', this.name, '-', this.campus, '-', this.house, '-', this.room, '-', this.person_name);
     };
 
     Reservation.prototype.getName = function()
@@ -179,10 +176,22 @@ define('ShowRooms', ["jquery"], function ($)
         }, (waiting_time / max_progress) * 1000);
 
         setInterval(function() {
-            console.log('refresh!');
+            that.logDebug('refresh!');
             that.refreshNowValue();
             that.refreshReservations();
         }, 60 * 1000);
+    };
+
+    ShowRooms.prototype.logDebug = function()
+    {
+        if (typeof console !== 'undefined' && typeof console.log === 'function')
+        {
+            console.log.apply(console, arguments);
+        }
+        else
+        {
+            /* We cannot log properly, so we don't even try! */
+        }
     };
 
     ShowRooms.prototype.refreshNowValue = function()
@@ -269,7 +278,7 @@ define('ShowRooms', ["jquery"], function ($)
             },
             'dataType': 'xml'
         }).fail(function(response) {
-            console.log('fail reservations', response);
+            that.logDebug('fail reservations', response);
 
         }).done(function (response) {
             var returns = $(response).find('return');
@@ -308,7 +317,7 @@ define('ShowRooms', ["jquery"], function ($)
                 },
                 'dataType': 'xml'
             }).fail(function(response) {
-                console.log('fail rooms4time', response);
+                that.logDebug('fail rooms4time', response);
 
             }).done(function (response) {
                 var returns = $(response).find('return');
@@ -539,7 +548,7 @@ define('ShowRooms', ["jquery"], function ($)
             var house = parseInt(room_match[2], 10);
             var room = room_match[3];
 
-            console.log('free', campus, house, room);
+            that.logDebug('free', campus, house, room);
 
             if (campus == that.campus && house == that.house)
             {
