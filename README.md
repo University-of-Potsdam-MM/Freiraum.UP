@@ -12,6 +12,24 @@
 Wenn alle Schritte aus der Entwicklungsumgebung ausgeführt wurde, kann der komplette Ordner als `.zip` oder `.tar.gz`
 gepackt werden und auf einem beliebigen Webserver (auch ohne PHP-Unterstützung) platziert werden.
 
+## Konfiguration
+
+Die App beinhaltet direkt eine `config.json`.
+
+``` js
+{
+    "base_url": "https://api.uni-potsdam.de/endpoints/roomsAPI/1.0/",
+    "authorization": "Bearer xxxxxxx", // Das Token, von api.uni-potsdam.de
+    "xml_proxy_path": "./xml.php",
+    "use_xml_proxy": false, // soll der xml_proxy_path als fallback benutzt werden?
+    "campus": 3, // Auf welchem Campus hängt das Panel?
+    "house": 6 // In welchem Haus hängt das Panel?
+}
+```
+
+Die Parameter campus und house können für einen Seitenaufruf überschrieben werden, in dem man sie hinten an die URL
+ranhängt. Zum Beispiel: `/index.html?campus=3&house=1` würde das Panel für Campus 3 und Haus 1 laden.
+
 # Anforderung
 
 - 46 zoll
