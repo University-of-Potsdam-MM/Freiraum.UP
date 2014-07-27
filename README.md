@@ -62,7 +62,7 @@ S27
 ### Alice (39%)
 
 * 1. Semester
-* Weiß dass sie heute ab 10:00, "Staatsrecht I" bei Herrn "M.M."
+* Weiß dass sie heute ab 10:00, "Staatsrecht I" bei Herrn "M.M." hat
 * Weiß nicht ob sich der Raum geändert hat
 
 ### Bob (60%)
