@@ -116,6 +116,49 @@ Die folgenden Technologien werden bei der Umsetzung der `rooms` Webanwendung ben
 - Composer und Doctrine-Cache
   - Für xml.php (als Fallback falls die externe Api nicht verfügbar ist oder CORS-Header nicht richtig gesetzt sind)
 
+## Entitäten (JS Objekte)
+
+### `ShowRooms` Komponente
+
+Ist für die Aktualisierung des Panels zuständig. 
+
+Es beinhaltet zwei Anzeigen: `.js_now` und `.js_soon`. Das erste bezieht sich auf den aktuellen 2 Stundenblock (beginnt immer auf ganze 2 Stunden) und das zweite bezieht sich auf den 2 Stundenblock danach.
+
+In jedem Block werden die damit verknüpften `Reservation`s und `FreeRoom`s angezeigt.
+
+`FreeRoom`s werden dabei in `this.free_rooms` von `ShowRooms` gehalten. Sie beziehen sich immer auf den aktuellen Stundenblock.
+
+Die `Reservation`s werden in `this.reservations` von `ShowRooms` komplett gehalten, für den Zeitraum vom Beginn des ersten Stundenblocks und bis zum Ende des zweiten Stundenblocks geladen. Erst beim rendern wird mit `Reservation#isRunningAtTime` getestet, ob der Stundenblock auch dort angezeigt wird. Das hat den Vorteil, dass es auch funktioniert, wenn eine Reservierung über 2 Stundenblöcke hinweg stattfindet.
+
+Da die `free4Time` API Methode ab und an trotzdem Räume liefert, die nicht frei sind, wird in `ShowRooms#refreshReservations()` eine Variable `used_rooms` mit allen geblockten Räumen gefüllt und beim Abholen der freien Räume diese Liste noch mal danach gefiltert.
+
+### `Reservation(name, start_time, end_time, campus, house, room, person_name)`
+
+Bildet eine einzelne Reservierung für einen Raum ab.
+
+Zum Beispiel wird eine Reservierung so initialisiert:
+
+``` js
+new Reservation(
+	'V/G1 - Öffentliches Wirtschaftsrecht I',
+	'2014-02-04T18:00:00+01:00',
+	'2014-02-04T16:00:00+01:00',
+	3,
+	1,
+	'H10'
+);
+```
+
+### `FreeRoom(campus, house, room)`
+
+Bildet einen einzelnen freien Raum ab.
+
+Zum Beispiel wird Raum 04.06.S01 so initialisiert:
+
+``` js
+new FreeRoom(4, 6, "S01");
+```
+
 ## Schnittstellen
 
 ### API Aufruf nach `/reservations`
