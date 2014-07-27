@@ -65,6 +65,8 @@ Hier einige User die ich mir bei dem Konzeptionieren des Panels überlegt habe.
 
 Die folgenden Technologien werden bei der Umsetzung der `rooms` Webanwendung benutzt:
 
+- nodejs http://nodejs.org
+  - Zur Installation von Bower
 - bower http://bower.io
   - Zur Installation der Webbibliotheken
 - bootstrap http://getbootstrap.com
