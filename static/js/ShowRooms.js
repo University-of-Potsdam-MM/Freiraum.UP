@@ -371,12 +371,12 @@ define('ShowRooms', ["jquery", "json!../../config.json"], function ($, config)
         var person_element = $(document.createElement('span'));
         var time_element = $(document.createElement('span'));
 
+        tr_element.addClass('reservation');
+
         room_element.text(reservation.getRoom());
-        room_element.css({
-            'display': 'inline-block',
-            'margin-right': '5px'
-        });
         room_element.addClass('pull-right');
+        room_element.addClass('room');
+
         var text = reservation.getName();
         text = reservation.getShortCode();
         info_element.text(reservation.getName() + '');
@@ -384,11 +384,7 @@ define('ShowRooms', ["jquery", "json!../../config.json"], function ($, config)
         {
             info_element.html( info_element.html().replace(/^(.)/, '<em>$1</em>'));
         }
-        info_element.css({
-            'display': 'inline-block',
-            'margin-right': '5px',
-            'font-weight': '700'
-        });
+        info_element.addClass('info');
 
         var is_time_visible = block_start_time.getTime() + 2 * 60 * 60 * 1000 != reservation.getEndTime().getTime() ? true : false;
 
@@ -403,20 +399,12 @@ define('ShowRooms', ["jquery", "json!../../config.json"], function ($, config)
             person_element.text('(' + reservation.getShortPersonName() + ')');
             time_element.text('');
         }
-        person_element.css({
-            'display': 'inline-block',
-            'margin-right': '5px',
-            'font-size': '0.8em'
-        });
-        time_element.css({
-            'display': 'inline-block',
-            'margin-right': '5px',
-            'font-size': '0.8em'
-        });
+        person_element.addClass('person');
+        time_element.addClass('time');
         td_element.append(info_element);
         td_element.append(person_element);
-        td_element.append(room_element);
         td_element.append(time_element);
+        td_element.append(room_element);
         tr_element.append(td_element);
 
         return tr_element;
