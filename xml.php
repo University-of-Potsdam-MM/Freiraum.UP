@@ -23,10 +23,7 @@ while ($i < 10)
     try
     {
 
-        $client = new Client('http://usb.soft.cs.uni-potsdam.de/roomsAPI/1.0/');
-
- #      $client = new Client('http://fossa.soft.cs.uni-potsdam.de:8280/services/roomsAPI/');
-
+        $client = new Client('https://api.uni-potsdam.de/endpoints/roomsAPI/1.0//');
 
         $request = $client->get($method, array(
             'Authorization' => $authorization
