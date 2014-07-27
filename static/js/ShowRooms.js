@@ -143,27 +143,31 @@ define('ShowRooms', ["jquery", "json!../../config.json"], function ($, config)
         $('.js_campus').val(that.campus);
         $('.js_house').val(that.house);
 
-        var new_page_in = 1;
-        var current_page = 'soon';
+        var current_page = 0;
         var waiting_time = 10;
         var max_progress = 10;
+        var new_page_in = waiting_time;
+
+        this.pages = this.dom_element.find('.js_page');
+        this.pages.hide();
+        $(this.pages[0]).show();
 
         setInterval(function() {
             new_page_in--;
             if (new_page_in == 0)
             {
-                if (current_page == 'now')
+                $(that.pages[current_page]).hide();
+
+                if (that.pages.length - 1 == current_page)
                 {
-                    that.now_element.hide();
-                    that.soon_element.show();
-                    current_page = 'soon';
+                    current_page = 0;
                 }
-                else if (current_page == 'soon')
+                else
                 {
-                    that.now_element.show();
-                    that.soon_element.hide();
-                    current_page = 'now';
+                    current_page++;
                 }
+
+                $(that.pages[current_page]).show();
 
                 new_page_in = max_progress;
                 $('.progress-bar').css('width', 0);

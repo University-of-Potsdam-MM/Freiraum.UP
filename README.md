@@ -188,3 +188,55 @@ Beispielantwort:
   </S:Body>
 </S:Envelope>
 ```
+
+## Neue Seite anlegen
+
+Wenn eine weitere Seite auf dem Panel angezeigt werden soll, ist das relativ einfach.
+
+Es gibt bereits 2 Seiten (soon + now unter dem css-Selektor `.container > .js_page`), will man davor eine Seite hinzufügen, sieht das so aus:
+
+``` html
+    <div class="container">
+
+        <!-- neue Seite -->
+        <div class="row js_page">
+            <h2 class="hidden">Interner Bezeichner für die Seite</h2>
+            <table class="table table-striped table-hover">
+                <thead>
+                <th>Die Überschrift</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Die erste Zeile <strong>mit dickem Text</strong> und <em>hervorgehobene Text</em>.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="row js_page">
+            <h2 class="hidden">Laufende Veranstaltungen</h2>
+            <table class="js_now table table-striped table-hover">
+                <thead>
+                    <th class="js_now_headline">Gerade</th>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+        <div class="row js_page">
+            <h2 class="hidden">Laufende Veranstaltungen</h2>
+            <table class="js_soon table table-striped table-hover">
+                <thead>
+                <th class="js_soon_headline">In 2 Stunden</th>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+```
+
+Das Ergebnis sieht dann ungefähr so aus:
+
+![Neue Seite](docs/example_for_new_page.png)
