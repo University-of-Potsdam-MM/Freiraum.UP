@@ -74,3 +74,78 @@ S27
 
 * Kein Semester, ist Gastredner
 * Möchte am "Kolloquium für Master im Bereich Internationale Politik" (von K.K., R.R. und H.H.) von 12:00 bis 14:00 teilnehmen
+
+## Architektur
+
+- Webanwendung
+  - `index.html`
+  - `js/ShowRooms.js`
+- Zugriff von der Webanwendung per `Bearer`-Token auf die roomsAPI
+- roomsAPI auf dem USB
+  - `/rooms4Time`
+  - `/reservations` 
+
+## Technologien der Webanwendung
+
+Die folgenden Technologien werden bei der Umsetzung der `rooms` Webanwendung benutzt:
+
+- bower http://bower.io
+  - Zur Installation der Webbibliotheken
+- bootstrap http://getbootstrap.com
+  - HTML/CSS-Framework für das Layout 
+- require.js http://requirejs.org
+  - Dependency Library für Javascript
+- jsb.js
+  - Library um Javascript-Verhalten ohne Inline-JS auf HTML-Elemente zu tun
+- html5shiv
+  - Polyfill damit HTML5-Elemente auch in älteren Browsern funktionieren
+- respond.js
+  - Media-Query Polyfill für ältere IE-Browser
+- Composer und Doctrine-Cache
+  - Für xml.php (als Fallback falls die externe Api nicht verfügbar ist oder CORS-Header nicht richtig gesetzt sind)
+
+## Schnittstellen
+
+### API Aufruf nach `/reservations`
+
+``` xml
+<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+    <S:Body>
+      <ns2:reservationsResponse xmlns:ns2="http://rooms.provider.elis.unipotsdam.de/">
+        <return>
+          <endTime>2014-02-04T18:00:00+01:00</endTime>
+          <startTime>2014-02-04T16:00:00+01:00</startTime>
+          <roomList>
+            <room>3.01.H10</room>
+          </roomList>
+          <personList>
+            <person>Jochen Bley</person>
+          </personList>
+          <veranstaltung>V/G1 - Öffentliches Wirtschaftsrecht I</veranstaltung>
+        </return>
+        <!-- weitere <return> -->
+      </ns2:reservationsResponse>
+    </S:Body>
+</S:Envelope>
+```
+### API Aufruf nach `/rooms4Time`
+
+Parameter:
+
+- endTime: aktuelle Zeit als ISO-Zeit String
+- startTime: aktuelle Zeit als ISO-Zeit String
+- campus: Nummer des Campus
+- cb: Cachebuster Parameter (zufällige Zahl)
+
+Beispielantwort:
+
+``` xml
+<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+  <S:Body>
+    <ns2:rooms4TimeResponse xmlns:ns2="http://rooms.provider.elis.unipotsdam.de/">
+      <return>3.01.1.14</return>
+      <return>3.01.1.50</return>
+    </ns2:rooms4TimeResponse>
+  </S:Body>
+</S:Envelope>
+```
