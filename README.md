@@ -30,6 +30,10 @@ Die App beinhaltet direkt eine `config.json`.
 Die Parameter campus und house können für einen Seitenaufruf überschrieben werden, in dem man sie hinten an die URL
 ranhängt. Zum Beispiel: `/index.html?campus=3&house=1` würde das Panel für Campus 3 und Haus 1 laden.
 
+Zu Testzwecken ist es möglich mit dem URL-Parameter `now` die Uhrzeit und den Tag zu überschrieben. Zum Beispiel würde
+`/index.html?campus=3&house=6&now=2014-07-28T10%3A00%3A00.000Z` das Panel für den 28.7.2014 um 10 Uhr laden. Hierbei ist
+wichtig zu beachten, dass die Daten nur aus der Zukunft von der `roomsAPI` zurückgegeben werden.
+
 # Anforderung
 
 - 46 zoll
