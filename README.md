@@ -1,5 +1,15 @@
 # rooms
 
+### Table of Contents
+**[Entwicklungsumgebung aufsetzen](#entwicklungsumgebung-aufsetzen)**  
+**[Release für den Server vorbereiten](#release-für-den-Server-vorbereiten)**  
+**[Konfiguration](#konfiguration)**  
+**[Anforderungen](#anforderungen)**  
+**[Architektur](#architektur)**  
+**[Technologien der Webanwendung](#technologien-der-Webanwendung)**  
+**[Nächste Schritte, Credits, Feedback, Lizenz](#next-steps)**  
+
+
 ## Entwicklungsumgebung aufsetzen
 
 1. Installiere nodejs von http://nodejs.org/
@@ -30,19 +40,19 @@ Die App beinhaltet direkt eine `config.json`.
 Die Parameter campus und house können für einen Seitenaufruf überschrieben werden, in dem man sie hinten an die URL
 ranhängt. Zum Beispiel: `/index.html?campus=3&house=1` würde das Panel für Campus 3 und Haus 1 laden.
 
-# Anforderung
+# Anforderungen
 
 - 46 zoll
 - 15-26 Seminarräume, 7 HS
 
-# Ansichten
+## Ansichten
 
 - Welche Räume sind gerade frei?
 - Welche Veranstaltungen laufen gerade?
 - Welche Veranstaltungen kommen bald?
 - Hinweis, wenn das Netz nicht verfügbar ist!
 
-# Tasks
+## Tasks
 
 - Konfigurationsdatei für URL's / Endpoints
 - Dokumentation der Einbindung weiterer Darstellungsseiten
@@ -66,39 +76,34 @@ Hier einige User die ich mir bei dem Konzeptionieren des Panels überlegt habe.
   - Kein Semester, ist Gastredner
   - Möchte am "Kolloquium für Master im Bereich Internationale Politik" (von K.K., R.R. und H.H.) von 12:00 bis 14:00 teilnehmen
 
-## Architektur
+# Architektur
 
 - Webanwendung
   - `index.html`
   - `js/ShowRooms.js`
 - Zugriff von der Webanwendung per `Bearer`-Token auf die roomsAPI
-- roomsAPI auf dem USB
+- [roomsAPI](https://api.uni-potsdam.de/store/apis/info?name=roomsAPI&version=1.0&provider=admin) auf dem [USB](https://api.uni-potsdam.de/)
   - `/rooms4Time`
   - `/reservations`
 
 ![Maschinen](docs/machines.png)
 
 
-## Technologien der Webanwendung
+# Technologien der Webanwendung
 
 Die folgenden Technologien werden bei der Umsetzung der `rooms` Webanwendung benutzt:
 
-- nodejs http://nodejs.org
-  - Zur Installation von Bower
-- bower http://bower.io
-  - Zur Installation der Webbibliotheken
-- bootstrap http://getbootstrap.com
-  - HTML/CSS-Framework für das Layout 
-- require.js http://requirejs.org
-  - Dependency Library für Javascript
-- jsb.js
-  - Library um Javascript-Verhalten ohne Inline-JS auf HTML-Elemente zu tun
-- html5shiv
-  - Polyfill damit HTML5-Elemente auch in älteren Browsern funktionieren
-- respond.js
-  - Media-Query Polyfill für ältere IE-Browser
-- Composer und Doctrine-Cache
-  - Für xml.php (als Fallback falls die externe Api nicht verfügbar ist oder CORS-Header nicht richtig gesetzt sind)
+| Technologie        | Verwendungszweck           | Link  |
+| ------------- |-------------|:-----:|
+| nodejs      | zur primären Installation von Bower | http://nodejs.org |
+| bower      | Installation der Webbibliotheken | http://bower.io |
+| bootstrap | HTML/CSS-Framework für das Layout | http://getbootstrap.com |
+| require.js | Dependency Library für Javascript | http://requirejs.org |
+| jsb.js | Library um Javascript-Verhalten ohne Inline-JS auf HTML-Elemente zu tun | - |
+| html5shiv | Polyfill damit HTML5-Elemente auch in älteren Browsern funktionieren | - |
+| respond.js | Media-Query Polyfill für ältere IE-Browser | - |
+| Composer und Doctrine-Cache | Für xml.php (als Fallback falls die externe Api nicht verfügbar ist oder CORS-Header nicht richtig gesetzt sind) | - |
+
 
 ## Entitäten (JS Objekte)
 
@@ -106,7 +111,7 @@ Die folgenden Technologien werden bei der Umsetzung der `rooms` Webanwendung ben
 
 Ist für die Aktualisierung des Panels zuständig. 
 
-Es beinhaltet zwei Anzeigen: `.js_now` und `.js_soon`. Das erste bezieht sich auf den aktuellen 2 Stundenblock (beginnt immer auf ganze 2 Stunden) und das zweite bezieht sich auf den 2 Stundenblock danach.
+Es beinhaltet zwei Anzeigen: `.js_now` und `.js_soon`. `.js_now` bezieht sich auf den aktuellen 2 Stundenblock (beginnt immer auf ganze 2 Stunden) und `.js_soon` bezieht sich auf den 2 Stundenblock danach.
 
 In jedem Block werden die damit verknüpften `Reservation`s und `FreeRoom`s angezeigt.
 
@@ -240,3 +245,5 @@ Es gibt bereits 2 Seiten (soon + now unter dem css-Selektor `.container > .js_pa
 Das Ergebnis sieht dann ungefähr so aus:
 
 ![Neue Seite](docs/example_for_new_page.png)
+
+#Nächste Schritte, Credits, Feedback, Lizenz
