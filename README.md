@@ -21,7 +21,7 @@ Die App beinhaltet direkt eine `config.json`.
     "base_url": "https://api.uni-potsdam.de/endpoints/roomsAPI/1.0/",
     "authorization": "Bearer xxxxxxx", // Das Token, von api.uni-potsdam.de
     "xml_proxy_path": "./xml.php",
-    "use_xml_proxy": false, // soll der xml_proxy_path als fallback benutzt werden?
+    "use_xml_proxy": false, // soll der xml_proxy_path als fallback benutzt werden? Z.B. wenn die CORS-Header nicht richtig gesetzt sind.
     "campus": 3, // Auf welchem Campus hängt das Panel?
     "house": 6 // In welchem Haus hängt das Panel?
 }
