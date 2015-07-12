@@ -201,7 +201,7 @@ define('ShowRooms', ["jquery", "json!../../config.json", "moment"], function ($,
 
             for (var name in firstForCategoryMap) {
                 if (firstForCategoryMap.hasOwnProperty(name)) {
-                    if (count < 2) {
+                    if (count < config.local_traffic_count) {
                         count++;
                         journeysText.push(name + ' ' + moment().to(firstForCategoryMap[name].getTime()));
                     }
