@@ -20,14 +20,18 @@ define('LocalTraffic', ['jquery', "json!../../config.json", "transportApi", 'mom
 
         transportApi.getTrainsForStation(config.station_id, function(error, journeys) {
             if (error) {
+                jsb.fireEvent('LocalTraffic::NO_NEXT_JOURNEYS');
                 that.journeysHeadline.text('Fehler: Nahverkehrsverbindungen können nicht ermittelt werden.');
                 return ;
             }
 
             if (journeys.length == 0) {
+                jsb.fireEvent('LocalTraffic::NO_NEXT_JOURNEYS');
                 that.journeysHeadline.text('Aktuell keine Zug- und Busverbindungen.');
                 return ;
             }
+
+            jsb.fireEvent('LocalTraffic::NEXT_JOURNEYS', journeys);
 
             //that.journeysHeadline.text('Von: ' + journeys[0].getStationName());
             that.journeysHeadline.text('Nahverkehr');
