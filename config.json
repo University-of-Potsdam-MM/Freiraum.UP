@@ -7,6 +7,7 @@
     "campus": 3,
     "house": 6,
     "station_id": "009230003#86",
+    "events_rss_feed_url": "./eventsProxy.php",
     "news_rss_feed_url": "./newsProxy.php",
     "news_per_page": 2
 }

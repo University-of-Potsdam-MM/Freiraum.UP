@@ -16,5 +16,9 @@ define('domain/NewsItem', ['moment'], function(moment) {
         return this.data.publishedTimestamp;
     };
 
+    NewsItem.prototype.getUpdatedTimestamp = function() {
+        return this.data.updatedTimestamp;
+    };
+
     return NewsItem;
 });

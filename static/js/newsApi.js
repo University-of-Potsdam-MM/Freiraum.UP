@@ -6,7 +6,19 @@ define('newsApi', ['jquery', "json!../../config.json", "moment", "domain/NewsIte
     NewsApi.prototype.getLatestNews = function(callback) {
         var that = this;
 
-        this.rawCall(function(error, responseXml) {
+        this.rawCall(config.news_rss_feed_url, function(error, responseXml) {
+            if (error) {
+                callback(error, responseXml);
+            } else {
+                callback(error, that.parseNewsResponse(responseXml));
+            }
+        });
+    };
+
+    NewsApi.prototype.getLatestEvents = function(callback) {
+        var that = this;
+
+        this.rawCall(config.events_rss_feed_url, function(error, responseXml) {
             if (error) {
                 callback(error, responseXml);
             } else {
@@ -49,17 +61,18 @@ define('newsApi', ['jquery', "json!../../config.json", "moment", "domain/NewsIte
                 /* FIXME: Rewrite-HACK for #26 @ https://github.com/University-of-Potsdam-MM/rooms/issues/26 */
                 "imageSrc":  (imgNode.attr('src') || "").replace(/uploads\//, "uploads01/"),
                 "content": contentNode.text().trim(),
-                "publishedTimestamp":  moment(newsNode.find('published').text()).toDate()
+                "publishedTimestamp":  moment(newsNode.find('published').text()).toDate(),
+                "updatedTimestamp":  moment(newsNode.find('updated').text()).toDate()
             }));
         });
 
         return newsItems;
     };
 
-    NewsApi.prototype.rawCall = function(callback) {
+    NewsApi.prototype.rawCall = function(url, callback) {
         $.ajax({
             type: "GET",
-            url: config.news_rss_feed_url,
+            url: url,
             crossDomain: true,
             contentType: 'text/xml'
         }).then(function(responseXml) {

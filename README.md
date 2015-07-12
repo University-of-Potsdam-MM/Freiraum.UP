@@ -36,7 +36,8 @@ Die App beinhaltet direkt eine `config.json`.
     "campus": 3, // Auf welchem Campus hängt das Panel?
     "house": 6, // In welchem Haus hängt das Panel?
     "station_id": "009230003#86", // ID der Station für die Nahverkehrsinformationen
-    "news_rss_feed_url": "http://www.uni-potsdam.de/nachrichten/rss-feed-abonnieren.html?type=100&tx_ttnews%5Bcat%5D=19", // URL zum Rss-Feed der Uni-Potsdam 
+    "events_rss_feed_url": "https://www.uni-potsdam.de/veranstaltungen/rss-feed-abonnieren/eventfeed/feed/xml.html?tx_upevents_upeventfeed%5Blimit%5D=30&tx_upevents_upeventfeed%5Bcat%5D=&tx_upevents_upeventfeed%5BcatLink%5D=or", // URL zum Rss-Feed der Veranstaltungen der Uni-Potsdam
+    "news_rss_feed_url": "http://www.uni-potsdam.de/nachrichten/rss-feed-abonnieren.html?type=100&tx_ttnews%5Bcat%5D=19", // URL zum Rss-Feed der Nachrichten der Uni-Potsdam 
     "news_per_page": 2 // Anzahl der News pro Seite
 }
 ```
