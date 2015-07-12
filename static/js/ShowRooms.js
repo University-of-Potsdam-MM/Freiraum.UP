@@ -155,20 +155,24 @@ define('ShowRooms', ["jquery", "json!../../config.json", "moment"], function ($,
         this.pages.hide();
         $(this.pages[0]).show();
 
-        setInterval(function() {
+        var toNextPage = function() {
             new_page_in--;
             if (new_page_in == 0)
             {
                 $(that.pages[current_page]).hide();
 
-                if (that.pages.length - 1 == current_page)
-                {
-                    current_page = 0;
-                }
-                else
-                {
-                    current_page++;
-                }
+                /* Remember this, in case every page would be hidden. */
+                var initial_current_page = current_page;
+
+                do {
+                    current_page = current_page + 1;
+
+                    if (that.pages.length == current_page)
+                    {
+                        current_page = 0;
+                    }
+
+                } while ($(that.pages[current_page]).hasClass('is-hidden') || initial_current_page === current_page);
 
                 $(that.pages[current_page]).show();
 
@@ -179,7 +183,9 @@ define('ShowRooms', ["jquery", "json!../../config.json", "moment"], function ($,
             {
                 $('.progress-bar').css('width', Math.floor(100 - 100 * (new_page_in / max_progress)) + '%');
             }
-        }, (waiting_time / max_progress) * 1000);
+        };
+
+        setInterval(toNextPage, (waiting_time / max_progress) * 1000);
 
         setInterval(function() {
             that.logDebug('refresh!');
@@ -361,9 +367,12 @@ define('ShowRooms', ["jquery", "json!../../config.json", "moment"], function ($,
         if (running_count == 0)
         {
             var div_element = $('<div />');
+            that.dom_element.find('.js_reservations_now').addClass('is-hidden');
             div_element.addClass('alert alert-info');
             div_element.text('Keine Veranstaltungen');
             that.now_tbody_element.append(div_element);
+        } else {
+            that.dom_element.find('.js_reservations_now').removeClass('is-hidden');
         }
 
         running_count = 0;
@@ -381,9 +390,12 @@ define('ShowRooms', ["jquery", "json!../../config.json", "moment"], function ($,
         if (running_count == 0)
         {
             var div_element = $('<div />');
+            that.dom_element.find('.js_reservations_soon').addClass('is-hidden');
             div_element.addClass('alert alert-info');
             div_element.text('Keine Veranstaltungen');
             that.soon_tbody_element.append(div_element);
+        } else {
+            that.dom_element.find('.js_reservations_soon').removeClass('is-hidden');
         }
     };
 
