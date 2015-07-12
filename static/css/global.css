@@ -1,5 +1,5 @@
 body {
-    zoom: 2;
+    /*zoom: 2;*/
 }
 
 
@@ -93,7 +93,7 @@ h2 {
 
 .js_news {
     position: absolute;
-    top: 5px;
+    top: 38px;
     bottom: 11px;
     height: 100%;
 }
