@@ -29,11 +29,13 @@ Die App beinhaltet direkt eine `config.json`.
 ``` js
 {
     "base_url": "https://api.uni-potsdam.de/endpoints/roomsAPI/1.0/",
+    "transport_base_url": "https://api.uni-potsdam.de/endpoints/transportAPI/1.0/",
     "authorization": "Bearer xxxxxxx", // Das Token, von api.uni-potsdam.de
     "xml_proxy_path": "./xml.php",
     "use_xml_proxy": false, // soll der xml_proxy_path als fallback benutzt werden? Z.B. wenn die CORS-Header nicht richtig gesetzt sind.
     "campus": 3, // Auf welchem Campus hängt das Panel?
     "house": 6, // In welchem Haus hängt das Panel?
+    "station_id": "009230003#86", // ID der Station für die Nahverkehrsinformationen
     "news_rss_feed_url": "http://www.uni-potsdam.de/nachrichten/rss-feed-abonnieren.html?type=100&tx_ttnews%5Bcat%5D=19", // URL zum Rss-Feed der Uni-Potsdam 
     "news_per_page": 2 // Anzahl der News pro Seite
 }

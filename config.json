@@ -1,10 +1,12 @@
 {
     "base_url": "https://api.uni-potsdam.de/endpoints/roomsAPI/1.0/",
+    "transport_base_url": "https://api.uni-potsdam.de/endpoints/transportAPI/1.0/",
     "authorization": "Bearer c06156e119040a27a4b43fa933f130",
     "xml_proxy_path": "./xml.php",
     "use_xml_proxy": false,
     "campus": 3,
     "house": 6,
+    "station_id": "009230003#86",
     "news_rss_feed_url": "./newsProxy.php",
     "news_per_page": 2
 }
