@@ -7,6 +7,10 @@ define('domain/NewsItem', ['moment'], function(moment) {
         return this.data.title;
     };
 
+    NewsItem.prototype.getContent = function() {
+        return this.data.content;
+    };
+
     NewsItem.prototype.getImageSrc = function() {
         return this.data.imageSrc;
     };
@@ -17,6 +21,21 @@ define('domain/NewsItem', ['moment'], function(moment) {
 
     NewsItem.prototype.getUpdatedTimestamp = function() {
         return this.data.updatedTimestamp;
+    };
+
+    NewsItem.prototype.hasLocation = function() {
+        return this.getContent().match(/^(.+), (.+) - /) ? true : false;
+    };
+
+    NewsItem.prototype.getMainLocation = function() {
+        var match = this.getContent().match(/^(.+?), (.+?) - /);
+        return match && match[1];
+    };
+
+    NewsItem.prototype.getLocation = function() {
+        var match = this.getContent().match(/^(.+?), (.+?) - /);
+        console.log('match', match);
+        return match && match[2];
     };
 
     return NewsItem;

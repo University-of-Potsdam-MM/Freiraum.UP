@@ -45,10 +45,18 @@ define('Events', ['jquery', "json!../../config.json", "newsApi", 'moment'], func
             notYetStartedNews = notYetStartedNews.splice(0, config.news_per_page);
 
             notYetStartedNews.forEach(function(newsItem) {
-                console.log('newsItem', arguments[1], newsItem);
                 var tr = $('<tr><td class="news-td" colspan="2"><div class="news-title">Das ist der Titel</div></td></tr>');
                 tr.find('td').css('background-image', 'url(\'' + newsItem.getImageSrc() + '\')');
-                tr.find('.news-title').text(newsItem.getTitle() + ' (' + moment(newsItem.getUpdatedTimestamp()).format('DD.MM.YYYY HH:mm') + ')');
+                var location = '';
+
+                if (newsItem.hasLocation()) {
+                    if (newsItem.getMainLocation() == 'Universität Potsdam') {
+                        location = newsItem.getLocation() + ', ';
+                    } else {
+                        location = newsItem.getMainLocation() + ', ' + newsItem.getLocation() + ', ';
+                    }
+                }
+                tr.find('.news-title').text(newsItem.getTitle() + ' (' + location + moment(newsItem.getUpdatedTimestamp()).format('DD.MM.YYYY HH:mm') + ')');
                 that.newsTableBody.append(tr);
             });
         });

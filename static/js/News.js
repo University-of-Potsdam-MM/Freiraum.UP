@@ -37,7 +37,6 @@ define('News', ['jquery', "json!../../config.json", "newsApi", 'moment'], functi
             newsItems = newsItems.splice(0, config.news_per_page);
 
             newsItems.forEach(function(newsItem) {
-                console.log('newsItem', arguments[1], newsItem);
                 var tr = $('<tr><td class="news-td" colspan="2"><div class="news-title">Das ist der Titel</div></td></tr>');
                 tr.find('td').css('background-image', 'url(\'' + newsItem.getImageSrc() + '\')');
                 tr.find('.news-title').text(newsItem.getTitle() + ' (' + moment(newsItem.getPublishedTimestamp()).format('DD.MM.YYYY') + ')');
