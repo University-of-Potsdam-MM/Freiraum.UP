@@ -19,6 +19,14 @@ tr td em {
     /*line-height: 0.6;*/
 }
 
+.page-headline {
+    font-size: 15px;
+    border-bottom: 2px solid #dddddd;
+    width: 100%;
+    display: block;
+    padding: 5px;
+}
+
 h2 {
     font-size: 15px;
 }
@@ -42,27 +50,38 @@ h2 {
     margin-bottom: 1px;
 }
 
+.reservation {
+    border-top: 1px solid #dddddd;
+    padding: 2px;
+}
+
 .reservation .room {
     display: inline-block;
     margin-right: 5px;
 }
 
 .reservation .info {
-    display: inline-block;
-    margin-right: 5px;
+    display: block;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    margin-right: 50px;
     font-weight: 700;
 }
 
 .reservation .person {
     display: inline-block;
+    margin-left: 5px;
     margin-right: 5px;
     font-size: 0.8em;
+    font-weight: normal;
 }
 
 .reservation .time {
     display: inline-block;
     margin-right: 5px;
     font-size: 0.8em;
+    font-weight: normal;
 }
 
 .container {
@@ -95,4 +114,12 @@ h2 {
     background-position: center center;
     position: relative;
     overflow: hidden;
+}
+
+.reservation:nth-child(odd) {
+    background-color: #f9f9f9;
+}
+
+.reservation:nth-child(even) {
+    background-color: #ffffff;
 }

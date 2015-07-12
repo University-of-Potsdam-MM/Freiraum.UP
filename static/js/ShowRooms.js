@@ -110,10 +110,8 @@ define('ShowRooms', ["jquery", "json!../../config.json", "moment"], function ($,
 
         this.options = options || {};
         this.dom_element = $(dom_element);
-        this.now_element = this.dom_element.find('table.js_now');
-        this.now_tbody_element = this.dom_element.find('table.js_now tbody');
-        this.soon_element = this.dom_element.find('table.js_soon');
-        this.soon_tbody_element = this.dom_element.find('table.js_soon tbody');
+        this.now_tbody_element = this.dom_element.find('.js_now_body');
+        this.soon_tbody_element = this.dom_element.find('.js_soon_body');
         this.free_ul_element = this.dom_element.find('.js_free_rooms');
         this.base_url = config.use_xml_proxy > 0 ? 'xml.php/' : config.base_url.toString();
         this.authorization = config.authorization.toString();
@@ -314,14 +312,13 @@ define('ShowRooms', ["jquery", "json!../../config.json", "moment"], function ($,
         var before = new Date();
         before.setTime(now.getTime() - 2 * 60 * 60 * 1000);
 
-        $('.js_now').val(now.toISOString());
-        $('.js_soon').val(soon.toISOString());
-        $('.js_before').val(before.toISOString());
+        $('input.js_now').val(now.toISOString());
+        $('input.js_soon').val(soon.toISOString());
+        $('input.js_before').val(before.toISOString());
 
         that.now_tbody_element.empty();
         that.soon_tbody_element.empty();
 
-//        var last_first_letter = null;
         var running_count = 0;
 
         $.each(that.reservations, function(pos, reservation) {
@@ -329,21 +326,18 @@ define('ShowRooms', ["jquery", "json!../../config.json", "moment"], function ($,
             if (is_running)
             {
                 running_count++;
-                that.now_tbody_element.append(that.createTrForReservation(reservation, false, now));
+                that.now_tbody_element.append(that.createDivForReservation(reservation, false, now));
             }
         });
 
         if (running_count == 0)
         {
-            var tr_element = $('<tr />');
-            var td_element = $('<td />');
-            td_element.addClass('alert alert-info');
-            td_element.text('Keine Veranstaltungen');
-            tr_element.append(td_element);
-            that.now_tbody_element.append(tr_element);
+            var div_element = $('<div />');
+            div_element.addClass('alert alert-info');
+            div_element.text('Keine Veranstaltungen');
+            that.now_tbody_element.append(div_element);
         }
 
-//        last_first_letter = null;
         running_count = 0;
 
         $.each(that.reservations, function(pos, reservation) {
@@ -352,41 +346,40 @@ define('ShowRooms', ["jquery", "json!../../config.json", "moment"], function ($,
             if (is_running)
             {
                 running_count++;
-                that.soon_tbody_element.append(that.createTrForReservation(reservation, false, soon));
+                that.soon_tbody_element.append(that.createDivForReservation(reservation, false, soon));
             }
         });
 
         if (running_count == 0)
         {
-            var tr_element = $('<tr />');
-            var td_element = $('<td />');
-            td_element.addClass('alert alert-info');
-            td_element.text('Keine Veranstaltungen');
-            tr_element.append(td_element);
-            that.soon_tbody_element.append(tr_element);
+            var div_element = $('<div />');
+            div_element.addClass('alert alert-info');
+            div_element.text('Keine Veranstaltungen');
+            that.soon_tbody_element.append(div_element);
         }
     };
 
-    ShowRooms.prototype.createTrForReservation = function(reservation, highlight_first_letter, block_start_time)
+    ShowRooms.prototype.createDivForReservation = function(reservation, highlight_first_letter, block_start_time)
     {
-        var tr_element = $(document.createElement('tr'));
-        var td_element = $(document.createElement('td'));
-        var td_room_element = $(document.createElement('td'));
+        var div_element = $(document.createElement('div'));
         var room_element = $(document.createElement('strong'));
         var info_element = $(document.createElement('span'));
         var person_element = $(document.createElement('span'));
         var time_element = $(document.createElement('span'));
 
-        tr_element.addClass('reservation');
+        div_element.addClass('reservation');
 
         room_element.text(reservation.getRoom());
-        td_room_element.addClass('text-right');
+        room_element.addClass('pull-right');
         room_element.addClass('room');
 
         var text = reservation.getName();
         text = reservation.getShortCode();
-        // info_element.text(reservation.getName() + '' + ' ksjhdkadj klsjdlkasj dlaksjd aldjaslk jdalkdj laksdjasldjiwieulakhkasd asldakjhfda dhasd ,asjd alksjd aldkjasdlaksjdlajdska');
-        info_element.text(reservation.getName() + '');
+        var strong_info = $('<strong />');
+        strong_info.text(reservation.getName() + '' + ' ksjhdkadj klsjdlkasj dlaksjd aldjaslk jdalkdj laksdjasldjiwieulakhkasd asldakjhfda dhasd ,asjd alksjd aldkjasdlaksjdlajdska');
+        strong_info.text(reservation.getName());
+
+        info_element.append(strong_info);
         if (highlight_first_letter)
         {
             info_element.html( info_element.html().replace(/^(.)/, '<em>$1</em>'));
@@ -408,14 +401,12 @@ define('ShowRooms', ["jquery", "json!../../config.json", "moment"], function ($,
         }
         person_element.addClass('person');
         time_element.addClass('time');
-        td_element.append(info_element);
-        td_element.append(person_element);
-        td_element.append(time_element);
-        td_room_element.append(room_element);
-        tr_element.append(td_element);
-        tr_element.append(td_room_element);
+        div_element.append(room_element);
+        div_element.append(info_element);
+        info_element.append(person_element);
+        info_element.append(time_element);
 
-        return tr_element;
+        return div_element;
     };
 
     ShowRooms.prototype.renderAllFreeRooms = function()
