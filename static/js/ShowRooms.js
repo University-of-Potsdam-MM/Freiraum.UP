@@ -148,7 +148,7 @@ define('ShowRooms', ["jquery", "json!../../config.json", "moment"], function ($,
 
         var current_page = 0;
         var waiting_time = 10;
-        var max_progress = 10;
+        var max_progress = waiting_time;
         var new_page_in = waiting_time;
 
         this.pages = this.dom_element.find('.js_page');
