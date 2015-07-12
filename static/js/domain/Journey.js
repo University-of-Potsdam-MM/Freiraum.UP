@@ -1,7 +1,6 @@
 define('domain/Journey', ['moment'], function(moment) {
     var Journey = function(data) {
         this.data = data;
-        console.log('Journey', this.data);
     };
 
     Journey.prototype.getName = function() {

@@ -1,7 +1,6 @@
 define('domain/NewsItem', ['moment'], function(moment) {
     var NewsItem = function(data) {
         this.data = data;
-        console.log('NewsItem', this.data);
     };
 
     NewsItem.prototype.getTitle = function() {
