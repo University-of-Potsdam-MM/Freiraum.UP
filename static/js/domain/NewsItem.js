@@ -34,7 +34,6 @@ define('domain/NewsItem', ['moment'], function(moment) {
 
     NewsItem.prototype.getLocation = function() {
         var match = this.getContent().match(/^(.+?), (.+?) - /);
-        console.log('match', match);
         return match && match[2];
     };
 
