@@ -4,5 +4,7 @@
     "xml_proxy_path": "./xml.php",
     "use_xml_proxy": false,
     "campus": 3,
-    "house": 6
+    "house": 6,
+    "news_rss_feed_url": "./newsProxy.php",
+    "news_per_page": 2
 }
