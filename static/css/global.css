@@ -62,3 +62,31 @@ h2 {
 .container {
     width: 100%;
 }
+.js_journeys_current_time {
+
+}
+
+.js_news {
+    position: absolute;
+    top: 5px;
+    bottom: 11px;
+    height: 100%;
+}
+
+.news-title {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    padding: 5px;
+    background-color: #fff;
+    opacity: 0.95;
+    outline: 1px solid #000;
+    max-width: 60%;
+}
+
+.news-td {
+    background-size: cover;
+    background-position: center center;
+    position: relative;
+    overflow: hidden;
+}
