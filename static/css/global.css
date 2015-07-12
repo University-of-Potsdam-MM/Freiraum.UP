@@ -9,8 +9,14 @@ tr td em {
     color: #AA0000;
 }
 
+.table tbody > tr > td,
+.table thead > tr > th {
+    padding: 2px;
+    /*line-height: 0.6;*/
+}
+
 .table tbody > tr > td {
-    line-height: 0.6;
+    /*line-height: 0.6;*/
 }
 
 h2 {

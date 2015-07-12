@@ -371,6 +371,7 @@ define('ShowRooms', ["jquery", "json!../../config.json", "moment"], function ($,
     {
         var tr_element = $(document.createElement('tr'));
         var td_element = $(document.createElement('td'));
+        var td_room_element = $(document.createElement('td'));
         var room_element = $(document.createElement('strong'));
         var info_element = $(document.createElement('span'));
         var person_element = $(document.createElement('span'));
@@ -379,11 +380,12 @@ define('ShowRooms', ["jquery", "json!../../config.json", "moment"], function ($,
         tr_element.addClass('reservation');
 
         room_element.text(reservation.getRoom());
-        room_element.addClass('pull-right');
+        td_room_element.addClass('text-right');
         room_element.addClass('room');
 
         var text = reservation.getName();
         text = reservation.getShortCode();
+        // info_element.text(reservation.getName() + '' + ' ksjhdkadj klsjdlkasj dlaksjd aldjaslk jdalkdj laksdjasldjiwieulakhkasd asldakjhfda dhasd ,asjd alksjd aldkjasdlaksjdlajdska');
         info_element.text(reservation.getName() + '');
         if (highlight_first_letter)
         {
@@ -409,8 +411,9 @@ define('ShowRooms', ["jquery", "json!../../config.json", "moment"], function ($,
         td_element.append(info_element);
         td_element.append(person_element);
         td_element.append(time_element);
-        td_element.append(room_element);
+        td_room_element.append(room_element);
         tr_element.append(td_element);
+        tr_element.append(td_room_element);
 
         return tr_element;
     };
