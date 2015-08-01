@@ -135,4 +135,6 @@ h2 {
 
 .tweets {
     text-align: center;
+    transform: scale(1.4);
+    transform-origin: 50% 0;
 }
