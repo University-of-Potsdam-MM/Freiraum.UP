@@ -15,7 +15,7 @@ define('PageSwitcher', ['jquery', "json!../../config.json", "moment"], function(
 
         var toNextPage = function() {
             new_page_in--;
-            if (new_page_in == 0)
+            if (new_page_in == -1)
             {
                 $(that.pages[current_page]).hide();
 
