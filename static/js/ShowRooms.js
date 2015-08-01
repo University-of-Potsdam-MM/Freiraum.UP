@@ -219,6 +219,8 @@ define('ShowRooms', ["jquery", "json!../../config.json", "moment"], function ($,
         $('.js_now_headline').text('Jetzt (' + this.now.toLocaleTimeString().replace(/:\d\d$/g, '') + ' - ' + soon.toLocaleTimeString().replace(/:\d\d$/g, '') + ' Uhr)');
         $('.js_soon_headline').text('Demnächst (ab ' + soon.toLocaleTimeString().replace(/:\d\d$/g, '') + ' Uhr)');
 
+        that.logDebug('ShowRooms:refreshReservations', that.base_url + 'reservations');
+
         $.ajax({
             'url': that.base_url + 'reservations',
             headers: {
@@ -255,6 +257,7 @@ define('ShowRooms', ["jquery", "json!../../config.json", "moment"], function ($,
             that.sortReservationsByRoomName();
             that.renderAllReservations();
 
+            that.logDebug('ShowRooms:refreshReservations', that.base_url + 'rooms4Time');
             $.ajax({
                 'url':  that.base_url + 'rooms4Time',
                 headers: {
@@ -469,8 +472,6 @@ define('ShowRooms', ["jquery", "json!../../config.json", "moment"], function ($,
             var campus = room_match[1];
             var house = parseInt(room_match[2], 10);
             var room = room_match[3];
-
-            that.logDebug('free', campus, house, room);
 
             if (campus == that.campus && house == that.house)
             {

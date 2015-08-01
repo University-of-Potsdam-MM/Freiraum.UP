@@ -43,10 +43,7 @@ define('transportApi', ['jquery', "json!../../config.json", "moment", "domain/Jo
     };
 
     TransportApi.prototype.rawCall = function(xmlString, callback) {
-        //var xmlString = $($.parseHTML('<root><STBReq boardType="DEP" maxJourneys="5" sortOrder="REALTIME"><Time>23:00:52</Time><Today/><TableStation externalId="009230003#86"/><ProductFilter>1111111111111111</ProductFilter></STBReq></root>'));
-        //var xmlString = '<?xml version="1.0" encoding="UTF-8" ?>\n' + '<STBReq boardType="DEP" maxJourneys="5" sortOrder="REALTIME"><Time>' + moment().format('HH:mm:ss') + '</Time><Today/><TableStation externalId="' + stationId + '"/><ProductFilter>1111111111111111</ProductFilter></STBReq>';
-        //xmlString.find('TableStation').attr('externalId', stationId);
-        //xmlString.find('Time').text(moment().format('HH:mm:ss'));
+        console.log('TransportApi:rawCall', xmlString.substr(0, 255));
         $.ajax({
             type: "POST",
             url: config.transport_base_url,

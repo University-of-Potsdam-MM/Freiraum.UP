@@ -70,6 +70,7 @@ define('newsApi', ['jquery', "json!../../config.json", "moment", "domain/NewsIte
     };
 
     NewsApi.prototype.rawCall = function(url, callback) {
+        console.log('NewsApi:rawCall', url);
         $.ajax({
             type: "GET",
             url: url,
