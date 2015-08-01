@@ -56,6 +56,10 @@ Zu Testzwecken ist es möglich mit dem URL-Parameter `now` die Uhrzeit und den T
 `/index.html?campus=3&house=6&now=2014-07-28T10%3A00%3A00.000Z` das Panel für den 28.7.2014 um 10 Uhr laden. Hierbei ist
 wichtig zu beachten, dass die Daten nur aus der Zukunft von der `roomsAPI` zurückgegeben werden.
 
+Zu Testzwecken ist es auch möglich mit dem URL-Parameter `page` auf eine bestimmte Seite des Panels zu switchen ohne,
+dass das Panel nach der `switch_page_frequency` weiterblättert. Zum Beispiel würde `/index.html?page=0` immer nur die
+erste Seite anzeigen.
+
 # Anforderungen
 
 - 46 zoll

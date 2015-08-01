@@ -13,6 +13,12 @@ define('PageSwitcher', ['jquery', "json!../../config.json", "moment"], function(
         this.pages.hide();
         $(this.pages[0]).show();
 
+        var force_page_match = document.location.toString().match(/page=([^&$]+)/);
+        if (force_page_match)
+        {
+            current_page = new Date(decodeURIComponent(force_page_match[1]));
+        }
+
         var toNextPage = function() {
             new_page_in--;
             if (new_page_in == -1)
@@ -45,8 +51,9 @@ define('PageSwitcher', ['jquery', "json!../../config.json", "moment"], function(
             }
         };
 
-        setInterval(toNextPage, (waiting_time / max_progress) * 1000);
-
+        if (!force_page_match) {
+            setInterval(toNextPage, (waiting_time / max_progress) * 1000);
+        }
 
         this.current_time_element = this.domElement.find('.js_current_time');
         setInterval(function() {
