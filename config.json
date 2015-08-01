@@ -9,6 +9,7 @@
     "station_id": "009230003#86",
     "events_rss_feed_url": "./eventsProxy.php",
     "news_rss_feed_url": "./newsProxy.php",
-    "news_per_page": 3,
-    "local_traffic_count": 2
+    "news_per_page": 2,
+    "local_traffic_count": 2,
+    "twitter_widget_id": "627066449773875201"
 }
