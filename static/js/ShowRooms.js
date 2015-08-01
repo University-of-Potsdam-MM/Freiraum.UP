@@ -145,34 +145,6 @@ define('ShowRooms', ["jquery", "json!../../config.json", "moment"], function ($,
             that.refreshNowValue();
             that.refreshReservations();
         }, config.rooms_update_frequency * 1000);
-
-        jsb.on('LocalTraffic::NEXT_JOURNEYS', function(journeys) {
-
-            var journeysText = [];
-            var firstForCategoryMap = {};
-            journeys.forEach(function(journey) {
-               if (!firstForCategoryMap[journey.getName()]) {
-                   firstForCategoryMap[journey.getName()] = journey;
-               }
-            });
-
-            var count = 0;
-
-            for (var name in firstForCategoryMap) {
-                if (firstForCategoryMap.hasOwnProperty(name)) {
-                    if (count < config.local_traffic_count) {
-                        count++;
-                        journeysText.push(name + ' ' + moment().to(firstForCategoryMap[name].getTime()));
-                    }
-                }
-            }
-
-            $('.js_next_local_traffic').text('ÖPNV: ' + journeysText.join(', '));
-        });
-
-        jsb.on('LocalTraffic::NO_NEXT_JOURNEYS', function() {
-            $('.js_next_local_traffic').text('');
-        });
     };
 
     ShowRooms.prototype.logDebug = function()

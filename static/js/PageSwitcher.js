@@ -57,6 +57,38 @@ define('PageSwitcher', ['jquery', "json!../../config.json", "moment"], function(
             }
         }, 1000);
 
+        jsb.on('LocalTraffic::NEXT_JOURNEYS', function(journeys) {
+
+            var journeysText = [];
+            var firstForCategoryMap = {};
+            var now = (new Date()).getTime();
+            journeys.forEach(function(journey) {
+                if (journey.getTime() < now + 60000) {
+                    /* Zeige nur ÖPNV in wenigstens einer Sekunde */
+                    return ;
+                }
+                if (!firstForCategoryMap[journey.getName()]) {
+                    firstForCategoryMap[journey.getName()] = journey;
+                }
+            });
+
+            var count = 0;
+
+            for (var name in firstForCategoryMap) {
+                if (firstForCategoryMap.hasOwnProperty(name)) {
+                    if (count < config.local_traffic_count) {
+                        count++;
+                        journeysText.push(name + ' ' + moment().to(firstForCategoryMap[name].getTime()));
+                    }
+                }
+            }
+
+            $('.js_next_local_traffic').text('ÖPNV: ' + journeysText.join(', '));
+        });
+
+        jsb.on('LocalTraffic::NO_NEXT_JOURNEYS', function() {
+            $('.js_next_local_traffic').text('');
+        });
     };
 
     return PageSwitcher;
