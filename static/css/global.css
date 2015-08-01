@@ -138,3 +138,10 @@ h2 {
     transform: scale(1.4);
     transform-origin: 50% 0;
 }
+
+.next-local-traffic {
+    border-top: 3px solid #dddddd;
+    display: block;
+    padding-top: 5px;
+    margin-top: 5px;
+}

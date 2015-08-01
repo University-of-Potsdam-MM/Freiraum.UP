@@ -91,7 +91,7 @@ define('PageSwitcher', ['jquery', "json!../../config.json", "moment"], function(
                 }
             }
 
-            $('.js_next_local_traffic').text('ÖPNV: ' + journeysText.join(', '));
+            $('.js_next_local_traffic').text(journeysText.join(', '));
         });
 
         jsb.on('LocalTraffic::NO_NEXT_JOURNEYS', function() {
