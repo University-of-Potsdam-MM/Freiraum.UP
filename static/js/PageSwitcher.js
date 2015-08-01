@@ -46,6 +46,17 @@ define('PageSwitcher', ['jquery', "json!../../config.json", "moment"], function(
         };
 
         setInterval(toNextPage, (waiting_time / max_progress) * 1000);
+
+
+        this.current_time_element = this.domElement.find('.js_current_time');
+        setInterval(function() {
+            var currentTimeString = moment().format('HH:mm:ss');
+
+            if (that.current_time_element.text() != currentTimeString) {
+                that.current_time_element.text(currentTimeString);
+            }
+        }, 1000);
+
     };
 
     return PageSwitcher;

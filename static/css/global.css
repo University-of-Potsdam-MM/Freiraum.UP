@@ -19,6 +19,10 @@ tr td em {
     /*line-height: 0.6;*/
 }
 
+.table thead th {
+    font-size: 15px;
+}
+
 .page-headline {
     font-size: 15px;
     border-bottom: 2px solid #dddddd;
@@ -87,9 +91,6 @@ h2 {
 .container {
     width: 100%;
 }
-.js_journeys_current_time {
-
-}
 
 .js_news {
     position: absolute;
@@ -123,4 +124,11 @@ h2 {
 
 .reservation:nth-child(even) {
     background-color: #ffffff;
+}
+
+.current-time {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    font-weight: bold;
 }

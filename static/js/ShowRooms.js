@@ -118,11 +118,6 @@ define('ShowRooms', ["jquery", "json!../../config.json", "moment"], function ($,
         this.reservations = [];
         this.free_rooms = [];
 
-        this.current_time_element = this.dom_element.find('.js_current_time');
-        setInterval(function() {
-            that.current_time_element.text(moment().format('HH:mm:ss'));
-        }, 200);
-
         this.campus = config.campus;
         this.house = config.house;
         this.now = null;
