@@ -1,11 +1,11 @@
-define('PageSwitcher', ['jquery', "json!../../config.json"], function($, config) {
+define('PageSwitcher', ['jquery', "json!../../config.json", "moment"], function($, config, moment) {
 
     var PageSwitcher = function(domElement, options) {
         var that = this;
         this.domElement = $(domElement);
 
         var current_page = 0;
-        var waiting_time = 3;
+        var waiting_time = config.switch_page_frequency;
         var max_progress = waiting_time;
         var new_page_in = waiting_time;
 

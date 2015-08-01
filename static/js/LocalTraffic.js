@@ -6,13 +6,9 @@ define('LocalTraffic', ['jquery', "json!../../config.json", "transportApi", 'mom
         this.journeysHeadline = this.domElement.find('.js_journeys_headline');
         this.journeysTableBody = this.domElement.find('.js_journeys_tbody');
         this.refresh();
-        //
-        //transportApi.getTrainsForStation('009230003#86', function(error, journeys) {
-        //    console.log('journeys', journeys);
-        //});
         setInterval(function() {
             that.refresh();
-        }, 10000);
+        }, config.transport_update_frequency * 1000);
     };
 
     LocalTraffic.prototype.refresh = function() {

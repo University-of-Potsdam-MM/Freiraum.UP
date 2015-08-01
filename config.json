@@ -11,5 +11,10 @@
     "news_rss_feed_url": "./newsProxy.php",
     "news_per_page": 2,
     "local_traffic_count": 2,
+    "news_update_frequency": 60,
+    "events_update_frequency": 60,
+    "transport_update_frequency": 60,
+    "rooms_update_frequency": 60,
+    "switch_page_frequency": 10,
     "twitter_widget_id": "627066449773875201"
 }

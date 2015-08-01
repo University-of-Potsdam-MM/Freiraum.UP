@@ -149,7 +149,7 @@ define('ShowRooms', ["jquery", "json!../../config.json", "moment"], function ($,
         setInterval(function() {
             that.refreshNowValue();
             that.refreshReservations();
-        }, 60 * 1000);
+        }, config.rooms_update_frequency * 1000);
 
         jsb.on('LocalTraffic::NEXT_JOURNEYS', function(journeys) {
 

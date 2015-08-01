@@ -8,7 +8,7 @@ define('News', ['jquery', "json!../../config.json", "newsApi", 'moment'], functi
         this.refresh();
         setInterval(function() {
             that.refresh();
-        }, 10000);
+        }, config.news_update_frequency * 1000);
     };
 
     News.prototype.refresh = function() {

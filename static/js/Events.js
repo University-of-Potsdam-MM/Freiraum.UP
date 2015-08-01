@@ -8,7 +8,7 @@ define('Events', ['jquery', "json!../../config.json", "newsApi", 'moment'], func
         this.refresh();
         setInterval(function() {
             that.refresh();
-        }, 10000);
+        }, config.events_update_frequency * 1000);
     };
 
     Events.prototype.refresh = function() {

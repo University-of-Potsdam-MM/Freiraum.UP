@@ -40,6 +40,11 @@ Die App beinhaltet direkt eine `config.json`.
     "news_rss_feed_url": "http://www.uni-potsdam.de/nachrichten/rss-feed-abonnieren.html?type=100&tx_ttnews%5Bcat%5D=19", // URL zum Rss-Feed der Nachrichten der Uni-Potsdam 
     "news_per_page": 3, // Anzahl der News pro Seite
     "local_traffic_count": 2, // Anzahl der nächsten ÖPNV-Einträge auf allen Seiten
+	"news_update_frequency": 60, // Nach wievielen Sekunden wird das News RSS-Feed neu abgeholt
+	"events_update_frequency": 60, // Nach wievielen Sekunden wird das Events RSS-Feed neu abgeholt
+	"transport_update_frequency": 60, // Nach wievielen Sekunden wird die Transport API neu abgefragt
+	"rooms_update_frequency": 60, // Nach wievielen Sekunden wird die Veranstaltungs API neu abgefragt
+	"switch_page_frequency": 10, // Nach wievielen Sekunden wird zur nächsten Seite geblättert
 	"twitter_widget_id": "627066449773875201" // die Twitter Widget ID von https://twitter.com/settings/widgets
 }
 ```
