@@ -11,13 +11,14 @@ define('PageSwitcher', ['jquery', "json!../../config.json", "moment"], function(
 
         this.pages = this.domElement.find('.js_page');
         this.pages.hide();
-        $(this.pages[0]).show();
 
         var force_page_match = document.location.toString().match(/page=([^&$]+)/);
         if (force_page_match)
         {
-            current_page = new Date(decodeURIComponent(force_page_match[1]));
+            current_page = parseInt(decodeURIComponent(force_page_match[1]), 10);
         }
+
+        $(this.pages[current_page]).show();
 
         var toNextPage = function() {
             new_page_in--;
