@@ -114,6 +114,7 @@ h2 {
     background-position: center center;
     position: relative;
     overflow: hidden;
+    outline: 1px solid #fff;
 }
 
 .reservation:nth-child(odd) {
