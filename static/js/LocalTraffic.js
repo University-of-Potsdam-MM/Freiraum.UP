@@ -33,7 +33,7 @@ define('LocalTraffic', ['jquery', "json!../../config.json", "transportApi", 'mom
             that.journeysHeadline.text('Nahverkehr');
             that.journeysTableBody.empty();
             journeys.forEach(function(journey) {
-                var tr = $('<tr><td><strong class="js_journey_name"></strong></td><td><div><strong class="js_journey_direction"></strong></div><div class="js_journey_platform"></div></td><td class="text-right"><div><strong class="js_journey_time_absolute"></strong></div><div class="js_journey_time_relative"></div></td></tr>');
+                var tr = $('<tr><td class="js_journey_name"></td><td class="journey_dir_platf"><p class="js_journey_direction"></p><p class="js_journey_platform"></p></td><td class="js_journey_time_absolute"></td><td class="js_journey_time_relative"></td></tr>');
                 tr.find('.js_journey_name').text(journey.getName());
                 tr.find('.js_journey_direction').text(journey.getDirection());
                 tr.find('.js_journey_time_absolute').text(journey.getTimeFormatted());

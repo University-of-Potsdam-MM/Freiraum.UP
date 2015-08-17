@@ -31,7 +31,7 @@ define('News', ['jquery', "json!../../config.json", "newsApi", 'moment'], functi
             });
 
             that.newsTableBody.empty();
-            that.newsTable.css('height', 'calc(100% - ' + ($('.free-rooms').outerHeight() + 38) + 'px)');
+            that.newsTable.css('height', 'calc(90% -  ' + ($('.free-rooms').outerHeight() + 38) + 'px)');
             that.newsTable.css('margin-bottom', '0');
 
             newsItems = newsItems.splice(0, config.news_per_page);
