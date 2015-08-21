@@ -2,7 +2,6 @@ body {
     /*zoom: 2;*/
 }
 
-
 tr td em {
     font-style: normal;
     font-weight: bold;
@@ -24,14 +23,10 @@ tr td em {
 }
 
 .page-headline {
-   
-  
     width: 100%;
     display: block;
     padding: 5px;
 }
-
-
 
 .navbar {
     display: none;
@@ -112,7 +107,6 @@ tr td em {
 
 .container {
     width: 100%;
-    
 }
 
 .js_news {
@@ -123,22 +117,17 @@ tr td em {
 }
 
 .news-title {
-  
     padding: 5px;
     background-color: #fff;
     opacity:.9;
-       font-size: 3em;
+    font-size: 3em;
     max-width: 60%;
-     display: block;
+    display: block;
     float: right;
     margin-top: 20px;
     color:#014260;
     border:5px solid #d0dae3;
 }
-
-
-
-   
 
 .news-td {
     background-size: cover;
@@ -157,7 +146,6 @@ tr td em {
 }
 
 .current-time {
- 
     font-size: 1.5em;
     width: auto;
     text-align: center;
@@ -168,18 +156,15 @@ tr td em {
     width: 110px;
     height: 110px;
     line-height: 100px;
-   colo:#014260;
-position:absolute;
-right:10px;
+    position:absolute;
+    right:10px;
     top: 9px;
-border:5px solid #fff;
-z-index:600;
+    border:5px solid #fff;
+    z-index:600;
 }
 
 .tweets {
     text-align: center;
-    transform: scale(1.4);
-    transform-origin: 50% 0;
 }
 
 .next-local-traffic {
@@ -213,18 +198,16 @@ th.js_journeys_headline  {
 	font-size:3em !important;
 	color:#fff;
 
-	text-transform:uppercase;
+    text-transform:uppercase;
 	text-align:left;
 	background:#014260;
 	height:2.3em;
 	line-height:1;
 	padding:0 0 0 10px !important;
 	vertical-align:middle !important;
-
 }
 
 .journey_dir_platf {
-	
 	width:20em;
 }
 
@@ -234,7 +217,7 @@ th.js_journeys_headline  {
 	color:#014260;
 	line-height:1.2;
 	margin-bottom:0;
-	
+
 }
 
 .js_journey_time_absolute, .js_journey_time_relative {
@@ -252,7 +235,7 @@ th.js_journeys_headline  {
 	padding:0;
 }
 
-.js_now_headline, .js_soon_headline, .js_news_headline {
+.js_now_headline, .js_soon_headline, .js_news_headline, .js_tweets_headline{
 	display:block;
 	width:100%;
 	font-size:3em !important;
@@ -266,4 +249,11 @@ th.js_journeys_headline  {
 	margin:0;
 	padding:0 0 0 10px !important;
 	vertical-align:middle !important;
+}
+
+.twitter-timeline {
+    display:inline !important;
+    height: 2000px !important;
+    transform: scale(1.6);
+    transform-origin: top;
 }
