@@ -17,9 +17,10 @@
     "bootstrap": "3.0",
     "html5shiv": "~3.7.0",
     "jquery": "1.10",
-    "jsb": "~1.7.0",
+    "jsb": "~2.0.1",
     "requirejs": "~2.1.8",
     "respond": "~1.3.0",
-    "requirejs-plugins": "~1.0.2"
+    "requirejs-plugins": "~1.0.2",
+    "moment": "~2.10.3"
   }
 }

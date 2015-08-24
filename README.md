@@ -29,11 +29,23 @@ Die App beinhaltet direkt eine `config.json`.
 ``` js
 {
     "base_url": "https://api.uni-potsdam.de/endpoints/roomsAPI/1.0/",
+    "transport_base_url": "https://api.uni-potsdam.de/endpoints/transportAPI/1.0/",
     "authorization": "Bearer xxxxxxx", // Das Token, von api.uni-potsdam.de
     "xml_proxy_path": "./xml.php",
     "use_xml_proxy": false, // soll der xml_proxy_path als fallback benutzt werden? Z.B. wenn die CORS-Header nicht richtig gesetzt sind.
     "campus": 3, // Auf welchem Campus hängt das Panel?
-    "house": 6 // In welchem Haus hängt das Panel?
+    "house": 6, // In welchem Haus hängt das Panel?
+    "station_id": "009230003#86", // ID der Station für die Nahverkehrsinformationen
+    "events_rss_feed_url": "https://www.uni-potsdam.de/veranstaltungen/rss-feed-abonnieren/eventfeed/feed/xml.html?tx_upevents_upeventfeed%5Blimit%5D=30&tx_upevents_upeventfeed%5Bcat%5D=&tx_upevents_upeventfeed%5BcatLink%5D=or", // URL zum Rss-Feed der Veranstaltungen der Uni-Potsdam
+    "news_rss_feed_url": "http://www.uni-potsdam.de/nachrichten/rss-feed-abonnieren.html?type=100&tx_ttnews%5Bcat%5D=19", // URL zum Rss-Feed der Nachrichten der Uni-Potsdam 
+    "news_per_page": 3, // Anzahl der News pro Seite
+    "local_traffic_count": 2, // Anzahl der nächsten ÖPNV-Einträge auf allen Seiten
+	"news_update_frequency": 60, // Nach wievielen Sekunden wird das News RSS-Feed neu abgeholt
+	"events_update_frequency": 60, // Nach wievielen Sekunden wird das Events RSS-Feed neu abgeholt
+	"transport_update_frequency": 60, // Nach wievielen Sekunden wird die Transport API neu abgefragt
+	"rooms_update_frequency": 60, // Nach wievielen Sekunden wird die Veranstaltungs API neu abgefragt
+	"switch_page_frequency": 10, // Nach wievielen Sekunden wird zur nächsten Seite geblättert
+	"twitter_widget_id": "627066449773875201" // die Twitter Widget ID von https://twitter.com/settings/widgets
 }
 ```
 
@@ -43,6 +55,10 @@ ranhängt. Zum Beispiel: `/index.html?campus=3&house=1` würde das Panel für Ca
 Zu Testzwecken ist es möglich mit dem URL-Parameter `now` die Uhrzeit und den Tag zu überschrieben. Zum Beispiel würde
 `/index.html?campus=3&house=6&now=2014-07-28T10%3A00%3A00.000Z` das Panel für den 28.7.2014 um 10 Uhr laden. Hierbei ist
 wichtig zu beachten, dass die Daten nur aus der Zukunft von der `roomsAPI` zurückgegeben werden.
+
+Zu Testzwecken ist es auch möglich mit dem URL-Parameter `page` auf eine bestimmte Seite des Panels zu switchen ohne,
+dass das Panel nach der `switch_page_frequency` weiterblättert. Zum Beispiel würde `/index.html?page=0` immer nur die
+erste Seite anzeigen.
 
 # Anforderungen
 

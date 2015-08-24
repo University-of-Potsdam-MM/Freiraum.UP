@@ -69,36 +69,72 @@
     </div>
 </div>
 
-<div class="jsb_ jsb_ShowRooms" data-jsb="">
+<div class="jsb_ jsb_ShowRooms jsb_PageSwitcher" data-jsb="">
     <div class="progress">
-        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
+        <div class="js_progress_bar progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
     </div>
+
+    <span class="current-time js_current_time"></span>
 
     <div class="container free-rooms">
-        <h2>Freie Räume</h2>
+        <h2>Freie Räume </h2>
         <div class="js_free_rooms">
         </div>
+        <div class="next-local-traffic"><h3>Nächste ÖPNV-Verbindungen</h3> <span class="js_next_local_traffic"></span></div>
     </div>
 
-    <div class="container">
+    <div class="container current-content">
 
-        <div class="row js_page">
-            <h2 class="hidden">Laufende Veranstaltungen</h2>
-            <table class="js_now table table-striped table-hover">
-                <thead>
-                    <th class="js_now_headline">Gerade</th>
-                </thead>
-                <tbody>
+        <div class="row js_page jsb_ jsb_Tweets tweets" data-jsb="">
+            <strong class="page-headline"><span class="js_tweets_headline">Tweets</span></strong>
+            <a data-chrome="noheader noscrollbar transparent noborders nofooter" class="js_twitter_timeline twitter-timeline" href="https://twitter.com/search?q=%40unipotsdam">Tweets by @unipotsdam</a>
+        </div>
+
+        <div class="row js_page jsb_ jsb_News" data-jsb="">
+            <h2 class="hidden">Nachrichten</h2>
+            <strong class="page-headline"><span class="js_news_headline">Neuigkeiten</span></strong>
+            <table class="js_news table table-striped table-hover">
+                <tbody class="js_news_tbody">
                 </tbody>
             </table>
         </div>
-        <div class="row js_page">
+
+         <div class="row js_page jsb_ jsb_Events" data-jsb="">
+            <h2 class="hidden">Veranstaltungen</h2>
+            <strong class="page-headline"><span class="js_news_headline">Veranstaltungen</span></strong>
+            <table class="js_news table table-striped table-hover">
+                <tbody class="js_news_tbody">
+                </tbody>
+            </table>
+        </div>
+
+        <div class="row js_page js_reservations_now">
             <h2 class="hidden">Laufende Veranstaltungen</h2>
-            <table class="js_soon table table-striped table-hover">
+            <div>
+                <strong class="page-headline"><span class="js_now_headline"></span></strong>
+                <div class="js_now_body">
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row js_page js_reservations_soon">
+            <h2 class="hidden">Laufende Veranstaltungen</h2>
+            <div>
+                <strong class="page-headline"><span class="js_soon_headline">In 2 Stunden</span></strong>
+                <div class="js_soon_body">
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row js_page jsb_ jsb_LocalTraffic" data-jsb="">
+            <h2 class="hidden">Nahverkehrsverbindungen</h2>
+            <table class="js_journeys table table-striped table-hover">
                 <thead>
-                <th class="js_soon_headline">In 2 Stunden</th>
+                <th class="js_journeys_headline" colspan="4">Nahverkehr</th></th>
                 </thead>
-                <tbody>
+                <tbody class="js_journeys_tbody">
                 </tbody>
             </table>
         </div>
@@ -116,14 +152,76 @@
         urlArgs: "cb=" + (new Date()).getTime(),
         paths: {
             jquery: './../bower_components/jquery/jquery',
-            jsb: './../bower_components/jsb/JsBehaviourToolkit',
+            jsb: './../bower_components/jsb/jsb',
+            moment: './../bower_components/moment/min/moment-with-locales',
             bootstrap: './../bower_components/bootstrap/dist/js/bootstrap',
             json: './../bower_components/requirejs-plugins/src/json',
             text: './../bower_components/requirejs-plugins/lib/text'
         }
     });
 
-    requirejs(['jquery'], function() {
+    requirejs(['jquery', 'moment'], function($, moment) {
+        function de__processRelativeTime(number, withoutSuffix, key, isFuture) {
+            var format = {
+                'm': ['eine Min.', 'einer Min.'],
+                'h': ['eine Std.', 'einer Std.'],
+                'd': ['ein Tag', 'einem Tag'],
+                'dd': [number + ' Tage', number + ' Tagen'],
+                'M': ['ein Monat', 'einem Monat'],
+                'MM': [number + ' Monate', number + ' Monaten'],
+                'y': ['ein Jahr', 'einem Jahr'],
+                'yy': [number + ' Jahre', number + ' Jahren']
+            };
+            return withoutSuffix ? format[key][0] : format[key][1];
+        }
+
+        var de = moment.defineLocale('deShort', {
+            months : 'Januar_Februar_März_April_Mai_Juni_Juli_August_September_Oktober_November_Dezember'.split('_'),
+            monthsShort : 'Jan._Febr._Mrz._Apr._Mai_Jun._Jul._Aug._Sept._Okt._Nov._Dez.'.split('_'),
+            weekdays : 'Sonntag_Montag_Dienstag_Mittwoch_Donnerstag_Freitag_Samstag'.split('_'),
+            weekdaysShort : 'So._Mo._Di._Mi._Do._Fr._Sa.'.split('_'),
+            weekdaysMin : 'So_Mo_Di_Mi_Do_Fr_Sa'.split('_'),
+            longDateFormat : {
+                LT: 'HH:mm',
+                LTS: 'HH:mm:ss',
+                L : 'DD.MM.YYYY',
+                LL : 'D. MMMM YYYY',
+                LLL : 'D. MMMM YYYY LT',
+                LLLL : 'dddd, D. MMMM YYYY LT'
+            },
+            calendar : {
+                sameDay: '[Heute um] LT [Uhr]',
+                sameElse: 'L',
+                nextDay: '[Morgen um] LT [Uhr]',
+                nextWeek: 'dddd [um] LT [Uhr]',
+                lastDay: '[Gestern um] LT [Uhr]',
+                lastWeek: '[letzten] dddd [um] LT [Uhr]'
+            },
+            relativeTime : {
+                future : 'in %s',
+                past : 'vor %s',
+                s : 'ein paar Sek.',
+                m : de__processRelativeTime,
+                mm : '%d Min.',
+                h : de__processRelativeTime,
+                hh : '%d Std.',
+                d : de__processRelativeTime,
+                dd : de__processRelativeTime,
+                M : de__processRelativeTime,
+                MM : de__processRelativeTime,
+                y : de__processRelativeTime,
+                yy : de__processRelativeTime
+            },
+            ordinalParse: /\d{1,2}\./,
+            ordinal : '%d.',
+            week : {
+                dow : 1, // Monday is the first day of the week.
+                doy : 4  // The week that contains Jan 4th is the first week of the year.
+            }
+        });
+
+        moment.locale('deShort');
+
         require(['bootstrap'], function() {
             require(['jsb'], function() {
                 jsb.applyBehaviour(document.body);
