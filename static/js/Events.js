@@ -39,7 +39,7 @@ define('Events', ['jquery', "json!../../config.json", "newsApi", 'moment'], func
             });
 
             that.newsTableBody.empty();
-            that.newsTable.css('height', 'calc(90% - ' + ($('.free-rooms').outerHeight() + 38) + 'px)');
+            that.newsTable.css('height', 'calc(90% - ' + ($('.free-rooms').outerHeight() + 38 + 100) + 'px)');
             that.newsTable.css('margin-bottom', '0');
 
             notYetStartedNews = notYetStartedNews.splice(0, config.news_per_page);
