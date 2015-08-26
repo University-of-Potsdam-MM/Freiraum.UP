@@ -121,12 +121,14 @@ tr td em {
     background-color: #fff;
     opacity:.9;
     font-size: 3em;
-    max-width: 60%;
+    max-width: 80%;
     display: block;
-    float: right;
-    margin-top: 20px;
     color:#014260;
     border:5px solid #d0dae3;
+    max-height: 200px;
+    bottom: 10px;
+    right: 10px;
+    position: absolute;
 }
 
 .news-td {
