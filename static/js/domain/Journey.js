@@ -7,6 +7,10 @@ define('domain/Journey', ['moment'], function(moment) {
         return this.data.name;
     };
 
+    Journey.prototype.getCategory = function() {
+        return this.data.category;
+    };
+
     Journey.prototype.getPlatform = function() {
         return this.data.platform;
     };
