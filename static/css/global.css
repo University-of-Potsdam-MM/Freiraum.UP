@@ -196,6 +196,10 @@ tr td em {
 }
 
 
+.js_journeys_tbody td {
+	line-height:2em !important;
+}
+
 th.js_journeys_headline  {
 	font-size:3em !important;
 	color:#fff;
@@ -230,6 +234,27 @@ th.js_journeys_headline  {
 	font-size:1.5em;
 	font-weight:bold;
 	color:#014260;
+}
+
+.js_journey_name.Bus {
+	background-image:url(../img/bus.png);
+	background-repeat:no-repeat;
+	text-indent:54px;
+	background-position:4px 4px;
+}
+
+.js_journey_name.S {
+	background-image:url(../img/sbahn.png);
+	background-repeat:no-repeat;
+	text-indent:54px;
+	background-position:4px 4px;
+}
+
+.js_journey_name.RB {
+	background-image:url(../img/regio.png);
+	background-repeat:no-repeat;
+	text-indent:54px;
+	background-position:4px 4px;
 }
 
 /* NEWS */
