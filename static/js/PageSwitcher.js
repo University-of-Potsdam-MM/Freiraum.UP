@@ -1,16 +1,19 @@
-define('PageSwitcher', ['jquery', "json!../../config.json", "moment"], function($, config, moment) {
+define('PageSwitcher', ['jquery', "config", "moment"], function($, config, moment) {
 
     var PageSwitcher = function(domElement, options) {
         var that = this;
         this.domElement = $(domElement);
 
         var current_page = 0;
-        var waiting_time = config.switch_page_frequency;
+        var waiting_time = config.get('switch_page_frequency');
         var max_progress = waiting_time;
         var new_page_in = waiting_time;
 
         this.pages = this.domElement.find('.js_page');
         this.pages.hide();
+
+        $('.js_app_title').text('Campus ' + config.get('campus') + ', Haus ' + config.get('house'));
+        document.title = $('.js_app_title').text();
 
         var force_page_match = document.location.toString().match(/page=([^&$]+)/);
         if (force_page_match)
