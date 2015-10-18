@@ -1,5 +1,7 @@
 # rooms
 
+- Build Status: [![Build Status](https://travis-ci.org/University-of-Potsdam-MM/rooms.svg)](https://travis-ci.org/University-of-Potsdam-MM/rooms)
+
 ### Table of Contents
 **[Entwicklungsumgebung aufsetzen](#entwicklungsumgebung-aufsetzen)**  
 **[Release für den Server vorbereiten](#release-für-den-Server-vorbereiten)**  
