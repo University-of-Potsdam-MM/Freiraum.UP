@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/university-of-potsdam-mm/rooms.png?label=ready&title=Ready)](https://waffle.io/university-of-potsdam-mm/rooms)
 # rooms
 
 ### Table of Contents
