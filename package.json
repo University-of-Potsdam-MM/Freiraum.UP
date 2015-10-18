@@ -5,7 +5,8 @@
   "name": "rooms",
   "private": true,
   "scripts": {
-    "test": "node_modules/.bin/mocha"
+    "test": "node_modules/.bin/mocha",
+    "postinstall": "node_modules/.bin/bower install"
   },
   "repository": {
     "type": "git",
