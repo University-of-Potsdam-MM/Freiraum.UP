@@ -69,7 +69,7 @@
     </div>
 </div>
 
-<div class="jsb_ jsb_ShowRooms jsb_PageSwitcher" data-jsb="">
+<div class="jsb_ jsb_PageSwitcher" data-jsb="">
     <div class="progress">
         <div class="js_progress_bar progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
     </div>
@@ -78,7 +78,7 @@
 
     <div class="container free-rooms">
         <h2>Freie Räume </h2>
-        <div class="js_free_rooms">
+        <div class="jsb_ jsb_views/FreeRoomCollectionView">
         </div>
         <div class="next-local-traffic"><h3>Nächste ÖPNV-Verbindungen</h3> <span class="js_next_local_traffic"></span></div>
     </div>
@@ -108,21 +108,21 @@
             </table>
         </div>
 
-        <div class="row js_page js_reservations_now">
+        <div class="jsb_ jsb_views/NowBookedRoomCollectionView row js_page js_reservations_now">
             <h2 class="hidden">Laufende Veranstaltungen</h2>
             <div>
-                <strong class="page-headline"><span class="js_now_headline"></span></strong>
-                <div class="js_now_body">
+                <strong class="page-headline"><span class="js_headline"></span></strong>
+                <div class="js_body">
 
                 </div>
             </div>
         </div>
 
-        <div class="row js_page js_reservations_soon">
+        <div class="jsb_ jsb_views/SoonBookedRoomCollectionView row js_page js_reservations_soon">
             <h2 class="hidden">Laufende Veranstaltungen</h2>
             <div>
-                <strong class="page-headline"><span class="js_soon_headline">In 2 Stunden</span></strong>
-                <div class="js_soon_body">
+                <strong class="page-headline"><span class="js_headline"></span></strong>
+                <div class="js_body">
 
                 </div>
             </div>
@@ -153,6 +153,8 @@
         paths: {
             jquery: './../bower_components/jquery/jquery',
             jsb: './../bower_components/jsb/jsb',
+            Backbone: './../bower_components/backbone/backbone',
+            underscore: './../bower_components/underscore/underscore',
             moment: './../bower_components/moment/min/moment-with-locales',
             bootstrap: './../bower_components/bootstrap/dist/js/bootstrap',
             json: './../bower_components/requirejs-plugins/src/json',
