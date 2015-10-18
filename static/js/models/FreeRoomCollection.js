@@ -54,7 +54,7 @@ define('models/FreeRoomCollection', ["Backbone", "jquery", "config", "moment", "
                     'campus': config.get('campus'),
                     'cb': Math.random()
                 },
-                'dataType': 'text' // FIXME: hack, sollte eigentlich xml sein, gibt aber parse error.
+                'dataType': 'xml'
             }).fail(function(response) {
                 console.log('Error', response);
                 if (options.error) {

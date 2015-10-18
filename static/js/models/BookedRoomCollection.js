@@ -90,7 +90,7 @@ define('models/BookedRoomCollection', ["Backbone", "jquery", "config", "moment",
                     'campus': config.get('campus'),
                     'cb': Math.random()
                 },
-                'dataType': 'text' // FIXME: hack, sollte eigentlich xml sein, gibt aber parse error.
+                'dataType': 'xml'
             }).fail(function(response) {
                 if (options.error) {
                     options.error();

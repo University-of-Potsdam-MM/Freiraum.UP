@@ -2,6 +2,7 @@
 var requirejs = require("requirejs");
 var assert = require("chai").assert;
 var domino = require('domino');
+global.DOMParser = require('xmldom').DOMParser;
 global.jQuery = require('jquery')(domino.createWindow());
 global.$ = global.jQuery;
 global.XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
@@ -48,6 +49,7 @@ before(function(done) {
                 [
                     'collections/freeRooms',
                     'collections/bookedRooms',
+                    'collections/transports',
                     'jquery'
                 ],
                 function () {
@@ -85,6 +87,22 @@ describe('collections/freeRooms', function() {
             },
             "error": function() {
                 throw new Error('cannot retrieve the free rooms');
+                done();
+            }
+        });
+    });
+});
+
+describe('collections/transports', function() {
+    it('should contain all transport connections', function(done) {
+        var transports = requirejs('collections/transports');
+        transports.fetch({
+            "success": function() {
+                assert.ok(transports.length > 0);
+                done();
+            },
+            "error": function() {
+                throw new Error('cannot retrieve the transports');
                 done();
             }
         });
