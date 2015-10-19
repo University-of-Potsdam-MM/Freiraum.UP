@@ -1,7 +1,7 @@
-define('models/Event', ["Backbone", "jquery", "moment"], function (Backbone, $, moment) {
+define('models/RssItem', ["Backbone", "jquery", "moment"], function (Backbone, $, moment) {
     "use strict";
 
-    var Event = Backbone.Model.extend({
+    var RssItem = Backbone.Model.extend({
 
         getTitle: function() {
             return this.get('title');
@@ -38,5 +38,5 @@ define('models/Event', ["Backbone", "jquery", "moment"], function (Backbone, $, 
         }
     });
 
-    return Event;
+    return RssItem;
 });
