@@ -45,10 +45,14 @@ before(function(done) {
             nextMondayAtTen.second(0);
 
             config.set('now', new Date(nextMondayAtTen.format()));
+            config.set('events_rss_feed_url', 'https://www.uni-potsdam.de/veranstaltungen/rss-feed-abonnieren/eventfeed/feed/xml.html?tx_upevents_upeventfeed%5Blimit%5D=30&tx_upevents_upeventfeed%5Bcat%5D=&tx_upevents_upeventfeed%5BcatLink%5D=or');
+            config.set('news_rss_feed_url', 'http://www.uni-potsdam.de/nachrichten/rss-feed-abonnieren.html?type=100&tx_ttnews%5Bcat%5D=19');
             requirejs(
                 [
                     'collections/freeRooms',
                     'collections/bookedRooms',
+                    'collections/events',
+                    'collections/news',
                     'collections/transports',
                     'jquery'
                 ],
@@ -103,6 +107,41 @@ describe('collections/transports', function() {
             },
             "error": function() {
                 throw new Error('cannot retrieve the transports');
+                done();
+            }
+        });
+    });
+});
+
+describe('collections/events', function() {
+    it('should contain all events', function(done) {
+        this.timeout(10000); /* dieses feed ist wirklich sehr langsam */
+        var events = requirejs('collections/events');
+        events.fetch({
+            "success": function() {
+                assert.ok(events.length > 0);
+                done();
+            },
+            "error": function() {
+                throw new Error('cannot retrieve the events');
+                done();
+            }
+        });
+    });
+});
+
+
+describe('collections/news', function() {
+    it('should contain all news', function(done) {
+        this.timeout(10000); /* dieses feed ist wirklich sehr langsam */
+        var news = requirejs('collections/news');
+        news.fetch({
+            "success": function() {
+                assert.ok(news.length > 0);
+                done();
+            },
+            "error": function() {
+                throw new Error('cannot retrieve the news');
                 done();
             }
         });
