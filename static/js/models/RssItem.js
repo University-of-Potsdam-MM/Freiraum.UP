@@ -9,7 +9,7 @@ define('models/RssItem', ["Backbone", "jquery", "moment"], function (Backbone, $
     
         getContent: function() {
             return this.get('content');
-            },
+        },
     
         getImageSrc: function() {
             return this.get('imageSrc');

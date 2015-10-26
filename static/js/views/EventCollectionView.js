@@ -21,15 +21,9 @@ define('views/EventCollectionView', ["Backbone", "config", "jquery", "views/Base
             newsTable.css('height', 'calc(90% - ' + ($('.free-rooms').outerHeight() + 38 + 100) + 'px)');
             newsTable.css('margin-bottom', '0');
 
-            var notYetStartedEvents = [];
+            console.log('events', eventsCollection.length);
 
             eventsCollection.forEach(function(event) {
-                if (moment(event.getUpdatedTimestamp()).toDate().getTime() > moment().toDate().getTime()) {
-                    notYetStartedEvents.push(event);
-                }
-            });
-
-            notYetStartedEvents.slice(0, config.get('news_per_page')).forEach(function(event) {
                 var view = new EventView({"model": event, "tagName": "tr"});
                 newsTableBody.append(view.render().el);
             });
