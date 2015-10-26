@@ -22,20 +22,9 @@ define('views/PageSwitcherView', ['jquery', "config", "moment", "views/BaseView"
                     that.showNextPage();
                 }, (this.waiting_time / this.max_progress) * 1000);
             }
-
-            this.current_time_element = $(this.el).find('.js_current_time');
-            setInterval(function() {
-                var currentTimeString = moment().format('HH:mm:ss');
-
-                if (that.current_time_element.text() != currentTimeString) {
-                    that.current_time_element.text(currentTimeString);
-                }
-            }, 1000);
         },
 
         showNextPage: function() {
-            var domElement = $(this.el);
-
             this.new_page_in--;
             if (this.new_page_in == -1)
             {
@@ -59,16 +48,13 @@ define('views/PageSwitcherView', ['jquery', "config", "moment", "views/BaseView"
                 $(this.pages[this.current_page]).show();
 
                 this.new_page_in = this.max_progress;
-                domElement.find('.js_progress_bar').css('width', 0);
             }
-            else
-            {
-                domElement.find('.js_progress_bar').css('width', Math.floor(100 - 100 * (this.new_page_in / this.max_progress)) + '%');
-            }
+
+            this.render();
         },
 
         render: function() {
-
+            $(this.el).find('.js_progress_bar').css('width', Math.floor(100 - 100 * (this.new_page_in / this.max_progress)) + '%');
         }
     });
 
