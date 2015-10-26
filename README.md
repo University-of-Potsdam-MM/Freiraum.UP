@@ -47,7 +47,8 @@ Die App beinhaltet direkt eine `config.json`.
 	"rooms_update_frequency": 60, // Nach wievielen Sekunden wird die Veranstaltungs API neu abgefragt
 	"switch_page_frequency": 10, // Nach wievielen Sekunden wird zur nächsten Seite geblättert
 	"twitter_widget_id": "627066449773875201", // die Twitter Widget ID von https://twitter.com/settings/widgets
-	"force_page": null // kann erzwingen, dass nur eine Seite angezeigt wird. SOllte per ?page= ondemand überschrieben werden.
+	"event_location": "Uni-Komplex Am Neuen Palais", // Wenn bei Events der Veranstaltungsort übereinstimmt, wird die Veranstaltung mit gehighlighted
+	"force_page": null // kann erzwingen, dass nur eine Seite angezeigt wird. Sollte per ?page= ondemand überschrieben werden.
 }
 ```
 

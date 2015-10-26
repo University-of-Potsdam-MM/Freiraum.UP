@@ -27,6 +27,10 @@ define('views/EventView', ["Backbone", "config", "jquery", "moment"], function (
             }
             tr.find('.news-title').text(this.model.getTitle() + ' (' + location + moment(this.model.getUpdatedTimestamp()).format('DD.MM.YYYY HH:mm') + ')');
 
+            if (config.get('event_location') == this.model.getLocation()) {
+                tr.addClass('is-highlighted');
+            }
+
             return this;
         }
     });
