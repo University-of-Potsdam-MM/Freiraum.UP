@@ -1,4 +1,4 @@
-define('views/BookedRoomView', ["Backbone", "config"], function (Backbone, config) {
+define('views/BookedRoomView', ["Backbone", "config", "collections/events"], function (Backbone, config, eventsCollection) {
     "use strict";
 
     var BookedRoomView = Backbone.View.extend({
@@ -52,6 +52,10 @@ define('views/BookedRoomView', ["Backbone", "config"], function (Backbone, confi
             div_element.append(info_element);
             info_element.append(person_element);
             info_element.append(time_element);
+
+            if (eventsCollection.findWhere({"title": this.model.getName()})) {
+                div_element.addClass('is-highlighted');
+            }
 
             return this;
         }

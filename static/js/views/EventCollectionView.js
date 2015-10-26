@@ -21,8 +21,6 @@ define('views/EventCollectionView', ["Backbone", "config", "jquery", "views/Base
             newsTable.css('height', 'calc(90% - ' + ($('.free-rooms').outerHeight() + 38 + 100) + 'px)');
             newsTable.css('margin-bottom', '0');
 
-            console.log('events', eventsCollection.length);
-
             eventsCollection.forEach(function(event) {
                 var view = new EventView({"model": event, "tagName": "tr"});
                 newsTableBody.append(view.render().el);
