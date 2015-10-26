@@ -4,7 +4,7 @@ define('PageSwitcher', ['jquery', "config", "moment"], function($, config, momen
         var that = this;
         this.domElement = $(domElement);
 
-        var current_page = 0;
+        var current_page = config.get('force_page') || 0;
         var waiting_time = config.get('switch_page_frequency');
         var max_progress = waiting_time;
         var new_page_in = waiting_time;
@@ -14,12 +14,6 @@ define('PageSwitcher', ['jquery', "config", "moment"], function($, config, momen
 
         $('.js_app_title').text('Campus ' + config.get('campus') + ', Haus ' + config.get('house'));
         document.title = $('.js_app_title').text();
-
-        var force_page_match = document.location.toString().match(/page=([^&$]+)/);
-        if (force_page_match)
-        {
-            current_page = parseInt(decodeURIComponent(force_page_match[1]), 10);
-        }
 
         $(this.pages[current_page]).show();
 
@@ -55,7 +49,7 @@ define('PageSwitcher', ['jquery', "config", "moment"], function($, config, momen
             }
         };
 
-        if (!force_page_match) {
+        if (config.get('force_page') === null) {
             setInterval(toNextPage, (waiting_time / max_progress) * 1000);
         }
 

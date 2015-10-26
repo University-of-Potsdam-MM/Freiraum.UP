@@ -7,6 +7,12 @@ define('config', ["json!../../config.json", "Backbone"], function (rawConfig, Ba
     });
 
     if (typeof document !== "undefined") {
+        var force_page_match = document.location.toString().match(/page=([^&$]+)/);
+        if (force_page_match)
+        {
+            rawConfig.force_page = parseInt(decodeURIComponent(force_page_match[1]), 10);
+        }
+
         var house_match = document.location.toString().match(/house=([^&$]+)/);
         if (house_match)
         {
@@ -27,6 +33,10 @@ define('config', ["json!../../config.json", "Backbone"], function (rawConfig, Ba
 
     if (!rawConfig.now) {
         rawConfig.now = (new Date()).toUTCString();
+    }
+
+    if (typeof rawConfig.force_page === "undefined") {
+        rawConfig.force_page = null;
     }
 
     rawConfig.now = new Date(rawConfig.now);
