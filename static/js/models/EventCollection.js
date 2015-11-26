@@ -9,7 +9,7 @@ define('models/EventCollection', ["Backbone", "jquery", "config", "moment", "mod
         },
 
         isValid: function(rssItem) {
-            if (moment(rssItem.getUpdatedTimestamp()).toDate().getTime() > moment().toDate().getTime()) {
+            if (moment(rssItem.get('updatedTimestamp')).toDate().getTime() > moment().toDate().getTime()) {
                 return true;
             }
 
@@ -25,10 +25,10 @@ define('models/EventCollection', ["Backbone", "jquery", "config", "moment", "mod
         },
 
         comparator: function(a, b) {
-            if (a.getUpdatedTimestamp().getTime() == b.getUpdatedTimestamp().getTime()) {
+            if (a.get('updatedTimestamp').getTime() == b.get('updatedTimestamp').getTime()) {
                 return 0;
             }
-            return a.getUpdatedTimestamp().getTime() < b.getUpdatedTimestamp().getTime() ? -1 : 1;
+            return a.get('updatedTimestamp').getTime() < b.get('updatedTimestamp').getTime() ? -1 : 1;
         }
 
     });

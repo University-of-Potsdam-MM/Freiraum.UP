@@ -17,5 +17,11 @@
     "transport_update_frequency": 60,
     "rooms_update_frequency": 60,
     "switch_page_frequency": 10,
-    "twitter_widget_id": "641883662246649856"
+    "twitter_widget_id": "641883662246649856",
+    "event_location": "Uni-Komplex Am Neuen Palais",
+    "force_page": null,
+    "ads_update_frequency": 60,
+    "ads": [
+        "one.html"
+    ]
 }

@@ -21,10 +21,10 @@ define('models/NewsCollection', ["Backbone", "jquery", "config", "moment", "mode
         },
 
         comparator: function(a, b) {
-            if (a.getUpdatedTimestamp().getTime() == b.getUpdatedTimestamp().getTime()) {
+            if (a.get('updatedTimestamp').getTime() == b.get('updatedTimestamp').getTime()) {
                 return 0;
             }
-            return a.getUpdatedTimestamp().getTime() > b.getUpdatedTimestamp().getTime() ? -1 : 1;
+            return a.get('updatedTimestamp').getTime() > b.get('updatedTimestamp').getTime() ? -1 : 1;
         }
 
     });

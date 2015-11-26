@@ -5,12 +5,14 @@ define('models/BookedRoom', ["Backbone", "jquery", "moment"], function (Backbone
         initialize: function(attributes) {
         },
 
-        getName: function()
-        {
-            return this.get('name');
+        get: function (attr) {
+            if (typeof this[attr] == 'function') {
+              return this[attr]();
+            }
+            return Backbone.Model.prototype.get.call(this, attr);
         },
 
-        getShortCode: function()
+        shortCode: function()
         {
             var name_without_latin_numbers = this.get('name').replace(/ I+$/, "");
             var latin_numbers_suffix = this.get('name').match(/ I+$/) || "";
@@ -18,12 +20,7 @@ define('models/BookedRoom', ["Backbone", "jquery", "moment"], function (Backbone
             return (" " + name_without_latin_numbers).match(/ [a-zA-Z]/g).join('').replace(/ /g, '') + latin_numbers_suffix;
         },
 
-        getRoom: function ()
-        {
-            return this.get('room');
-        },
-
-        getShortPersonName: function ()
+        shortPersonName: function ()
         {
             var short_person_name = this.get('person_name').replace(/(Dr. |Prof.)/g, '');
             short_person_name = short_person_name.match(/[A-Z]/g).join('.') + '.';
@@ -36,27 +33,27 @@ define('models/BookedRoom', ["Backbone", "jquery", "moment"], function (Backbone
             return short_person_name;
         },
 
-        getStartTime: function()
+        startTime: function()
         {
             return new Date(this.get('start_time'));
         },
 
-        getStartTimeAsTimeString: function()
+        startTimeAsTimeString: function()
         {
-            return this.getDateAsTimeString(this.getStartTime());
+            return this.dateAsTimeString(this.get('startTime'));
         },
 
-        getEndTime: function()
+        endTime: function()
         {
             return new Date(this.get('end_time'));
         },
 
-        getEndTimeAsTimeString: function()
+        endTimeAsTimeString: function()
         {
-            return this.getDateAsTimeString(this.getEndTime());
+            return this.dateAsTimeString(this.get('endTime'));
         },
 
-        getDateAsTimeString: function(date)
+        dateAsTimeString: function(date)
         {
             var hours = date.getHours();
             var minutes = date.getMinutes();
@@ -76,7 +73,7 @@ define('models/BookedRoom', ["Backbone", "jquery", "moment"], function (Backbone
 
         isRunningAtTime: function(time)
         {
-            if (this.getStartTime().getTime() <= time.getTime() && time.getTime() < this.getEndTime().getTime())
+            if (this.get('startTime').getTime() <= time.getTime() && time.getTime() < this.get('endTime').getTime())
             {
                 return true;
             }

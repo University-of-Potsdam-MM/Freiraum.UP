@@ -3,36 +3,19 @@ define('models/Transport', ["Backbone", "jquery", "moment"], function (Backbone,
 
     var Transport = Backbone.Model.extend({
 
-        getName: function() {
-            return this.get('name');
+        get: function (attr) {
+            if (typeof this[attr] == 'function') {
+              return this[attr]();
+            }
+            return Backbone.Model.prototype.get.call(this, attr);
         },
 
-        getCategory: function() {
-            return this.get('category');
+        TimeFormatted: function() {
+            return moment(this.get('time')).format('HH:mm');
         },
 
-        getPlatform: function() {
-            return this.get('platform');
-        },
-
-        getStationName: function() {
-            return this.get('stationName');
-        },
-
-        getDirection: function() {
-            return this.get('direction');
-        },
-
-        getTime: function() {
-            return this.get('time');
-        },
-
-        getTimeFormatted: function() {
-            return moment(this.getTime()).format('HH:mm');
-        },
-
-        getTimeTo: function() {
-            return moment().to(this.getTime(), false);
+        TimeTo: function() {
+            return moment().to(this.get('time'), false);
         }
     });
 

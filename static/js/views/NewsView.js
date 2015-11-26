@@ -14,8 +14,8 @@ define('views/NewsView', ["Backbone", "config", "jquery", "moment"], function (B
             var tr = $(this.el);
 
             tr.html('<td class="news-td" colspan="2"><div class="news-title">Das ist der Titel</div></td>');
-            tr.find('td').css('background-image', 'url(\'' + this.model.getImageSrc() + '\')');
-            tr.find('.news-title').text(this.model.getTitle() + ' (' + moment(this.model.getPublishedTimestamp()).format('DD.MM.YYYY') + ')');
+            tr.find('td').css('background-image', 'url(\'' + this.model.get('imageSrc') + '\')');
+            tr.find('.news-title').text(this.model.get('title') + ' (' + moment(this.model.get('publishedTimestamp')).format('DD.MM.YYYY') + ')');
 
             return this;
         }
@@ -23,6 +23,3 @@ define('views/NewsView', ["Backbone", "config", "jquery", "moment"], function (B
 
     return NewsView;
 });
-
-
-

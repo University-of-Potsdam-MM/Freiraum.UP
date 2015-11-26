@@ -10,9 +10,7 @@ define('models/TransportCollection', ["Backbone", "jquery", "config", "moment", 
             if (!config.get('authorization')) throw new Error('Missing config.authorization attribute for TransportCollection');
         },
 
-        comparator: function(a, b) {
-            return a.get('room') == b.get('room') ? 0 : (a.get('room') > b.get('room') ? 1 : -1);
-        },
+        comparator: 'time',
 
         fetch: function(options) {
             options = options || {};
@@ -40,7 +38,6 @@ define('models/TransportCollection', ["Backbone", "jquery", "config", "moment", 
         parseJourneyListResponse: function(xmlString) {
             var rawTransports = [];
             var xml = $(xmlString);
-
 
             xml.find('STBJourney').each(function(position, journeyNode) {
                 journeyNode = $(journeyNode);

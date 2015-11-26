@@ -14,20 +14,20 @@ define('views/EventView', ["Backbone", "config", "jquery", "moment"], function (
             var tr = $(this.el);
 
             tr.html('<td class="news-td" colspan="2"><div class="news-title">Das ist der Titel</div></td>');
-            tr.find('td').css('background-image', 'url(\'' + this.model.getImageSrc() + '\')');
+            tr.find('td').css('background-image', 'url(\'' + this.model.get('imageSrc') + '\')');
             var location = '';
 
             /* FIXME: highlighten, wenn das Event von diesem Ort ist! */
-            if (this.model.hasLocation()) {
-                if (this.model.getMainLocation() == 'Universität Potsdam') {
-                    location = this.model.getLocation() + ', ';
+            if (this.model.get('hasLocation')) {
+                if (this.model.get('mainLocation') == 'Universität Potsdam') {
+                    location = this.model.get('location') + ', ';
                 } else {
-                    location = this.model.getMainLocation() + ', ' + this.model.getLocation() + ', ';
+                    location = this.model.get('mainLocation') + ', ' + this.model.get('location') + ', ';
                 }
             }
-            tr.find('.news-title').text(this.model.getTitle() + ' (' + location + moment(this.model.getUpdatedTimestamp()).format('DD.MM.YYYY HH:mm') + ')');
+            tr.find('.news-title').text(this.model.get('title') + ' (' + location + moment(this.model.get('updatedTimestamp')).format('DD.MM.YYYY HH:mm') + ')');
 
-            if (config.get('event_location') == this.model.getLocation()) {
+            if (config.get('event_location') == this.model.get('location')) {
                 tr.addClass('is-highlighted');
             }
 
@@ -37,6 +37,3 @@ define('views/EventView', ["Backbone", "config", "jquery", "moment"], function (
 
     return EventView;
 });
-
-
-

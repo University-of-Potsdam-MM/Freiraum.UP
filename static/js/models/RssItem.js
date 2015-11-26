@@ -3,36 +3,23 @@ define('models/RssItem', ["Backbone", "jquery", "moment"], function (Backbone, $
 
     var RssItem = Backbone.Model.extend({
 
-        getTitle: function() {
-            return this.get('title');
+        get: function (attr) {
+            if (typeof this[attr] == 'function') {
+              return this[attr]();
+            }
+            return Backbone.Model.prototype.get.call(this, attr);
         },
-    
-        getContent: function() {
-            return this.get('content');
-        },
-    
-        getImageSrc: function() {
-            return this.get('imageSrc');
-        },
-    
-        getPublishedTimestamp: function() {
-            return this.get('publishedTimestamp');
-        },
-    
-        getUpdatedTimestamp: function() {
-            return this.get('updatedTimestamp');
-        },
-    
+
         hasLocation: function() {
             return this.getContent().match(/^(.+), (.+) - /) ? true : false;
         },
-    
-        getMainLocation: function() {
+
+        mainLocation: function() {
             var match = this.getContent().match(/^(.+?), (.+?) - /);
             return match && match[1];
         },
-    
-        getLocation: function() {
+
+        location: function() {
             var match = this.getContent().match(/^(.+?), (.+?) - /);
             return match && match[2];
         }
