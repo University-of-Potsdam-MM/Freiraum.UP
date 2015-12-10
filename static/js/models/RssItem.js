@@ -11,16 +11,16 @@ define('models/RssItem', ["Backbone", "jquery", "moment"], function (Backbone, $
         },
 
         hasLocation: function() {
-            return this.getContent().match(/^(.+), (.+) - /) ? true : false;
+            return this.get('content').match(/^(.+), (.+) - /) ? true : false;
         },
 
         mainLocation: function() {
-            var match = this.getContent().match(/^(.+?), (.+?) - /);
+            var match = this.get('content').match(/^(.+?), (.+?) - /);
             return match && match[1];
         },
 
         location: function() {
-            var match = this.getContent().match(/^(.+?), (.+?) - /);
+            var match = this.get('content').match(/^(.+?), (.+?) - /);
             return match && match[2];
         }
     });
