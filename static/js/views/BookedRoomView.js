@@ -3,59 +3,23 @@ define('views/BookedRoomView', ["Backbone", "config", "collections/events"], fun
 
     var BookedRoomView = Backbone.View.extend({
 
-        tagName: "div",
-
         initialize: function(options) {
 
             this.referenceTime = options.referenceTime;
+            this.template = _.template('<div class="reservation <% if (is_highlighted){ %>is-highlighted<% } %> "><strong class="pull-right room"><%= room %></strong><span class="info"><strong><%= name %></strong><span class="person"><% if (is_time_visible){ %>(<% } %><%= person %><% if (is_time_visible){ %>, <% } %></span><span class="time"><% if (is_time_visible){ %> bis <% } %><%= time %><% if (is_time_visible){ %>)<% } %></span></span></div>');
 
             this.listenTo(this.model, "change", this.render);
         },
 
         render: function() {
-            var div_element = $(this.el);
-            var room_element = $(document.createElement('strong'));
-            var info_element = $(document.createElement('span'));
-            var person_element = $(document.createElement('span'));
-            var time_element = $(document.createElement('span'));
 
-            div_element.addClass('reservation');
-
-            room_element.text(this.model.get('room'));
-            room_element.addClass('pull-right');
-            room_element.addClass('room');
-
-            var text = this.model.get('name');
-            text = this.model.get('shortCode');
-            var strong_info = $('<strong />');
-            strong_info.text(this.model.get('name'));
-
-            info_element.append(strong_info);
-            info_element.addClass('info');
-
-            var is_time_visible = this.referenceTime.getTime() + 2 * 60 * 60 * 1000 != this.model.get('endTime').getTime() ? true : false;
-
-            if (is_time_visible)
-            {
-                person_element.text('(' + this.model.get('shortPersonName') + ', ');
-                time_element.text(this.model.get('startTimeAsTimeString') + ' - ' + this.model.get('endTimeAsTimeString'));
-                time_element.text('bis ' + this.model.get('endTimeAsTimeString') + ')');
-            }
-            else
-            {
-                person_element.text('(' + this.model.get('shortPersonName') + ')');
-                time_element.text('');
-            }
-            person_element.addClass('person');
-            time_element.addClass('time');
-            div_element.append(room_element);
-            div_element.append(info_element);
-            info_element.append(person_element);
-            info_element.append(time_element);
+            this.is_time_visible = this.referenceTime.getTime() + 2 * 60 * 60 * 1000 != this.model.get('endTime').getTime() ? true : false;
 
             if (eventsCollection.findWhere({"title": this.model.get('name')})) {
-                div_element.addClass('is-highlighted');
+                this.is_highlighted;
             }
+
+            this.$el.html(this.template({name: this.model.get('name'), room: this.model.get('room'), person: this.model.get('shortPersonName'), time: this.model.get('endTimeAsTimeString'), is_time_visible: this.is_time_visible, is_highlighted: this.is_highlighted}));
 
             return this;
         }
@@ -63,5 +27,3 @@ define('views/BookedRoomView', ["Backbone", "config", "collections/events"], fun
 
     return BookedRoomView;
 });
-
-
