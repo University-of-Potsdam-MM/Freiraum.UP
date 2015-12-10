@@ -1,5 +1,7 @@
 # rooms
 
+- Build Status: [![Build Status](https://travis-ci.org/University-of-Potsdam-MM/rooms.svg)](https://travis-ci.org/University-of-Potsdam-MM/rooms)
+
 ### Table of Contents
 **[Entwicklungsumgebung aufsetzen](#entwicklungsumgebung-aufsetzen)**  
 **[Release für den Server vorbereiten](#release-für-den-Server-vorbereiten)**  
@@ -14,7 +16,6 @@
 
 1. Installiere nodejs von http://nodejs.org/
 2. Führe `npm install` im rooms Verzeichnis aus
-3. Führe `node_modules/.bin/bower install` im rooms Verzeichnis aus
 4. Öffne die index.html in einem Webbrowser
 
 ## Release für den Server vorbereiten
@@ -45,7 +46,14 @@ Die App beinhaltet direkt eine `config.json`.
 	"transport_update_frequency": 60, // Nach wievielen Sekunden wird die Transport API neu abgefragt
 	"rooms_update_frequency": 60, // Nach wievielen Sekunden wird die Veranstaltungs API neu abgefragt
 	"switch_page_frequency": 10, // Nach wievielen Sekunden wird zur nächsten Seite geblättert
-	"twitter_widget_id": "627066449773875201" // die Twitter Widget ID von https://twitter.com/settings/widgets
+	"twitter_widget_id": "627066449773875201", // die Twitter Widget ID von https://twitter.com/settings/widgets
+	"event_location": "Uni-Komplex Am Neuen Palais", // Wenn bei Events der Veranstaltungsort übereinstimmt, wird die Veranstaltung mit gehighlighted
+	"force_page": null, // kann erzwingen, dass nur eine Seite angezeigt wird. Sollte per ?page= ondemand überschrieben werden.
+	"ads_update_frequency": 60, // wie häufig Werbug geladen werden soll
+	"ads": [
+		"one.html", // welche werbug als erstes angezeigt wird
+		"two.html" // welche werbung als nächstes angezeigt wird
+	]
 }
 ```
 
@@ -265,5 +273,23 @@ Es gibt bereits 2 Seiten (soon + now unter dem css-Selektor `.container > .js_pa
 Das Ergebnis sieht dann ungefähr so aus:
 
 ![Neue Seite](docs/example_for_new_page.png)
+
+# Werbung schalten
+
+Um Werbug hinzuzufügen, reicht es eine Datei (z.B. `hans.html`) im rooms-Hauptverzeichnis abzulegen.
+
+Zusätzlich die config.json erweitern, um:
+
+``` json
+{
+	"ads": [
+		"hans.html"
+	]
+}
+```
+
+und dann wird `hans.html` angezeigt, sobald die AdView angezeigt wird.
+
+Mit `ads_update_frequency` ist die Frequenz angegeben in der die Werbug ersetzt wird.
 
 #Nächste Schritte, Credits, Feedback, Lizenz

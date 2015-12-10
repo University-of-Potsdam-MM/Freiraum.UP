@@ -69,29 +69,31 @@
     </div>
 </div>
 
-<div class="jsb_ jsb_ShowRooms jsb_PageSwitcher" data-jsb="">
+<div class="jsb_ jsb_views/PageSwitcherView" data-jsb="">
     <div class="progress">
         <div class="js_progress_bar progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
     </div>
 
-    <span class="current-time js_current_time"></span>
+    <span class="current-time jsb_ jsb_views/CurrentTimeView"></span>
 
     <div class="container free-rooms">
-        <h2>Freie Räume </h2>
-        <div class="js_free_rooms">
+        <h2>Freie Räume</h2>
+        <div class="jsb_ jsb_views/FreeRoomCollectionView">
         </div>
-        <div class="next-local-traffic"><h3>Nächste ÖPNV-Verbindungen</h3> <span class="js_next_local_traffic"></span></div>
+        <div class="next-local-traffic"><h3>Nächste ÖPNV-Verbindungen</h3> <span class="jsb_ jsb_views/NextTransportView"></span></div>
     </div>
 
     <div class="container current-content">
-<!--
-        <div class="row js_page jsb_ jsb_Tweets tweets" data-jsb="">
+
+        <div class="row js_page jsb_ jsb_views/AdView" data-jsb="">
+        </div>
+
+        <div class="row js_page jsb_ jsb_views/TweetsView tweets" data-jsb="">
             <strong class="page-headline"><span class="js_tweets_headline">Tweets</span></strong>
             <a data-chrome="noheader noscrollbar transparent noborders nofooter" class="js_twitter_timeline twitter-timeline" href="https://twitter.com/search?q=%40unipotsdam">Tweets by @unipotsdam</a>
         </div>
 
-        <div class="row js_page jsb_ jsb_News" data-jsb="">
-            <h2 class="hidden">Nachrichten</h2>
+        <div class="row js_page jsb_ jsb_views/NewsCollectionView" data-jsb="">
             <strong class="page-headline"><span class="js_news_headline">Neuigkeiten</span></strong>
             <table class="js_news table table-striped table-hover">
                 <tbody class="js_news_tbody">
@@ -99,8 +101,7 @@
             </table>
         </div>
 
-         <div class="row js_page jsb_ jsb_Events" data-jsb="">
-            <h2 class="hidden">Veranstaltungen</h2>
+         <div class="row js_page jsb_ jsb_views/EventCollectionView" data-jsb="">
             <strong class="page-headline"><span class="js_news_headline">Veranstaltungen</span></strong>
             <table class="js_news table table-striped table-hover">
                 <tbody class="js_news_tbody">
@@ -108,33 +109,29 @@
             </table>
         </div>
 
-        <div class="row js_page js_reservations_now">
-            <h2 class="hidden">Laufende Veranstaltungen</h2>
+        <div class="jsb_ jsb_views/NowBookedRoomCollectionView row js_page">
             <div>
-                <strong class="page-headline"><span class="js_now_headline"></span></strong>
-                <div class="js_now_body">
+                <strong class="page-headline"><span class="js_headline"></span></strong>
+                <div class="js_body">
+                </div>
+            </div>
+        </div>
+
+        <div class="jsb_ jsb_views/SoonBookedRoomCollectionView row js_page">
+            <div>
+                <strong class="page-headline"><span class="js_headline"></span></strong>
+                <div class="js_body">
 
                 </div>
             </div>
         </div>
 
-        <div class="row js_page js_reservations_soon">
-            <h2 class="hidden">Laufende Veranstaltungen</h2>
-            <div>
-                <strong class="page-headline"><span class="js_soon_headline">In 2 Stunden</span></strong>
-                <div class="js_soon_body">
 
-                </div>
-            </div>
-        </div>
-		
-		
 
-        <div class="row js_page jsb_ jsb_LocalTraffic" data-jsb="">
-            <h2 class="hidden">Nahverkehrsverbindungen</h2>
+        <div class="row js_page jsb_ jsb_views/TransportCollectionView" data-jsb="">
             <table class="js_journeys table table-striped table-hover">
                 <thead>
-                <th class="js_journeys_headline" colspan="4">Nahverkehr</th></th>
+                <th class="js_journeys_headline" colspan="4">Nahverkehrsverbindungen</th></th>
                 </thead>
                 <tbody class="js_journeys_tbody">
                 </tbody>
@@ -147,11 +144,11 @@
                 <h1>Überschrift</h2>
 				<h2>Untertitel</h2>
 				<img width="100%"src="static/img/jellyfish.jpg" />
-				
+
 				<p>Lorem ipsum dolor sit amet, consetetur <strong>sadipscing elitr, sed diam nonumy</strong> eirmod tempor invidunt ut labore  et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
-				
+
 				<p><strong>Hallo</strong><br>Lorem ipsum dolor sit amet, consetetur sadipscingmy eirmod tempor invidu</p>
-            
+
         </div>
 
     </div>
@@ -168,6 +165,8 @@
         paths: {
             jquery: './../bower_components/jquery/jquery',
             jsb: './../bower_components/jsb/jsb',
+            Backbone: './../bower_components/backbone/backbone',
+            underscore: './../bower_components/underscore/underscore',
             moment: './../bower_components/moment/min/moment-with-locales',
             bootstrap: './../bower_components/bootstrap/dist/js/bootstrap',
             json: './../bower_components/requirejs-plugins/src/json',

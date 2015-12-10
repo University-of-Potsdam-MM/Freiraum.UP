@@ -263,7 +263,7 @@ th.js_journeys_headline  {
 	padding:0;
 }
 
-.js_now_headline, .js_soon_headline, .js_news_headline, .js_tweets_headline{
+.js_headline, .js_news_headline, .js_tweets_headline, .js_ads_headline{
 	display:block;
 	width:100%;
 	font-size:3em !important;

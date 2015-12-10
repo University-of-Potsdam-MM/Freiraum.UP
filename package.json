@@ -5,7 +5,8 @@
   "name": "rooms",
   "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node_modules/.bin/mocha",
+    "postinstall": "node_modules/.bin/bower install"
   },
   "repository": {
     "type": "git",
@@ -14,5 +15,14 @@
   "bugs": {
     "url": "https://github.com/University-of-Potsdam-MM/rooms/issues"
   },
-  "homepage": "https://github.com/University-of-Potsdam-MM/rooms"
+  "homepage": "https://github.com/University-of-Potsdam-MM/rooms",
+  "devDependencies": {
+    "chai": "^3.3.0",
+    "domino": "^1.0.19",
+    "jquery": "^2.1.4",
+    "mocha": "^2.3.3",
+    "requirejs": "^2.1.20",
+    "xmldom": "^0.1.19",
+    "xmlhttprequest": "^1.8.0"
+  }
 }
