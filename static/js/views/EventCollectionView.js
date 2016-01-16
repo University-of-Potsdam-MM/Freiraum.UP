@@ -26,6 +26,12 @@ define('views/EventCollectionView', ["Backbone", "config", "jquery", "views/Base
                 newsTableBody.append(view.render().el);
             });
 
+            if (eventsCollection.length) {
+                $(this.el).removeClass('is-hidden');
+            } else {
+                $(this.el).addClass('is-hidden');
+            }
+
             return this;
         }
     });
