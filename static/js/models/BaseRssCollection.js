@@ -46,8 +46,7 @@ define('models/BaseRssCollection', ["Backbone", "jquery", "config", "moment", "m
 
                 var rssItem = new RssItem({
                     "title":  newsNode.find('title').text().trim(),
-                    /* FIXME: Rewrite-HACK for #26 @ https://github.com/University-of-Potsdam-MM/rooms/issues/26 */
-                    "imageSrc":  (imgNode.attr('src') || "").replace(/uploads\//, "uploads01/"),
+                    "imageSrc":  (imgNode.attr('src') || ""),
                     "content": contentNode.text().trim(),
                     "publishedTimestamp":  moment(newsNode.find('published').text()).toDate(),
                     "updatedTimestamp":  moment(newsNode.find('updated').text()).toDate()
