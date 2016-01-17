@@ -32,6 +32,12 @@ th.js_journeys_headline {
     font-size: 1.25em !important;
 }
 
+.js_page .js_body {
+    width: 570px;
+    height: 208px;
+    overflow: hidden;
+}
+
 .js_news {
     width: 570px;  /* 576-6px wegen schwarzem Rand */
     height: 207px;
