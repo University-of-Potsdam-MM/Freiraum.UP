@@ -292,4 +292,27 @@ und dann wird `hans.html` angezeigt, sobald die AdView angezeigt wird.
 
 Mit `ads_update_frequency` ist die Frequenz angegeben in der die Werbug ersetzt wird.
 
+# Benutzung als Split-Panel
+
+Zusätzlich zur index.html gibt es auch eine split.html. Diese ist für ein Video-Panel der Größe 768px x 240px gedacht.
+Die 768px teilen sich hierbei nochmal in 576px und 192px auf. Sowohl der 576px breite Teil als auch der 192px breite
+Teil haben zusätzlich einen 6 Pixel breiten Rand.
+
+Dadurch ergibt sich der folgende Viewport:
+
+              ________________________
+              |               |       |
+              |               |  186  |
+    6px Rand  |     570x240   |   x   |  6px Rand
+              |               |  240  |
+              |_______________|_______|
+
+Um Styles aus der `index.html` (`global.css`) wieder zu verwenden, wird in der `split.css` lediglich überschrieben
+oder neu definiert, was für die `split.html` zuständig ist.
+
+Der Aufruf funktioniert analog zu index.html, jedoch mit `page=2`, da blättern nicht gewünscht ist:
+
+    /split.html?campus=3&house=6&page=2
+
+
 #Nächste Schritte, Credits, Feedback, Lizenz

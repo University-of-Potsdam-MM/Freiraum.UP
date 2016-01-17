@@ -18,8 +18,11 @@ define('views/NewsCollectionView', ["Backbone", "config", "jquery", "views/BaseV
             var newsTable = $(this.el).find('.js_news');
 
             newsTableBody.empty();
-            newsTable.css('height', 'calc(90% - ' + ($('.free-rooms').outerHeight() + 38 + 100) + 'px)');
-            newsTable.css('margin-bottom', '0');
+            /* FIXME: hack damit das bei split nicht benutzt wird! hier wäre besseres CSS besser. */
+            if (document.location.toString().indexOf('split.html') === -1) {
+                newsTable.css('height', 'calc(90% - ' + ($('.free-rooms').outerHeight() + 38 + 100) + 'px)');
+                newsTable.css('margin-bottom', '0');
+            }
 
             newsCollection.slice(0, config.get('news_per_page')).forEach(function(event) {
                 var view = new NewsView({"model": event, "tagName": "tr"});

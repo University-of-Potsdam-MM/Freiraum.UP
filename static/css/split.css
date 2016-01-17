@@ -1,0 +1,57 @@
+.container.current-content {
+    position: fixed;
+    top: 0;
+    left: 6px; /* 6px wegen schwarzem Rand */
+    width: 570px;  /* 576-6px wegen schwarzem Rand */
+    margin: 0;
+    padding: 0;
+    height: 240px;
+}
+
+.container.current-content .row {
+    margin: 0;
+}
+
+.progress,
+.current-time,
+.free-rooms {
+    position: fixed; /* muss verschoben sein, weil next-local-traffic IN .free-rooms liegt (aber angezeigt wird) -> sonst gern display: none */
+    top: -10000px;
+    left: -10000px;
+    zoom: 100%;
+    height: 0;
+    width: 0;
+    overflow: hidden;
+}
+
+.next-local-traffic {
+    position: fixed;
+    left: 576px;
+    top: 0;
+    width: 186px; /* 192px-6px wegen schwarzem Rand */
+    height: 235px;
+    padding: 5px;
+}
+
+.next-local-traffic h3 {
+    font-size: 1.25em;
+}
+
+.js_news {
+    width: 570px;  /* 576-6px wegen schwarzem Rand */
+    height: 207px;
+    top: 33px;
+    position: fixed;
+    bottom: 0;
+    left: 6px;
+}
+
+.news-title {
+    font-size: 1em;
+    border: 1px solid #d0dae3;
+    max-height: 104px;
+}
+
+.js_headline, .js_news_headline, .js_tweets_headline, .js_ads_headline {
+    font-size: 1em !important;
+}
