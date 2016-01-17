@@ -15,26 +15,21 @@
 .progress,
 .current-time,
 .free-rooms {
-    position: fixed; /* muss verschoben sein, weil next-local-traffic IN .free-rooms liegt (aber angezeigt wird) -> sonst gern display: none */
-    top: -10000px;
-    left: -10000px;
-    zoom: 100%;
-    height: 0;
-    width: 0;
-    overflow: hidden;
+    display: none;
 }
 
-.next-local-traffic {
+.local-traffic {
     position: fixed;
     left: 576px;
     top: 0;
     width: 186px; /* 192px-6px wegen schwarzem Rand */
     height: 235px;
     padding: 5px;
+    font-size: 14px;
 }
 
-.next-local-traffic h3 {
-    font-size: 1.25em;
+th.js_journeys_headline {
+    font-size: 1.25em !important;
 }
 
 .js_news {
