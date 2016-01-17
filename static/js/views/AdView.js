@@ -7,7 +7,6 @@ define('views/AdView', ["jquery", "config", "views/BaseView"], function ($, conf
             var that = this;
             this.currentIndex = 0;
             if (!config.get('ads')) throw new Error('Missing config.ads attribute for AdView');
-            if (!config.get('ads_update_frequency')) throw new Error('Missing config.ads_update_frequency attribute for AdView');
 
             if (config.get('ads').length == 0) {
                 $(this.el).addClass('is-hidden');
@@ -31,6 +30,13 @@ define('views/AdView', ["jquery", "config", "views/BaseView"], function ($, conf
                 "dataType": "html",
                 "success": function(response) {
                     domElement.html(response);
+
+                    var refreshMetaTag = $(domElement).find('meta[name=next-page-in]');
+                    if (refreshMetaTag) {
+                        jsb.fireEvent('PageSwitcherView::SHOW_NEW_PAGE_IN', {
+                            "seconds": parseInt(refreshMetaTag.attr('content'), 10)
+                        });
+                    }
                 }
             });
         }

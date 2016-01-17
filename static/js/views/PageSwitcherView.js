@@ -22,6 +22,11 @@ define('views/PageSwitcherView', ['jquery', "config", "moment", "views/BaseView"
                     that.showNextPage();
                 }, (this.waiting_time / this.max_progress) * 1000);
             }
+
+            jsb.whenFired('PageSwitcherView::SHOW_NEW_PAGE_IN', function(values) {
+                that.new_page_in = values.seconds;
+                that.max_progress = values.seconds;
+            });
         },
 
         showCurrentPage: function() {
@@ -57,7 +62,8 @@ define('views/PageSwitcherView', ['jquery', "config", "moment", "views/BaseView"
 
                 this.showCurrentPage();
 
-                this.new_page_in = this.max_progress;
+                this.max_progress = config.get('switch_page_frequency');
+                this.new_page_in = config.get('switch_page_frequency');
             }
 
             this.render();

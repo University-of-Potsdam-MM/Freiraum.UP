@@ -49,7 +49,6 @@ Die App beinhaltet direkt eine `config.json`.
 	"twitter_widget_id": "627066449773875201", // die Twitter Widget ID von https://twitter.com/settings/widgets
 	"event_location": "Uni-Komplex Am Neuen Palais", // Wenn bei Events der Veranstaltungsort übereinstimmt, wird die Veranstaltung mit gehighlighted
 	"force_page": null, // kann erzwingen, dass nur eine Seite angezeigt wird. Sollte per ?page= ondemand überschrieben werden.
-	"ads_update_frequency": 60, // wie häufig Werbug geladen werden soll
 	"ads": [
 		"one.html", // welche werbug als erstes angezeigt wird
 		"two.html" // welche werbung als nächstes angezeigt wird
@@ -274,7 +273,13 @@ Zusätzlich die config.json erweitern, um:
 
 und dann wird `hans.html` angezeigt, sobald die AdView angezeigt wird.
 
-Mit `ads_update_frequency` ist die Frequenz angegeben in der die Werbug ersetzt wird.
+Wenn die Datei folgenden Tag enthält:
+
+``` html
+<meta name="next-page-in" content="260" />
+```
+
+wird das Schalten zur nächsten Screen um 260 Sekunden verzögert.
 
 # Benutzung als Split-Panel
 
