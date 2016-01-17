@@ -133,48 +133,32 @@ Die folgenden Technologien werden bei der Umsetzung der `rooms` Webanwendung ben
 | Composer und Doctrine-Cache | Für xml.php (als Fallback falls die externe Api nicht verfügbar ist oder CORS-Header nicht richtig gesetzt sind) | - |
 
 
-## Entitäten (JS Objekte)
+## MVC (JS Objekte)
 
-### `ShowRooms` Komponente
+Die Entitäten sind als Backbone-Models implementiert. Im Verzeichnis `js/models` finden sich alle uninitialisierten
+Backbone-Models (z.B. `FreeRoom`, `FreeRoomCollection`. Im Verzeichnis `js/collections` befinden sich
+initialisierte und befüllte Singletons der Collections (z.B. `freeRooms`). Das erlaubt an anderer Stelle einfach die
+Collection zu `require`n ohne die Collection x mal zu initialisieren.
 
-Ist für die Aktualisierung des Panels zuständig. 
+Die folgende Tabelle zeigt die Models, Collections, Views und ihre Verwendung.
 
-Es beinhaltet zwei Anzeigen: `.js_now` und `.js_soon`. `.js_now` bezieht sich auf den aktuellen 2 Stundenblock (beginnt immer auf ganze 2 Stunden) und `.js_soon` bezieht sich auf den 2 Stundenblock danach.
+Model | Collection | View(s) | Singleton
+--------|-----------------|-------|------
+RssItem | EventCollection und NewsCollection extenden BaseRssCollection | EventCollectionView, NewsCollectionView, NewsView, EventView | events, news
+Transport | TransportCollection | TransportCollectionView, NextTransportView, TransportView | transports
+FreeRoom | FreeRoomCollection | FreeRoomCollectionView, FreeRoomView | freeRooms
+BookedRoom | BookedRoomCollection | NowBookedRoomCollectionView, SoonBookedRoomCollectionView, BookedRoomView | bookedRooms
+*-* | *-* | TweetsView
+*-* | *-* | AdView
 
-In jedem Block werden die damit verknüpften `Reservation`s und `FreeRoom`s angezeigt.
 
-`FreeRoom`s werden dabei in `this.free_rooms` von `ShowRooms` gehalten. Sie beziehen sich immer auf den aktuellen Stundenblock.
+Zusätzlich gibt es noch die `BaseRssCollection` (als Basis für `News`+`EventCollection`), sowie die `BaseView` als Basis für
+alle Views.
 
-Die `Reservation`s werden in `this.reservations` von `ShowRooms` komplett gehalten, für den Zeitraum vom Beginn des ersten Stundenblocks und bis zum Ende des zweiten Stundenblocks geladen. Erst beim rendern wird mit `Reservation#isRunningAtTime` getestet, ob der Stundenblock auch dort angezeigt wird. Das hat den Vorteil, dass es auch funktioniert, wenn eine Reservierung über 2 Stundenblöcke hinweg stattfindet.
+Außerdem gibt es ein Singleton unter `config`, welches auch ein `Backbone.Model` ist. Darin sind nun die Konfigurationen
+aus der config.json verfügbar und das overriding der Options passiert dort (`&page=2` usw.).
 
-Da die `free4Time` API Methode ab und an trotzdem Räume liefert, die nicht frei sind, wird in `ShowRooms#refreshReservations()` eine Variable `used_rooms` mit allen geblockten Räumen gefüllt und beim Abholen der freien Räume diese Liste noch mal danach gefiltert.
-
-### `Reservation(name, start_time, end_time, campus, house, room, person_name)`
-
-Bildet eine einzelne Reservierung für einen Raum ab.
-
-Zum Beispiel wird eine Reservierung so initialisiert:
-
-``` js
-new Reservation(
-	'V/G1 - Öffentliches Wirtschaftsrecht I',
-	'2014-02-04T18:00:00+01:00',
-	'2014-02-04T16:00:00+01:00',
-	3,
-	1,
-	'H10'
-);
-```
-
-### `FreeRoom(campus, house, room)`
-
-Bildet einen einzelnen freien Raum ab.
-
-Zum Beispiel wird Raum 04.06.S01 so initialisiert:
-
-``` js
-new FreeRoom(4, 6, "S01");
-```
+Für das Wechseln zwischen den Seiten gibt es den `PageSwitcherView`. Für die Uhrzeit den `CurrentTimeView`.
 
 ## Schnittstellen
 
