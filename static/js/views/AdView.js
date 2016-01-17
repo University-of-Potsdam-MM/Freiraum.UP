@@ -11,17 +11,15 @@ define('views/AdView', ["jquery", "config", "views/BaseView"], function ($, conf
 
             if (config.get('ads').length == 0) {
                 $(this.el).addClass('is-hidden');
-            } else {
-                this.render();
-
-                setInterval(function() {
-                    that.currentIndex++;
-                    if (that.currentIndex >= config.get('ads').length) {
-                        that.currentIndex = 0;
-                    }
-                    that.render();
-                }, config.get('ads_update_frequency') * 1000);
             }
+
+            jsb.whenFired('PageSwitcherView::SHOW_PAGE', function(values) {
+                if (values.id === 'ad-view') {
+                    that.render();
+                } else {
+                    $(that.el).empty();
+                }
+            });
         },
 
         render: function() {

@@ -15,12 +15,22 @@ define('views/PageSwitcherView', ['jquery', "config", "moment", "views/BaseView"
             $('.js_app_title').text('Campus ' + config.get('campus') + ', Haus ' + config.get('house'));
             document.title = $('.js_app_title').text();
 
-            $(this.pages[this.current_page]).show();
+            this.showCurrentPage();
 
             if (config.get('force_page') === null) {
                 setInterval(function() {
                     that.showNextPage();
                 }, (this.waiting_time / this.max_progress) * 1000);
+            }
+        },
+
+        showCurrentPage: function() {
+            $(this.pages[this.current_page]).show();
+
+            if ($(this.pages[this.current_page]).attr('id')) {
+                jsb.fireEvent('PageSwitcherView::SHOW_PAGE', {"id": $(this.pages[this.current_page]).attr('id')});
+            } else {
+                jsb.fireEvent('PageSwitcherView::SHOW_PAGE', {});
             }
         },
 
@@ -45,7 +55,7 @@ define('views/PageSwitcherView', ['jquery', "config", "moment", "views/BaseView"
 
                 console.log('NEXT PAGE after', initial_current_page, 'is now', this.current_page);
 
-                $(this.pages[this.current_page]).show();
+                this.showCurrentPage();
 
                 this.new_page_in = this.max_progress;
             }
