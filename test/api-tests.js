@@ -1,6 +1,10 @@
 'use strict';
-var requirejs = require("requirejs");
 var assert = require("chai").assert;
+
+/*
+ * Der nächste Abschnitt ist dafür da, dass die nodejs-Umgebung so wirkt, wie wie einen Browser:
+ */
+var requirejs = require("requirejs");
 var domino = require('domino');
 global.DOMParser = require('xmldom').DOMParser;
 global.jQuery = require('jquery')(domino.createWindow());
@@ -29,6 +33,11 @@ requirejs.config({
     }
 });
 
+/*
+ * Initialisieren von moment.js und den pre-require'ten modules, welche gleich getestet werden.
+ *
+ * Außerdem werden ein paar der Konfigvariablen spezifisch für den Test gesetzt.
+ */
 before(function(done) {
     requirejs(
         [
@@ -38,6 +47,9 @@ before(function(done) {
         function(config, moment) {
             config.set('house', 6);
 
+            /*
+             * wir testen immer am nächsten Montag um 10:00 Uhr
+             */
             var nextMondayAtTen = moment();
             nextMondayAtTen.day(1);
             nextMondayAtTen.hour(10);
@@ -45,8 +57,16 @@ before(function(done) {
             nextMondayAtTen.second(0);
 
             config.set('now', new Date(nextMondayAtTen.format()));
+
+            /*
+             * wir testen immer mit den echten RSS-Feed URLs, weil wir kein CROSS-Origin-Problem auf der CLI haben
+             */
             config.set('events_rss_feed_url', 'https://www.uni-potsdam.de/veranstaltungen/rss-feed-abonnieren/eventfeed/feed/xml.html?tx_upevents_upeventfeed%5Blimit%5D=30&tx_upevents_upeventfeed%5Bcat%5D=&tx_upevents_upeventfeed%5BcatLink%5D=or');
             config.set('news_rss_feed_url', 'http://www.uni-potsdam.de/nachrichten/rss-feed-abonnieren.html?type=100&tx_ttnews%5Bcat%5D=19');
+
+            /*
+             * wir benötigen die folgenden Module für die Tests
+             */
             requirejs(
                 [
                     'collections/freeRooms',
@@ -57,6 +77,9 @@ before(function(done) {
                     'jquery'
                 ],
                 function () {
+                    /*
+                     * alle module sind geladen -> die Tests können starten!
+                     */
                     done();
                 }
             );

@@ -257,7 +257,7 @@ Das Ergebnis sieht dann ungefähr so aus:
 
 ![Neue Seite](docs/example_for_new_page.png)
 
-# Werbung schalten
+## Werbung schalten
 
 Um Werbug hinzuzufügen, reicht es eine Datei (z.B. `hans.html`) im rooms-Hauptverzeichnis abzulegen.
 
@@ -281,7 +281,7 @@ Wenn die Datei folgenden Tag enthält:
 
 wird das Schalten zur nächsten Screen um 260 Sekunden verzögert.
 
-# Benutzung als Split-Panel
+## Benutzung als Split-Panel
 
 Zusätzlich zur index.html gibt es auch eine split.html. Diese ist für ein Video-Panel der Größe 768px x 240px gedacht.
 Die 768px teilen sich hierbei nochmal in 576px und 192px auf. Sowohl der 576px breite Teil als auch der 192px breite
@@ -303,5 +303,47 @@ Der Aufruf funktioniert analog zu index.html, jedoch mit `page=2`, da blättern 
 
     /split.html?campus=3&house=6&page=2
 
+## Api-Tests
+
+Unter `test/api-tests.js` befinden sich Tests, welche mit dem Mocha-Framework entwickelt wurden.
+
+Durch den Aufruf von
+
+``` console
+$ mocha
+```
+
+werden die Tests ausgeführt.
+
+Das Ergebnis ist dann z.B.:
+
+``` console
+$ mocha
+
+
+  collections/bookedRooms
+    ✓ should contain all booked rooms (270ms)
+
+  collections/freeRooms
+    ✓ should contain all free rooms (161ms)
+
+  collections/transports
+    ✓ should contain all transport connections (549ms)
+
+  collections/events
+    ✓ should contain all events (4242ms)
+
+  collections/news
+    ✓ should contain all news (1854ms)
+
+
+  5 passing (7s)
+```
+
+Es gibt zusätzlich eine `.travis.yml`, welche dafür sorgt, dass die Mocha-Tests nach jedem commit auf [travis-ci](https://travis-ci.org/University-of-Potsdam-MM/rooms)
+ausgeführt werden. Der Build-Status kann auch ganz am Anfang der README.md eingesehen werden.
+
+Aktuell fokussieren sich die API-Tests ausschließlich auf den Test und eine Plausibilitätsprüfung der angebundenen
+APIs.
 
 #Nächste Schritte, Credits, Feedback, Lizenz
