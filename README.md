@@ -105,9 +105,27 @@ Hier einige User die ich mir bei dem Konzeptionieren des Panels überlegt habe.
 
 # Architektur
 
+- Generell
+  - `package.json`, `bower.json`, `.bowerrc` - Konfiguration für die Paketemanager (Bower und NPM)
+  - `newsProxy.php` und `eventsProxy.php` sind als Proxy vorhanden bis #22 korrigiert ist
+  - `README.md` als README
+  - `.gitignore` als Konfiguration welche Dateien nicht im Git landen dürfen
+  - `one.html` ein Beispiel für eine Werbe-Datei
 - Webanwendung
-  - `index.html`
-  - `js/ShowRooms.js`
+  - `index.html` - HTML für das vertikale Panel
+  - `split.html` - HTML für das horizontale Panel mit Split bei 576 Pixel
+  - `static/css/global.css` - CSS für das vertikale und das horizontale Panel
+  - `static/css/split.css` - zusätzliches CSS für das horizontale Panel
+  - `static/img/*.*` - vom CSS verwendete Bilder
+  - `static/js/models/*.js` - die Backbone-Models
+  - `static/js/collections/*.js` - die Singletons für instanzierte Backbone-Collections
+  - `static/js/views/*.js` - die Backbone-Views
+  - `static/js/main.js` - die Konfiguration für externe JS-Libraries (z.B. momentjs)
+  - `static/js/config.js` - der Singleton für die Config
+  - `config.json` - die Config für diese Panelinstallation
+- Tests
+  - `.travis.yml` - Konfiguration für die CI Umgebung bei Travis
+  - `test/api-test.js` - die CLI Tests mit mocha
 - Zugriff von der Webanwendung per `Bearer`-Token auf die roomsAPI
 - [roomsAPI](https://api.uni-potsdam.de/store/apis/info?name=roomsAPI&version=1.0&provider=admin) auf dem [USB](https://api.uni-potsdam.de/)
   - `/rooms4Time`
