@@ -76,6 +76,8 @@ tr td em {
     border-top: 1px solid #dddddd;
     padding: 2px;
     font-size: 2.5em;
+    padding-top: .3em;
+    padding-bottom: .3em;
 }
 
 .reservation .room {
@@ -88,7 +90,7 @@ tr td em {
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
-    margin-right: 50px;
+    margin-right: 85px;
     font-weight: 700;
 }
 
@@ -105,6 +107,11 @@ tr td em {
     margin-right: 5px;
     font-size: 0.8em;
     font-weight: normal;
+}
+
+.reservation strong.pull-right {
+    background: #d0dae3;
+    padding:.05em;
 }
 
 .container {
@@ -131,6 +138,11 @@ tr td em {
     bottom: 10px;
     right: 10px;
     position: absolute;
+}
+
+.js_news_tbody tr + tr {
+
+    border-top: 10px solid #014260;
 }
 
 .news-td {
@@ -227,16 +239,19 @@ th.js_journeys_headline  {
 	margin-bottom:0;
 }
 
-.js_journey_time_absolute, .js_journey_time_relative {
+ .js_journey_time_relative {
 	text-align:center;
 }
 
-.js_journey_time_relative {
+.js_journey_time_relative,.js_journey_time_absolute {
 	font-size:1.5em;
 	font-weight:bold;
 	color:#014260;
 }
 
+.js_journey_name, .js_journey_time_absolute {
+    color:#696969;
+}
 .js_journey_name.Bus {
 	background-image:url(../img/bus.png);
 	background-repeat:no-repeat;
@@ -262,7 +277,7 @@ th.js_journeys_headline  {
 
 .js_body {
     width: 100%;
-    text-align: center;
+    
 }
 
 .page-headline {
