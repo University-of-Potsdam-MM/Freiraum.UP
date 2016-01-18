@@ -16,7 +16,9 @@
 
 1. Installiere nodejs von http://nodejs.org/
 2. Führe `npm install` im rooms Verzeichnis aus
-4. Öffne die index.html in einem Webbrowser
+3. Führe `npm install -g bower` im rooms Verzeichnis aus
+4. Führe `bower install` im rooms Verzeichnis aus
+5. Öffne die index.html in einem Webbrowser
 
 ## Release für den Server vorbereiten
 
@@ -120,14 +122,15 @@ Die folgenden Technologien werden bei der Umsetzung der `rooms` Webanwendung ben
 
 | Technologie        | Verwendungszweck           | Link  |
 | ------------- |-------------|:-----:|
-| nodejs      | zur primären Installation von Bower | http://nodejs.org |
+| backbonejs | Backbone als MVC-Framework | http://backbonejs.org/ |
+| nodejs      | zur primären Installation von Bower und für die Tests | http://nodejs.org |
 | bower      | Installation der Webbibliotheken | http://bower.io |
 | bootstrap | HTML/CSS-Framework für das Layout | http://getbootstrap.com |
 | require.js | Dependency Library für Javascript | http://requirejs.org |
-| jsb.js | Library um Javascript-Verhalten ohne Inline-JS auf HTML-Elemente zu tun | - |
+| jsb.js | Library um Javascript-Verhalten ohne Inline-JS auf HTML-Elemente zu tun | https://github.com/DracoBlue/jsb |
 | html5shiv | Polyfill damit HTML5-Elemente auch in älteren Browsern funktionieren | - |
 | respond.js | Media-Query Polyfill für ältere IE-Browser | - |
-
+| mocha | Testframework für die CLI-Tests | https://mochajs.org |
 
 ## MVC (JS Objekte)
 
