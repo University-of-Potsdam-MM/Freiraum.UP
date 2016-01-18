@@ -26,10 +26,86 @@
     height: 235px;
     padding: 5px;
     font-size: 14px;
+    padding: 0;
 }
 
-th.js_journeys_headline {
-    font-size: 1.25em !important;
+/* Nahverkehr */
+
+.js_journeys_tbody {
+    font-size:1.3em;
+}
+
+
+.js_journeys_tbody td {
+    line-height:2em !important;
+}
+
+th.js_journeys_headline  {
+    font-size: 1em !important;
+    color:#fff;
+
+    text-transform:uppercase;
+    text-align:left;
+    background:#014260;
+    height:2.3em;
+    line-height:1;
+    padding:0 0 0 10px !important;
+    vertical-align:middle !important;
+}
+
+.journey_dir_platf {
+    width:20em;
+}
+
+.js_journey_platform {
+    display: none;
+}
+
+.js_journey_direction, .js_journey_name {
+    font-weight:bold;
+    font-size:0.5em;
+    color:#014260;
+    line-height:1.2;
+    margin-bottom:0;
+}
+
+td.js_journey_time_absolute {
+    display: none;
+}
+
+.js_journey_time_relative {
+    text-align:center;
+    font-size:0.5em;
+}
+
+.js_journey_time_relative {
+    font-size:0.5em;
+    font-weight:bold;
+    color:#014260;
+}
+
+.js_journey_name.Bus {
+    background-image:url(../img/bus.png);
+    background-size: 20px;
+    background-repeat:no-repeat;
+    text-indent:54px;
+    background-position:4px 4px;
+}
+
+.js_journey_name.S {
+    background-image:url(../img/sbahn.png);
+    background-size: 20px;
+    background-repeat:no-repeat;
+    text-indent:54px;
+    background-position:4px 4px;
+}
+
+.js_journey_name.RB {
+    background-image:url(../img/regio.png);
+    background-size: 20px;
+    background-repeat:no-repeat;
+    text-indent:54px;
+    background-position:4px 4px;
 }
 
 .js_page .js_body {
