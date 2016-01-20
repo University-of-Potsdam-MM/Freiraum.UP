@@ -11,22 +11,20 @@ define('views/NewsCollectionView', ["Backbone", "config", "jquery", "views/BaseV
         },
 
         render: function() {
-            var that = this;
-            var tr = $(this.el);
 
-            var newsTableBody = $(this.el).find('.js_news_tbody');
-            var newsTable = $(this.el).find('.js_news');
+            var newsBody = $(this.el).find('.js_news_body');
+            newsBody.empty();
 
-            newsTableBody.empty();
             /* FIXME: hack damit das bei split nicht benutzt wird! hier wäre besseres CSS besser. */
+/*
             if (document.location.toString().indexOf('split.html') === -1) {
-                newsTable.css('height', 'calc(90% - ' + ($('.free-rooms').outerHeight() + 38 + 100) + 'px)');
-                newsTable.css('margin-bottom', '0');
+                newsBody.css('height', 'calc(90% - ' + ($('.free-rooms').outerHeight() + 38 + 100) + 'px)');
+                newsBody.css('margin-bottom', '0');
             }
-
+*/
             newsCollection.slice(0, config.get('news_per_page')).forEach(function(event) {
-                var view = new NewsView({"model": event, "tagName": "tr"});
-                newsTableBody.append(view.render().el);
+                var view = new NewsView({"model": event});
+                newsBody.append(view.render().el);
             });
 
             if (newsCollection.length) {
@@ -41,6 +39,3 @@ define('views/NewsCollectionView', ["Backbone", "config", "jquery", "views/BaseV
 
     return NewsCollectionView;
 });
-
-
-

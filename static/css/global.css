@@ -1,5 +1,6 @@
-body {
+html, body {
     /*zoom: 2;*/
+    height: 100%;
 }
 
 tr td em {
@@ -114,8 +115,15 @@ tr td em {
     padding:.05em;
 }
 
-.container {
+.container{
     width: 100%;
+    max-height: 100%;
+}
+
+
+#mainframe {
+    height: calc(100% - 300px);
+    overflow: hidden;
 }
 
 .js_news {
@@ -140,10 +148,18 @@ tr td em {
     position: absolute;
 }
 
-.js_news_tbody tr + tr {
-
+.news-container {
     border-top: 10px solid #014260;
+    position: relative;
+    height: 50%;
+    overflow: hidden;
 }
+
+.row-fluid {
+    text-align: center;
+}
+
+.img-responsive{margin:0 auto}
 
 .news-td {
     background-size: cover;
@@ -277,7 +293,7 @@ th.js_journeys_headline  {
 
 .js_body {
     width: 100%;
-    
+
 }
 
 .page-headline {
