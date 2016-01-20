@@ -4,10 +4,10 @@ define('views/NewsView', ["Backbone", "config", "jquery", "moment"], function (B
     var NewsView = Backbone.View.extend({
 
         tagName: "div",
-        className: "news-container",
+        className: "news-container row-fluid",
 
         initialize: function(options) {
-            this.template = _.template('<div class="news-img"><img src="<%= img %>"/><div class="news-title"><%= title %></div></div>');
+            this.template = _.template('<img src="<%= img %>" class="img-responsive"/><div class="news-title"><%= title %></div>');
             this.listenTo(this.model, "change", this.render);
         },
 
