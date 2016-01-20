@@ -1,6 +1,7 @@
 html, body {
     /*zoom: 2;*/
-    height: 100%;
+    height:100%;
+  
 }
 
 tr td em {
@@ -36,12 +37,12 @@ tr td em {
 .free-rooms {
     left: 0;
     right: 0;
-    padding-bottom: 10px;
-    position: fixed;
+    height:20%;
+    font-size: 200%;
     bottom: 0;
-    z-index: 100;
+  
     background-color: #fff;
-    zoom:150%;
+   
     padding-left:5px;
     padding-right:5px;
     -webkit-box-shadow: 0px -4px 3px -2px rgba(171,171,171,1);
@@ -117,13 +118,14 @@ tr td em {
 
 .container{
     width: 100%;
-    max-height: 100%;
+    
 }
 
 
 #mainframe {
-    height: calc(100% - 300px);
+   
     overflow: hidden;
+    height:80%;
 }
 
 .js_news {
@@ -151,8 +153,14 @@ tr td em {
 .news-container {
     border-top: 10px solid #014260;
     position: relative;
-    height: 50%;
-    overflow: hidden;
+    
+    overflow: visible;
+    background-image: url(../img/sbahn.png);
+}
+
+.news-img {
+    width: 100%;
+    height:calc((80% - 20% - 97px)/2);
 }
 
 .row-fluid {

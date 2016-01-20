@@ -4,10 +4,11 @@ define('views/EventView', ["Backbone", "config", "jquery", "moment"], function (
     var EventView = Backbone.View.extend({
 
         tagName: "div",
-        className: "news-container row-fluid",
+        className: "news-container row-fluid news-img",
 
         initialize: function(options) {
-            this.template = _.template('<img src="<%= img %>" class="img-responsive"/><div class="news-title"><%= title %></div>');
+           // this.template = _.template('<img src="<%= img %>" class="img-responsive"/><div class="news-title"><%= title %></div>');
+             this.template = _.template('<div class="news-img" style="background-image:url(<%= img %>);" /><div class="news-title"><%= title %></div>');
             this.listenTo(this.model, "change", this.render);
         },
 

@@ -19,6 +19,8 @@
     <script src="./static/bower_components/html5shiv/dist/html5shiv.js"></script>
     <script src="./static/bower_components/respond/respond.src.js"></script>
     <![endif]-->
+
+  
 </head>
 
 <body>
@@ -43,12 +45,7 @@
 
     <span class="current-time jsb_ jsb_views/CurrentTimeView"></span>
 
-    <div class="container free-rooms">
-        <h2>Freie Räume</h2>
-        <div class="jsb_ jsb_views/FreeRoomCollectionView">
-        </div>
-        <div class="next-local-traffic"><h3>Nächste ÖPNV-Verbindungen</h3> <span class="jsb_ jsb_views/NextTransportView"></span></div>
-    </div>
+   
 
     <div class="container current-content">
 		<!--
@@ -100,13 +97,22 @@
         </div>
 
     </div>
+
+
 </div>
+
+<div class="container free-rooms">
+        <h2>Freie Räume</h2>
+        <div class="jsb_ jsb_views/FreeRoomCollectionView">
+        </div>
+        <div class="next-local-traffic"><h3>Nächste ÖPNV-Verbindungen</h3> <span class="jsb_ jsb_views/NextTransportView"></span></div>
+    </div>
 
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="./static/bower_components/requirejs/require.js"></script>
 <script src="./static/js/main.js"></script>
-
+  <script src="./static/js/collections/getheight.js"></script>
 </body>
 </html>

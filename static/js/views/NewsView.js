@@ -8,6 +8,7 @@ define('views/NewsView', ["Backbone", "config", "jquery", "moment"], function (B
 
         initialize: function(options) {
             this.template = _.template('<img src="<%= img %>" class="img-responsive"/><div class="news-title"><%= title %></div>');
+           
             this.listenTo(this.model, "change", this.render);
         },
 
