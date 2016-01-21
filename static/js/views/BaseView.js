@@ -23,7 +23,16 @@ define('views/BaseView', ["Backbone"], function (Backbone) {
              * skaliert Neuigkeiten und Veranstaltungen, so dass diese entsprechend Platz des Containers haben
              * und diesen zu gleichen Teilen vereinnehmen
              */
-            var comp_height= ($("body").height() - $(".free-rooms").outerHeight() - 250)/2;
+
+            /* FIXME: hack damit das bei split nicht benutzt wird! hier wäre besseres CSS besser. */
+            /* TODO: substitute heading variable with calculated one */
+            if (document.location.toString().indexOf('split.html') === -1) {
+                var heading = 250;
+            }else{
+                var heading = 32;
+            }
+
+            var comp_height= ($("body").outerHeight() - $(".free-rooms").outerHeight() - heading)/2;
             $(".row-fluid").css("height", comp_height+'px');
         }
     });

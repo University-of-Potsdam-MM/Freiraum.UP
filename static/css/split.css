@@ -1,3 +1,8 @@
+body {
+    height: 240px;
+    overflow: hidden;
+}
+
 .container.current-content {
     position: fixed;
     top: 0;
@@ -161,6 +166,10 @@ td.js_journey_time_relative {
     font-size: 1em;
     border: 1px solid #d0dae3;
     max-height: 104px;
+}
+
+.news-container {
+    border: 0;
 }
 
 .js_headline, .js_news_headline, .js_tweets_headline, .js_ads_headline {

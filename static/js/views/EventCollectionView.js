@@ -15,13 +15,6 @@ define('views/EventCollectionView', ["Backbone", "config", "jquery", "views/Base
             var newsBody = $(this.el).find('.js_news_body');
             newsBody.empty();
 
-            /* FIXME: hack damit das bei split nicht benutzt wird! hier wäre besseres CSS besser. */
-/*
-            if (document.location.toString().indexOf('split.html') === -1) {
-                newsBody.css('height', 'calc(50% - ' + ($('.free-rooms').outerHeight() + 38 + 100) + 'px)');
-                newsBody.css('margin-bottom', '0');
-            }
-*/
             eventsCollection.forEach(function(event) {
                 var view = new EventView({"model": event});
                 newsBody.append(view.render().el);
