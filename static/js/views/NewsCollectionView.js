@@ -32,7 +32,7 @@ define('views/NewsCollectionView', ["Backbone", "config", "jquery", "views/BaseV
             } else {
                 $(this.el).addClass('is-hidden');
             }
-
+            BaseView.prototype.scaleView()
             return this;
         }
     });

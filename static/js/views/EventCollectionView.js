@@ -32,13 +32,10 @@ define('views/EventCollectionView', ["Backbone", "config", "jquery", "views/Base
             } else {
                 $(this.el).addClass('is-hidden');
             }
-
+            BaseView.prototype.scaleView()
             return this;
         }
     });
 
     return EventCollectionView;
 });
-
-
-

@@ -16,10 +16,17 @@ define('views/BaseView', ["Backbone"], function (Backbone) {
                 options = domElement || {};
             }
             Backbone.View.apply(this, [options]);
+        },
+
+        scaleView: function(){
+            /*
+             * skaliert Neuigkeiten und Veranstaltungen, so dass diese entsprechend Platz des Containers haben
+             * und diesen zu gleichen Teilen vereinnehmen
+             */
+            var comp_height= ($("body").height() - $(".free-rooms").outerHeight() - 250)/2;
+            $(".row-fluid").css("height", comp_height+'px');
         }
     });
 
     return BaseView;
 });
-
-
