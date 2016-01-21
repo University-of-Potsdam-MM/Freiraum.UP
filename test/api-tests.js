@@ -138,7 +138,7 @@ describe('collections/transports', function() {
 
 describe('collections/events', function() {
     it('should contain all events', function(done) {
-        this.timeout(10000); /* dieses feed ist wirklich sehr langsam */
+        this.timeout(20000); /* dieses feed ist wirklich sehr langsam */
         var events = requirejs('collections/events');
         events.fetch({
             "success": function() {
@@ -156,7 +156,7 @@ describe('collections/events', function() {
 
 describe('collections/news', function() {
     it('should contain all news', function(done) {
-        this.timeout(10000); /* dieses feed ist wirklich sehr langsam */
+        this.timeout(20000); /* dieses feed ist wirklich sehr langsam */
         var news = requirejs('collections/news');
         news.fetch({
             "success": function() {
