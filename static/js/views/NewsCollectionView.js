@@ -4,6 +4,7 @@ define('views/NewsCollectionView', ["Backbone", "config", "jquery", "views/BaseV
     var NewsCollectionView = BaseView.extend({
 
         initialize: function() {
+            $(window).on("resize",this.scaleView)
             if (!config.get('news_per_page')) throw new Error('Missing config.news_per_page attribute for EventCollectionView');
 
             this.listenTo(newsCollection, "update", this.render);
