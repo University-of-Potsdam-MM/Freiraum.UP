@@ -13,7 +13,7 @@ define('views/NewsView', ["Backbone", "config", "jquery", "moment"], function (B
         },
 
         initialize: function(options) {
-            this.template = _.template('<div class="news-title"><%= title %></div>');
+            this.template = _.template('<div class="news-title"><%= title %> (<%= publishedTimestamp %>)</div>');
             this.listenTo(this.model, "change", this.render);
         },
 

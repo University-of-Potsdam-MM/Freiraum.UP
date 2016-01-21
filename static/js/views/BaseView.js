@@ -27,7 +27,7 @@ define('views/BaseView', ["Backbone"], function (Backbone) {
             /* FIXME: hack damit das bei split nicht benutzt wird! hier wäre besseres CSS besser. */
             /* TODO: substitute heading variable with calculated one */
             if (document.location.toString().indexOf('split.html') === -1) {
-                var heading = 250;
+                var heading = 280;
             }else{
                 var heading = 32;
             }
