@@ -1,7 +1,7 @@
 html, body {
     /*zoom: 2;*/
     height:100%;
-
+    overflow:hidden;
 }
 
 tr td em {
@@ -56,12 +56,13 @@ tr td em {
     text-transform: uppercase;
     color: #014260;
     font-weight: bold;
-    font-size: 1.6em;
+    font-size: 1.2em;
 }
 
 .btn.btn-success {
 	border-radius:0;
 	border-width:0;
+    zoom: 1.5;
 }
 
 
