@@ -1,5 +1,4 @@
 html, body {
-    /*zoom: 2;*/
     height:100%;
     overflow:hidden;
 }
@@ -13,11 +12,6 @@ tr td em {
 .table tbody > tr > td,
 .table thead > tr > th {
     padding: 2px;
-    /*line-height: 0.6;*/
-}
-
-.table tbody > tr > td {
-    /*line-height: 0.6;*/
 }
 
 .table thead th {
@@ -39,7 +33,9 @@ tr td em {
     right: 0;
     font-size: 200%;
     bottom: 0;
-    zoom: 150%;
+    zoom: 1.5;
+    -moz-transform: scale(1.5);
+    -moz-transform-origin: 0 0;
 
     background-color: #fff;
     position: fixed;
@@ -63,8 +59,9 @@ tr td em {
 	border-radius:0;
 	border-width:0;
     zoom: 1.5;
+    -moz-transform: scale(1.5);
+    -moz-transform-origin: 0 0;
 }
-
 
 .progress {
     height: 15px;
@@ -146,7 +143,7 @@ tr td em {
     bottom: 10px;
     right: 10px;
     position: absolute;
-   
+
 }
 
 .news-container.is-highlighted:after {
@@ -154,16 +151,13 @@ tr td em {
 
     background-image:url(../img/marker.svg);
     background-repeat:no-repeat;
-   
     height:100%;
     display:block;
-
 }
 
 .news-container {
     border-top: 10px solid #014260;
     position: relative;
-
     overflow: visible;
 }
 
@@ -174,7 +168,9 @@ tr td em {
     background-position: center;
 }
 
-.img-responsive{margin:0 auto}
+.img-responsive{
+    margin:0 auto
+}
 
 .news-td {
     background-size: cover;
@@ -239,7 +235,6 @@ tr td em {
 .js_journeys_tbody {
 	font-size:1.3em;
 }
-
 
 .js_journeys_tbody td {
 	line-height:2em !important;
@@ -308,7 +303,6 @@ th.js_journeys_headline  {
 
 .js_body {
     width: 100%;
-
 }
 
 .page-headline {
