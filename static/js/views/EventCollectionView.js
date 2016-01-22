@@ -3,7 +3,8 @@ define('views/EventCollectionView', ["Backbone", "config", "jquery", "views/Base
 
     var EventCollectionView = BaseView.extend({
 
-        initialize: function(options) {
+        initialize: function() {
+            $(window).on("resize",this.scaleView)
             if (!config.get('news_per_page')) throw new Error('Missing config.news_per_page attribute for EventCollectionView');
 
             this.options = options || {};
@@ -14,22 +15,13 @@ define('views/EventCollectionView', ["Backbone", "config", "jquery", "views/Base
         },
 
         render: function() {
-            var that = this;
-            var tr = $(this.el);
 
-            var newsTableBody = $(this.el).find('.js_news_tbody');
-            var newsTable = $(this.el).find('.js_news');
-
-            newsTableBody.empty();
-            /* FIXME: hack damit das bei split nicht benutzt wird! hier wäre besseres CSS besser. */
-            if (document.location.toString().indexOf('split.html') === -1) {
-                newsTable.css('height', 'calc(90% - ' + ($('.free-rooms').outerHeight() + 38 + 100) + 'px)');
-                newsTable.css('margin-bottom', '0');
-            }
+            var newsBody = $(this.el).find('.js_news_body');
+            newsBody.empty();
 
             eventsCollection.slice(this.options.offset, this.options.offset + config.get('news_per_page')).forEach(function(event) {
-                var view = new EventView({"model": event, "tagName": "tr"});
-                newsTableBody.append(view.render().el);
+                var view = new EventView({"model": event});
+                newsBody.append(view.render().el);
             });
 
             if (eventsCollection.length) {
@@ -37,13 +29,10 @@ define('views/EventCollectionView', ["Backbone", "config", "jquery", "views/Base
             } else {
                 $(this.el).addClass('is-hidden');
             }
-
+            BaseView.prototype.scaleView()
             return this;
         }
     });
 
     return EventCollectionView;
 });
-
-
-

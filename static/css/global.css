@@ -1,5 +1,6 @@
-body {
-    /*zoom: 2;*/
+html, body {
+    height:100%;
+    overflow:hidden;
 }
 
 tr td em {
@@ -11,11 +12,6 @@ tr td em {
 .table tbody > tr > td,
 .table thead > tr > th {
     padding: 2px;
-    /*line-height: 0.6;*/
-}
-
-.table tbody > tr > td {
-    /*line-height: 0.6;*/
 }
 
 .table thead th {
@@ -35,12 +31,12 @@ tr td em {
 .free-rooms {
     left: 0;
     right: 0;
-    padding-bottom: 10px;
-    position: fixed;
+    font-size: 200%;
     bottom: 0;
-    z-index: 100;
+
     background-color: #fff;
-    zoom:150%;
+    position: fixed;
+    padding-bottom: 10px;
     padding-left:5px;
     padding-right:5px;
     -webkit-box-shadow: 0px -4px 3px -2px rgba(171,171,171,1);
@@ -53,14 +49,17 @@ tr td em {
     text-transform: uppercase;
     color: #014260;
     font-weight: bold;
-    font-size: 1.6em;
+    font-size: 2em;
 }
 
 .btn.btn-success {
 	border-radius:0;
 	border-width:0;
+    width: 120px;
+    height: 70px;
+    font-size: 1.5em;
+    line-height: 60px;
 }
-
 
 .progress {
     height: 15px;
@@ -114,8 +113,12 @@ tr td em {
     padding:.05em;
 }
 
-.container {
+.container{
     width: 100%;
+}
+
+#mainframe {
+    overflow: hidden;
 }
 
 .js_news {
@@ -129,7 +132,7 @@ tr td em {
     padding: 5px;
     background-color: #fff;
     opacity:.9;
-    font-size: 3em;
+    font-size: 2.5em;
     max-width: 80%;
     display: block;
     color:#014260;
@@ -138,11 +141,33 @@ tr td em {
     bottom: 10px;
     right: 10px;
     position: absolute;
+
 }
 
-.js_news_tbody tr + tr {
+.news-container.is-highlighted:after {
+    content:".";
 
+    background-image:url(../img/marker.svg);
+    background-repeat:no-repeat;
+    height:100%;
+    display:block;
+}
+
+.news-container {
     border-top: 10px solid #014260;
+    position: relative;
+    overflow: visible;
+}
+
+.row-fluid {
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+
+.img-responsive{
+    margin:0 auto
 }
 
 .news-td {
@@ -192,7 +217,7 @@ tr td em {
 .next-local-traffic h3 {
 	margin-top:10px;
 	margin-bottom:0;
-	font-size:1em;
+	font-size:1.5em;
 	color:#014260;
 	text-transform:uppercase;
 	font-weight:bold;
@@ -208,7 +233,6 @@ tr td em {
 .js_journeys_tbody {
 	font-size:1.3em;
 }
-
 
 .js_journeys_tbody td {
 	line-height:2em !important;
@@ -277,7 +301,6 @@ th.js_journeys_headline  {
 
 .js_body {
     width: 100%;
-    
 }
 
 .page-headline {
@@ -332,4 +355,19 @@ th.js_journeys_headline  {
 	font-weight:bold;
 	color:#014260;
 	font-size:1.5em;
+}
+
+
+/* Twitter */
+
+.footer.customisable-border {
+    display:none !important;
+}
+
+.footer.customisable-border .tweet-actions {
+    display:none !important;
+}
+
+.footer.customisable-border .tweet-actions li {
+    text-indent:-540000px;
 }

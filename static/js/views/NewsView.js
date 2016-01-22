@@ -3,20 +3,22 @@ define('views/NewsView', ["Backbone", "config", "jquery", "moment"], function (B
 
     var NewsView = Backbone.View.extend({
 
-        tagName: "tr",
+        tagName: "div",
+        className: "news-container row-fluid",
+
+         attributes: function(){
+            return {
+                style: "background-image:url('"+ this.model.get('imageSrc')+"');"
+            };
+        },
 
         initialize: function(options) {
+            this.template = _.template('<div class="news-title"><%= title %> (<%= publishedTimestamp %>)</div>');
             this.listenTo(this.model, "change", this.render);
         },
 
         render: function() {
-            var that = this;
-            var tr = $(this.el);
-
-            tr.html('<td class="news-td" colspan="2"><div class="news-title">Das ist der Titel</div></td>');
-            tr.find('td').css('background-image', 'url(\'' + this.model.get('imageSrc') + '\')');
-            tr.find('.news-title').text(this.model.get('title') + ' (' + moment(this.model.get('publishedTimestamp')).format('DD.MM.YYYY') + ')');
-
+            this.$el.html(this.template({title: this.model.get('title'), publishedTimestamp: moment(this.model.get('publishedTimestamp')).format('DD.MM.YYYY')}));
             return this;
         }
     });
