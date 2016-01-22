@@ -5,7 +5,6 @@ define('models/NewsCollection', ["Backbone", "jquery", "config", "moment", "mode
 
         initialize: function(models, attributes) {
             if (!config.get('news_rss_feed_url')) throw new Error('Missing config.news_rss_feed_url attribute for NewsCollection');
-            if (!config.get('news_per_page')) throw new Error('Missing config.news_per_page attribute for NewsCollection');
         },
 
         isValid: function(rssItem) {
@@ -14,10 +13,6 @@ define('models/NewsCollection', ["Backbone", "jquery", "config", "moment", "mode
 
         getFeedUrl: function() {
             return config.get('news_rss_feed_url');
-        },
-
-        getMaxResults: function() {
-            return config.get('news_per_page');
         },
 
         comparator: function(a, b) {

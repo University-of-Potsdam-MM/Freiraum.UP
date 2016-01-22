@@ -16,7 +16,7 @@ define('models/BaseRssCollection', ["Backbone", "jquery", "config", "moment", "m
                 } else {
                     var rawEvents = that.parseNewsResponse(xmlResponseString);
 
-                    that.reset(rawEvents.slice(0, that.getMaxResults()));
+                    that.reset(rawEvents);
                     that.trigger('update');
 
                     if (options.success) {

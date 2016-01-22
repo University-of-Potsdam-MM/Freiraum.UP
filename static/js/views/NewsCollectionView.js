@@ -3,8 +3,11 @@ define('views/NewsCollectionView', ["Backbone", "config", "jquery", "views/BaseV
 
     var NewsCollectionView = BaseView.extend({
 
-        initialize: function() {
+        initialize: function(options) {
             if (!config.get('news_per_page')) throw new Error('Missing config.news_per_page attribute for EventCollectionView');
+
+            this.options = options || {};
+            this.options.offset = parseInt(this.options.offset || "0", 10);
 
             this.listenTo(newsCollection, "update", this.render);
             this.render();
@@ -24,7 +27,7 @@ define('views/NewsCollectionView', ["Backbone", "config", "jquery", "views/BaseV
                 newsTable.css('margin-bottom', '0');
             }
 
-            newsCollection.slice(0, config.get('news_per_page')).forEach(function(event) {
+            newsCollection.slice(this.options.offset, this.options.offset + config.get('news_per_page')).forEach(function(event) {
                 var view = new NewsView({"model": event, "tagName": "tr"});
                 newsTableBody.append(view.render().el);
             });
