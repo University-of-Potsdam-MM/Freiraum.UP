@@ -49,6 +49,8 @@ Die App beinhaltet direkt eine `config.json`.
 	"twitter_widget_id": "627066449773875201", // die Twitter Widget ID von https://twitter.com/settings/widgets
 	"event_location": "Uni-Komplex Am Neuen Palais", // Wenn bei Events der Veranstaltungsort übereinstimmt, wird die Veranstaltung mit gehighlighted
 	"force_page": null, // kann erzwingen, dass nur eine Seite angezeigt wird. Sollte per ?page= ondemand überschrieben werden.
+    "switch_on_at": "06:00", // wann schaltet sich das panel an?
+    "switch_off_at": "22:00", // wann schaltet sich das panel ab?
 	"ads": [
 		"one.html", // welche werbug als erstes angezeigt wird
 		"two.html" // welche werbung als nächstes angezeigt wird
@@ -119,7 +121,7 @@ Hier einige User die ich mir bei dem Konzeptionieren des Panels überlegt habe.
   - `static/img/*.*` - vom CSS verwendete Bilder
   - `static/js/models/*.js` - die Backbone-Models
   - `static/js/collections/*.js` - die Singletons für instanzierte Backbone-Collections
-  - `static/js/views/*.js` - die Backbone-Views
+  - `static/js/views/*.js` - die Backbone-Views + `NightSwitchView.js`
   - `static/js/main.js` - die Konfiguration für externe JS-Libraries (z.B. momentjs)
   - `static/js/config.js` - der Singleton für die Config
   - `config.json` - die Config für diese Panelinstallation
@@ -320,6 +322,20 @@ oder neu definiert, was für die `split.html` zuständig ist.
 Der Aufruf funktioniert analog zu index.html, jedoch mit `page=2`, da blättern nicht gewünscht ist:
 
     /split.html?campus=3&house=6&page=2
+
+## Nachtmodus für das Panel
+
+Im `split.html` ist `views/NightSwitchView.js` inkludiert. Dadurch kann via:
+
+``` json
+{
+    "switch_on_at": "06:00",
+    "switch_off_at": "22:00",
+}
+```
+
+in der Config.json eingestellt werden, wann sich das Panel schwarz schaltet. Das passiert über die `is-switched-off`
+CSS Klasse, welche in der `global.css` für body definiert ist.
 
 ## Api-Tests
 

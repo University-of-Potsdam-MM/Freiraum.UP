@@ -371,3 +371,8 @@ th.js_journeys_headline  {
 .footer.customisable-border .tweet-actions li {
     text-indent:-540000px;
 }
+
+body.is-switched-off {
+    visibility: hidden;
+    background-color: #000;
+}
