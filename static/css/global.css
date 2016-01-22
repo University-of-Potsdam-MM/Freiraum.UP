@@ -33,9 +33,6 @@ tr td em {
     right: 0;
     font-size: 200%;
     bottom: 0;
-    zoom: 1.5;
-    -moz-transform: scale(1.5);
-    -moz-transform-origin: left bottom;
 
     background-color: #fff;
     position: fixed;
@@ -52,16 +49,16 @@ tr td em {
     text-transform: uppercase;
     color: #014260;
     font-weight: bold;
-    font-size: 1.2em;
+    font-size: 2em;
 }
 
 .btn.btn-success {
 	border-radius:0;
 	border-width:0;
-    width: 80px;
-    height: 40px;
-    font-size: 25px;
-    line-height: 30px;
+    width: 120px;
+    height: 70px;
+    font-size: 1.5em;
+    line-height: 60px;
 }
 
 .progress {
@@ -220,7 +217,7 @@ tr td em {
 .next-local-traffic h3 {
 	margin-top:10px;
 	margin-bottom:0;
-	font-size:1em;
+	font-size:1.5em;
 	color:#014260;
 	text-transform:uppercase;
 	font-weight:bold;
