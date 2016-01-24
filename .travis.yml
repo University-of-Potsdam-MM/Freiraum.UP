@@ -6,6 +6,3 @@ before_script:
   - node_modules/.bin/json -E "this.authorization='$AUTHORIZATION_HEADER'" -f config.json -I
 node_js:
   - "4.2.4"
-env:
-  global:
-    secure: FsHObWyz9fzT9JGbdEqJ3wBdNGL3HQl5V4NXqpHsKhHekjWe5K1kgnwDrInPsUB965mDoEnEhlyNAtnrZLYRRfaeQcRd2N38EJ/RbyR7Qjz2h2Tm6svB8YE78/KX+P6IqtZ6AS+t8fkhdT+I3H0Suwys96Y5/xCyVe7waTKPFGo=
