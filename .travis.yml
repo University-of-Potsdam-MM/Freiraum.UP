@@ -3,6 +3,6 @@ sudo: false
 before_script:
   - cp config-dist.json config.json
   - npm install json
-  - node_modules/.bin/json -E "this.authorization='$AUTHORIZATION_HEADER'" -f config.json -I
+  - node_modules/.bin/json -E "this.authorization='Bearer $BEARER_TOKEN'" -f config.json -I
 node_js:
   - "4.2.4"
