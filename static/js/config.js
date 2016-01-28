@@ -9,10 +9,6 @@ define('config', ["Backbone"], function (Backbone) {
             var that = this;
             this.fetch({async:false});
 
-            if (!this.get('now')) {
-                this.set('now', new Date().toUTCString());
-            }
-
             if (typeof this.force_page === "undefined") {
                 this.set('force_page', null);
             }
@@ -21,13 +17,12 @@ define('config', ["Backbone"], function (Backbone) {
 
             setInterval(function() {
                 that.refreshTime();
-            }, that.get('rooms_update_frequency') * 1000);
+            }, that.get('rooms_update_frequency') * 100);
         },
 
         refreshTime: function(){
-            console.log('update triggered');
-            console.log(this);
-            var now = new Date(this.get('now'));
+
+            var now = new Date();
             now.setHours(Math.floor(now.getHours() / 2) * 2);
             now.setMinutes(0);
             now.setSeconds(0);
