@@ -9,15 +9,11 @@ define('config', ["Backbone"], function (Backbone) {
             var that = this;
             this.fetch({async:false});
 
-            if (typeof this.force_page === "undefined") {
-                this.set('force_page', null);
-            }
-
             this.refreshTime();
 
             setInterval(function() {
                 that.refreshTime();
-            }, that.get('rooms_update_frequency') * 100);
+            }, that.get('rooms_update_frequency') * 60000);
         },
 
         refreshTime: function(){
