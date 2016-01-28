@@ -13,7 +13,7 @@ define('views/EventView', ["Backbone", "config", "jquery", "moment"], function (
         },
 
         initialize: function(options) {
-            this.template = _.template('<div class="news-title"><%= title %> (<%= location %> <%= publishedTimestamp %>)</div>');
+            this.template = _.template('<div class="news-title"><%= title %> (<%= location %> <%= updatedTimestamp %>)</div>');
             this.listenTo(this.model, "change", this.render);
         },
 
@@ -33,7 +33,7 @@ define('views/EventView', ["Backbone", "config", "jquery", "moment"], function (
                 this.$el.addClass('is-highlighted');
             }
 
-            this.$el.html(this.template({title: this.model.get('title'), location: location, publishedTimestamp: moment(this.model.get('publishedTimestamp')).format('DD.MM.YYYY')}));
+            this.$el.html(this.template({title: this.model.get('title'), location: location, updatedTimestamp: moment(this.model.get('updatedTimestamp')).format('DD.MM.YYYY')}));
             return this;
         }
     });

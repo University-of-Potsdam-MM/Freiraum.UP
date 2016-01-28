@@ -13,12 +13,12 @@ define('views/NewsView', ["Backbone", "config", "jquery", "moment"], function (B
         },
 
         initialize: function(options) {
-            this.template = _.template('<div class="news-title"><%= title %> (<%= publishedTimestamp %>)</div>');
+            this.template = _.template('<div class="news-title"><%= title %> (<%= updatedTimestamp %>)</div>');
             this.listenTo(this.model, "change", this.render);
         },
 
         render: function() {
-            this.$el.html(this.template({title: this.model.get('title'), publishedTimestamp: moment(this.model.get('publishedTimestamp')).format('DD.MM.YYYY')}));
+            this.$el.html(this.template({title: this.model.get('title'), updatedTimestamp: moment(this.model.get('updatedTimestamp')).format('DD.MM.YYYY')}));
             return this;
         }
     });
