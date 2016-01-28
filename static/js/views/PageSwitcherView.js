@@ -50,7 +50,7 @@ define('views/PageSwitcherView', ['jquery', "config", "moment", "views/BaseView"
 
                 do {
                     this.current_page = this.current_page + 1;
-                    console.log('FINDING NEXT PAGE for', initial_current_page, ' and testing ', this.current_page);
+                    //console.log('FINDING NEXT PAGE for', initial_current_page, ' and testing ', this.current_page);
                     if (this.pages.length == this.current_page)
                     {
                         this.current_page = 0;
@@ -58,7 +58,7 @@ define('views/PageSwitcherView', ['jquery', "config", "moment", "views/BaseView"
 
                 } while ($(this.pages[this.current_page]).hasClass('is-hidden') && initial_current_page !== this.current_page);
 
-                console.log('NEXT PAGE after', initial_current_page, 'is now', this.current_page);
+                //console.log('NEXT PAGE after', initial_current_page, 'is now', this.current_page);
 
                 this.showCurrentPage();
 

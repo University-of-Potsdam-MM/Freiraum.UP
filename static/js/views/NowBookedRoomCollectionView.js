@@ -13,7 +13,7 @@ define('views/NowBookedRoomCollectionView', ["jquery", "config", "views/BaseView
 
         render: function() {
             var that = this;
-
+            console.log('render booked rooms');
             $(this.el).find('.js_headline').text('Jetzt (' + config.get('now').toLocaleTimeString().replace(/:\d\d$/g, '') + ' - ' + config.get('soon').toLocaleTimeString().replace(/:\d\d$/g, '') + ' Uhr)');
 
             var listBody = $(this.el).find('.js_body');

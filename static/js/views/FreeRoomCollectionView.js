@@ -13,6 +13,7 @@ define('views/FreeRoomCollectionView', ["jquery", "config", "views/BaseView", "c
 
         render: function() {
             var that = this;
+            console.log('render free rooms');
 
             $(this.el).empty();
 
