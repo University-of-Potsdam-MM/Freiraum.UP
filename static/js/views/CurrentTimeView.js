@@ -6,6 +6,7 @@ define('views/CurrentTimeView', ['jquery', "config", "moment", "views/BaseView"]
 
             that.render();
             setInterval(function() {
+                config.refreshTime();
                 that.render();
             }, 1000);
         },

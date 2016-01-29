@@ -10,10 +10,6 @@ define('config', ["Backbone"], function (Backbone) {
             this.fetch({async:false});
 
             this.refreshTime();
-
-            setInterval(function() {
-                that.refreshTime();
-            }, that.get('rooms_update_frequency') * 60000);
         },
 
         refreshTime: function(){
