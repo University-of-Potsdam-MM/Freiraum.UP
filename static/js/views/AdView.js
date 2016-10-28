@@ -3,9 +3,10 @@ define('views/AdView', ["jquery", "config", "views/BaseView"], function ($, conf
 
     var AdView = BaseView.extend({
 
-        initialize: function() {
+        initialize: function(options) {
             var that = this;
-            this.currentIndex = 0;
+            this.currentIndex = (options) ? options.index : 0;
+
             if (!config.get('ads')) throw new Error('Missing config.ads attribute for AdView');
 
             if (config.get('ads').length == 0) {
@@ -13,7 +14,7 @@ define('views/AdView', ["jquery", "config", "views/BaseView"], function ($, conf
             }
 
             jsb.whenFired('PageSwitcherView::SHOW_PAGE', function(values) {
-                if (values.id === 'ad-view') {
+                if (that.currentIndex === values.id) {
                     that.render();
                 } else {
                     $(that.el).empty();
@@ -44,5 +45,3 @@ define('views/AdView', ["jquery", "config", "views/BaseView"], function ($, conf
 
     return AdView;
 });
-
-
