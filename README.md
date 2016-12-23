@@ -3,13 +3,13 @@
 - Build Status: [![Build Status](https://travis-ci.org/University-of-Potsdam-MM/rooms.svg)](https://travis-ci.org/University-of-Potsdam-MM/rooms)
 
 ### Table of Contents
-**[Entwicklungsumgebung aufsetzen](#entwicklungsumgebung-aufsetzen)**  
-**[Release für den Server vorbereiten](#release-für-den-Server-vorbereiten)**  
-**[Konfiguration](#konfiguration)**  
-**[Anforderungen](#anforderungen)**  
-**[Architektur](#architektur)**  
-**[Technologien der Webanwendung](#technologien-der-Webanwendung)**  
-**[Nächste Schritte, Credits, Feedback, Lizenz](#next-steps)**  
+**[Entwicklungsumgebung aufsetzen](#entwicklungsumgebung-aufsetzen)**
+**[Release für den Server vorbereiten](#release-für-den-Server-vorbereiten)**
+**[Konfiguration](#konfiguration)**
+**[Anforderungen](#anforderungen)**
+**[Architektur](#architektur)**
+**[Technologien der Webanwendung](#technologien-der-Webanwendung)**
+**[Nächste Schritte, Credits, Feedback, Lizenz](#next-steps)**
 
 
 ## Entwicklungsumgebung aufsetzen
@@ -36,9 +36,10 @@ Die App beinhaltet direkt eine `config.json`.
     "authorization": "Bearer xxxxxxx", // Das Token, von api.uni-potsdam.de
     "campus": 3, // Auf welchem Campus hängt das Panel?
     "house": 6, // In welchem Haus hängt das Panel?
+    "level": 0, // In welcher Etage hängt das Panel?
     "station_id": "009230003#86", // ID der Station für die Nahverkehrsinformationen
     "events_rss_feed_url": "https://www.uni-potsdam.de/veranstaltungen/rss-feed-abonnieren/eventfeed/feed/xml.html?tx_upevents_upeventfeed%5Blimit%5D=30&tx_upevents_upeventfeed%5Bcat%5D=&tx_upevents_upeventfeed%5BcatLink%5D=or", // URL zum Rss-Feed der Veranstaltungen der Uni-Potsdam
-    "news_rss_feed_url": "http://www.uni-potsdam.de/nachrichten/rss-feed-abonnieren.html?type=100&tx_ttnews%5Bcat%5D=19", // URL zum Rss-Feed der Nachrichten der Uni-Potsdam 
+    "news_rss_feed_url": "http://www.uni-potsdam.de/nachrichten/rss-feed-abonnieren.html?type=100&tx_ttnews%5Bcat%5D=19", // URL zum Rss-Feed der Nachrichten der Uni-Potsdam
     "news_per_page": 3, // Anzahl der News pro Seite
     "local_traffic_count": 2, // Anzahl der nächsten ÖPNV-Einträge auf allen Seiten
 	"news_update_frequency": 60, // Nach wievielen Sekunden wird das News RSS-Feed neu abgeholt
@@ -169,6 +170,7 @@ FreeRoom | FreeRoomCollection | FreeRoomCollectionView, FreeRoomView | freeRooms
 BookedRoom | BookedRoomCollection | NowBookedRoomCollectionView, SoonBookedRoomCollectionView, BookedRoomView | bookedRooms
 *-* | *-* | TweetsView
 *-* | *-* | AdView
+*-* | *-* | EscapePlanView
 
 
 Zusätzlich gibt es noch die `BaseRssCollection` (als Basis für `News`+`EventCollection`), sowie die `BaseView` als Basis für

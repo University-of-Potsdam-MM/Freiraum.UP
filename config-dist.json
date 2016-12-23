@@ -4,6 +4,7 @@
     "authorization": "",
     "campus": 3,
     "house": 6,
+    "level": 0,
     "event_location": "Uni-Komplex Griebnitzsee",
     "station_id": "009230003#86",
     "events_rss_feed_url": "./eventsProxy.php",
