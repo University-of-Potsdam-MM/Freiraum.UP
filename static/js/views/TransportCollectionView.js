@@ -11,20 +11,18 @@ define('views/TransportCollectionView', ["jquery", "config", "views/BaseView", "
         },
 
         render: function() {
-            var that = this;
-
             var listBody = $(this.el).find('.js_journeys_tbody');
             var journeysHeadline = $(this.el).find('.js_journeys_headline');
 
             listBody.empty();
 
             transportsCollection.forEach(function(transport) {
-                var view = new TransportView({"model": transport, "tagName": "tr"});
+                var view = new TransportView({"model": transport});
                 listBody.append(view.render().el);
             });
 
             if (transportsCollection.length) {
-                journeysHeadline.text('Nahverkehr');
+                journeysHeadline.text('Nahverkehrsverbindungen');
             } else {
                 journeysHeadline.text('Aktuell keine Zug- und Busverbindungen.');
             }
@@ -33,5 +31,3 @@ define('views/TransportCollectionView', ["jquery", "config", "views/BaseView", "
 
     return TransportCollectionView;
 });
-
-

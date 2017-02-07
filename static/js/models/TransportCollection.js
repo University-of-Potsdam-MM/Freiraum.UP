@@ -25,7 +25,25 @@ define('models/TransportCollection', ["Backbone", "jquery", "config", "moment", 
                 } else {
                     var rawTransports = that.parseJourneyListResponse(xmlResponseString);
 
-                    that.reset(rawTransports);
+                    var dateNow = Date.now();
+
+                    var viewTransports = []; //Liste für Angezeigte Verbindungen
+                    var lines = [];         //Zwischenspeicher für Linen
+
+                    //Alle übergebenen Trasporte durchlaufen
+                    for (var i = 0; i < rawTransports.length; i++) {
+
+                        //Eimal pro Line und Richtung in die Liste packen
+                        if($.inArray(rawTransports[i].number+rawTransports[i].direction, lines) == -1){
+                            viewTransports.push(rawTransports[i])
+                            //Und alle Verbindungen in den nächsten fünf Minuten
+                            if(dateNow+300000 < new Date(rawTransports[i].time)){
+                                lines.push(rawTransports[i].number+rawTransports[i].direction)
+                            };
+                        };
+                    }
+                    //Neu Laden
+                    that.reset(viewTransports)
                     that.trigger('update');
 
                     if (options.success) {

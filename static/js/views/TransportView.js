@@ -13,17 +13,21 @@ define('views/TransportView', ["Backbone", "config", "jquery"], function (Backbo
             var that = this;
             var tr = $(this.el);
 
-            tr.html('<td class="js_journey_name"></td><td class="journey_dir_platf"><p class="js_journey_direction"></p><p class="js_journey_platform"></p></td><td class="js_journey_time_absolute"></td><td class="js_journey_time_relative"></td>');
+            // some styling of table rows
+            if (this.model.get('category') == "RB"){
+                this.el.className = "danger";
+            }else if(this.model.get('category') == "S"){
+                this.el.className = "success";
+            }else{
+                this.el.className = "active";
+            }
+
+            tr.html('<td class="js_journey_name vert-align"></td><td class="journey_dir_platf vert-align"><p class="js_journey_direction vert-align"></p></td><td class="js_journey_time_relative vert-align"></td>');
+            
             tr.find('.js_journey_name').text(that.model.get('name'));
             tr.find('.js_journey_name').addClass(that.model.get('category'));
             tr.find('.js_journey_direction').text(that.model.get('direction'));
-            tr.find('.js_journey_time_absolute').text(that.model.get('TimeFormatted'));
             tr.find('.js_journey_time_relative').text(that.model.get('TimeTo'));
-            if (that.model.get('platform')) {
-                tr.find('.js_journey_platform').text('Gleis ' + that.model.get('platform'));
-            } else {
-                tr.find('.js_journey_platform').text(that.model.get('platform'));
-            }
 
             return this;
         }

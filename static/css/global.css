@@ -9,15 +9,6 @@ tr td em {
     color: #AA0000;
 }
 
-.table tbody > tr > td,
-.table thead > tr > th {
-    padding: 2px;
-}
-
-.table thead th {
-    font-size: 15px;
-}
-
 .page-headline {
     width: 100%;
     display: block;
@@ -235,7 +226,7 @@ tr td em {
 }
 
 .js_journeys_tbody td {
-	line-height:2em !important;
+	line-height: 1.8em !important;
 }
 
 th.js_journeys_headline  {
@@ -251,26 +242,31 @@ th.js_journeys_headline  {
 	vertical-align:middle !important;
 }
 
-.journey_dir_platf {
-	width:20em;
-}
-
-.js_journey_direction, .js_journey_name {
+.js_journey_name {
 	font-weight:bold;
-	font-size:1.5em;
+	font-size:2em;
 	color:#014260;
 	line-height:1.2;
 	margin-bottom:0;
+    width: 20%;
 }
 
- .js_journey_time_relative {
+.js_journey_direction {
+    font-weight:bold;
+    font-size: 2em;
+    color:#014260;
+    line-height:1.2;
+    margin-bottom:0;
+}
+
+.js_journey_time_relative {
 	text-align:center;
 }
 
-.js_journey_time_relative,.js_journey_time_absolute {
-	font-size:1.5em;
-	font-weight:bold;
-	color:#014260;
+.js_journey_time_relative, .js_journey_time_absolute {
+	font-size: 2em;
+	font-weight: bold;
+	color: #014260;
 }
 
 .js_journey_name, .js_journey_time_absolute {
@@ -279,23 +275,36 @@ th.js_journeys_headline  {
 .js_journey_name.Bus {
 	background-image:url(../img/bus.png);
 	background-repeat:no-repeat;
-	text-indent:54px;
-	background-position:4px 4px;
+    background-position:10px center;
+    text-align: center;
+    padding-left: 65px;
 }
 
 .js_journey_name.S {
 	background-image:url(../img/sbahn.png);
 	background-repeat:no-repeat;
-	text-indent:54px;
-	background-position:4px 4px;
+    background-position:10px center;
+    text-align: center;
+    padding-left: 65px;
 }
 
 .js_journey_name.RB {
 	background-image:url(../img/regio.png);
 	background-repeat:no-repeat;
-	text-indent:54px;
-	background-position:4px 4px;
+	background-position:10px center;
+    text-align: center;
+    padding-left: 65px;
 }
+
+.table tbody>tr>td.vert-align{
+    vertical-align: middle;
+}
+
+.table > tbody > tr > td {
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
 
 /* NEWS */
 
@@ -307,7 +316,7 @@ th.js_journeys_headline  {
 	padding:0;
 }
 
-.js_headline, .js_news_headline, .js_tweets_headline, .js_ads_headline{
+.js_headline, .js_news_headline, .js_tweets_headline, .js_ads_headline, .js_journeys_headline{
 	display:block;
 	width:100%;
 	font-size:3em !important;
