@@ -4,23 +4,17 @@ define('views/FreeRoomView', ["Backbone", "config", "jquery"], function (Backbon
     var FreeRoomView = Backbone.View.extend({
 
         tagName: "a",
+        className: "btn btn-success",
 
         initialize: function(options) {
             this.listenTo(this.model, "change", this.render);
         },
 
         render: function() {
-            var a_element = $(this.el);
-            a_element.addClass('btn');
-            a_element.addClass('btn-success');
-            a_element.text(this.model.get('room'));
-            a_element.css('margin', '3px');
-
+            $(this.el).text(this.model.get('room'));
             return this;
         }
     });
 
     return FreeRoomView;
 });
-
-
