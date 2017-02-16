@@ -1,4 +1,4 @@
-define('models/BookedRoomCollection', ["Backbone", "jquery", "config", "moment", "models/BookedRoom"], function (Backbone, $, config, moment, BookedRoom) {
+define('collections/BookedRoomCollection', ["Backbone", "jquery", "config", "moment", "models/BookedRoom"], function (Backbone, $, config, moment, BookedRoom) {
     "use strict";
 
     var BookedRoomCollection = Backbone.Collection.extend({
@@ -21,18 +21,15 @@ define('models/BookedRoomCollection', ["Backbone", "jquery", "config", "moment",
             var value = roomA > roomB ? 1 : -1;
 
             /* Put H0, H1, etc at the beginning */
-            if (roomA.substr(0, 1) == 'H' && roomB.substr(0, 1) == 'H')
-            {
+            if (roomA.substr(0, 1) == 'H' && roomB.substr(0, 1) == 'H'){
                 return value;
             }
 
-            if (roomA.substr(0, 1) == 'H' && roomB.substr(0, 1) != 'H')
-            {
+            if (roomA.substr(0, 1) == 'H' && roomB.substr(0, 1) != 'H'){
                 return -1;
             }
 
-            if (roomA.substr(0, 1) != 'H' && roomB.substr(0, 1) == 'H')
-            {
+            if (roomA.substr(0, 1) != 'H' && roomB.substr(0, 1) == 'H'){
                 return 1;
             }
 
@@ -56,8 +53,7 @@ define('models/BookedRoomCollection', ["Backbone", "jquery", "config", "moment",
 
             var room_match = rawBookedRoom.room.match(/^([^\.]+)\.([^\.]+)\.(.+)/);
 
-            if (rawBookedRoom.name && room_match && rawBookedRoom.name != 'Raumreservierung')
-            {
+            if (rawBookedRoom.name && room_match && rawBookedRoom.name != 'Raumreservierung'){
                 rawBookedRoom.campus = parseInt(room_match[1], 10);
                 rawBookedRoom.house = parseInt(room_match[2], 10);
                 rawBookedRoom.room = room_match[3];
@@ -85,10 +81,9 @@ define('models/BookedRoomCollection', ["Backbone", "jquery", "config", "moment",
                     'Authorization': config.get('authorization')
                 },
                 'data': {
-                    'endTime': end_of_soon.toISOString(),
                     'startTime': now.toISOString(),
-                    'campus': config.get('campus'),
-                    'cb': Math.random()
+                    'endTime': end_of_soon.toISOString(),
+                    'campus': config.get('campus')
                 },
                 'dataType': 'xml'
             }).fail(function(response) {
@@ -103,8 +98,7 @@ define('models/BookedRoomCollection', ["Backbone", "jquery", "config", "moment",
                 returns.each(function(pos, bookedRoomXml) {
                     var rawBookedRoom = that.parseBookedRoomXml(bookedRoomXml);
 
-                    if (rawBookedRoom.campus == config.get('campus') && rawBookedRoom.house == config.get('house'))
-                    {
+                    if (rawBookedRoom.campus == config.get('campus') && rawBookedRoom.house == config.get('house')){
                         rawBookedRooms.push(rawBookedRoom);
                     }
                 });

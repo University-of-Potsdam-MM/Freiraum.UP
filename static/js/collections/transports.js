@@ -1,4 +1,4 @@
-define('collections/transports', ["models/TransportCollection", "config"], function (TransportCollection, config) {
+define('collections/transports', ["collections/TransportCollection", "config"], function (TransportCollection, config) {
     "use strict";
 
     var transports = new TransportCollection();

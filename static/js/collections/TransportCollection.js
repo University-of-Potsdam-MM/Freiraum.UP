@@ -1,4 +1,4 @@
-define('models/TransportCollection', ["Backbone", "jquery", "config", "moment", "models/Transport"], function (Backbone, $, config, moment, Transport) {
+define('collections/TransportCollection', ["Backbone", "jquery", "config", "moment", "models/Transport"], function (Backbone, $, config, moment, Transport) {
     "use strict";
 
     var TransportCollection = Backbone.Collection.extend({

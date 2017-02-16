@@ -1,4 +1,4 @@
-define('collections/bookedRooms', ["models/BookedRoomCollection", "config"], function (BookedRoomCollection, config) {
+define('collections/bookedRooms', ["collections/BookedRoomCollection", "config"], function (BookedRoomCollection, config) {
     "use strict";
 
     var bookedRooms = new BookedRoomCollection();
