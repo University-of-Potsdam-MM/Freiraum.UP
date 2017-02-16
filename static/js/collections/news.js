@@ -1,4 +1,4 @@
-define('collections/news', ["models/NewsCollection", "config"], function (NewsCollection, config) {
+define('collections/news', ["collections/NewsCollection", "config"], function (NewsCollection, config) {
     "use strict";
 
     var news = new NewsCollection();

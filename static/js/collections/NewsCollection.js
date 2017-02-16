@@ -1,4 +1,4 @@
-define('models/NewsCollection', ["Backbone", "jquery", "config", "moment", "models/BaseRssCollection"], function (Backbone, $, config, moment, BaseRssCollection) {
+define('collections/NewsCollection', ["Backbone", "jquery", "config", "moment", "collections/BaseRssCollection"], function (Backbone, $, config, moment, BaseRssCollection) {
     "use strict";
 
     var NewsCollection = BaseRssCollection.extend({

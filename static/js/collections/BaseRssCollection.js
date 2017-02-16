@@ -1,4 +1,4 @@
-define('models/BaseRssCollection', ["Backbone", "jquery", "config", "moment", "models/RssItem"], function (Backbone, $, config, moment, RssItem) {
+define('collections/BaseRssCollection', ["Backbone", "jquery", "config", "moment", "models/RssItem"], function (Backbone, $, config, moment, RssItem) {
     "use strict";
 
     var BaseRssCollection = Backbone.Collection.extend({

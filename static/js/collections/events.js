@@ -1,4 +1,4 @@
-define('collections/events', ["models/EventCollection", "config"], function (EventCollection, config) {
+define('collections/events', ["collections/EventCollection", "config"], function (EventCollection, config) {
     "use strict";
 
     var events = new EventCollection();

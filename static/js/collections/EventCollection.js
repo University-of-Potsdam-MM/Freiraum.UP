@@ -1,4 +1,4 @@
-define('models/EventCollection', ["Backbone", "jquery", "config", "moment", "models/BaseRssCollection"], function (Backbone, $, config, moment, BaseRssCollection) {
+define('collections/EventCollection', ["Backbone", "jquery", "config", "moment", "collections/BaseRssCollection"], function (Backbone, $, config, moment, BaseRssCollection) {
     "use strict";
 
     var EventCollection = BaseRssCollection.extend({
