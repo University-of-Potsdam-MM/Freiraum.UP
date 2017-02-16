@@ -4,6 +4,7 @@ define('views/TweetsView', ["jquery", "config", "views/BaseView"], function ($, 
     var TweetsView = BaseView.extend({
 
         initialize: function() {
+            if (!config.get('twitter_widget_id')) throw new Error('Missing twitter_widget_id attribute for TweetsView');
             var that = this;
 
             this.render();
@@ -22,5 +23,3 @@ define('views/TweetsView', ["jquery", "config", "views/BaseView"], function ($, 
 
     return TweetsView;
 });
-
-
