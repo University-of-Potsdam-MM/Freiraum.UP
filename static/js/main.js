@@ -9,11 +9,13 @@ requirejs.config({
         moment: './../bower_components/moment/min/moment-with-locales',
         bootstrap: './../bower_components/bootstrap/dist/js/bootstrap',
         json: './../bower_components/requirejs-plugins/src/json',
-        text: './../bower_components/requirejs-plugins/lib/text'
+        text: './../bower_components/requirejs-plugins/lib/text',
+        underscoreString: './../bower_components/underscore.string/dist/underscore.string',
+        bandClock: './bandClock'
     }
 });
 
-requirejs(['jquery', 'moment'], function($, moment) {
+requirejs(['jquery', 'moment', 'underscore', 'Backbone'], function($, moment, _) {
     function de__processRelativeTime(number, withoutSuffix, key, isFuture) {
         var format = {
             'm': ['eine Min.', 'einer Min.'],
@@ -74,6 +76,8 @@ requirejs(['jquery', 'moment'], function($, moment) {
     });
 
     moment.locale('deShort');
+
+    window.onerror = function(){  return true;}
 
     require(['bootstrap'], function() {
         require(['jsb'], function() {

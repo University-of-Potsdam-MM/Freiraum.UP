@@ -50,6 +50,7 @@ tr td em {
     height: 70px;
     font-size: 1.5em;
     line-height: 60px;
+    margin: 3px;
 }
 
 .progress {
@@ -177,22 +178,15 @@ tr td em {
     background-color: #ffffff;
 }
 
-.current-time {
-    font-size: 1.5em;
-    width: auto;
-    text-align: center;
-    display: block;
-    font-weight: bold;
-    background: #d0dae3;
-    border-radius: 50%;
-    width: 110px;
-    height: 110px;
-    line-height: 100px;
+.bandClock {
     position:absolute;
-    right:10px;
-    top: 9px;
-    border:5px solid #fff;
+    right: 5px;
+    top: 0px;
     z-index:600;
+}
+
+.bandClock canvas {
+    border-radius: 50%;
 }
 
 .tweets {
