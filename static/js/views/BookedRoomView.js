@@ -1,4 +1,4 @@
-define('views/BookedRoomView', ["Backbone", "config", "collections/events"], function (Backbone, config, eventsCollection) {
+define('views/BookedRoomView', ["Backbone", "config", "moment", "collections/events"], function (Backbone, config, moment, eventsCollection) {
     "use strict";
 
     var BookedRoomView = Backbone.View.extend({
@@ -19,7 +19,7 @@ define('views/BookedRoomView', ["Backbone", "config", "collections/events"], fun
                 this.is_highlighted;
             }
 
-            this.$el.html(this.template({name: this.model.get('name'), room: this.model.get('room'), person: this.model.get('shortPersonName'), time: this.model.get('endTimeAsTimeString'), is_time_visible: this.is_time_visible, is_highlighted: this.is_highlighted}));
+            this.$el.html(this.template({name: this.model.get('name'), room: this.model.get('room'), person: this.model.get('shortPersonName'), time: moment(this.model.get('endTime')).format('HH:mm'), is_time_visible: this.is_time_visible, is_highlighted: this.is_highlighted}));
 
             return this;
         }

@@ -1,12 +1,16 @@
-define('collections/BookedRoomCollection', ["Backbone", "jquery", "config", "moment", "models/BookedRoom"], function (Backbone, $, config, moment, BookedRoom) {
+define('collections/BookedRoomCollection', ["Backbone", "jquery", "config", "moment", "underscoreString", "models/BookedRoom"], function (Backbone, $, config, moment, _str, BookedRoom) {
     "use strict";
 
     var BookedRoomCollection = Backbone.Collection.extend({
+
         model: BookedRoom,
 
         initialize: function(models, attributes) {
             if (!config.get('house')) throw new Error('Missing config.house attribute for BookedRoomCollection');
             if (!config.get('campus')) throw new Error('Missing config.campus attribute for BookedRoomCollection');
+
+            // listening for update every quarter hour
+            this.listenTo(config, "change:tillNextUpdate", this.fetch);
         },
 
         comparator: function(a, b) {
@@ -21,6 +25,7 @@ define('collections/BookedRoomCollection', ["Backbone", "jquery", "config", "mom
             var value = roomA > roomB ? 1 : -1;
 
             /* Put H0, H1, etc at the beginning */
+
             if (roomA.substr(0, 1) == 'H' && roomB.substr(0, 1) == 'H'){
                 return value;
             }
@@ -38,79 +43,26 @@ define('collections/BookedRoomCollection', ["Backbone", "jquery", "config", "mom
             return value;
         },
 
-        parseBookedRoomXml: function(bookedRoomXml) {
-            bookedRoomXml = $(bookedRoomXml);
+        url: function(){
+            // Set start and end time
+            var now = config.get('now');
+            var soon = config.get('soon');
+            console.log(now.toISOString(), soon.toISOString());
 
-            var rawBookedRoom = {
-                "name": bookedRoomXml.find('veranstaltung').text().replace(/.+?\/.+? - /, '').replace(/ (I+)[: ].+$/, ' $1'),
-                "start_time": bookedRoomXml.find('startTime').text(),
-                "end_time": bookedRoomXml.find('endTime').text(),
-                "campus": bookedRoomXml.find('roomList > room').text(),
-                "house": bookedRoomXml.find('roomList > room').text(),
-                "room": bookedRoomXml.find('roomList > room').text(),
-                "person_name": bookedRoomXml.find('personList > person:first').text()
-            };
-
-            var room_match = rawBookedRoom.room.match(/^([^\.]+)\.([^\.]+)\.(.+)/);
-
-            if (rawBookedRoom.name && room_match && rawBookedRoom.name != 'Raumreservierung'){
-                rawBookedRoom.campus = parseInt(room_match[1], 10);
-                rawBookedRoom.house = parseInt(room_match[2], 10);
-                rawBookedRoom.room = room_match[3];
-
-                /* Because sometimes there double escaped XML entities in the response ... */
-                //rawBookedRoom.name = $('<textarea/>').html(rawBookedRoom.name).val();;
-            };
-
-            return rawBookedRoom;
+            var request = config.get('base_url') + 'reservations?format=json&startTime=%s&endTime=%s&campus=%d&building=%s';
+            return _str.sprintf(request, encodeURIComponent(now.toISOString()), encodeURIComponent(soon.toISOString()), config.get('campus'), config.get('house'));
         },
 
-        fetch: function(options) {
-            options = options || {};
-            var that = this;
-
-            var now = config.get('now');
-            var soon = new Date();
-            soon.setTime(now.getTime() + 2 * 60 * 60 * 1000);
-            var end_of_soon = new Date();
-            end_of_soon.setTime(soon.getTime() + 2 * 60 * 60 * 1000);
-
-            $.ajax({
-                'url': config.get('base_url') + 'reservations',
-                headers: {
-                    'Authorization': config.get('authorization')
-                },
-                'data': {
-                    'startTime': now.toISOString(),
-                    'endTime': end_of_soon.toISOString(),
-                    'campus': config.get('campus')
-                },
-                'dataType': 'xml'
-            }).fail(function(response) {
-                if (options.error) {
-                    options.error();
+        parse: function(response){
+            // only use rooms with valid title or name
+            var filtered = response.reservationsResponse["return"].filter(
+                function isVeranstaltung(value){
+                    return (value.veranstaltung && value.veranstaltung != 'Raumreservierung');
                 }
-            }).done(function (response) {
-                var returns = $(response).find('return');
-
-                var rawBookedRooms = [];
-
-                returns.each(function(pos, bookedRoomXml) {
-                    var rawBookedRoom = that.parseBookedRoomXml(bookedRoomXml);
-
-                    if (rawBookedRoom.campus == config.get('campus') && rawBookedRoom.house == config.get('house')){
-                        rawBookedRooms.push(rawBookedRoom);
-                    }
-                });
-
-                that.reset(rawBookedRooms);
-                that.trigger('update');
-
-                if (options.success) {
-                    options.success();
-                }
-            });
+            );
+            return filtered;
         }
+
     });
 
     return BookedRoomCollection;

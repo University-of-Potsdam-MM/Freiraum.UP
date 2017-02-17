@@ -2,84 +2,62 @@ define('models/BookedRoom', ["Backbone", "jquery", "moment"], function (Backbone
     "use strict";
 
     var BookedRoom = Backbone.Model.extend({
-        initialize: function(attributes) {
+
+        defaults: {
+            name: null,
+            shortCode: null,
+            startTime: null,
+            endTime: null,
+            personName: null,
+            shortPersonName: null,
+            campus: null,
+            house: null,
+            room: null
         },
 
-        get: function (attr) {
-            if (typeof this[attr] == 'function') {
-              return this[attr]();
+        parse: function(response){
+            var that = this;
+            var room_match = response.roomList.room.match(/^([^\.]+)\.([^\.]+)\.(.+)/);
+
+             return {
+                // name replace(/.+?\/.+? - /, '').replace(/ (I+)[: ].+$/, ' $1'), ??
+                name: response.veranstaltung,
+                shortCode: that.shortCode(response.veranstaltung),
+                startTime: new Date(response.startTime),
+                endTime: new Date(response.endTime),
+                personName: response.personList.person[0],
+                shortPersonName: that.shortPersonName(response.personList.person[0]),
+                campus: parseInt(room_match[1], 10),
+                house: parseInt(room_match[2], 10),
+                room: room_match[3]
             }
-            return Backbone.Model.prototype.get.call(this, attr);
         },
 
-        shortCode: function()
-        {
-            var name_without_latin_numbers = this.get('name').replace(/ I+$/, "");
-            var latin_numbers_suffix = this.get('name').match(/ I+$/) || "";
+
+        isRunningAtTime: function(time) {
+            if (this.get('startTime').getTime() <= time.getTime() && time.getTime() < this.get('endTime').getTime()){
+                return true;
+            }
+            return false;
+        },
+
+        shortCode: function(name){
+            var name_without_latin_numbers = name.replace(/ I+$/, "");
+            var latin_numbers_suffix = name.match(/ I+$/) || "";
 
             return (" " + name_without_latin_numbers).match(/ [a-zA-Z]/g).join('').replace(/ /g, '') + latin_numbers_suffix;
         },
 
-        shortPersonName: function ()
-        {
-            var short_person_name = this.get('person_name').replace(/(Dr. |Prof.)/g, '');
+        shortPersonName: function (personName){
+            var short_person_name = personName.replace(/(Dr. |Prof.)/g, '');
             short_person_name = short_person_name.match(/[A-Z]/g).join('.') + '.';
 
-            if (!short_person_name)
-            {
+            if (!short_person_name){
                 short_person_name = 'N.N';
             }
-
             return short_person_name;
-        },
-
-        startTime: function()
-        {
-            return new Date(this.get('start_time'));
-        },
-
-        startTimeAsTimeString: function()
-        {
-            return this.dateAsTimeString(this.get('startTime'));
-        },
-
-        endTime: function()
-        {
-            return new Date(this.get('end_time'));
-        },
-
-        endTimeAsTimeString: function()
-        {
-            return this.dateAsTimeString(this.get('endTime'));
-        },
-
-        dateAsTimeString: function(date)
-        {
-            var hours = date.getHours();
-            var minutes = date.getMinutes();
-
-            if (hours < 10)
-            {
-                hours = "0" + hours;
-            }
-
-            if (minutes < 10)
-            {
-                minutes = "0" + minutes;
-            }
-
-            return hours + ':' + minutes;
-        },
-
-        isRunningAtTime: function(time)
-        {
-            if (this.get('startTime').getTime() <= time.getTime() && time.getTime() < this.get('endTime').getTime())
-            {
-                return true;
-            }
-
-            return false;
         }
+
     });
 
     return BookedRoom;

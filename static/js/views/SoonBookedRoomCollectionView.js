@@ -4,8 +4,6 @@ define('views/SoonBookedRoomCollectionView', ["jquery", "config", "views/BaseVie
     var SoonBookedRoomCollectionView = BaseView.extend({
 
         initialize: function() {
-            var that = this;
-
             this.listenTo(bookedRoomsCollection, "update", this.render);
             this.listenTo(config, "change:soon", this.render);
             this.render();
@@ -20,19 +18,18 @@ define('views/SoonBookedRoomCollectionView', ["jquery", "config", "views/BaseVie
 
             var runningCount = 0;
 
-            bookedRoomsCollection.forEach(function(bookedRoom) {
+            bookedRoomsCollection.each(function(bookedRoom) {
 
-                if (bookedRoom.isRunningAtTime(config.get('soon')))
-                {
+                if (bookedRoom.isRunningAtTime(config.get('soon'))){
                     runningCount += 1;
                     var view = new BookedRoomView({"model": bookedRoom, "tagName": "div", "referenceTime": config.get('soon')});
                     listBody.append(view.render().el);
                 }
             });
 
-            if (runningCount) {
+            if (runningCount){
                 $(this.el).removeClass('is-hidden');
-            } else {
+            }else{
                 $(this.el).addClass('is-hidden');
                 var div_element = $(document.createElement('div'));
                 div_element.addClass('alert alert-info');
@@ -44,5 +41,3 @@ define('views/SoonBookedRoomCollectionView', ["jquery", "config", "views/BaseVie
 
     return SoonBookedRoomCollectionView;
 });
-
-

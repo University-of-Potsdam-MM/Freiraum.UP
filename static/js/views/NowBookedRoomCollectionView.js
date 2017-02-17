@@ -4,8 +4,6 @@ define('views/NowBookedRoomCollectionView', ["jquery", "config", "views/BaseView
     var NowBookedRoomCollectionView = BaseView.extend({
 
         initialize: function() {
-            var that = this;
-
             this.listenTo(bookedRoomsCollection, "update", this.render);
             this.listenTo(config, "change:now", this.render);
             this.render();
@@ -13,27 +11,25 @@ define('views/NowBookedRoomCollectionView', ["jquery", "config", "views/BaseView
 
         render: function() {
             var that = this;
-            $(this.el).find('.js_headline').text('Jetzt (' + config.get('now').toLocaleTimeString().replace(/:\d\d$/g, '') + ' - ' + config.get('soon').toLocaleTimeString().replace(/:\d\d$/g, '') + ' Uhr)');
-
             var listBody = $(this.el).find('.js_body');
+            $(this.el).find('.js_headline').text('Jetzt (' + config.get('now').toLocaleTimeString().replace(/:\d\d$/g, '') + ' - ' + config.get('soon').toLocaleTimeString().replace(/:\d\d$/g, '') + ' Uhr)');
 
             listBody.empty();
 
             var runningCount = 0;
 
-            bookedRoomsCollection.forEach(function(bookedRoom) {
+            bookedRoomsCollection.each(function(bookedRoom) {
 
-                if (bookedRoom.isRunningAtTime(config.get('now')))
-                {
+                if (bookedRoom.isRunningAtTime(config.get('now'))){
                     runningCount += 1;
                     var view = new BookedRoomView({"model": bookedRoom, "tagName": "div", "referenceTime": config.get('now')});
                     listBody.append(view.render().el);
                 }
             });
 
-            if (runningCount) {
+            if (runningCount){
                 $(this.el).removeClass('is-hidden');
-            } else {
+            }else{
                 $(this.el).addClass('is-hidden');
                 var div_element = $(document.createElement('div'));
                 div_element.addClass('alert alert-info');
@@ -45,5 +41,3 @@ define('views/NowBookedRoomCollectionView', ["jquery", "config", "views/BaseView
 
     return NowBookedRoomCollectionView;
 });
-
-
