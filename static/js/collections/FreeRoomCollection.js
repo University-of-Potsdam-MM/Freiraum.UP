@@ -18,7 +18,7 @@ define('collections/FreeRoomCollection', ["Backbone", "jquery", "config", "momen
             // Set start and end time
             var now = config.get('now');
             var soon = config.get('soon');
-            console.log(now.toISOString(), soon.toISOString());
+            //console.log(now.toISOString(), soon.toISOString());
 
             var request = config.get('base_url') + 'rooms4Time?format=json&startTime=%s&endTime=%s&campus=%d&building=%s';
             return _str.sprintf(request, encodeURIComponent(now.toISOString()), encodeURIComponent(soon.toISOString()), config.get('campus'), config.get('house'));

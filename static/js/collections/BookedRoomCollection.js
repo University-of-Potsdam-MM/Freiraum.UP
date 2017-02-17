@@ -64,7 +64,6 @@ define('collections/BookedRoomCollection', ["Backbone", "jquery", "config", "mom
                     return (value.veranstaltung && value.veranstaltung != 'Raumreservierung');
                 }
             );
-            console.log(filtered);
             return filtered;
         }
 
