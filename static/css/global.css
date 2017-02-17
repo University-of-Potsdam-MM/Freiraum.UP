@@ -33,7 +33,6 @@ tr td em {
     -webkit-box-shadow: 0px -4px 3px -2px rgba(171,171,171,1);
 	-moz-box-shadow: 0px -4px 3px -2px rgba(171,171,171,1);
 	box-shadow: 0px -4px 3px -2px rgba(171,171,171,1);
-
 }
 
 .free-rooms h2 {
@@ -51,6 +50,27 @@ tr td em {
     font-size: 1.5em;
     line-height: 60px;
     margin: 3px;
+}
+
+.btn-xlarge {
+    padding: 10px 10px;
+    font-size: 40px;
+    line-height: normal;
+    -webkit-border-radius: 8px;
+       -moz-border-radius: 8px;
+            border-radius: 8px;
+    margin-right: 20px;
+}
+
+.badge {
+    vertical-align: middle;
+    font-size: 30px;
+
+}
+
+.btn .badge {
+    top: -2px;
+    left: 5px;
 }
 
 .progress {
@@ -202,11 +222,10 @@ tr td em {
 .next-local-traffic h3 {
 	margin-top:10px;
 	margin-bottom:0;
-	font-size:1.5em;
+	font-size: 1.5em;
 	color:#014260;
 	text-transform:uppercase;
 	font-weight:bold;
-
 }
 
 .next-local-traffic span {

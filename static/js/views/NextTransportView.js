@@ -13,10 +13,13 @@ define('views/NextTransportView', ["jquery", "config", "views/BaseView", "collec
         render: function() {
             var that = this;
 
-            var journeysText = [];
+            var journeysText = '';
             var firstForCategoryMap = {};
             var now = (new Date()).getTime();
-            transportsCollection.forEach(function(transport) {
+
+            $(this.el).empty();
+
+            transportsCollection.each(function(transport) {
                 if (transport.get('time') < now + 60000) {
                     /* Zeige nur ÖPNV in wenigstens einer Sekunde */
                     return ;
@@ -32,12 +35,12 @@ define('views/NextTransportView', ["jquery", "config", "views/BaseView", "collec
                 if (firstForCategoryMap.hasOwnProperty(name)) {
                     if (count < config.get('local_traffic_count')) {
                         count++;
-                        journeysText.push(name + ' ' + moment().to(firstForCategoryMap[name].get('time')));
+                        journeysText += '<button class="btn btn-primary btn-xlarge" type="button">' + name + '<span class="badge">' + moment().to(firstForCategoryMap[name].get('time')) + '</span></button>';
                     }
                 }
             }
 
-            $(this.el).text(journeysText.join(', '));
+            $(this.el).append('<h2>' + journeysText + '</h2>');
         }
     });
 
