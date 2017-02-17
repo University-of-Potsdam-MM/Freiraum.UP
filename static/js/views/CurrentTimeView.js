@@ -15,7 +15,7 @@ define('views/CurrentTimeView', ['jquery', "config", "moment", "bandClock", "vie
               color: '#014260' ,
               lineCap: 2,
               gap: 0,
-              fontStyle: '32px Helvetica Neue, Helvetica, Arial, sans-serif'
+              fontStyle: 'bold 32px Helvetica Neue, Helvetica, Arial, sans-serif'
             });
         }
     });
