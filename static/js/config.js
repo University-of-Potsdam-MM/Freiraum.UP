@@ -10,6 +10,28 @@ define('config', ["Backbone"], function (Backbone) {
             this.fetch({async:false});
 
             this.refreshTime();
+
+            // trigger update every 15 minutes
+            // when tillNextUpdate is changed next update necessary
+            function everyQuarter() {
+                console.log('triggered');
+                var d = new Date(),
+                    h = new Date(d.getFullYear(), d.getMonth(), d.getDate(), d.getHours(), (d.getMinutes() - (d.getMinutes() % 15)) + 15, 0, 0),
+                    e = h - d;
+                console.log(that);
+                that.set('tillNextUpdate', e);
+                console.log('saved');
+                window.setTimeout(everyQuarter, e);
+
+                console.log('run', e);
+            }
+
+            everyQuarter();
+
+            // updating current time every secound
+            setInterval(function() {
+                that.refreshTime();
+            }, 1000);
         },
 
         refreshTime: function(){
@@ -18,6 +40,7 @@ define('config', ["Backbone"], function (Backbone) {
             now.setHours(Math.floor(now.getHours() / 2) * 2);
             now.setMinutes(0);
             now.setSeconds(0);
+
             this.set('now', now);
 
             var soon = new Date();
@@ -26,7 +49,6 @@ define('config', ["Backbone"], function (Backbone) {
         }
 
     });
-
 
     return new Config;
 });
