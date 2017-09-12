@@ -2,6 +2,7 @@ define('collections/transports', ["collections/TransportCollection", "config"], 
     "use strict";
 
     var transports = new TransportCollection();
+
     transports.fetch();
 
     setInterval(function() {

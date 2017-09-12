@@ -60,7 +60,7 @@ th.js_journeys_headline  {
 }
 
 .journey_dir_platf {
-    width:20em;
+    display: none;
 }
 
 .js_journey_platform {
@@ -110,41 +110,35 @@ td.js_journey_time_relative {
 
 .js_journey_name.Bus {
     background-image:url(../img/bus.png);
-    line-height: 1.3 !important;
     background-repeat:no-repeat;
-    background-size: 20px 20px;
-    background-position:8px 4px;
-
-    width: 210px;
-    text-align:center;
-    padding-top:25px;
-    text-indent:0;
+    background-position:10px center;
+        background-size: 20px 20px;
+    text-align: center;
+    padding-left: 65px;
 }
 
 .js_journey_name.S {
     background-image:url(../img/sbahn.png);
-    line-height: 1.3 !important;
     background-repeat:no-repeat;
-    background-size: 20px 20px;
-    background-position:8px 4px;
-
-    width: 210px;
-    text-align:center;
-    padding-top:25px;
-    text-indent:0;
+    background-position:10px center;
+        background-size: 20px 20px;
+    text-align: center;
+    padding-left: 65px;
 }
 
 .js_journey_name.RB {
     background-image:url(../img/regio.png);
-    line-height: 1.3 !important;
     background-repeat:no-repeat;
-    background-size: 20px 20px;
-    background-position:8px 4px;
+    background-position:10px center;
+        background-size: 20px 20px;
+    text-align: center;
+    padding-left: 65px;
+}
 
-    width: 210px;
-    text-align:center;
-    padding-top:25px;
-    text-indent:0;
+
+.table > tbody > tr > td {
+    padding-top: 0px;
+    padding-bottom: 0px;
 }
 
 .js_page .js_body {

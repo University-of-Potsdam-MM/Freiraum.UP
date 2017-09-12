@@ -1,6 +1,6 @@
 # rooms
 
-- Build Status: [![Build Status](https://travis-ci.org/University-of-Potsdam-MM/rooms.svg)](https://travis-ci.org/University-of-Potsdam-MM/rooms)
+- Build Status: [![Build Status](https://travis-ci.org/University-of-Potsdam-MM/Freiraum.UP.svg)](https://travis-ci.org/University-of-Potsdam-MM/Freiraum.UP)
 
 ### Table of Contents
 **[Entwicklungsumgebung aufsetzen](#entwicklungsumgebung-aufsetzen)**

@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>rooms</title>
+    <title>Freiraum.UP</title>
 
     <!-- Bootstrap core CSS -->
     <link href="./static/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
@@ -44,13 +44,13 @@
         <span class="bandClock jsb_ jsb_views/CurrentTimeView"></span>
 
         <div class="container current-content">
-
+            <!--
             <div class="row js_page jsb_ jsb_views/AdView" id="0" data-jsb="index=0">
             </div>
 
             <div class="row js_page jsb_ jsb_views/AdView" id="1" data-jsb="index=1">
             </div>
-
+            -->
             <div class="row js_page jsb_ jsb_views/TweetsView tweets" data-jsb="">
                 <strong class="page-headline"><span class="js_tweets_headline">Tweets</span></strong>
                 <a data-chrome="noheader noscrollbar transparent noborders nofooter" class="js_twitter_timeline twitter-timeline" href="https://twitter.com/search?q=%40unipotsdam">Tweets by @unipotsdam</a>
@@ -64,16 +64,26 @@
                 <div class="js_escape_body container-fluid"></div>
             </div>
             -->
+
+            <!--
+                news
+            -->
             <div class="row js_page jsb_ jsb_views/NewsCollectionView" data-jsb="">
                 <strong class="page-headline"><span class="js_news_headline">Neuigkeiten</span></strong>
                 <div class="js_news_body container-fluid"></div>
             </div>
 
+            <!--
+                events
+            -->
              <div class="row js_page jsb_ jsb_views/EventCollectionView" data-jsb="">
                 <strong class="page-headline"><span class="js_news_headline">Veranstaltungen</span></strong>
                 <div class="js_news_body container-fluid"></div>
             </div>
 
+            <!--
+                current running courses
+            -->
             <div class="jsb_ jsb_views/NowBookedRoomCollectionView row js_page">
                 <div>
                     <strong class="page-headline"><span class="js_headline"></span></strong>
@@ -81,6 +91,9 @@
                 </div>
             </div>
 
+            <!--
+                soon running courses
+            -->
             <div class="jsb_ jsb_views/SoonBookedRoomCollectionView row js_page">
                 <div>
                     <strong class="page-headline"><span class="js_headline"></span></strong>
@@ -88,6 +101,9 @@
                 </div>
             </div>
 
+            <!--
+                public transportations
+            -->
             <div class="row js_page jsb_ jsb_views/TransportCollectionView" data-jsb="">
                 <strong class="page-headline"><span class="js_journeys_headline">Nahverkehrsverbindungen</span></strong>
                 <div class="js_journeys container-fluid"></div>
@@ -101,7 +117,6 @@
     </div>
 
     <div class="container free-rooms">
-
         <div class="jsb_ jsb_views/FreeRoomCollectionView"></div>
         <div class="jsb_ jsb_views/NextTransportView"></div>
     </div>

@@ -7,8 +7,10 @@ var assert = require("chai").assert;
 var requirejs = require("requirejs");
 var domino = require('domino');
 global.DOMParser = require('xmldom').DOMParser;
-global.jQuery = require('jquery')(domino.createWindow());
+var window = domino.createWindow();
+global.jQuery = require('jquery')(window);
 global.$ = global.jQuery;
+global.window = window;
 global.XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
 $.support.cors=true; // cross domain
 $.ajaxSettings.xhr = function() {
@@ -27,6 +29,7 @@ requirejs.config({
         'moment': '../bower_components/moment/moment',
         'Backbone': '../bower_components/backbone/backbone',
         'underscore': '../bower_components/underscore/underscore',
+        'underscoreString': './../bower_components/underscore.string/dist/underscore.string',
         'jquery': '../bower_components/jquery/jquery',
         'json': '../bower_components/requirejs-plugins/src/json',
         'text': '../bower_components/requirejs-plugins/lib/text'
@@ -45,7 +48,6 @@ before(function(done) {
             'moment'
         ],
         function(config, moment) {
-            config.set('house', 6);
 
             /*
              * wir testen immer am nächsten Montag um 10:00 Uhr

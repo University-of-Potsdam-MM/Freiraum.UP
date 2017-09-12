@@ -7,7 +7,7 @@ define('config', ["Backbone"], function (Backbone) {
 
         initialize: function () {
             var that = this;
-            this.fetch({async:false});
+            this.fetch({async:false, success: function(c, r, o){console.log(c, r, o);}, error: function(c, r, o){console.log(c,r,o);}});
 
             this.refreshTime();
 
@@ -47,7 +47,6 @@ define('config', ["Backbone"], function (Backbone) {
             soon.setTime(this.get('now').getTime() + 2 * 60 * 60 * 1000)
             this.set('soon', soon);
         }
-
     });
 
     return new Config;

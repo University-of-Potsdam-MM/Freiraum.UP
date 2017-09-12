@@ -1,6 +1,6 @@
 {
-    "base_url": "https://api.uni-potsdam.de/endpoints/roomsAPI/1.0/",
-    "transport_base_url": "https://api.uni-potsdam.de/endpoints/transportAPI/1.0/",
+    "base_url": "https://apiup.uni-potsdam.de/endpoints/roomsAPI/1.0/",
+    "transport_base_url": "https://apiup.uni-potsdam.de/endpoints/transportAPI/1.0/",
     "authorization": "",
     "campus": 3,
     "house": 6,
