@@ -48,7 +48,7 @@ before(function(done) {
             'moment'
         ],
         function(config, moment) {
-            config.url =config.get('build-dir')+'config.json';
+            config.url =config.get('builddir')+'/config.json';
             config.fetch({async:false});
             /*
              * wir testen immer am nächsten Montag um 10:00 Uhr

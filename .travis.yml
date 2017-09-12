@@ -4,6 +4,6 @@ before_script:
   - cp config-dist.json config.json
   - npm install json
   - node_modules/.bin/json -E "this.authorization='Bearer $BEARER_TOKEN'" -f config.json -I
-  - node_modules/.bin/json -E "this.build-dir='$TRAVIS_BUILD_DIR'" -f config.json -I
+  - node_modules/.bin/json -e "this.builddir='$TRAVIS_BUILD_DIR'" -f config.json -I
 node_js:
   - "4.2.4"
