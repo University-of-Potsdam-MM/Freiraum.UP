@@ -15,7 +15,7 @@ define('views/FreeRoomCollectionView', ["jquery", "config", "views/BaseView", "c
             $(this.el).empty();
 
             if(freeRoomsCollection.length != 0){
-                $(this.el).append("<h2>Freie Räume</h2>");
+                $(this.el).append("<h2 class='footerheadline'>Freie Räume: </h2>");
             }
             console.log(freeRoomsCollection);
             freeRoomsCollection.forEach(function(freeRoom) {
