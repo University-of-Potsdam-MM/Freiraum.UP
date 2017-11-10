@@ -14,16 +14,16 @@ define('config', ["Backbone"], function (Backbone) {
             // trigger update every 15 minutes
             // when tillNextUpdate is changed next update necessary
             function everyQuarter() {
-                console.log('triggered');
+                //console.log('triggered');
                 var d = new Date(),
                     h = new Date(d.getFullYear(), d.getMonth(), d.getDate(), d.getHours(), (d.getMinutes() - (d.getMinutes() % 15)) + 15, 0, 0),
                     e = h - d;
-                console.log(that);
+                //console.log(that);
                 that.set('tillNextUpdate', e);
-                console.log('saved');
+                //console.log('saved');
                 window.setTimeout(everyQuarter, e);
 
-                console.log('run', e);
+                //console.log('run', e);
             }
 
             everyQuarter();

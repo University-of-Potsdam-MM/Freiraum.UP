@@ -16,6 +16,8 @@ define('views/TransportCollectionView', ["jquery", "config", "views/BaseView", "
 
             listBody.empty();
 
+            //console.log(transportsCollection);
+
             transportsCollection.forEach(function(transport) {
                 var view = new TransportView({"model": transport});
                 listBody.append(view.render().el);

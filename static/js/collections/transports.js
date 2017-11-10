@@ -3,10 +3,10 @@ define('collections/transports', ["collections/TransportCollection", "config"], 
 
     var transports = new TransportCollection();
 
-    transports.fetch();
+    transports.fetch({headers: {'Authorization': config.get('authorization')}});
 
     setInterval(function() {
-        transports.fetch();
+        transports.fetch({headers: {'Authorization': config.get('authorization')}});
     }, config.get('transport_update_frequency') * 1000);
 
     return transports;
