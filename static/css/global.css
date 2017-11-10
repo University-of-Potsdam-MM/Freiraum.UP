@@ -383,8 +383,9 @@ th.js_journeys_headline  {
 }
 
 
-/* Twitter */
-
+/**
+ * Twitter
+ */
 .footer.customisable-border {
 	display:none !important;
 }
@@ -402,14 +403,16 @@ body.is-switched-off {
 	background-color: #000;
 }
 
+body.is-switched-off iframe{
+	visibility: hidden !important;
+}
 
 .footerheadline {
-		display:block;
-
-		margin-right:10px;
-		font-size:30px !important;
-		line-height:50px;
-	}
+	display:block;
+	margin-right:10px;
+	font-size:30px !important;
+	line-height:50px;
+}
 
 /*landscape */
 @media (orientation: landscape) {
