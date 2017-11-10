@@ -9,9 +9,6 @@ tr td em {
     color: #AA0000;
 }
 
-
-
-
 .page-headline {
 	width: 100%;
 	display: block;
@@ -66,7 +63,7 @@ tr td em {
 	-webkit-border-radius: 0px;
 	-moz-border-radius: 0px;
 	border-radius: 0px;
-			
+
 	margin-right: 20px;
 }
 
@@ -322,10 +319,9 @@ th.js_journeys_headline  {
 }
 
 .table > tbody > tr > td {
-	padding-top: 30px;
-	padding-bottom: 30px;
+	padding-top: 15px;
+	padding-bottom: 15px;
 }
-
 
 /* NEWS */
 
@@ -342,7 +338,6 @@ th.js_journeys_headline  {
 	width:100%;
 	font-size:3em !important;
 	color:#fff;
-
 	text-transform:uppercase;
 	text-align:left;
 	background:#014260;
@@ -350,7 +345,7 @@ th.js_journeys_headline  {
 	line-height:2.3em;
 	margin:0;
 	padding:0 0 0 10px !important;
-	vertical-align:middle !important;
+	vertical-align: middle !important;
 }
 
 .twitter-timeline {
@@ -410,7 +405,7 @@ body.is-switched-off {
 
 .footerheadline {
 		display:block;
-		
+
 		margin-right:10px;
 		font-size:30px !important;
 		line-height:50px;
@@ -418,13 +413,13 @@ body.is-switched-off {
 
 /*landscape */
 @media (orientation: landscape) {
-	
+
 	.free-rooms h2 {
 		margin-top:10px;
 		margin-bottom: 0;
-		
+
 	}
-	
+
 	.footerheadline {
 		display:inline-block;
 		float:left;
@@ -432,12 +427,12 @@ body.is-switched-off {
 		font-size:30px !important;
 		line-height:50px;
 	}
-	
-	.btn.btn-success {	
+
+	.btn.btn-success {
 		width: 90px;
 		height: 50px;
 		font-size: 1em;
-		line-height: 40px;	
+		line-height: 40px;
 	}
 
 	.btn-xlarge {
@@ -450,11 +445,11 @@ body.is-switched-off {
 	}
 
 	.badge {
-		
+
 	font-size: .7em;
 
 	}
-	
+
 	.news-title {
 		padding: 5px;
 		background-color: #fff;
@@ -471,22 +466,22 @@ body.is-switched-off {
 		top:0;
 
 	}
-	
+
 	.events .news-title {
 		left:360px;
 	}
 
 	.news-container {
-		border-top: 10px solid #fff;	
+		border-top: 10px solid #fff;
 	}
 
-	.row-fluid {	
+	.row-fluid {
 		background-position: left;
 	}
 
 	.bandClock {
 		right: 5px;
-		top: 5px;	
+		top: 5px;
 	}
 
 	.table > tbody > tr > td {
@@ -495,7 +490,7 @@ body.is-switched-off {
 	}
 
 	.js_headline, .js_news_headline, .js_tweets_headline, .js_ads_headline, .js_journeys_headline{
-		line-height:2.5em;	
+		line-height:2.5em;
 	}
 
 }
@@ -504,7 +499,7 @@ body.is-switched-off {
 	.news-title {
 		left: 610px;
 	}
-	
+
 	.events .news-title {
 		left: 400px;
 	}
@@ -512,18 +507,18 @@ body.is-switched-off {
 
 @media (orientation: portrait) and (min-width: 2160px) {
 	.news-title {
-			
+
 		font-size: 5em;
 		bottom: 110px;
 		       max-height: inherit;
 		}
-	
-	
+
+
 	.footerheadline {
 		font-size: 60px !important;
 		line-height: 90px;
 	}
-	
+
 	.btn.btn-success {
 		width: 100px;
 		height: 100px;
@@ -531,11 +526,11 @@ body.is-switched-off {
 		line-height: 80px;
 		margin-right: 10px;
 	}
-	
+
 	.free-rooms h2 {
 		margin-top: 20px;
 	}
-	
+
 	.btn-xlarge {
 		padding: 10px 10px;
 		font-size: 1em;
@@ -544,30 +539,30 @@ body.is-switched-off {
 		margin-right: 20px;
 		vertical-align: top;
 	}
-	
+
 	.free-rooms {
 		padding-top:20px;
 		padding-bottom:20px;
 	}
-	
+
 	.img-responsive {
 			margin: 30% auto;
 			width: 100%;
 		}
 }
 
-@media (orientation: landscape) and (min-width: 3840px) { 
+@media (orientation: landscape) and (min-width: 3840px) {
 	.news-title {
 			left: 1700px;
 			font-size: 5em;
-			
+
 		}
-		
+
 		.footerheadline {
 		font-size: 60px !important;
 		line-height: 90px;
 	}
-	
+
 	.btn.btn-success {
 		width: 100px;
 		height: 100px;
@@ -575,11 +570,11 @@ body.is-switched-off {
 		line-height: 80px;
 	    margin-right: 10px;
 	}
-	
+
 	.free-rooms h2 {
 		margin-top: 20px;
 	}
-	
+
 	.btn-xlarge {
 		padding: 10px 10px;
 		font-size: 1em;
@@ -588,22 +583,22 @@ body.is-switched-off {
 		margin-right: 20px;
 		vertical-align: top;
 	}
-	
+
 	.free-rooms {
 		padding-top:20px;
 		padding-bottom:20px;
 	}
-	
+
 	.events .news-title {
 		left: 1100px;
 	}
 	.img-responsive {
-		
+
 			width: 100%;
 		}
-	
-	
-	
+
+
+
 }
 
 
