@@ -4,15 +4,11 @@ define('views/NextTransportView', ["jquery", "config", "views/BaseView", "collec
     var NextTransportView = BaseView.extend({
 
         initialize: function() {
-            var that = this;
-
             this.listenTo(transportsCollection, "update", this.render);
             this.render();
         },
 
         render: function() {
-            var that = this;
-
             var journeysText = '';
             var firstForCategoryMap = {};
             var now = (new Date()).getTime();
@@ -24,22 +20,23 @@ define('views/NextTransportView', ["jquery", "config", "views/BaseView", "collec
                     /* Zeige nur ÖPNV in wenigstens einer Sekunde */
                     return ;
                 }
-                if (!firstForCategoryMap[transport.get('name')]) {
-                    firstForCategoryMap[transport.get('name')] = transport;
+                if (!firstForCategoryMap[transport.get('direction')]) {
+                    firstForCategoryMap[transport.get('direction')] = transport;
                 }
             });
-
             var count = 0;
+            _.sortBy(firstForCategoryMap, 'time');
 
-            for (var name in firstForCategoryMap) {
-                if (firstForCategoryMap.hasOwnProperty(name)) {
-                    if (count < config.get('local_traffic_count')) {
+            for (var direction in firstForCategoryMap) {
+                if (firstForCategoryMap.hasOwnProperty(direction)) {
+                    if (count < config.get('transport_local_traffic_count')) {
                         count++;
-                        journeysText += '<button class="btn btn-primary btn-xlarge" type="button">' + name + '<span class="badge">' + moment().to(firstForCategoryMap[name].get('time')) + '</span></button>';
+                        var name = firstForCategoryMap[direction].get('name');
+                        var timeTo = moment().to(moment(firstForCategoryMap[direction].get('time'), 'HH:mm:ss'));
+                        journeysText += '<button class="btn btn-primary btn-xlarge" type="button">' + name + '<span class="badge">' + timeTo + '</span></button>';
                     }
                 }
             }
-
             $(this.el).append("<h2><span class='footerheadline'> Nächste Abfahrten:</span>" + journeysText + "</h2>");
         }
     });
