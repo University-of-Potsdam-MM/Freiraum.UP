@@ -7,7 +7,15 @@ define('config', ["Backbone"], function (Backbone) {
 
         initialize: function () {
             var that = this;
-            this.fetch({async:false, success: function(c, r, o){console.log(c, r, o);}, error: function(c, r, o){console.log(c,r,o);}});
+            this.fetch({
+                async:false,
+                success: function(c, r, o){
+                    //console.log(c, r, o);
+                },
+                error: function(c, r, o){
+                    console.log(c,r,o);
+                }
+            });
 
             this.refreshTime();
 
