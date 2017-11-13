@@ -37,7 +37,7 @@ define('views/NextTransportView', ["jquery", "config", "views/BaseView", "collec
                     }
                 }
             }
-            $(this.el).append("<h2><span class='footerheadline'> Nächste Abfahrten:</span>" + journeysText + "</h2>");
+            $(this.el).append("<h2>" + journeysText + "</h2>");
         }
     });
 
