@@ -1,29 +1,31 @@
-// FIXME Kommentieren
 {
     "base_url": "https://apiup.uni-potsdam.de/endpoints/roomsAPI/1.0/",
     "transport_base_url": "https://apiup.uni-potsdam.de/endpoints/transportAPI/2.0/",
-    "authorization": "",
+    "authorization": "Bearer XXXX",
     "campus": 3,
     "house": 6,
     "level": 0,
     "event_location": "Uni-Komplex Griebnitzsee",
+    "transport_station_id": "900230003",
     "events_rss_feed_url": "./eventsProxy.php",
     "news_rss_feed_url": "./newsProxy.php",
     "news_per_page": 2,
-    "transport_station_id": "900230003",
+    "news_per_row": 2,
     "transport_count": 15,
     "transport_local_traffic_count": 3,
-    "news_update_frequency": 60,
-    "events_update_frequency": 60,
-    "transport_update_frequency": 60,
-    "rooms_update_frequency": 60,
-    "switch_page_frequency": 10,
-    "twitter_widget_id": "",
+    "news_update_frequency": 300,
+    "events_update_frequency": 300,
+    "transport_update_frequency": 100,
+    "rooms_update_frequency": 300,
+    "switch_page_frequency": 5,
+    "twitter_widget_id": "XXXXXXXXXXXXXXXXXX",
     "switch_on_at": "06:00",
     "switch_off_at": "22:00",
     "force_page": null,
     "ads": [
         "one.html",
-        "two.html"
-    ]
+        "two.html",
+        "three.html"
+    ],
+    "builddir": "/"
 }
