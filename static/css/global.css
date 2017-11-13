@@ -158,12 +158,10 @@ tr td em {
 	bottom: 10px;
 	right: 10px;
 	position: absolute;
-
 }
 
 .news-container.is-highlighted:after {
 	content:".";
-
 	background-image:url(../img/marker.svg);
 	background-repeat:no-repeat;
 	height:100%;
@@ -171,7 +169,7 @@ tr td em {
 }
 
 .news-container {
-	border-top: 10px solid #014260;
+	border-bottom: 10px solid #014260;
 	position: relative;
 	overflow: visible;
 }
@@ -467,7 +465,6 @@ body.is-switched-off iframe{
 		right:auto;
 		border:none;
 		top:0;
-
 	}
 
 	.events .news-title {
@@ -475,7 +472,7 @@ body.is-switched-off iframe{
 	}
 
 	.news-container {
-		border-top: 10px solid #fff;
+		border-bottom: 10px solid #fff;
 	}
 
 	.row-fluid {
