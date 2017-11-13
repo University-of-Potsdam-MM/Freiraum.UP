@@ -2,7 +2,8 @@
   "name": "rauminfo",
   "version": "0.0.0",
   "authors": [
-    "DracoBlue <JanS@DracoBlue.de>"
+    "DracoBlue <JanS@DracoBlue.de>",
+    "Alexander Kiy <alekiy@uni-potsdam.de>"
   ],
   "license": "MIT",
   "private": true,
