@@ -31,31 +31,35 @@ Die App beinhaltet direkt eine `config.json`.
 
 ``` js
 {
-    "base_url": "https://api.uni-potsdam.de/endpoints/roomsAPI/1.0/",
-    "transport_base_url": "https://api.uni-potsdam.de/endpoints/transportAPI/1.0/",
-    "authorization": "Bearer xxxxxxx", // Das Token, von api.uni-potsdam.de
+    "base_url": "https://apiup.uni-potsdam.de/endpoints/roomsAPI/1.0/",
+    "transport_base_url": "https://apiup.uni-potsdam.de/endpoints/transportAPI/2.0/",
+    "authorization": "Bearer XXXXX", // Das Token, von apiup.uni-potsdam.de
     "campus": 3, // Auf welchem Campus hängt das Panel?
     "house": 6, // In welchem Haus hängt das Panel?
     "level": 0, // In welcher Etage hängt das Panel?
-    "station_id": "009230003#86", // ID der Station für die Nahverkehrsinformationen
-    "events_rss_feed_url": "https://www.uni-potsdam.de/veranstaltungen/rss-feed-abonnieren/eventfeed/feed/xml.html?tx_upevents_upeventfeed%5Blimit%5D=30&tx_upevents_upeventfeed%5Bcat%5D=&tx_upevents_upeventfeed%5BcatLink%5D=or", // URL zum Rss-Feed der Veranstaltungen der Uni-Potsdam
-    "news_rss_feed_url": "http://www.uni-potsdam.de/nachrichten/rss-feed-abonnieren.html?type=100&tx_ttnews%5Bcat%5D=19", // URL zum Rss-Feed der Nachrichten der Uni-Potsdam
-    "news_per_page": 3, // Anzahl der News pro Seite
-    "local_traffic_count": 2, // Anzahl der nächsten ÖPNV-Einträge auf allen Seiten
-	"news_update_frequency": 60, // Nach wievielen Sekunden wird das News RSS-Feed neu abgeholt
-	"events_update_frequency": 60, // Nach wievielen Sekunden wird das Events RSS-Feed neu abgeholt
-	"transport_update_frequency": 60, // Nach wievielen Sekunden wird die Transport API neu abgefragt
-	"rooms_update_frequency": 60, // Nach wievielen Sekunden wird die Veranstaltungs API neu abgefragt
-	"switch_page_frequency": 10, // Nach wievielen Sekunden wird zur nächsten Seite geblättert
-	"twitter_widget_id": "627066449773875201", // die Twitter Widget ID von https://twitter.com/settings/widgets
-	"event_location": "Uni-Komplex Am Neuen Palais", // Wenn bei Events der Veranstaltungsort übereinstimmt, wird die Veranstaltung mit gehighlighted
-	"force_page": null, // kann erzwingen, dass nur eine Seite angezeigt wird. Sollte per ?page= ondemand überschrieben werden.
+    "event_location": "Uni-Komplex Griebnitzsee", // Wenn bei Events der Veranstaltungsort übereinstimmt, wird die Veranstaltung mit gehighlighted
+    "transport_station_id": "900230003", // ID der Station für die Nahverkehrsinformationen
+    "events_rss_feed_url": "./eventsProxy.php", // URL zum Rss-Feed der Veranstaltungen der Uni-Potsdam
+    "news_rss_feed_url": "./newsProxy.php", // URL zum Rss-Feed der Nachrichten der Uni-Potsdam
+    "news_per_page": 2, // Anzahl der News pro Seite
+    "news_per_row": 2,
+    "transport_count": 15,
+    "transport_local_traffic_count": 3, // Anzahl der nächsten ÖPNV-Einträge auf allen Seiten
+    "news_update_frequency": 300, // Nach wievielen Sekunden wird das News RSS-Feed neu abgeholt
+    "events_update_frequency": 300, // Nach wievielen Sekunden wird das Events RSS-Feed neu abgeholt
+    "transport_update_frequency": 30, // Nach wievielen Sekunden wird die Transport API neu abgefragt
+    "rooms_update_frequency": 300, // Nach wievielen Sekunden wird die Veranstaltungs API neu abgefragt
+    "switch_page_frequency": 5, // Nach wievielen Sekunden wird zur nächsten Seite geblättert
+    "twitter_widget_id": "XXXXX", // die Twitter Widget ID von https://twitter.com/settings/widgets
     "switch_on_at": "06:00", // wann schaltet sich das panel an?
     "switch_off_at": "22:00", // wann schaltet sich das panel ab?
-	"ads": [
-		"one.html", // welche werbug als erstes angezeigt wird
-		"two.html" // welche werbung als nächstes angezeigt wird
-	]
+    "force_page": null, // kann erzwingen, dass nur eine Seite angezeigt wird. Sollte per ?page= ondemand überschrieben werden.
+    "ads": [
+        "one.html", // welche werbug als erstes angezeigt wird
+        "two.html", // welche werbung als nächstes angezeigt wird
+        "three.html"
+    ],
+    "builddir": "/"
 }
 ```
 
@@ -87,7 +91,6 @@ erste Seite anzeigen.
 - Konfigurationsdatei für URL's / Endpoints
 - Dokumentation der Einbindung weiterer Darstellungsseiten
 - Darstellung
-- ? Soap-Client
 - ? Framework für views
 
 ## Use-Cases
@@ -130,7 +133,7 @@ Hier einige User die ich mir bei dem Konzeptionieren des Panels überlegt habe.
   - `.travis.yml` - Konfiguration für die CI Umgebung bei Travis
   - `test/api-test.js` - die CLI Tests mit mocha
 - Zugriff von der Webanwendung per `Bearer`-Token auf die roomsAPI
-- [roomsAPI](https://api.uni-potsdam.de/store/apis/info?name=roomsAPI&version=1.0&provider=admin) auf dem [USB](https://api.uni-potsdam.de/)
+- [roomsAPI](https://apiup.uni-potsdam.de/store/apis/info?name=roomsAPI&version=1.0&provider=admin) auf dem [APIUP](https://apiup.uni-potsdam.de/)
   - `/rooms4Time`
   - `/reservations`
 
@@ -185,25 +188,58 @@ Für das Wechseln zwischen den Seiten gibt es den `PageSwitcherView`. Für die U
 
 ### API Aufruf nach `/reservations`
 
-``` xml
-<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
-    <S:Body>
-      <ns2:reservationsResponse xmlns:ns2="http://rooms.provider.elis.unipotsdam.de/">
-        <return>
-          <endTime>2014-02-04T18:00:00+01:00</endTime>
-          <startTime>2014-02-04T16:00:00+01:00</startTime>
-          <roomList>
-            <room>3.01.H10</room>
-          </roomList>
-          <personList>
-            <person>Jochen Bley</person>
-          </personList>
-          <veranstaltung>V/G1 - Öffentliches Wirtschaftsrecht I</veranstaltung>
-        </return>
-        <!-- weitere <return> -->
-      </ns2:reservationsResponse>
-    </S:Body>
-</S:Envelope>
+``` json
+{
+  "reservationsResponse": {
+    "return": [
+      {
+        "endTime": "2017-11-13T18:00:00+01:00",
+        "startTime": "2017-11-13T16:00:00+01:00",
+        "roomList": {
+          "room": "3.06.H06"
+        },
+        "personList": {
+          "person": [
+            "Vierhaus",
+            " Hans-Peter (Hon. Prof.)"
+          ]
+        },
+        "veranstaltung": "V/G1 - Allgemeines Verwaltungsrecht für Nichtjuristen"
+      },
+      {
+        "endTime": "2017-11-13T16:00:00+01:00",
+        "startTime": "2017-11-13T14:00:00+01:00",
+        "roomList": {
+          "room": "3.06.S19"
+        },
+        "personList": {
+          "person": [
+            "Petersen",
+            " Jens (Prof. Dr.)"
+          ]
+        },
+        "veranstaltung": "RE/G1 - Examinatorium im Bürgerlichen Recht (Simulation mündliche Prüfung)"
+      },
+      ....
+      {
+        "endTime": "2017-11-13T16:00:00+01:00",
+        "startTime": "2017-11-13T14:00:00+01:00",
+        "roomList": {
+          "room": [
+            "3.06.S13",
+            "3.06.S21"
+          ]
+        },
+        "personList": {
+          "person": [
+            "",
+            ""
+          ]
+        }
+      }
+    ]
+  }
+}
 ```
 ### API Aufruf nach `/rooms4Time`
 
@@ -216,15 +252,12 @@ Parameter:
 
 Beispielantwort:
 
-``` xml
-<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
-  <S:Body>
-    <ns2:rooms4TimeResponse xmlns:ns2="http://rooms.provider.elis.unipotsdam.de/">
-      <return>3.01.1.14</return>
-      <return>3.01.1.50</return>
-    </ns2:rooms4TimeResponse>
-  </S:Body>
-</S:Envelope>
+``` json
+{
+  "rooms4TimeResponse": {
+    "return": "3.06.0.15"
+  }
+}
 ```
 
 ## Neue Seite anlegen
@@ -384,7 +417,7 @@ APIs.
 
 #Nächste Schritte
 
-siehe Issues unter https://github.com/University-of-Potsdam-MM/rooms/issues
+siehe Issues unter https://github.com/University-of-Potsdam-MM/Freiraum.UP/issues
 
 #Credits, Feedback
 
