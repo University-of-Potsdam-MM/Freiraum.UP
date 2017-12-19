@@ -23,7 +23,12 @@ define('collections/TransportCollection', ["Backbone", "jquery", "config", "mome
         comparator: 'time',
 
         parse: function(response){
-            return response.Departure;
+            // FIX: API returns departures which are already outdated
+            var result = _.filter(response.Departure, function(dep){
+                return dep.time > moment().format('HH:mm:ss');
+            });
+
+            return result;
         }
     });
 
