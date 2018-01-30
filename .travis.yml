@@ -2,5 +2,7 @@ language: node_js
 sudo: false
 before_script:
   - npm install env2
+  - touch .env
+  - echo TOKEN=$TOKEN > .env
 node_js:
   - "4.2.4"
