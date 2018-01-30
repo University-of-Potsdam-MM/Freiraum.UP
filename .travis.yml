@@ -1,9 +1,6 @@
 language: node_js
 sudo: false
 before_script:
-  - cp config-dist.json config.json
-  - npm install json
-  - node_modules/.bin/json -E "this.authorization='Bearer $BEARER_TOKEN'" -f config.json -I
-  - node_modules/.bin/json -e "this.builddir='$TRAVIS_BUILD_DIR'" -f config.json -I
+  - npm install env2
 node_js:
   - "4.2.4"
