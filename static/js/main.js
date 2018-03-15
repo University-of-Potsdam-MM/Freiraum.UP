@@ -2,7 +2,7 @@ requirejs.config({
     baseUrl: './static/js/',
     urlArgs: "cb=" + (new Date()).getTime(),
     paths: {
-        jquery: './../bower_components/jquery/jquery',
+        jquery: './../bower_components/jquery/dist/jquery',
         jsb: './../bower_components/jsb/jsb',
         Backbone: './../bower_components/backbone/backbone',
         underscore: './../bower_components/underscore/underscore',

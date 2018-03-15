@@ -415,12 +415,12 @@ ausgeführt werden. Der Build-Status kann auch ganz am Anfang der README.md eing
 Aktuell fokussieren sich die API-Tests ausschließlich auf den Test und eine Plausibilitätsprüfung der angebundenen
 APIs.
 
-#Nächste Schritte
+# Nächste Schritte
 
 siehe Issues unter https://github.com/University-of-Potsdam-MM/Freiraum.UP/issues
 
-#Credits, Feedback
+# Credits, Feedback
 
-#Lizenz
+# Lizenz
 
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/de/"><img alt="Creative Commons Lizenzvertrag" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/3.0/de/88x31.png" /></a><br />Dieses Werk ist lizenziert unter einer <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/de/">Creative Commons Namensnennung - Nicht-kommerziell - Weitergabe unter gleichen Bedingungen 3.0 Deutschland Lizenz</a>.

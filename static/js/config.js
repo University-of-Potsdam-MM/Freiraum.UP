@@ -13,7 +13,7 @@ define('config', ["Backbone"], function (Backbone) {
                     //console.log(c, r, o);
                 },
                 error: function(c, r, o){
-                    console.log(c,r,o);
+                    //console.log(c,r,o);
                 }
             });
 
