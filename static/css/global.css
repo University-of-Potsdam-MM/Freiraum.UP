@@ -345,10 +345,10 @@ th.js_journeys_headline  {
 	vertical-align: middle !important;
 }
 
+
 .twitter-timeline {
 	display:inline !important;
-	height: 2000px !important;
-	transform: scale(1.6);
+	transform: scale(0.8);
 	transform-origin: top;
 }
 
