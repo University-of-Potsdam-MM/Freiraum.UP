@@ -21,6 +21,11 @@ requirejs.define('jquery', function() {
     return jQuery;
 });
 
+require('env2')('.env');
+console.log(process.env.TOKEN);
+
+var token = process.env.TRAVIS || false;
+
 requirejs.config({
     baseUrl: 'static/js',
     nodeRequire: require,
@@ -30,9 +35,7 @@ requirejs.config({
         'Backbone': '../bower_components/backbone/backbone',
         'underscore': '../bower_components/underscore/underscore',
         'underscoreString': './../bower_components/underscore.string/dist/underscore.string',
-        'jquery': '../bower_components/jquery/jquery',
-        'json': '../bower_components/requirejs-plugins/src/json',
-        'text': '../bower_components/requirejs-plugins/lib/text'
+        'jquery': '../bower_components/jquery/dist/jquery'
     }
 });
 
@@ -48,8 +51,7 @@ before(function(done) {
             'moment'
         ],
         function(config, moment) {
-            config.url =config.get('builddir')+'/config.json';
-            config.fetch({async:false});
+
             /*
              * wir testen immer am nächsten Montag um 10:00 Uhr
              */
@@ -60,7 +62,15 @@ before(function(done) {
             nextMondayAtTen.second(0);
 
             config.set('now', new Date(nextMondayAtTen.format()));
+            config.set('house', 6);
+            config.set('campus', 3);
+            config.set('authorization', process.env.TOKEN);
+            config.set('base_url', 'https://apiup.uni-potsdam.de/endpoints/roomsAPI/1.0/');
+            config.set('transport_station_id', '900230003');
+            config.set('transport_count', '15');
+            config.set('transport_base_url', 'https://apiup.uni-potsdam.de/endpoints/transportAPI/2.0/');
 
+            console.log(config);
             /*
              * wir testen immer mit den echten RSS-Feed URLs, weil wir kein CROSS-Origin-Problem auf der CLI haben
              */
@@ -73,7 +83,7 @@ before(function(done) {
             requirejs(
                 [
                     'collections/freeRooms',
-                    'collections/bookedRooms',
+                    'collections/BookedRoomCollection',
                     'collections/events',
                     'collections/news',
                     'collections/transports',

@@ -1,9 +1,8 @@
 language: node_js
 sudo: false
 before_script:
-  - cp config-dist.json config.json
-  - npm install json
-  - node_modules/.bin/json -E "this.authorization='Bearer $BEARER_TOKEN'" -f config.json -I
-  - node_modules/.bin/json -e "this.builddir='$TRAVIS_BUILD_DIR'" -f config.json -I
+  - npm install env2
 node_js:
   - "4.2.4"
+env:
+  - secure: "PUlCvL6GlQgMsrxE3h8ivFK1jchLKu59ysGDzp/yPQePYTojF5izyria5WNe6O46yWi2vTMt10SoutsEg6uzFrIFVawzzloIebOS+kbJitSSbBpFourKl9rNWnAWAyaKtmbjIXvkZSN0gDJf3dRKPr44cssXrP7tr6KifpEF/V8="

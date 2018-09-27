@@ -17,12 +17,12 @@
   },
   "homepage": "https://github.com/University-of-Potsdam-MM/rooms",
   "devDependencies": {
-    "chai": "^3.3.0",
+    "chai": "^4.1.2",
     "domino": "^1.0.19",
-    "jquery": "2.1.4",
-    "mocha": "^2.3.3",
-    "requirejs": "^2.1.20",
-    "xmldom": "^0.1.19",
+    "jquery": "^3.3.1",
+    "mocha": "^5.0.0",
+    "requirejs": "^2.3.5",
+    "xmldom": "^0.1.27",
     "xmlhttprequest": "^1.8.0"
   }
 }
