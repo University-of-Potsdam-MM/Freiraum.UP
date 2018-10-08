@@ -55,9 +55,17 @@ Die App beinhaltet direkt eine `config.json`.
     "switch_off_at": "22:00", // wann schaltet sich das panel ab?
     "force_page": null, // kann erzwingen, dass nur eine Seite angezeigt wird. Sollte per ?page= ondemand überschrieben werden.
     "ads": [
-        "one.html", // welche werbug als erstes angezeigt wird
-        "two.html", // welche werbung als nächstes angezeigt wird
-        "three.html"
+        [
+            {"url": "one.html"} // welche Werbung im ersten Slot angezeigt werden soll
+        ],
+        [
+            {"url": "two.html", "startTime": "2018-09-01", "endTime": "2018-09-30"},
+            {"url": "three.html", "startTime": "2018-10-01", "endTime": "2018-10-30"},
+            {"url": "one.html", "startTime": "2018-10-08", "endTime": "2018-10-09"}
+        ],
+        [
+            {"url": "two.html", "startTime": "2018-09-01", "endTime": "2018-09-30"} // Werbung für den dritten Slot
+        ]
     ],
     "builddir": "/"
 }
@@ -320,13 +328,40 @@ Zusätzlich die config.json erweitern, um:
 
 ``` json
 {
-	"ads": [
-		"hans.html"
-	]
+  "ads": [
+    [
+      {"url": "hans.html"}
+    ]
+  ]
 }
 ```
 
 und dann wird `hans.html` angezeigt, sobald die AdView angezeigt wird.
+
+Sollen mehrere Ads in einem Slot (bestimmte Position in der Anzeigenreihenfolge) geschaltet werden, so erfolgt das wie folgt am Beispiel von `one.html`und `two.html`.
+
+``` json
+{
+  "ads": [
+    [
+      {"url": "one .html"}, {"url": "two.html"}
+    ]
+  ]
+}
+```
+
+Zusätzlich können noch Zeiträume für die Werbung angegeben werden, in denen der Inhalt dargestellt werden soll.
+
+``` json
+{
+  "ads": [
+    [
+      {"url": "one.html", "startTime": "2018-09-01", "endTime": "2018-09-30"},
+      {"url": "two.html", "startTime": "2018-10-01", "endTime": "2018-10-30"},
+    ]
+  ]
+}
+```
 
 Wenn die Datei folgenden Tag enthält:
 

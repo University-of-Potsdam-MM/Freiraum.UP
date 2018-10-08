@@ -23,9 +23,17 @@
     "switch_off_at": "22:00",
     "force_page": null,
     "ads": [
-        "one.html",
-        "two.html",
-        "three.html"
+        [
+            {"url": "one.html"}
+        ],
+        [
+            {"url": "two.html", "startTime": "2018-09-01", "endTime": "2018-09-30"},
+            {"url": "three.html", "startTime": "2018-10-01", "endTime": "2018-10-30"},
+            {"url": "one.html", "startTime": "2018-10-08", "endTime": "2018-10-09"}
+        ],
+        [
+            {"url": "two.html", "startTime": "2018-09-01", "endTime": "2018-09-30"}
+        ]
     ],
     "builddir": "/"
 }

@@ -2,7 +2,7 @@ requirejs.config({
     baseUrl: './static/js/',
     urlArgs: "cb=" + (new Date()).getTime(),
     paths: {
-        jquery: './../bower_components/jquery/jquery',
+        jquery: './../bower_components/jquery/dist/jquery',
         jsb: './../bower_components/jsb/jsb',
         Backbone: './../bower_components/backbone/backbone',
         underscore: './../bower_components/underscore/underscore',
@@ -10,7 +10,7 @@ requirejs.config({
         bootstrap: './../bower_components/bootstrap/dist/js/bootstrap',
         json: './../bower_components/requirejs-plugins/src/json',
         text: './../bower_components/requirejs-plugins/lib/text',
-        underscoreString: './../bower_components/underscore.string/dist/underscore.string',
+        sprintf: './../bower_components/sprintf/dist/sprintf.min',
         bandClock: './bandClock'
     }
 });
