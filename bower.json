@@ -24,9 +24,7 @@
     "requirejs": "^2.3.5",
     "respond": "^1.4.2",
     "requirejs-plugins": "~1.0.3",
-    "moment": "~2.10.3",
-    "underscore.string": "^3.3.4"
+    "moment": "~2.22.2",
+    "sprintf": "^1.1.1"
   }
 }
-
-

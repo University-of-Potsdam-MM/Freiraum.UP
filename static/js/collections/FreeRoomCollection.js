@@ -1,4 +1,4 @@
-define('collections/FreeRoomCollection', ["Backbone", "jquery", "config", "moment", "underscoreString", "models/FreeRoom"], function (Backbone, $, config, moment, _str, FreeRoom) {
+define('collections/FreeRoomCollection', ["Backbone", "jquery", "config", "moment", "sprintf", "models/FreeRoom"], function (Backbone, $, config, moment, sprintf, FreeRoom) {
     "use strict";
 
     var FreeRoomCollection = Backbone.Collection.extend({
@@ -21,7 +21,7 @@ define('collections/FreeRoomCollection', ["Backbone", "jquery", "config", "momen
             //console.log(now.toISOString(), soon.toISOString());
 
             var request = config.get('base_url') + 'rooms4Time?format=json&startTime=%s&endTime=%s&campus=%d&building=%s';
-            return _str.sprintf(request, encodeURIComponent(now.toISOString()), encodeURIComponent(soon.toISOString()), config.get('campus'), config.get('house'));
+            return sprintf.sprintf(request, encodeURIComponent(now.toISOString()), encodeURIComponent(soon.toISOString()), config.get('campus'), config.get('house'));
 
         },
 

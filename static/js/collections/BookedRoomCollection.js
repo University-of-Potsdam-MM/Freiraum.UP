@@ -1,4 +1,4 @@
-define('collections/BookedRoomCollection', ["Backbone", "jquery", "config", "moment", "underscoreString", "models/BookedRoom"], function (Backbone, $, config, moment, _str, BookedRoom) {
+define('collections/BookedRoomCollection', ["Backbone", "jquery", "config", "moment", "sprintf", "models/BookedRoom"], function (Backbone, $, config, moment, sprintf, BookedRoom) {
     "use strict";
 
     var BookedRoomCollection = Backbone.Collection.extend({
@@ -47,14 +47,14 @@ define('collections/BookedRoomCollection', ["Backbone", "jquery", "config", "mom
             // Set start and end time
             var now = config.get('now');
             var soon = config.get('soon');
-            
+
             var end_of_soon = new Date();
             end_of_soon.setTime(soon.getTime() + 2 * 60 * 60 * 1000);
 
             //console.log(now.toISOString(), end_of_soon.toISOString());
 
             var request = config.get('base_url') + 'reservations?format=json&startTime=%s&endTime=%s&campus=%d&building=%s';
-            return _str.sprintf(request, encodeURIComponent(now.toISOString()), encodeURIComponent(end_of_soon.toISOString()), config.get('campus'), config.get('house'));
+            return sprintf.sprintf(request, encodeURIComponent(now.toISOString()), encodeURIComponent(end_of_soon.toISOString()), config.get('campus'), config.get('house'));
         },
 
         parse: function(response){
