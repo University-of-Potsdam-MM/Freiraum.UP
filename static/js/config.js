@@ -1,12 +1,32 @@
 define('config', ["Backbone"], function (Backbone) {
     "use strict";
 
+    var Ads = Backbone.Model.extend({
+        url: 'ads.json',
+
+        initialize: function () {
+            var that = this;
+            this.fetch({
+                async:false,
+                success: function(c, r, o){
+                    //console.log(c, r, o);
+                },
+                error: function(c, r, o){
+                    console.log(c,r,o);
+                }
+            });
+        }
+    });
+
     var Config = Backbone.Model.extend({
 
         url: 'config.json',
 
         initialize: function () {
             var that = this;
+            var ads = new Ads();
+            that.set('ads', ads.get('ads'));
+
             this.fetch({
                 async:false,
                 success: function(c, r, o){
