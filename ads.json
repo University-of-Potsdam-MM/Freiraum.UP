@@ -16,6 +16,9 @@
             {"url": "mentoring.html", "startTime": "2018-10-11", "endTime": "2018-10-13"},
             {"url": "io-11.html", "startTime": "2018-10-01", "endTime": "2018-11-15"},
             {"url": "io-12.html"}
+        ],
+        [
+            {"url": "id.html", "startTime": "2018-11-15", "endTime": "2018-11-16"}
         ]
     ]
 }

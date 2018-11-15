@@ -21,6 +21,7 @@ function ($, config, moment, BaseView) {
             // filters relevant items for ads slot (no timestamp or valid timestamps)
             //console.log(config.get('ads')[this.currentIndex]);
             this.data = config.get('ads')[this.currentIndex].filter(function(ads) {
+                //console.log(ads);
                 var startTime = ads.startTime;
                 var endTime = ads.endTime;
 
