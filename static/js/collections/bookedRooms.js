@@ -2,7 +2,7 @@ define('collections/bookedRooms', ["collections/BookedRoomCollection", "config"]
     "use strict";
 
     var bookedRooms = new BookedRoomCollection();
-    
+
     bookedRooms.fetch({headers: {'Authorization': config.get('authorization')}});
 
     setInterval(function() {

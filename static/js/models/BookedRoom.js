@@ -10,14 +10,38 @@ define('models/BookedRoom', ["Backbone", "jquery", "moment"], function (Backbone
             endTime: null,
             personName: null,
             shortPersonName: null,
+            rooms: []
+            /*
             campus: null,
             house: null,
             room: null
+            */
         },
 
         parse: function(response){
             var that = this;
-            var room_match = response.roomList.room.match(/^([^\.]+)\.([^\.]+)\.(.+)/);
+            var room_match;
+            var roomlist = [];
+
+            if (Array.isArray(response.roomList.room)) {
+                response.roomList.room.forEach(room => {
+                    room_match = room.match(/^([^\.]+)\.([^\.]+)\.(.+)/);
+                    roomlist.push({
+                        campus: parseInt(room_match[1], 10),
+                        house: parseInt(room_match[2], 10),
+                        room: room_match[3]
+                    });
+                });
+            }else{
+                room_match = response.roomList.room.match(/^([^\.]+)\.([^\.]+)\.(.+)/);
+                roomlist.push({
+                    campus: parseInt(room_match[1], 10),
+                    house: parseInt(room_match[2], 10),
+                    room: room_match[3]
+                });
+            }
+
+            //console.log(this, roomlist);
 
              return {
                 // name replace(/.+?\/.+? - /, '').replace(/ (I+)[: ].+$/, ' $1'), ??
@@ -27,9 +51,7 @@ define('models/BookedRoom', ["Backbone", "jquery", "moment"], function (Backbone
                 endTime: new Date(response.endTime),
                 personName: response.personList.person[0],
                 shortPersonName: that.shortPersonName(response.personList.person[0]),
-                campus: parseInt(room_match[1], 10),
-                house: parseInt(room_match[2], 10),
-                room: room_match[3]
+                rooms: roomlist
             }
         },
 
