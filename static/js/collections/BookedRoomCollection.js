@@ -14,8 +14,9 @@ define('collections/BookedRoomCollection', ["Backbone", "jquery", "config", "mom
         },
 
         comparator: function(a, b) {
-            var roomA = a.get('room');
-            var roomB = b.get('room');
+
+            var roomA = a.get('rooms')[0].room;
+            var roomB = b.get('rooms')[0].room;
 
             if (roomA == roomB)
             {
