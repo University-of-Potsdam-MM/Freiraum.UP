@@ -1,0 +1,21 @@
+mensa {
+
+  .segment-md .segment-button {
+    font-size: 2.2rem;
+    overflow:visible;
+  }
+
+  .segment-md .segment-button.segment-activated:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border: 0.438em solid transparent;
+    border-top-color: #014260;
+    border-bottom: 0;
+    margin-left: -0.437em;
+    margin-bottom: -0.437em;
+  }
+}

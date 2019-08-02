@@ -1,0 +1,24 @@
+news-article {
+    width:48% !important;
+    height:48% !important;
+    margin-right:2%;
+
+    .news-date {
+        font-size: .8em;
+        color: #756b6b;
+    }
+
+    .row {
+        border-bottom:1px solid #ededed;
+    }
+
+    .card-md {
+        width: 100% !important;
+        min-height: 300px;
+    }
+
+    .card-md h3 {
+        font-size: 1.6rem;
+        font-weight:500;
+    }
+}

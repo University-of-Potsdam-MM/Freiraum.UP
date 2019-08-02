@@ -1,0 +1,76 @@
+{
+  "page": {
+    "home":{
+      "title": "Home"
+    },
+    "settings": {
+      "choose_language": "Choose language",
+      "language": {
+        "de": "German",
+        "en": "English"
+      }
+    },
+    "campus-map": {
+      "title": "Campus",
+      "chose_campus": "Choose campus",
+      "you_are_here": "You are here",
+      "category": {
+        "associateinstitutes": "Related institutes",
+        "institutes": "Institutes",
+        "canteens": "Cantees",
+        "parking": "Parking spots",
+        "student": "Student dorms",
+        "terminals": "Service-Terminals",
+        "sport": "Sports"
+      }
+    },
+    "transport": {
+      "title": "Public Transport",
+      "disclaimer": "All data is used with the kind support of the VBB.",
+      "journeys": "Departures from",
+      "track": "Track",
+      "cancelled": "Cancelled"
+    },
+    "ads": {
+      "title": "Advertisements"
+    },
+    "news": {
+      "title": "News",
+      "articlePublished": "Published at:"
+    },
+    "rooms-free": {
+      "title": "Free rooms",
+      "no_rooms": "There are no free rooms in this timeslot"
+    },
+    "rooms-booked": {
+      "title": "Lectures"
+    },
+    "mensa": {
+      "title": "Canteen"
+    },
+    "twitter-up": {
+      "title": "@unipotsdam"
+    },
+    "twitter-asta": {
+      "title": "@astaup"
+    },
+    "game": {
+      "title": "Game"
+    }
+  },
+  "words": {
+    "campus": "Campus",
+    "building": "Building",
+    "now": "Now",
+    "soon": "Soon"
+  },
+  "buttons": {
+    "next": "Next",
+    "previous": "Previous",
+    "confirm": "Okay",
+    "cancel": "Cancel"
+  },
+  "texts": {
+
+  }
+}

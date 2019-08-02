@@ -1,0 +1,18 @@
+news {
+
+  #categories {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+  }
+
+ .news-container {
+    display: flex;
+    flex-wrap: wrap;
+
+   .article {
+      width: 50%;
+      height: 50%;
+   }
+ }
+}

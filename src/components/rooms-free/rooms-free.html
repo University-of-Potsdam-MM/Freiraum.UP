@@ -1,0 +1,29 @@
+<div padding>
+  <ion-segment [(ngModel)]="when" (ngModelChange)="whenChanged($event)">
+    <ion-segment-button value="now">
+      {{ "words.now" | translate }}
+      (
+      {{ moment(timeslots.now.begin).format('HH:mm') }} -
+      {{ moment(timeslots.now.end).format('HH:mm') }}
+      )
+    </ion-segment-button>
+    <ion-segment-button value="soon">
+      {{ "words.soon" | translate }}
+      (
+      {{ moment(timeslots.soon.begin).format('HH:mm') }} -
+      {{ moment(timeslots.soon.end).format('HH:mm') }}
+      )
+    </ion-segment-button>
+  </ion-segment>
+</div>
+
+<ng-template #freeRoomsTemplate let-rooms="items">
+  <ion-list>
+    <ion-item *ngFor="let room of rooms">
+      {{ room }}
+    </ion-item>
+  </ion-list>
+</ng-template>
+
+<results [items]="when == 'now' ? freeRooms.now : freeRooms.soon"
+         [template]="freeRoomsTemplate"></results>

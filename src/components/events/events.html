@@ -1,0 +1,9 @@
+<ng-template #eventsTemplate let-events="items">
+  <div id="news-container">
+    <ng-container *ngFor="let article of events; let i = index">
+      <news-article class="article" [article]="article"></news-article>
+    </ng-container>
+  </div>
+</ng-template>
+
+<results [items]="eventsList" [template]="eventsTemplate"></results>

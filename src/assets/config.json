@@ -1,0 +1,109 @@
+{
+  "general": {
+    "mode": "interactive",
+    "default_language": "de",
+    "page_switching_frequency": 15,
+    "timeout_time": 20,
+    "timeout_modal_countdown_time": 10,
+    "timeslot_update_frequency": 60,
+    "location": {
+      "coordinates": [52.39354, 13.13022],
+      "campus_name": "Griebnitzsee",
+      "campus_name_short": "griebnitzsee",
+      "campus": 3,
+      "building": 4,
+      "level": 0
+    },
+    "operation_time": {
+      "on": "06:00",
+      "off": "22:00"
+    },
+    "timeslots": {
+      "now": {},
+      "soon": {}
+    }
+  },
+  "api": {
+    "authorization": "<add_api_token_here>",
+    "base_url": "https://apiup.uni-potsdam.de/endpoints/",
+    "default_frequency": "300",
+    "endpoints": {
+      "transport": {
+        "url": "https://apiup.uni-potsdam.de/endpoints/transportAPI/2.0/departureBoard",
+        "frequency": 60
+      },
+      "rooms-booked": {
+        "url":"https://apiup.uni-potsdam.de/endpoints/roomsAPI/1.0/reservations"
+      },
+      "rooms-free":{
+        "url":"https://apiup.uni-potsdam.de/endpoints/roomsAPI/1.0/rooms4Time"
+      },
+      "news": {
+        "url":"https://apiup.uni-potsdam.de/endpoints/newsAPI/json/news/"
+      },
+      "events":{
+        "url":"https://apiup.uni-potsdam.de/endpoints/newsAPI/json/events/"
+      },
+      "maps": {
+        "url":"https://apiup.uni-potsdam.de/endpoints/mapsAPI"
+      },
+      "mensa":{
+        "url":"https://apiup.uni-potsdam.de/endpoints/mensaAPI/meals"
+      }
+    }
+  },
+  "transport":{
+    "station_id": "900230003",
+    "count": 10,
+    "local_traffic_count": 3,
+    "update_frequency": 60,
+    "station_name": "S-Griebnitzsee"
+  },
+  "campusmap": {
+    "update_frequency": 3600,
+    "campi": [
+      {
+        "id": 1,
+        "name": "neuespalais" ,
+        "pretty_name": "Neues Palais",
+        "coordinates": {
+          "latitude": 52.40105,
+          "longitude": 13.01207
+        },
+        "lat_long_bounds": [
+          [52.4038, 13.0078],
+          [52.39706, 13.01884]
+        ]
+      },
+      {
+        "id": 2,
+        "name": "golm",
+        "pretty_name": "Golm",
+        "coordinates": {
+          "latitude": 52.41527,
+          "longitude": 12.96941
+        },
+        "lat_long_bounds": [
+          [52.413, 12.9721],
+          [52.4057, 12.9802]
+        ]
+      },
+      {
+        "id": 3,
+        "name": "griebnitzsee",
+        "pretty_name": "Griebnitzsee",
+        "coordinates": {
+          "latitude": 52.39281,
+          "longitude": 13.1288
+        },
+        "lat_long_bounds": [
+          [52.3945, 13.1258],
+          [52.3912, 13.1338]
+        ]
+      }
+    ]
+  },
+  "mensa": {
+    "update_frequency": 300
+  }
+}

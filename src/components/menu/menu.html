@@ -1,0 +1,23 @@
+<div id="menu-container">
+
+  <button id="button-backwards"
+          ion-button name="arrow-backwards"
+          (click)="slideToPrevious($event)">
+  </button>
+
+  <ion-slides (ionSlideTap)="slideTapped($event)" (ionSlideWillChange)="willChange($event)">
+    <ion-slide *ngFor="let page of pages">
+      <ion-grid>
+        <ion-col><ion-icon [name]="page.icon"></ion-icon></ion-col>
+
+        <ion-col><div>{{ "page."+page.name+".title" | translate }}</div></ion-col>
+      </ion-grid>
+    </ion-slide>
+  </ion-slides>
+
+  <button id="button-forwards"
+          ion-button name="arrow-forwards"
+          (click)="slideToNext($event)">
+  </button>
+
+</div>

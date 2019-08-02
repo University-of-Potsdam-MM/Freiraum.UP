@@ -1,0 +1,45 @@
+<div padding>
+  <ion-segment [(ngModel)]="when" (ngModelChange)="whenChanged($event)">
+    <ion-segment-button value="now">
+      {{ "words.now" | translate }}
+      (Ab {{ moment(timeslots.now.begin).format('HH:mm') }} {{ "words.oclock" | translate }})
+    </ion-segment-button>
+    <ion-segment-button value="soon">
+      {{ "words.soon" | translate }}
+      (Ab {{ moment(timeslots.soon.begin).format('HH:mm') }} {{ "words.oclock" | translate }})
+    </ion-segment-button>
+  </ion-segment>
+</div>
+
+<ng-template #roomReservationsTemplate let-reservations="items">
+  <ion-grid >
+    <ion-row id="headers">
+      <ion-col col-2>
+        {{ "page.rooms-booked.time" | translate }}
+      </ion-col>
+      <ion-col col-2>
+        {{ "page.rooms-booked.room" | translate }}
+      </ion-col>
+      <ion-col col-auto>
+        {{ "page.rooms-booked.reservation_title" | translate }}
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngFor="let reservation of reservations">
+      <ng-container *ngIf="reservation.veranstaltung ">
+        <ion-col col-2>
+          {{ moment(reservation.startTime).format("LT") }} - {{ moment(reservation.endTime).format("LT") }}
+        </ion-col>
+        <ion-col col-2>
+          {{ reservation.roomList.room }}
+        </ion-col>
+        <ion-col col-auto>
+          {{ reservation.veranstaltung }}
+        </ion-col>
+      </ng-container>
+    </ion-row>
+  </ion-grid>
+</ng-template>
+
+<results [items]="when == 'now' ? bookedRooms.now : bookedRooms.soon"
+         [template]="roomReservationsTemplate"></results>

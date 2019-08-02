@@ -1,0 +1,85 @@
+<div id="info-container">
+  <div id="up_header_wrapper">
+    <div id="up_section_indicator_left"></div>
+      <div id="up_header">
+        <div class="twentyfour">
+          <div class="row">
+            <div class="eight">
+              <div id ="up_section_indicator">
+                <div id="up_page_title">
+                  <div id="up_logo_indicator_wrapper" style="font-size:14px;">
+                    <div id="up_logo_indicator">
+                      <span>&nbsp;</span>
+                    </div>
+
+                    <div id="up_logo_image">
+                      <img src="assets/imgs/logo_uni_potsdam.svg" style="height:86px">
+                    </div>
+
+                    <div id="up_logo_title">
+                      Universität Potsdam
+                    </div>
+
+                    <div id="up_logo_footer"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <div id="info-wrapper">
+  <div id="building-name">
+
+  <h1>
+    {{ config.general.location.campus_name }} -
+    {{ "words.building" | translate }}
+    {{ config.general.location.building }}
+  </h1>
+
+</div>
+
+<div id="time">
+  <h1>{{ now }}</h1>
+  </div>
+</div>
+
+</div>
+
+<div id="menu_wrapper">
+  <div id="menu-container">
+    <page-switcher-loading-bar id="loading-bar"></page-switcher-loading-bar>
+
+    <div id="page-switcher-container">
+      <button ion-button
+              id="button-previous"
+              (click)="onPreviousClicked()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+
+      <ion-slides id="slides-container"
+                  (ionSlideDidChange)="onIonSlideDidChange($event)"
+                  (ionSlideTap)="onSlideTapped($event)"
+                  (ionSlideDrag)="onSlideDragged($event)">
+        <ng-container *ngFor="let page of pageList">
+          <ng-container *ngIf="!page.hide">
+            <ion-slide>
+              <ion-icon [name]="page.icon"></ion-icon>
+              <div>
+                {{ "page."+page.name+".title" | translate }}
+              </div>
+            </ion-slide>
+          </ng-container>
+        </ng-container>
+      </ion-slides>
+
+      <button ion-button id="button-next"
+              (click)="onNextClicked()">
+        <ion-icon name="arrow-forward"></ion-icon>
+      </button>
+    </div>
+  </div>
+</div>
+

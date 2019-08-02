@@ -1,0 +1,98 @@
+{
+	"page": {
+		"home":{
+			"title": "Home"
+		},
+    "settings": {
+      "choose_language": "Sprache wählen",
+      "language": {
+        "de": "Deutsch",
+        "en": "Englisch"
+      }
+    },
+    "campus-map": {
+      "title": "Campus",
+      "sites-at-this-campus": "Orte am Campus",
+      "chose_campus": "Campus wählen",
+      "you_are_here": "Sie sind hier",
+      "campus": {
+        "griebnitzsee": "Griebnitzsee",
+        "neuesPalais": "Neues Palais",
+        "golm": "Golm"
+      },
+      "category": {
+        "associateinstitutes": "An-Institute",
+        "institutes": "Institute",
+        "canteens": "Mensas",
+        "parking": "Parkplätze",
+        "student": "Studentisches",
+        "terminals": "Service-Stationen",
+        "sport": "Sport"
+      }
+    },
+    "transport": {
+      "title": "Nahverkehr",
+      "departures_from": "Abfahrten ab:",
+      "disclaimer": "Alle Daten werden mit freundlicher Unterstützung des VBB genutzt.",
+      "journeys": "Fahrten ab",
+      "track": "Gleis",
+      "cancelled": "Fällt aus"
+    },
+    "ads": {
+      "title": "Anzeigen"
+    },
+    "facebook": {
+      "title": "Facebook"
+    },
+    "news": {
+      "title": "Neues",
+      "articlePublished": "Veröffentlicht am:"
+    },
+    "events": {
+      "title": "Events"
+    },
+    "rooms-free": {
+      "title": "Freie Räume",
+      "no_rooms": "In diesem Zeitabschnitt sind keine freien Räume verfügbar"
+    },
+    "rooms-booked": {
+      "title": "Veranstaltungen",
+      "time": "Uhrzeit",
+      "room": "Raum",
+      "reservation_title": "Veranstaltung"
+    },
+    "mensa": {
+      "title": "Mensa"
+    },
+    "twitter-up": {
+      "title": "@unipotsdam"
+    },
+    "twitter-asta": {
+      "title": "@astaup"
+    },
+    "game": {
+      "title": "Spiel",
+      "retry": "Erneut spielen?",
+      "text": "Versuche, möglichst schnell alle dunkelblauen Rechtecke zu berühren!",
+      "ended": "Die Zeit ist leider vorbei!",
+      "score": "Dein Punktestand",
+      "highscores": "Die Top 5 bisher:"
+    }
+	},
+  "words": {
+    "campus": "Campus",
+    "building": "Haus",
+    "now": "Jetzt",
+    "soon": "Demnächst",
+    "oclock": "Uhr"
+  },
+  "buttons": {
+    "next": "Vor",
+    "previous": "Zurück",
+    "confirm": "Okay",
+    "cancel": "Abbrechen"
+  },
+  "hint": {
+    "no_results": "Keine Informationen verfügbar"
+  }
+}

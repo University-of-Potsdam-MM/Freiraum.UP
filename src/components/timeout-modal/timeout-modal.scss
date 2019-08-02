@@ -1,0 +1,27 @@
+timeout-modal {
+    
+  ion-content, .content  {
+    overflow: hidden !important;
+    width: 600px;
+    min-width: 1px;
+    margin: 0;
+    height: 600px;
+
+    .scroll-content {
+      overflow: hidden;
+      padding-top: 50px;
+
+    }
+
+  }
+
+  ion-header .toolbar-title-md, ion-header .toolbar-title {
+    position: absolute;   
+    width: 600px;    
+    height: 50px;    
+    left: -550px;   
+    top: 3px;
+
+  }
+
+}

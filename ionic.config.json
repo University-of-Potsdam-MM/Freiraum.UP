@@ -1,0 +1,7 @@
+{
+  "name": "freiraum-up-ionic",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}
