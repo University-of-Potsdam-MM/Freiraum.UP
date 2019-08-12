@@ -9,6 +9,8 @@ $ npm install
 $ ionic serve
 ```
 
+In der Datei `src/app/assets/config.json` muss allerdings noch unter `api > authorization` der entsprechende API-Key eingetragen werden.
+
 ## Implementierte Komponenten
 
 - Nächste ÖPNV-Abfahrten
