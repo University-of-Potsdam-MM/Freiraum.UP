@@ -16,7 +16,8 @@
             {"url": "io-12.html"}
         ],
         [
-            {"url": "absolventenfeier.html", "startTime": "2020-01-19", "endTime": "2020-02-01"}
+            {"url": "absolventenfeier.html", "startTime": "2020-01-19", "endTime": "2020-02-01"},
+			{"url": "2020-zessko-english.html", "startTime": "2020-02-20", "endTime": "2020-04-19"}
         ]
     ]
 }
