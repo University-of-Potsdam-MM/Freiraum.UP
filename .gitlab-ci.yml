@@ -1,0 +1,41 @@
+# General info: https://docs.gitlab.com/ee/ci/yaml/
+# Building maven: https://docs.gitlab.com/ee/user/project/packages/maven_repository.html
+#
+# Requires several environment variables to be set in Git.UP (most should be protected):
+#  * V1_SSH_DEPLOY_HOSTS (ein Host pro Zeile, falls mehrere)
+#  * V1_SSH_DEPLOY_KEY (SSH-key für den gitup-deploy user, spezifisch für jeden Dienst)
+#  * SSH_KNOWN_HOSTS (hosts keys der Server auf die deployd werden soll; `ssh-keyscan hostname`)
+
+image: node:12
+
+# Quick'n'Dirty build and deploy job for "old" Freiraum in GR_6
+deploy:
+  stage: deploy
+  cache:
+    paths:
+      - node_modules/
+      - static/bower_components/
+  before_script:
+    # Build
+    - npm install
+    - npm install -g bower
+    - bower install --allow-root
+    # Deploy
+    - mkdir /root/.ssh
+    - chmod 700 /root/.ssh
+    - echo "$V1_SSH_DEPLOY_KEY" | tr -d '\r' > /root/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+    - echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+  script:
+    - cp config-dist.json config.json
+    - if [ -z "$BEARER_TOKEN" ] || [ -z "$TWITTER_WIDGET_ID" ]; then echo "not all tokens are defined."; exit 1; fi
+    - perl -pi -e "s|\"Bearer XXXX\"|\"Bearer $BEARER_TOKEN\"|" config.json
+    - "perl -pi -e \"s|\\\"twitter_widget_id\\\": \\\"XXXXXXXXXXXXXXXXXX\\\"|\\\"twitter_widget_id\\\": \\\"$TWITTER_WIDGET_ID\\\"|\" config.json"
+    - if [ -z "$V1_SSH_DEPLOY_HOSTS" ]; then echo "no servers (V1_SSH_DEPLOY_HOSTS) defined."; exit 1; fi
+    - echo "hshs $V1_SSH_DEPLOY_HOSTS"
+    - for server in $V1_SSH_DEPLOY_HOSTS; do
+        tar cfz - *.html *.php *.json static/ | ssh -i /root/.ssh/id_rsa gitup-deploy@$server "$CI_JOB_TOKEN" "$CI_COMMIT_SHA" "$CI_PROJECT_ID" "$CI_PIPELINE_ID" "$CI_JOB_ID";
+      done
+  only:
+    - v1.0
