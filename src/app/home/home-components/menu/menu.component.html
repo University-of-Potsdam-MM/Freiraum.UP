@@ -1,0 +1,38 @@
+<div id="menu-container">
+  <app-loadingbar id="loading-bar"></app-loadingbar>
+
+  <div id="menu">
+    <ion-button id="button-previous"
+                *ngIf="config.general.interactiveMode"
+                (click)="slides.slidePrev()">
+      <ion-icon name="arrow-back"></ion-icon>
+    </ion-button>
+    <ion-slides id="slides"
+                (ionSlideDidChange)="onIonSlideDidChange($event)"
+                (ionSlideDrag)="onTouchEvent()"
+                [options]="slidesOptions">
+      <ion-slide *ngFor="let page of pageList">
+        <ion-grid>
+          <ion-col id="icon">
+            <ion-icon [name]="page.icon"></ion-icon>
+          </ion-col>
+          <ion-col id="label">
+            <div *ngIf="!page.customTitle">
+              {{ page.name | pageName }}
+            </div>
+            <div *ngIf="page.customTitle">
+              {{ page.customTitle }}
+            </div>
+          </ion-col>
+        </ion-grid>
+
+      </ion-slide>
+    </ion-slides>
+    <ion-button id="button-next"
+                *ngIf="config.general.interactiveMode"
+                (click)="slides.slideNext()">
+      <ion-icon name="arrow-forward"></ion-icon>
+    </ion-button>
+  </div>
+
+</div>

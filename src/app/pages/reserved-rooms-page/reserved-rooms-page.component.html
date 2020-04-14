@@ -1,0 +1,50 @@
+<ng-template #roomReservationsTemplate let-reservations="items" let-options="options">
+  <ion-card *ngIf="config.general.interactiveMode">
+
+  </ion-card>
+
+  <ion-card *ngIf="!config.general.interactiveMode">
+    <ion-card-header color="primary">
+      {{ "words."+options.when | translate }}
+      (Ab {{ moment(timerService.timeslots[options.when].begin).format('HH:mm') }} {{ "words.oclock" | translate }})
+    </ion-card-header>
+    <ion-card-content>
+      <ion-grid >
+        <ion-row id="headers">
+          <ion-col col-2>
+            {{ "page.rooms-reserved.time" | translate }}
+          </ion-col>
+          <ion-col col-2>
+            {{ "page.rooms-reserved.room" | translate }}
+          </ion-col>
+          <ion-col col-auto>
+            {{ "page.rooms-reserved.reservation_title" | translate }}
+          </ion-col>
+        </ion-row>
+
+
+        <ion-row *ngFor="let reservation of reservations">
+          <ng-container>
+            <ion-col col-2>
+              {{ moment(reservation.startTime).format("LT") }} - {{ moment(reservation.endTime).format("LT") }}
+            </ion-col>
+            <ion-col col-2>
+              {{ reservation.roomList.room }}
+            </ion-col>
+            <ion-col col-auto>
+              {{ reservation.veranstaltung }}
+            </ion-col>
+          </ng-container>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+</ng-template>
+
+<results [items]="reservedRooms.now"
+         [options]="{when: 'now'}"
+         [template]="roomReservationsTemplate"></results>
+
+<results [items]="reservedRooms.soon"
+         [options]="{when: 'soon'}"
+         [template]="roomReservationsTemplate"></results>

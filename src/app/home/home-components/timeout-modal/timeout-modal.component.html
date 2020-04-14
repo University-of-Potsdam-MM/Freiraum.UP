@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      {{ 'words.timeoutText' | translate : {timeRemaining: timeRemaining.toString()} }}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content style="overflow: hidden !important;">
+  <div (click)="dismissByInteraction()"
+       style="width: 100%; height:100%; background-color: white;">
+    <ion-spinner [name]="animationName"
+                 [duration]="animationDuration"
+                 style="width: 90%; height: 90%; z-index: 1000">
+    </ion-spinner>
+  </div>
+</ion-content>

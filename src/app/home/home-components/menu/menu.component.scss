@@ -1,0 +1,54 @@
+#menu-container {
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  margin-top: 50px;
+  width: 90%;
+  margin-left: 5%;
+
+  #loading-bar {
+    order: 0;
+  }
+
+  #menu {
+    order: 1;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    position:relative;
+
+    #button-previous {
+      order: 0;
+      position:absolute;
+      left:0;
+      margin: 2rem 0.2rem;
+    }
+
+    #slides {
+      order: 1;
+
+      ion-icon {
+        text-align: center;
+        font-size: 64px;
+      }
+
+      .swiper-slide-active {
+        color: var(--ion-color-primary);
+        font-weight: bold;
+      }
+
+      .swiper-slide:not(.swiper-slide-active) {
+        color: var(--ion-color-secondary);
+      }
+    }
+
+    #button-next {
+      order: 2;
+      position:absolute;
+      right:0;
+      margin: 2rem 0.2rem;
+    }
+  }
+}
+

@@ -1,0 +1,23 @@
+<div>
+  <ion-segment [(ngModel)]="selectedPlaceId" (ngModelChange)="filterEvents($event)">
+    <ng-container *ngFor="let place of places">
+      <ion-segment-button [value]="place.id">
+        {{ place.name }}
+      </ion-segment-button>
+    </ng-container>
+  </ion-segment>
+</div>
+
+<ng-template #results let-event="items">
+  <div class="events-container">
+        <ng-container *ngFor="let e of events">
+          <article [article]="e" [articleType]="'event'"></article>
+        </ng-container>
+  </div>
+</ng-template>
+
+<div id="newslist">
+    <results [items]="filteredEvents"
+             [template]="results">
+    </results>
+</div>

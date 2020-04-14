@@ -1,0 +1,58 @@
+<ng-template #eventArticle>
+  <ion-card>
+    <ion-card-header color="primary">
+      {{ article.Event.name }}
+    </ion-card-header>
+    <ion-card-content>
+      <ion-img [src]="article.Event.img"></ion-img>
+      {{ article.Event.description }}
+    </ion-card-content>
+    <ion-card-subtitle>
+      {{ article.Event.DateString }}
+    </ion-card-subtitle>
+  </ion-card>
+</ng-template>
+
+<ng-template #newsArticle>
+  <ion-card>
+    <ion-card-header class="ion-text-wrap" color="primary">
+      <h3>
+        {{ article.News.headline }}
+      </h3>
+    </ion-card-header>
+
+    <ion-card-content *ngIf="article.News.text ||
+                             article.News.description ||
+                             article.News.DateString"
+                      class="ion-text-wrap">
+      <ng-container *ngIf="(article.NewsSource.name == 'Uni Nachrichten' ||
+                            article.NewsSource.name == 'Uni Medienmitteilungen' ||
+                            article.NewsSource.name == 'Zur Quelle' ||
+                            article.NewsSource.name == 'AstA Protokolle');
+                            then textOnly else descriptionOnly">
+      </ng-container>
+
+      <ng-template #textOnly>
+        <div [innerHTML]="article.News.text"></div>
+      </ng-template>
+      <ng-template #descriptionOnly>
+        <div [innerHTML]="article.News.description"></div>
+      </ng-template>
+    </ion-card-content>
+
+    <ion-card-subtitle>
+        <div *ngIf="article.News.DateString" class="news-date">
+        {{ "page.news.articlePublished" | translate }} {{ article.News.DateString }}
+      </div>
+    </ion-card-subtitle>
+  </ion-card>
+</ng-template>
+
+<ng-container [ngSwitch]="articleType">
+  <div *ngSwitchCase="'news'">
+    <ng-container *ngTemplateOutlet="newsArticle"></ng-container>
+  </div>
+  <div *ngSwitchCase="'event'">
+    <ng-container *ngTemplateOutlet="eventArticle"></ng-container>
+  </div>
+</ng-container>

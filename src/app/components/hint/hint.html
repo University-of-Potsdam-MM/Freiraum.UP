@@ -1,0 +1,20 @@
+<ng-template #defaultTemplate>
+  <ion-card>
+
+    <ion-card-header *ngIf="hintTextI18nKey">
+      <ion-icon [name]="hintIcon" margin-right></ion-icon> {{ hintTypeI18nKey | translate }}
+    </ion-card-header>
+
+    <ion-card-content class="ion-text-center">
+      {{ hintTextI18nKey | translate }}
+    </ion-card-content>
+
+  </ion-card>
+</ng-template>
+
+<ng-template #customTemplate>
+  <ng-container *ngTemplateOutlet="hintCustomTemplate"></ng-container>
+</ng-template>
+
+<ng-container *ngIf="hintCustomTemplate === undefined; then defaultTemplate else customTemplate">
+</ng-container>

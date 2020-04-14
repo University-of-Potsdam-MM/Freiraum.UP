@@ -1,0 +1,14 @@
+<ion-header>
+  <ion-toolbar>
+    <app-header></app-header>
+    <app-menu (touched)="timer.startTimeout()"></app-menu>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="content">
+  <div *ngFor="let p of pages" [style.display]="p.selected ? 'block' : 'none'">
+    <ndc-dynamic [ndcDynamicComponent]="p.component"
+                 [ndcDynamicInputs]="p.inputs">
+    </ndc-dynamic>
+  </div>
+</ion-content>
