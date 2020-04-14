@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {ConfigService} from '../config/config.service';
-import {Observable, Subject, timer} from 'rxjs';
+import {Observable, ReplaySubject, Subject, timer} from 'rxjs';
 import * as moment from 'moment';
 
 @Injectable({
@@ -16,6 +16,7 @@ export class TimerService {
   progress: Subject<number> = new Subject<number>();
   timeoutEnded: Subject<void> = new Subject<void>();
   showNextPage: Subject<boolean> = new Subject<boolean>();
+  isInOperationTime: ReplaySubject<boolean> = new ReplaySubject<boolean>();
 
   protected config = ConfigService.config;
 
@@ -30,8 +31,24 @@ export class TimerService {
     this.startNowTimer();
     this.startTimeslotUpdate();
     this.startProgressTimer();
+    this.startOperationTimeWatcher();
   }
 
+  checkOperationTime(): boolean {
+    const format = 'hh:mm';
+    return moment().isBetween(
+      moment(this.config.general.operation_time.on, format),
+      moment(this.config.general.operation_time.off, format)
+    );
+  }
+
+  startOperationTimeWatcher() {
+    timer(0, 60 * 1000).subscribe(
+      n => {
+        this.isInOperationTime.next(this.checkOperationTime());
+      }
+    );
+  }
 
   startNowTimer() {
     timer(0, this.config.general.time_update_frequency * 1000).subscribe(

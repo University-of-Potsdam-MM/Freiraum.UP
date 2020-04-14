@@ -9,6 +9,7 @@ import {TimerService} from '../services/timer/timer.service';
 import {ModalController} from '@ionic/angular';
 import {TimeoutModalComponent} from './home-components/timeout-modal/timeout-modal.component';
 import {ApiService} from '../services/api/api.service';
+import {ScreenSaverComponent} from './home-components/screen-saver/screen-saver.component';
 
 @Component({
   selector: 'app-home',
@@ -19,6 +20,7 @@ export class HomePage implements AfterViewInit {
 
   pages: PageItem[] = this.pageService.pages;
   config = ConfigService.config;
+  screenSaverModal;
 
   constructor(private pageService: PagesService,
               private timer: TimerService,
@@ -30,6 +32,9 @@ export class HomePage implements AfterViewInit {
     window.addEventListener('click', () => this.timer.startTimeout());
     window.addEventListener('scroll', () => this.timer.startTimeout());
     this.timer.timeoutEnded.subscribe(() => this.showTimeoutModal());
+    this.timer.isInOperationTime.subscribe(
+      inOperationTime => { this.showScreenSaverModal(inOperationTime); }
+    );
   }
 
   async showTimeoutModal() {
@@ -46,5 +51,21 @@ export class HomePage implements AfterViewInit {
           this.timer.startProgressTimer();
         }
       });
+  }
+
+  async showScreenSaverModal(inOperationTime) {
+    if (!inOperationTime) {
+      if (this.screenSaverModal === null) {
+        this.screenSaverModal = await this.modalController.create({
+          component: ScreenSaverComponent,
+          cssClass: 'fullscreen-modal'
+        });
+        await this.screenSaverModal.present();
+      }
+    } else {
+      if (this.screenSaverModal !== null) {
+        this.screenSaverModal.dismiss();
+      }
+    }
   }
 }

@@ -16,6 +16,7 @@ import {ResultsComponent} from '../components/results/results';
 import {HintComponent} from '../components/hint/hint';
 import {ArticleComponent} from '../components/article/article';
 import {PipesModule} from '../pipes/pipes.module';
+import {ScreenSaverComponent} from './home-components/screen-saver/screen-saver.component';
 
 @NgModule({
   imports: [
@@ -38,6 +39,7 @@ import {PipesModule} from '../pipes/pipes.module';
     LoadingbarComponent,
     MenuComponent,
     TimeoutModalComponent,
+    ScreenSaverComponent,
     ResultsComponent,
     HintComponent,
     ArticleComponent,
@@ -48,6 +50,7 @@ import {PipesModule} from '../pipes/pipes.module';
     LoadingbarComponent,
     MenuComponent,
     TimeoutModalComponent,
+    ScreenSaverComponent,
     ResultsComponent,
     HintComponent,
     ArticleComponent,
