@@ -1,12 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-<<<<<<< HEAD
 import {HttpClient} from '@angular/common/http';
 import {BasicPageComponent} from '../../components/basic-page/basic-page.component';
 import * as moment from 'moment';
 import {Ad, AdsConfig} from '../../../types/Ads';
-=======
-import {BasicPageComponent} from '../../components/basic-page/basic-page.component';
->>>>>>> ionic4
 
 /**
  *
@@ -54,8 +50,8 @@ export class AdsPageComponent extends BasicPageComponent implements OnInit {
     );
   }
 
-  nextAd() {
-    this.currentAdIndex > (this.ads.length - 1)
+  onSelected() {
+    this.currentAdIndex >= (this.ads.length - 1)
       ? this.currentAdIndex = 0
       : this.currentAdIndex += 1;
   }
