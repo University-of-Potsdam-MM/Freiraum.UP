@@ -12,7 +12,7 @@ export class MensaPageComponent extends BasicPageComponent  implements OnInit {
   selectedCanteenIndex = 0;
   meals: {[canteen: string]: Meal[]} = {};
 
-  constructor() { super(); }
+  constructor() { super('mensa'); }
 
   ngOnInit() {
     for (const canteen of this.config.mensa.canteens) {

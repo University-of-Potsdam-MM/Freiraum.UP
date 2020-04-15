@@ -15,7 +15,7 @@ export class NewsPageComponent extends BasicPageComponent implements OnInit {
   newsSources: {id: number, name: string}[] = [];
   selectedNewsSourceId: number;
 
-  constructor() { super(); }
+  constructor() { super('news'); }
 
   /**
    * filters the currently available news by the selected newsSource

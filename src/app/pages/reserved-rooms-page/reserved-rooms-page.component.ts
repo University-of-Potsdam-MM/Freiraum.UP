@@ -10,7 +10,7 @@ export class ReservedRoomsPageComponent extends BasicPageComponent implements On
 
   reservedRooms = {};
 
-  constructor() { super(); }
+  constructor() { super('rooms-reserved'); }
 
   ngOnInit() {
     for (const timeslot of ['now', 'soon']) {

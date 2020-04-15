@@ -11,7 +11,7 @@ export class RoomsPageComponent extends BasicPageComponent implements OnInit {
 
   rooms = {};
 
-  constructor() { super(); }
+  constructor() { super('rooms-free'); }
 
   ngOnInit() {
     for (const timeslot of ['now', 'soon']) {

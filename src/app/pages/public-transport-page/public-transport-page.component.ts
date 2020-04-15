@@ -14,7 +14,7 @@ export class PublicTransportPageComponent extends BasicPageComponent implements 
   station = this.config.transport.station_name;
   departures: Departure[] = [];
 
-  constructor() { super(); }
+  constructor() { super('publicTransport'); }
 
   ngOnInit() {
     this.api.feeds.publicTransport.subscribe(

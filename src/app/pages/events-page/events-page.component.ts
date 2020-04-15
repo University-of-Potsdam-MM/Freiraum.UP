@@ -15,7 +15,7 @@ export class EventsPageComponent extends BasicPageComponent implements OnInit {
   selectedPlaceId;
   filteredEvents: EventItem[] = [];
 
-  constructor() { super(); }
+  constructor() { super('events'); }
 
   /**
    * filters the currently available events by the selected place
