@@ -2,16 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {BasicPageComponent} from '../../components/basic-page/basic-page.component';
 import * as moment from 'moment';
-
-export interface AdsConfig {
-  ads: {name: string, startDate: string, endDate: string}[];
-}
-
-export interface Ad {
-  html: string;
-  startDate: string;
-  endDate: string;
-}
+import {Ad, AdsConfig} from '../../../types/Ads';
 
 /**
  *
