@@ -1,3 +1,2 @@
-<p>
-  ads-page works!
-</p>
+<!-- if there are ads, include the currently selected one -->
+<div *ngIf="ads.length > 0" [innerHTML]="ads[currentAdIndex].html"></div>

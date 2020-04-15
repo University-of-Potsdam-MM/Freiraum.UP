@@ -32,7 +32,6 @@ export class TimerService {
     this.startProgressTimer();
   }
 
-
   startNowTimer() {
     timer(0, this.config.general.time_update_frequency * 1000).subscribe(
       n => {
