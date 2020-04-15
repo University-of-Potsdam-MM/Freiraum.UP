@@ -5,6 +5,7 @@ import {Injector, Type} from '@angular/core';
 import {StaticInjectorService} from './static-injector';
 import * as moment from 'moment';
 import {TimerService} from '../../services/timer/timer.service';
+import {PageSelectedService} from '../../services/page-selected/page-selected.service';
 
 export abstract class BasicPageComponent {
 
@@ -13,10 +14,22 @@ export abstract class BasicPageComponent {
   protected moment = moment;
   protected timerService: TimerService;
 
-  constructor() {
-      const injector: Injector = StaticInjectorService.getInjector();
-      this.api = injector.get<ApiService>(ApiService as Type<ApiService>);
-      this.timerService = injector.get<TimerService>(TimerService as Type<TimerService>);
+  private pages: PageSelectedService;
+  private name: string;
+
+  constructor(name: string = 'noName') {
+    this.name = name;
+    const injector: Injector = StaticInjectorService.getInjector();
+    this.api = injector.get<ApiService>(ApiService as Type<ApiService>);
+    this.timerService = injector.get<TimerService>(TimerService as Type<TimerService>);
+    this.pages = injector.get<PageSelectedService>(PageSelectedService as Type<PageSelectedService>);
+    this.pages.selected.subscribe(
+      selected => {
+        if (selected === name) { this.onSelected(); }}
+    );
   }
 
+  onSelected() {
+    console.log(`'onSelected()' not implemented for component '${this.name}'.`);
+  }
 }
