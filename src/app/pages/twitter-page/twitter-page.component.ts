@@ -13,7 +13,7 @@ export class TwitterPageComponent extends BasicPageComponent implements OnInit {
 
   @input channel: string;
 
-  constructor() { super(); }
+  constructor() { super('twitter'); }
 
   ngOnInit() {
     twitterWidgets.load();

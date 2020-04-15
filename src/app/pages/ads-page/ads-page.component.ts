@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+<<<<<<< HEAD
 import {HttpClient} from '@angular/common/http';
 import {BasicPageComponent} from '../../components/basic-page/basic-page.component';
 import * as moment from 'moment';
 import {Ad, AdsConfig} from '../../../types/Ads';
+=======
+import {BasicPageComponent} from '../../components/basic-page/basic-page.component';
+>>>>>>> ionic4
 
 /**
  *
@@ -17,7 +21,7 @@ export class AdsPageComponent extends BasicPageComponent implements OnInit {
   ads: Ad[] = [];
   currentAdIndex = 0;
 
-  constructor(private http: HttpClient) { super(); }
+  constructor(private http: HttpClient) { super('ads'); }
 
   async ngOnInit() {
     this.http.get<AdsConfig>('assets/ads/ads-config.json').subscribe(
