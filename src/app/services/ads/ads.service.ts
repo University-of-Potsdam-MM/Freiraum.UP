@@ -43,12 +43,10 @@ export class AdsService {
                   endDate: moment(ad.endDate).toISOString()
                 });
               } catch (error) {
-                  rj(`HTML for ad '${ad.name}' could not be loaded. Error: <${JSON.stringify(error)}>`);
-                  return;
+                  console.log(`HTML for ad '${ad.name}' could not be loaded.`);
               }
             } else {
-              rj('Ad element not properly formatted');
-              return;
+              console.log('Ad element not properly formatted');
             }
           }
           rs(this.filterAds(ads));
