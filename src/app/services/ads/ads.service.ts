@@ -12,6 +12,12 @@ export class AdsService {
 
   constructor(private http: HttpClient) { }
 
+  filterAds(ads: Ad[]) {
+    return ads.filter(
+      ad => moment().isBetween(ad.startDate, ad.endDate)
+    );
+  }
+
   getAds(): Promise<Ad[]> {
     return new Promise<Ad[]>(
       async (rs, rj) => {
@@ -20,6 +26,7 @@ export class AdsService {
           this.config = await this.http.get<AdsConfig>('assets/ads/ads-config.json').toPromise();
         } catch (error) {
           rj('Could not get ads config');
+          return;
         }
         if (this.config.ads && this.config.ads.length > 0) {
           for (const ad of this.config.ads) {
@@ -37,14 +44,18 @@ export class AdsService {
                 });
               } catch (error) {
                   rj(`HTML for ad '${ad.name}' could not be loaded. Error: <${JSON.stringify(error)}>`);
+                  return;
               }
             } else {
               rj('Ad element not properly formatted');
+              return;
             }
           }
-          rs(ads);
+          rs(this.filterAds(ads));
+          return;
         }
         rj('No ads defined');
+        return;
       }
     );
   }
