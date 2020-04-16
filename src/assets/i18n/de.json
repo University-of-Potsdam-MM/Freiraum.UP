@@ -45,7 +45,8 @@
       "time_of_departure": "Abfahrtszeit"
     },
     "ads": {
-      "title": "Anzeigen"
+      "title": "Anzeigen",
+      "noAds": "Es sind keine Anzeigen hinterlegt."
     },
     "facebook": {
       "title": "Facebook"
