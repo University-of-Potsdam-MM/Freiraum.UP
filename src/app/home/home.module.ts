@@ -16,9 +16,11 @@ import {ResultsComponent} from '../components/results/results';
 import {HintComponent} from '../components/hint/hint';
 import {ArticleComponent} from '../components/article/article';
 import {PipesModule} from '../pipes/pipes.module';
+import {LayoutModule} from '@angular/cdk/layout';
 
 @NgModule({
   imports: [
+    LayoutModule,
     CommonModule,
     FormsModule,
     IonicModule,

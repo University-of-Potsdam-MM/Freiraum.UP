@@ -15,6 +15,8 @@ import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {ConfigService} from './services/config/config.service';
 import {TimerService} from './services/timer/timer.service';
 import {ApiService, AuthorizationInterceptor} from './services/api/api.service';
+import {LayoutModule, MediaMatcher} from '@angular/cdk/layout';
+import {Platform} from "@angular/cdk/platform";
 
 export function TranslateLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -31,6 +33,7 @@ export function initConfig(config: ConfigService) {
   entryComponents: [
   ],
   imports: [
+    LayoutModule,
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
@@ -45,6 +48,7 @@ export function initConfig(config: ConfigService) {
       })
   ],
   exports: [
+    LayoutModule,
     TranslateModule
   ],
   providers: [
@@ -54,6 +58,8 @@ export function initConfig(config: ConfigService) {
     TimerService,
     ApiService,
     Title,
+    MediaMatcher,
+    Platform,
     {
       provide: APP_INITIALIZER,
       useFactory: initConfig,
