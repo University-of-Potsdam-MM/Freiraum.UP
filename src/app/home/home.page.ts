@@ -31,10 +31,8 @@ export class HomePage implements AfterViewInit {
 
   ngAfterViewInit() {
     this.breakpointObserver
-      .observe(['(max-width: 1080px)'])
-      .subscribe((state: BreakpointState) => {
-        this.landscape = !state.matches;
-      });
+      .observe([`(max-width: ${this.config.general.layout.breakpoint_landscape})`])
+      .subscribe((state: BreakpointState) => { this.landscape = !state.matches; });
 
     this.api.init();
     window.addEventListener('click', () => this.timer.startTimeout());

@@ -41,6 +41,7 @@ export interface ITimeslot {
 }
 
 export interface GeneralConfig {
+  layout: Layout;
   interactiveMode: boolean;
   default_language: string;
   page_switching_frequency: number;
@@ -51,6 +52,11 @@ export interface GeneralConfig {
   timeout_time: number;
   timeout_modal_countdown_time: number;
   time_update_frequency: number;
+}
+
+export interface Layout {
+  content_width_landscape: string;
+  breakpoint_landscape: string;
 }
 
 export interface ApiConfig {

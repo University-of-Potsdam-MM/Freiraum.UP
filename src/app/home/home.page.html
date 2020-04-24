@@ -27,9 +27,11 @@
 </ion-header>
 
 <ion-content class="content">
-  <div *ngFor="let p of pages" [style.display]="p.selected ? 'block' : 'none'">
-    <ndc-dynamic [ndcDynamicComponent]="p.component"
-                 [ndcDynamicInputs]="p.inputs">
-    </ndc-dynamic>
+  <div [style.width]="landscape ? config.general.layout.content_width_landscape : '100%'">
+    <div *ngFor="let p of pages" [style.display]="p.selected ? 'block' : 'none'">
+      <ndc-dynamic [ndcDynamicComponent]="p.component"
+                   [ndcDynamicInputs]="p.inputs">
+      </ndc-dynamic>
+    </div>
   </div>
 </ion-content>
