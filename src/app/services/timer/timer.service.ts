@@ -48,7 +48,7 @@ export class TimerService {
 
         const seconds = n % this.config.general.page_switching_frequency;
         const shouldShowNextPage = seconds === 0;
-        const progress = Math.trunc((seconds / this.config.general.page_switching_frequency) * 100);
+        const progress = Math.trunc((seconds / this.config.general.page_switching_frequency)*100);
 
         if (shouldShowNextPage) { this.showNextPage.next(true); }
         this.progress.next(progress);

@@ -22,6 +22,9 @@ export class HomePage implements AfterViewInit {
   pages: PageItem[] = this.pageService.pages;
   config = ConfigService.config;
   landscape = false;
+  contentWidthPercent = '100%';
+  visibleSlides = 3;
+  progress;
 
   constructor(private pageService: PagesService,
               private timer: TimerService,
@@ -30,14 +33,24 @@ export class HomePage implements AfterViewInit {
               private api: ApiService) {}
 
   ngAfterViewInit() {
-    this.breakpointObserver
-      .observe([`(max-width: ${this.config.general.layout.breakpoint_landscape})`])
-      .subscribe((state: BreakpointState) => { this.landscape = !state.matches; });
-
     this.api.init();
+
     window.addEventListener('click', () => this.timer.startTimeout());
     window.addEventListener('scroll', () => this.timer.startTimeout());
+
     this.timer.timeoutEnded.subscribe(() => this.showTimeoutModal());
+    this.timer.progress.subscribe(p => this.progress = p );
+
+    // observes the width of the application and sets the landscape variable accordingly
+    this.breakpointObserver
+      .observe([`(max-width: ${this.config.general.layout.breakpoint_landscape})`])
+      .subscribe((state: BreakpointState) => {
+        this.landscape = !state.matches;
+        this.contentWidthPercent = this.landscape
+          ? this.config.general.layout.content_width_landscape
+          : '100%';
+        this.visibleSlides = this.landscape ? 5 : 3;
+      });
   }
 
   async showTimeoutModal() {

@@ -1,37 +1,61 @@
-<div id="menu-container">
-  <app-loadingbar id="loading-bar"></app-loadingbar>
+<ng-template #interactive>
+  <div id="menu-container">
+    <ion-progress-bar [value]="progress/100">
+    </ion-progress-bar>
 
-  <div id="menu">
-    <ion-button id="button-previous"
-                *ngIf="config.general.interactiveMode"
-                (click)="slides.slidePrev()">
-      <ion-icon name="arrow-back"></ion-icon>
-    </ion-button>
-    <ion-slides id="slides"
-                (ionSlideDidChange)="onIonSlideDidChange($event)"
-                (ionSlideDrag)="onTouchEvent()"
-                [options]="slidesOptions">
-      <ion-slide *ngFor="let page of pageList">
-        <ion-grid>
-          <ion-col id="icon">
-            <ion-icon [name]="page.icon"></ion-icon>
-          </ion-col>
-          <ion-col id="label">
-            <div *ngIf="!page.customTitle">
-              {{ page.name | pageName }}
-            </div>
-            <div *ngIf="page.customTitle">
-              {{ page.customTitle }}
-            </div>
-          </ion-col>
-        </ion-grid>
+    <div id="menu">
+      <ion-button id="button-previous"
+                  class="navigation_button"
+                  *ngIf="config.general.interactiveMode"
+                  (click)="slides.slidePrev()">
+        <ion-icon size="large" name="arrow-back"></ion-icon>
+      </ion-button>
+      <ion-slides id="slides"
+                  (ionSlideDidChange)="onIonSlideDidChange($event)"
+                  (ionSlideDrag)="onTouchEvent()"
+                  [options]="slidesOptions">
+        <ion-slide *ngFor="let page of pageList">
+          <ion-grid>
+            <ion-col id="icon">
+              <ion-icon [name]="page.icon"></ion-icon>
+            </ion-col>
+            <ion-col id="label">
+              <div *ngIf="!page.customTitle">
+                {{ page.name | pageName }}
+              </div>
+              <div *ngIf="page.customTitle">
+                {{ page.customTitle }}
+              </div>
+            </ion-col>
+          </ion-grid>
 
-      </ion-slide>
-    </ion-slides>
-    <ion-button id="button-next"
-                *ngIf="config.general.interactiveMode"
-                (click)="slides.slideNext()">
-      <ion-icon name="arrow-forward"></ion-icon>
-    </ion-button>
+        </ion-slide>
+      </ion-slides>
+      <ion-button id="button-next"
+                  class="navigation_button"
+                  *ngIf="config.general.interactiveMode"
+                  (click)="slides.slideNext()">
+        <ion-icon size="large" name="arrow-forward"></ion-icon>
+      </ion-button>
+    </div>
   </div>
-</div>
+</ng-template>
+
+<ng-template #nonInteractive>
+  <ion-slides (ionSlideDidChange)="onIonSlideDidChange($event)"
+              (ionSlideDrag)="onTouchEvent()">
+    <ion-slide *ngFor="let page of pageList">
+      <span *ngIf="page.selected" style="font-size: 3em; color: var(--ion-color-primary);">
+      <ion-icon [name]="page.icon"></ion-icon>
+      <span *ngIf="!page.customTitle">
+        {{ page.name | pageName }}
+      </span>
+      <span *ngIf="page.customTitle">
+        {{ page.customTitle }}
+      </span>
+      </span>
+    </ion-slide>
+  </ion-slides>
+</ng-template>
+
+<ng-container *ngIf="config.general.interactiveMode; then interactive; else nonInteractive"></ng-container>

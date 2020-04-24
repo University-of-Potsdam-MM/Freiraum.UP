@@ -9,7 +9,6 @@ import {DynamicModule} from 'ng-dynamic-component';
 import {componentsList} from '../services/pages/pages.service';
 import {TranslateModule} from '@ngx-translate/core';
 import {HeaderComponent} from './home-components/header/header.component';
-import {LoadingbarComponent} from './home-components/loadingbar/loadingbar.component';
 import {MenuComponent} from './home-components/menu/menu.component';
 import {TimeoutModalComponent} from './home-components/timeout-modal/timeout-modal.component';
 import {ResultsComponent} from '../components/results/results';
@@ -37,7 +36,6 @@ import {LayoutModule} from '@angular/cdk/layout';
   declarations: [
     HomePage,
     HeaderComponent,
-    LoadingbarComponent,
     MenuComponent,
     TimeoutModalComponent,
     ResultsComponent,
@@ -47,7 +45,6 @@ import {LayoutModule} from '@angular/cdk/layout';
   ],
   entryComponents: [
     HeaderComponent,
-    LoadingbarComponent,
     MenuComponent,
     TimeoutModalComponent,
     ResultsComponent,

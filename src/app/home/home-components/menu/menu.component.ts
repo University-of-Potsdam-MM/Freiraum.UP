@@ -1,14 +1,15 @@
-import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {PagesService} from '../../../services/pages/pages.service';
 import {IonSlides} from '@ionic/angular';
-import {LoadingbarComponent} from '../loadingbar/loadingbar.component';
 import {ConfigService} from '../../../services/config/config.service';
 import {TimerService} from '../../../services/timer/timer.service';
+import {BreakpointObserver} from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss'],
+  providers: [BreakpointObserver]
 })
 export class MenuComponent implements OnInit {
 
@@ -16,13 +17,20 @@ export class MenuComponent implements OnInit {
 
   @ViewChild(IonSlides, {static: false}) slides: IonSlides;
 
-  @ViewChild(LoadingbarComponent, {static: false}) loadingBar: LoadingbarComponent;
-
   pageList = this.pages.pages;
-
+  progress;
   config = ConfigService.config;
 
-  visibleSlides = this.config.general.interactiveMode ? 7 : 3;
+  @Input() set visibleSlides(slides) {
+    this.slidesOptions = {
+    slidesPerView: slides,
+    centeredSlides: true,
+    loop: true,
+    loopedSlides: slides,
+    loopAdditionalSlides: slides,
+    slideToClickedSlide: true
+    };
+  }
 
   slidesOptions = {
     slidesPerView: this.visibleSlides,
@@ -34,10 +42,13 @@ export class MenuComponent implements OnInit {
   };
 
   constructor(private pages: PagesService,
-              private timer: TimerService) { }
+              private timer: TimerService) {
+    this.visibleSlides = 3;
+  }
 
   ngOnInit(): void {
     this.timer.showNextPage.subscribe(next => this.slides.slideNext());
+    this.timer.progress.subscribe(p => { this.progress = p; });
   }
 
   onIonSlideDidChange(event) {

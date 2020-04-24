@@ -1,33 +1,51 @@
-<ion-header>
+<!-- header of the application -->
+<ion-header no-border>
   <ion-toolbar>
-    <div id="header_wrapper">
 
-      <div id="logo_wrapper">
-        <div id="banner"></div>
-        <div id="logo_image">
-          <img src="assets/imgs/logo_uni_potsdam.svg">
-        </div>
-      </div>
-
-      <div id="info_wrapper" align="right">
-        <div id="building_name">
-          {{ "words.campus" | translate }} {{ config.general.location.campus_name }}
-          <br>
-          {{ "words.building" | translate }} {{ config.general.location.building }}
-        </div>
-
-        <div id="time">
-          {{ timer.now | async }}
-        </div>
-      </div>
+    <div class="stripe" *ngIf="config.general.interactiveMode">&nbsp;</div>
+    <div class="stripe" *ngIf="!config.general.interactiveMode">
+      <ion-progress-bar [value]="progress / 100"
+                        style="height: 20px;">
+      </ion-progress-bar>
     </div>
 
-    <app-menu (touched)="timer.startTimeout()"></app-menu>
+    <div id="header_wrapper">
+      <img id="logo" src="assets/imgs/logo_uni_potsdam.svg">
+
+      <span class="title no-wrap">
+        <!--  {{ "words.institution" | translate }} - {{ "words.title" | translate }} -->
+        Universität Potsdam - Freiraum.UP
+      </span>
+
+      <span *ngIf="!config.general.interactiveMode" class="title">
+        <app-menu></app-menu>
+      </span>
+    </div>
+
+
+    <div id="info_wrapper" [style.width]="contentWidthPercent">
+      <span id="location" class="header_text no-wrap">
+        {{ config.general.location.campus_name }} - {{ "words.building" | translate }} {{ config.general.location.building }}
+      </span>
+
+      <span id="time" class="header_text no-wrap">
+        {{ timer.now | async }}
+      </span>
+    </div>
+    <div id="menu"
+         *ngIf="config.general.interactiveMode"
+         [style.width]="contentWidthPercent">
+      <app-menu (touched)="timer.startTimeout()"
+                [visibleSlides]="visibleSlides">
+      </app-menu>
+    </div>
   </ion-toolbar>
 </ion-header>
 
+<!-- content of the application, Pages from pagesConfig are embedded here -->
 <ion-content class="content">
-  <div [style.width]="landscape ? config.general.layout.content_width_landscape : '100%'">
+  <div id="content-wrapper"
+       [style.width]="contentWidthPercent">
     <div *ngFor="let p of pages" [style.display]="p.selected ? 'block' : 'none'">
       <ndc-dynamic [ndcDynamicComponent]="p.component"
                    [ndcDynamicInputs]="p.inputs">
