@@ -2,21 +2,25 @@
   "ads": [
     {
       "name": "sample-ad0",
+      "fitForLandscape": true,
       "startDate": "2020-04-01",
       "endDate": "2020-04-30"
     },
     {
       "name": "sample-ad1",
+      "fitForLandscape": true,
       "startDate": "2020-04-01",
       "endDate": "2020-04-30"
     },
     {
       "name": "sample-ad2",
+      "fitForLandscape": true,
       "startDate": "2020-04-01",
       "endDate": "2020-04-30"
     },
     {
       "name": "sample-ad3",
+      "fitForLandscape": true,
       "startDate": "2020-04-01",
       "endDate": "2020-04-30"
     }

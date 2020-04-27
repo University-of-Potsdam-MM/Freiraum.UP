@@ -39,6 +39,7 @@ export class AdsService {
                 ).toPromise();
                 ads.push({
                   html: adHTML,
+                  fitForLandscape: ad.fitForLandscape,
                   startDate: moment(ad.startDate).toISOString(),
                   endDate: moment(ad.endDate).toISOString()
                 });

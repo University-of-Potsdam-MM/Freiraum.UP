@@ -60,6 +60,7 @@ export function initConfig(config: ConfigService) {
     Title,
     MediaMatcher,
     Platform,
+    LayoutModule,
     {
       provide: APP_INITIALIZER,
       useFactory: initConfig,

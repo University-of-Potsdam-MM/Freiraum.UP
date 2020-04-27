@@ -101,7 +101,9 @@
     "oclock": "Uhr",
     "to": "nach",
     "from": "von",
-    "timeoutText": "Automatischer Modus wird in {{timeRemaining}} Sekunden fortgesetzt"
+    "timeoutText": "Automatischer Modus wird in {{timeRemaining}} Sekunden fortgesetzt",
+    "application_name": "Freiraum.UP",
+    "university_name": "Universität Potsdam"
   },
   "buttons": {
     "next": "Vor",

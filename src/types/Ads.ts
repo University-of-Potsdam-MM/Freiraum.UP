@@ -4,6 +4,7 @@ export interface AdsConfig {
 
 export interface Ad {
   html: string;
+  fitForLandscape: boolean;
   startDate: string;
   endDate: string;
 }

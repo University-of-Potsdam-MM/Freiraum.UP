@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {BasicPageComponent} from '../../components/basic-page/basic-page.component';
 import {AdsService} from '../../services/ads/ads.service';
 import {Ad} from '../../../types/Ads';
+import {BreakpointObserver} from "@angular/cdk/layout";
 
 /**
  *
@@ -10,13 +11,15 @@ import {Ad} from '../../../types/Ads';
   selector: 'app-ads-page',
   templateUrl: './ads-page.component.html',
   styleUrls: ['./ads-page.component.scss'],
+  providers: [BreakpointObserver]
 })
 export class AdsPageComponent extends BasicPageComponent implements OnInit {
 
   ads: Ad[] = [];
   currentAdIndex = 0;
 
-  constructor(private adsService: AdsService) { super('ads'); }
+  constructor(private adsService: AdsService,
+              private breakpointObserver: BreakpointObserver) { super('ads'); }
 
   async ngOnInit() {
     this.adsService.getAds()

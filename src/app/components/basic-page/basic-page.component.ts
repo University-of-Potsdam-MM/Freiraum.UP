@@ -1,13 +1,15 @@
 import {ConfigService} from '../../services/config/config.service';
 import {Config} from '../../../types/Config';
 import {ApiService} from '../../services/api/api.service';
-import {Injector, Type} from '@angular/core';
+import {Injector, Input, Type} from '@angular/core';
 import {StaticInjectorService} from './static-injector';
 import * as moment from 'moment';
 import {TimerService} from '../../services/timer/timer.service';
 import {PageSelectedService} from '../../services/page-selected/page-selected.service';
 
 export abstract class BasicPageComponent {
+
+  @Input() landscape = false;
 
   protected config: Config = ConfigService.config;
   protected api: ApiService;

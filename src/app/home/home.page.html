@@ -13,8 +13,9 @@
       <img id="logo" src="assets/imgs/logo_uni_potsdam.svg">
 
       <span class="title no-wrap">
-        <!--  {{ "words.institution" | translate }} - {{ "words.title" | translate }} -->
-        Universität Potsdam - Freiraum.UP
+        {{ "words.university_name" | translate }}
+        &nbsp;-&nbsp;
+        {{ "words.application_name" | translate }}
       </span>
 
       <span *ngIf="!config.general.interactiveMode" class="title">
