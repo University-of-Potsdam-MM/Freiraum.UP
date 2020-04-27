@@ -64,7 +64,7 @@ einzufügen müssen zwei Schritte erfolgen:
   gestaltet werden. Es können auch CSS-Regeln und Klassen der Anwendung selbst verwendet werden.
 - Erstellen eines Eintrags für die Anzeige in der Datei [ads-config.json](src/assets/ads/ads-config.json). Ein solcher Eintrag
   muss wie folgt gestaltet sein:
-    ```json
+    ```js
     {
       "name": "sample-ad0", // der exakte Name des HTML-Dokuments
       "startDate": "2020-04-01", // Datum, ab wann die Anzeige gezeigt werden soll
