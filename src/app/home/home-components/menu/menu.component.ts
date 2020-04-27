@@ -23,12 +23,12 @@ export class MenuComponent implements OnInit {
 
   @Input() set visibleSlides(slides) {
     this.slidesOptions = {
-    slidesPerView: slides,
-    centeredSlides: true,
-    loop: true,
-    loopedSlides: slides,
-    loopAdditionalSlides: slides,
-    slideToClickedSlide: true
+      slidesPerView: slides,
+      centeredSlides: true,
+      loop: true,
+      loopedSlides: slides,
+      loopAdditionalSlides: slides,
+      slideToClickedSlide: true
     };
   }
 

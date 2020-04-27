@@ -15,7 +15,7 @@ export class TimerService {
   now: Subject<string> = new Subject<string>();
   progress: Subject<number> = new Subject<number>();
   timeoutEnded: Subject<void> = new Subject<void>();
-  showNextPage: Subject<boolean> = new Subject<boolean>();
+  showNextPage: Subject<void> = new Subject<void>();
 
   protected config = ConfigService.config;
 
@@ -46,11 +46,11 @@ export class TimerService {
         // guard for undefined state
         if (n <= 0) { return; }
 
-        const seconds = n % this.config.general.page_switching_frequency;
-        const shouldShowNextPage = seconds === 0;
-        const progress = Math.trunc((seconds / this.config.general.page_switching_frequency)*100);
+        const seconds = (n % this.config.general.page_switching_frequency);
+        const shouldShowNextPage = (seconds === 0);
+        const progress = (seconds / this.config.general.page_switching_frequency);
 
-        if (shouldShowNextPage) { this.showNextPage.next(true); }
+        if (shouldShowNextPage) { this.showNextPage.next(); }
         this.progress.next(progress);
       }
     );

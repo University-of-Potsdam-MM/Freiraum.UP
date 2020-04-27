@@ -23,7 +23,10 @@ export class PagesService {
   setSelected(index) {
     this.pages.forEach(
       (p, i) => {
+        // select the page that is to be selected and deselect the others
         p.selected = (i === index);
+
+        // signal selection to the outside
         if (p.selected) {
           this.pageSelected.selected.next(p.name);
         }

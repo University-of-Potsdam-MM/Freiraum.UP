@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {BasicPageComponent} from '../../components/basic-page/basic-page.component';
 import {AdsService} from '../../services/ads/ads.service';
 import {Ad} from '../../../types/Ads';
-import {BreakpointObserver} from "@angular/cdk/layout";
+import {BreakpointObserver} from '@angular/cdk/layout';
 
 /**
  *
@@ -14,6 +14,7 @@ import {BreakpointObserver} from "@angular/cdk/layout";
   providers: [BreakpointObserver]
 })
 export class AdsPageComponent extends BasicPageComponent implements OnInit {
+   @Input() landscape;
 
   ads: Ad[] = [];
   currentAdIndex = 0;

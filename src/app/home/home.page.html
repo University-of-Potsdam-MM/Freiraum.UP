@@ -4,7 +4,7 @@
 
     <div class="stripe" *ngIf="config.general.interactiveMode">&nbsp;</div>
     <div class="stripe" *ngIf="!config.general.interactiveMode">
-      <ion-progress-bar [value]="progress / 100"
+      <ion-progress-bar [value]="progress"
                         style="height: 20px;">
       </ion-progress-bar>
     </div>

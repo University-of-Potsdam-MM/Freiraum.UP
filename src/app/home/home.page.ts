@@ -30,7 +30,8 @@ export class HomePage implements AfterViewInit {
               private timer: TimerService,
               private modalController: ModalController,
               private breakpointObserver: BreakpointObserver,
-              private api: ApiService) {}
+              private api: ApiService) {
+  }
 
   ngAfterViewInit() {
     this.api.init();
@@ -39,13 +40,13 @@ export class HomePage implements AfterViewInit {
     window.addEventListener('scroll', () => this.timer.startTimeout());
 
     this.timer.timeoutEnded.subscribe(() => this.showTimeoutModal());
-    this.timer.progress.subscribe(p => this.progress = p );
+    this.timer.progress.subscribe(p => this.progress = p);
 
     // observes the width of the application and sets the landscape variable accordingly
     this.breakpointObserver
-      .observe([`(max-width: ${this.config.general.layout.breakpoint_landscape})`])
+      .observe([`(min-width: ${this.config.general.layout.breakpoint_landscape})`])
       .subscribe((state: BreakpointState) => {
-        this.landscape = !state.matches;
+        this.landscape = state.matches;
         this.contentWidthPercent = this.landscape
           ? this.config.general.layout.content_width_landscape
           : '100%';
