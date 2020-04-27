@@ -11,12 +11,12 @@
             </ion-avatar>
             <!-- title -->
             <ion-label class="ion-text-wrap">
-                <span>
+                <div class="meal-title">
                     {{ meal.title }}
-                </span>
-                <h1>
+                </div>
+                <div class="meal-description">
                     {{ meal.description }}
-                </h1>
+                </div>
             </ion-label>
         </ion-item>
     </ion-list>
@@ -44,8 +44,8 @@
     <div *ngSwitchCase="false">
         <ng-container *ngFor="let canteen of config.mensa.canteens">
             <ion-card *ngIf="canteen.enabled && meals[canteen.name]?.length > 0">
-                <ion-card-header color="primary">
-                    <h1>{{ "page.mensa.canteenNames." + canteen.name | translate  }}</h1>
+                <ion-card-header color="primary" class="mensa-title">
+                    {{ "page.mensa.canteenNames." + canteen.name | translate  }}
                 </ion-card-header>
                 <ion-card-content>
                     <results [items]="meals[canteen.name]"
