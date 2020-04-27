@@ -80,7 +80,7 @@ einzufügen müssen zwei Schritte erfolgen:
   muss wie folgt gestaltet sein:
     ```js
     {
-      "name": "sample-ad0", // der exakte Name des HTML-Dokuments
+      "name": "sample-ad.html", // der exakte Name des HTML-Dokuments
       "startDate": "2020-04-01", // Datum, ab wann die Anzeige gezeigt werden soll
       "endDate": "2020-04-30" // Datum, bis zu dem die Anzeige gezeigt werden soll
     }   
