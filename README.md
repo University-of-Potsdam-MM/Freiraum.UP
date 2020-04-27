@@ -4,6 +4,20 @@ Dies ist die Neuimplementierung der Anwendung *Freiraum.UP* in ionic 4.
 
 ![img](screenshots/Freiraum.UP.png)
 
+Die Anwendung bietet eine Übersicht im Alltag der Studierenden. Freiraum.UP beinhaltet aktuell die Funktionen:
+
+- Mensa-Speiseplan
+- Abfahrten öffentlicher Verkehrsmittel
+- Anzeige der aktuell freien Räume
+- Anzeige der stattfindenden Veranstaltungen
+- Einbindung vordefinierter Anzeigen
+- Anzeige vordefinierter Twitter-Feeds
+- Anzeige von Neuigkeiten und Events
+
+Freiraum.UP kann in zwei verschiedenen Modi (interaktiv, nicht interaktiv) betrieben werden. Außerdem
+kann Freiraum.UP sowohl im Hoch- als auch im Querformat verwendet werden. Die Anwendung wurde für den Betrieb
+im Format 16:9 entwickelt.
+
 ## Lokales Ausführen
 
 ```bash
