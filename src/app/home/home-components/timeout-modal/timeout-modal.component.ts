@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import {ModalController} from '@ionic/angular';
-import {timer} from 'rxjs';
+import {Observable, Subscription, timer} from 'rxjs';
 import {ConfigService} from '../../../services/config/config.service';
 
+/**
+ * This component displays a window with a countdown. If the countdown is interrupted by the user or the timeout reaches
+ * zero the modal is dismissed again.
+ */
 @Component({
   selector: 'app-timeout-modal',
   templateUrl: './timeout-modal.component.html',
@@ -10,20 +14,18 @@ import {ConfigService} from '../../../services/config/config.service';
 })
 export class TimeoutModalComponent implements OnInit {
 
-  timeout;
-
   config = ConfigService.config;
 
+  /* contains the timeout timer after it has veen started */
+  timeout: Subscription;
+
+  /* time remaining for the modal */
   timeRemaining = this.config.general.timeout_modal_countdown_time;
 
-  /**
-   * the animations name
-   */
+  /* the animations name */
   animationName = 'crescent';
 
-  /**
-   * the animations duration
-   */
+  /* the animations duration */
   animationDuration = 2000;
 
   constructor(private modalCtrl: ModalController) { }
@@ -39,12 +41,18 @@ export class TimeoutModalComponent implements OnInit {
     );
   }
 
-  dismissByInteraction() {
-    this.modalCtrl.dismiss({reason: 'interaction'});
+  /**
+   * dismisses the modal with reason 'interaction
+   */
+  async dismissByInteraction() {
+    await this.modalCtrl.dismiss({reason: 'interaction'});
   }
 
-  dismissByTimeout() {
-    this.modalCtrl.dismiss({reason: 'timeout'});
+  /**
+   * dismisses the timeout by reason 'timeout'
+   */
+  async dismissByTimeout() {
+    await this.modalCtrl.dismiss({reason: 'timeout'});
   }
 
 }

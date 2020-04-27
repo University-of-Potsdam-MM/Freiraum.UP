@@ -7,11 +7,15 @@ export const componentsList = () => {
     return pagesList.map(p => p.component);
 };
 
+/**
+ * This service handles the available pages and is used for selecting a page.
+ */
 @Injectable({
   providedIn: 'root'
 })
 export class PagesService {
 
+  /* fills the services pages array with pages that support the current value of 'interactiveMode' */
   public pages = pagesList.filter(
     p => p.interactiveModes.includes(ConfigService.config.general.interactiveMode)
   );
@@ -20,6 +24,11 @@ export class PagesService {
     this.pages[0].selected = true;
   }
 
+  /**
+   * sets the page at 'index' as selected and sigals this selection to outside subscribers. Actually only used
+   * to tell pages that they are currently in focus
+   * @param index: index of the page to select
+   */
   setSelected(index) {
     this.pages.forEach(
       (p, i) => {

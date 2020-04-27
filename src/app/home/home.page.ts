@@ -8,9 +8,14 @@ import {PageItem} from '../../types/PageItem';
 import {TimerService} from '../services/timer/timer.service';
 import {ModalController} from '@ionic/angular';
 import {TimeoutModalComponent} from './home-components/timeout-modal/timeout-modal.component';
-import {ApiService} from '../services/api/api.service';
 import {BreakpointObserver, BreakpointState} from '@angular/cdk/layout';
 
+/**
+ * This component contains the actual application. It consists of two elements:
+ *
+ * - The header area contains information about the location and the current time.
+ * - The content area contains the selected page
+ */
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -19,30 +24,40 @@ import {BreakpointObserver, BreakpointState} from '@angular/cdk/layout';
 })
 export class HomePage implements AfterViewInit {
 
-  pages: PageItem[] = this.pageService.pages;
   config = ConfigService.config;
+
+  /* Gets the pages that are to be used in the application */
+  pages: PageItem[] = this.pageService.pages;
+
+  /* Whether the application is currently running in landscape format */
   landscape = false;
+
+  /* Defines the current width of the content area. Must be a string because the value is directly used as CSS-value  */
   contentWidthPercent = '100%';
+
+  /* Defines how much slide are to be seen at the same time in interactive mode  */
   visibleSlides = 3;
-  progress;
+
+  /* Contains the current progress value used by the progress-bar */
+  progress: number;
 
   constructor(private pageService: PagesService,
               private timer: TimerService,
               private modalController: ModalController,
-              private breakpointObserver: BreakpointObserver,
-              private api: ApiService) {
-  }
+              private breakpointObserver: BreakpointObserver) {}
 
   ngAfterViewInit() {
-    this.api.init();
-
+    // Adds EventListeners for click and scroll events. Those events will trigger a timeout-timer in interactive mode.
     window.addEventListener('click', () => this.timer.startTimeout());
     window.addEventListener('scroll', () => this.timer.startTimeout());
 
+    // Show timeout modal when timeout has ended
     this.timer.timeoutEnded.subscribe(() => this.showTimeoutModal());
+
+    // Use progress value from TimerService for progress-bar
     this.timer.progress.subscribe(p => this.progress = p);
 
-    // observes the width of the application and sets the landscape variable accordingly
+    // Observes the width of the application and sets the landscape variable accordingly
     this.breakpointObserver
       .observe([`(max-width: ${this.config.general.layout.breakpoint_landscape}px)`])
       .subscribe((state: BreakpointState) => {
@@ -50,16 +65,17 @@ export class HomePage implements AfterViewInit {
         this.contentWidthPercent = this.landscape
           ? this.config.general.layout.content_width_landscape
           : '100%';
-        console.log(this.contentWidthPercent)
         this.visibleSlides = this.landscape ? 5 : 3;
       });
   }
 
+  /**
+   * Shows the timeout-modal when the TimerServices timeout has ended
+   */
   async showTimeoutModal() {
     const modal = await this.modalController.create({
       component: TimeoutModalComponent
     });
-    await modal.present();
     modal.onDidDismiss()
       .then(dismissed => {
         if (dismissed.data.reason === 'cancel') {
@@ -69,5 +85,6 @@ export class HomePage implements AfterViewInit {
           this.timer.startProgressTimer();
         }
       });
+    await modal.present();
   }
 }

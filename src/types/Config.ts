@@ -53,6 +53,7 @@ export interface GeneralConfig {
   timeout_time: number;
   timeout_modal_countdown_time: number;
   time_update_frequency: number;
+  time_format: string;
 }
 
 export interface Layout {

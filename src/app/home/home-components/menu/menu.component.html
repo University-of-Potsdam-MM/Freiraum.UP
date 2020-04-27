@@ -1,6 +1,6 @@
 <ng-template #interactive>
   <div id="menu-container">
-    <ion-progress-bar [value]="progress/100">
+    <ion-progress-bar [value]="progress">
     </ion-progress-bar>
 
     <div id="menu">
@@ -12,7 +12,6 @@
       </ion-button>
       <ion-slides id="slides"
                   (ionSlideDidChange)="onIonSlideDidChange($event)"
-                  (ionSlideDrag)="onTouchEvent()"
                   [options]="slidesOptions">
         <ion-slide *ngFor="let page of pageList">
           <ion-grid>
@@ -43,7 +42,6 @@
 
 <ng-template #nonInteractive>
   <ion-slides (ionSlideDidChange)="onIonSlideDidChange($event)"
-              (ionSlideDrag)="onTouchEvent()"
               [options]="{loop: true}">
     <ion-slide *ngFor="let page of pageList">
       <span *ngIf="page.selected" style="font-size: 3em; color: var(--ion-color-primary);">
