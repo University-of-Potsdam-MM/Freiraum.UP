@@ -9,6 +9,8 @@ import {TwitterPageComponent} from './pages/twitter-page/twitter-page.component'
 import {PublicTransportPageComponent} from './pages/public-transport-page/public-transport-page.component';
 import {AdsPageComponent} from './pages/ads-page/ads-page.component';
 
+// This list contains the pages that will be available in the application
+// See the definition of the PageItem type for further documentation.
 export const pagesList: PageItem[] = [
   {
     component: MensaPageComponent,
