@@ -2,6 +2,8 @@
 
 Dies ist die Neuimplementierung der Anwendung *Freiraum.UP* in ionic 4.
 
+![img](screenshots/Freiraum.UP.png)
+
 ## Lokales Ausführen
 
 ```bash
