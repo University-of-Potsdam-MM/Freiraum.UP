@@ -1,4 +1,4 @@
-<div>
+<div *ngIf="config.general.interactiveMode">
   <ion-segment [(ngModel)]="selectedNewsSourceId" (ngModelChange)="filterNews($event)">
     <ng-container *ngFor="let source of newsSources">
       <ion-segment-button [value]="source.id">
@@ -6,6 +6,14 @@
       </ion-segment-button>
     </ng-container>
   </ion-segment>
+</div>
+
+<div *ngIf="!config.general.interactiveMode">
+    <ng-container *ngFor="let source of newsSources">
+        <div *ngIf="source.id == selectedNewsSourceId" class="title">
+            {{ source.name }}
+        </div>
+    </ng-container>
 </div>
 
 <ng-template #results let-news="items">

@@ -1,12 +1,15 @@
 import { Component, Input } from '@angular/core';
 import {NewsItem} from '../../../types/news.response';
 import {EventItem} from '../../../types/events.response';
+import {ConfigService} from "../../services/config/config.service";
 
 @Component({
   selector: 'article',
   templateUrl: 'article.html'
 })
 export class ArticleComponent {
+
+  config = ConfigService.config;
 
   @Input() public articleType: 'news'|'event';
   @Input() public article: NewsItem | EventItem;

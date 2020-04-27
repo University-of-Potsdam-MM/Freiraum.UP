@@ -16,9 +16,9 @@
 <ng-template #newsArticle>
   <ion-card>
     <ion-card-header class="ion-text-wrap" color="primary">
-      <h3>
+      <span class="title">
         {{ article.News.headline }}
-      </h3>
+      </span>
     </ion-card-header>
 
     <ion-card-content *ngIf="article.News.text ||
@@ -33,14 +33,14 @@
       </ng-container>
 
       <ng-template #textOnly>
-        <div [innerHTML]="article.News.text"></div>
+        <div class="list-item" [innerHTML]="article.News.text"></div>
       </ng-template>
       <ng-template #descriptionOnly>
-        <div [innerHTML]="article.News.description"></div>
+        <div class="list-item" [innerHTML]="article.News.description"></div>
       </ng-template>
     </ion-card-content>
 
-    <ion-card-subtitle>
+    <ion-card-subtitle color="--ion-color-secondary">
         <div *ngIf="article.News.DateString" class="news-date">
         {{ "page.news.articlePublished" | translate }} {{ article.News.DateString }}
       </div>

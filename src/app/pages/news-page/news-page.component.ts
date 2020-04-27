@@ -46,7 +46,17 @@ export class NewsPageComponent extends BasicPageComponent implements OnInit {
 
         // select first newsSource by default
         this.selectedNewsSourceId = this.newsSources[0].id;
+        this.filterNews(this.selectedNewsSourceId.toString());
       }
     );
+  }
+
+  onSelected() {
+    this.selectedNewsSourceId = this.selectedNewsSourceId >= this.newsSources.length
+      ? 0
+      : this.selectedNewsSourceId += 1;
+    this.filterNews(this.selectedNewsSourceId.toString())
+
+    console.log(this.selectedNewsSourceId)
   }
 }
