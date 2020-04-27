@@ -44,12 +44,13 @@ export class HomePage implements AfterViewInit {
 
     // observes the width of the application and sets the landscape variable accordingly
     this.breakpointObserver
-      .observe([`(min-width: ${this.config.general.layout.breakpoint_landscape})`])
+      .observe([`(max-width: ${this.config.general.layout.breakpoint_landscape}px)`])
       .subscribe((state: BreakpointState) => {
-        this.landscape = state.matches;
+        this.landscape = !state.matches;
         this.contentWidthPercent = this.landscape
           ? this.config.general.layout.content_width_landscape
           : '100%';
+        console.log(this.contentWidthPercent)
         this.visibleSlides = this.landscape ? 5 : 3;
       });
   }
