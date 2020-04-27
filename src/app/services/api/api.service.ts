@@ -29,6 +29,33 @@ export class AuthorizationInterceptor implements HttpInterceptor {
   }
 }
 
+function buildRoomRequest(timeslot) {
+  return {
+    format: 'json',
+    campus: ConfigService.config.general.location.campus.toString(),
+    building: ConfigService.config.general.location.building.toString(),
+    startTime: timeslot.begin,
+    endTime: timeslot.end
+  };
+}
+
+function filterByTimeslot(reservations: IRoomReservation[], timeslot: ITimeslot) {
+  if (!Array.isArray(reservations)) {
+    reservations = [reservations];
+  }
+  return reservations.filter(
+    (r: IRoomReservation) => {
+      const d = moment(r.startTime) >= moment(timeslot.begin) &&
+              moment(timeslot.begin) >= moment(r.startTime);
+      return d;
+    }
+  );
+}
+
+function formatRoomName(room: string) {
+  return room.split('.').slice(2, 4).join('.');
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -125,26 +152,18 @@ export class ApiService {
     );
   }
 
-  buildRoomRequest(timeslot) {
-    return {
-      format: 'json',
-      campus: this.config.general.location.campus.toString(),
-      building: this.config.general.location.building.toString(),
-      startTime: timeslot.begin,
-      endTime: timeslot.end
-    };
-  }
-
   freeRooms() {
     for (const slot of ['now', 'soon']) {
       this.http.get(
       this.config.api.endpoints.freeRooms.url,
         {
-          params: this.buildRoomRequest(this.timerService.timeslots[slot])
+          params: buildRoomRequest(this.timerService.timeslots[slot])
         }).subscribe(
         (response: FreeRoomsResponse) => {
           try {
-            this.feeds.freeRooms[slot].next(response.rooms4TimeResponse.return);
+            this.feeds.freeRooms[slot].next(
+              response.rooms4TimeResponse.return.map(formatRoomName)
+            );
           } catch (e) {
             this.feeds.freeRooms[slot].next([]);
           }
@@ -153,30 +172,17 @@ export class ApiService {
     }
   }
 
-  filterByTimeslot(reservations: IRoomReservation[], timeslot: ITimeslot) {
-    if (!Array.isArray(reservations)) {
-      reservations = [reservations];
-    }
-    return reservations.filter(
-      (r: IRoomReservation) => {
-        const d = moment(r.startTime) >= moment(timeslot.begin) &&
-                moment(timeslot.begin) >= moment(r.startTime);
-        return d;
-      }
-    );
-  }
-
   reservedRooms() {
     for (const slot of ['now', 'soon']) {
       this.http.get(
       this.config.api.endpoints.reservedRooms.url,
         {
-          params: this.buildRoomRequest(this.timerService.timeslots[slot])
+          params: buildRoomRequest(this.timerService.timeslots[slot])
         }).subscribe(
         (response: ReservedRoomsResponse) => {
           try {
             this.feeds.reservedRooms[slot].next(
-              this.filterByTimeslot(
+              filterByTimeslot(
                 response.reservationsResponse.return,
                 this.timerService.timeslots[slot]
               )

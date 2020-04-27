@@ -1,30 +1,26 @@
-<div style="display: flex;">
-  <div id="now" style="width: 50%;">
+<div class="rooms-free-wrapper">
+  <div id="now" style="width: 100%;">
     <ion-card>
-      <ion-card-header color="primary">
-        <div style="font-size: 3em;">
-          {{ "words.now" | translate }}
-          (
-          {{ moment(timerService.timeslots.now.begin).format('HH:mm') }} -
-          {{ moment(timerService.timeslots.now.end).format('HH:mm') }}
-          )
-        </div>
+      <ion-card-header color="primary" class="title">
+        {{ "words.now" | translate }}
+        (
+        {{ moment(timerService.timeslots.now.begin).format('HH:mm') }} -
+        {{ moment(timerService.timeslots.now.end).format('HH:mm') }}
+        )
       </ion-card-header>
       <ion-card-content>
         <results [items]="rooms['now']" [template]="freeRoomsTemplate"></results>
       </ion-card-content>
     </ion-card>
   </div>
-  <div id="soon" style="width: 50%;">
+  <div id="soon" style="width: 100%;">
     <ion-card>
-      <ion-card-header color="primary">
-        <div style="font-size: 3em;">
-          {{ "words.soon" | translate }}
-          (
-          {{ moment(timerService.timeslots.soon.begin).format('HH:mm') }} -
-          {{ moment(timerService.timeslots.soon.end).format('HH:mm') }}
-          )
-        </div>
+      <ion-card-header color="primary" class="title">
+        {{ "words.soon" | translate }}
+        (
+        {{ moment(timerService.timeslots.soon.begin).format('HH:mm') }} -
+        {{ moment(timerService.timeslots.soon.end).format('HH:mm') }}
+        )
       </ion-card-header>
       <ion-card-content>
         <results [items]="rooms['soon']" [template]="freeRoomsTemplate"></results>
@@ -37,7 +33,10 @@
 <ng-template #freeRoomsTemplate let-rooms="items">
   <ion-list>
     <ion-item *ngFor="let room of rooms">
-      <div style="font-size: 5em;">{{ room }}</div>
+      <div class="list-item">
+        {{ "words.room" | translate }}
+        {{ room }}
+      </div>
     </ion-item>
   </ion-list>
 </ng-template>

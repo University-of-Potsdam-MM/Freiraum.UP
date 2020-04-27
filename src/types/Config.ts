@@ -33,6 +33,7 @@ export interface TransportConfig {
   update_frequency: number;
   station_id: string;
   station_name: string;
+  meansOfTransport: {name: string, iconFileName: string}[];
 }
 
 export interface ITimeslot {

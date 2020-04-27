@@ -43,8 +43,11 @@
   </ion-toolbar>
 </ion-header>
 
+<div style="height: 2.5%;">&nbsp;</div>
+
 <!-- content of the application, Pages from pagesConfig are embedded here -->
 <ion-content class="content">
+
   <div id="content-wrapper"
        [style.width]="contentWidthPercent">
     <div *ngFor="let p of pages" [style.display]="p.selected ? 'block' : 'none'">
