@@ -14,6 +14,7 @@ export class NewsPageComponent extends BasicPageComponent implements OnInit {
   filteredNews: NewsItem[] = [];
   newsSources: {id: number, name: string}[] = [];
   selectedNewsSourceId: number;
+  selectedNewsSourceName: string;
 
   constructor() { super('news'); }
 
@@ -52,11 +53,12 @@ export class NewsPageComponent extends BasicPageComponent implements OnInit {
   }
 
   onSelected() {
-    this.selectedNewsSourceId = this.selectedNewsSourceId >= this.newsSources.length
-      ? 0
-      : this.selectedNewsSourceId += 1;
-    this.filterNews(this.selectedNewsSourceId.toString())
-
-    console.log(this.selectedNewsSourceId)
+    if (this.selectedNewsSourceId >= this.newsSources.length) {
+      this.selectedNewsSourceId = 0;
+    } else {
+      this.selectedNewsSourceId += 1;
+    }
+    this.filterNews(this.selectedNewsSourceId.toString());
+    this.selectedNewsSourceName = this.newsSources.find(source => source.id === this.selectedNewsSourceId).name;
   }
 }
