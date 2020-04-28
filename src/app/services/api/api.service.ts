@@ -12,7 +12,7 @@ import {FreeRoomsResponse} from '../../../types/freeRooms.response';
 import {IRoomReservation, ReservedRoomsResponse} from '../../../types/reservedRooms.response';
 import {CampusMapDataResponse} from '../../../types/campusMapData.response';
 import {TimerService} from '../timer/timer.service';
-import {ITimeslot} from '../../../types/Config';
+import {Timeslot} from '../../../types/Config';
 
 @Injectable()
 export class AuthorizationInterceptor implements HttpInterceptor {
@@ -39,7 +39,7 @@ function buildRoomRequest(timeslot) {
   };
 }
 
-function filterByTimeslot(reservations: IRoomReservation[], timeslot: ITimeslot) {
+function filterByTimeslot(reservations: IRoomReservation[], timeslot: Timeslot) {
   if (!Array.isArray(reservations)) {
     reservations = [reservations];
   }

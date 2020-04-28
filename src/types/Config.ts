@@ -11,6 +11,7 @@ export interface Config {
   rooms: RoomsConfig;
   events: EventsConfig;
   transport: TransportConfig;
+  transportBar: TransportBarConfig;
   campusmap: CampusMapConfig;
   mensa: MensaConfig;
 }
@@ -36,6 +37,11 @@ export interface GeneralConfig {
   time_update_frequency: number;
   // momentjs format of the current time that is shown in the header
   time_format: string;
+}
+
+export interface Timeslot {
+  begin: string;
+  end: string;
 }
 
 export interface ApiConfig {
@@ -64,6 +70,11 @@ export interface TransportConfig {
     // name of the icon file, eg 'bahn.svg'
     iconFileName: string
   }[];
+}
+
+export interface TransportBarConfig {
+  // how many connection to show in the smaller transport-bar
+  count: number;
 }
 
 export interface Layout {
