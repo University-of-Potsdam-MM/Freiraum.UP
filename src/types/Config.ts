@@ -6,12 +6,12 @@ export interface Config {
   api: ApiConfig;
 
   // configuration of the available pages
+  infobar: InfoBarConfig;
   news: NewsConfig;
   twitter: TwitterConfig;
   rooms: RoomsConfig;
   events: EventsConfig;
   transport: TransportConfig;
-  transportBar: TransportBarConfig;
   campusmap: CampusMapConfig;
   mensa: MensaConfig;
 }
@@ -37,6 +37,16 @@ export interface GeneralConfig {
   time_update_frequency: number;
   // momentjs format of the current time that is shown in the header
   time_format: string;
+}
+
+export interface InfoBarConfig {
+  public_transport: {
+    display: boolean;
+    count: number
+  };
+  rooms_free: {
+    display: boolean;
+  };
 }
 
 export interface Timeslot {
@@ -70,11 +80,6 @@ export interface TransportConfig {
     // name of the icon file, eg 'bahn.svg'
     iconFileName: string
   }[];
-}
-
-export interface TransportBarConfig {
-  // how many connection to show in the smaller transport-bar
-  count: number;
 }
 
 export interface Layout {

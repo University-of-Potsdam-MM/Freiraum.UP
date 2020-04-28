@@ -3,13 +3,14 @@ import {BasicPageComponent} from '../../../components/basic-page/basic-page.comp
 import {Departure} from '../../../../types/publicTransport.response';
 
 @Component({
-  selector: 'app-transport-bar',
-  templateUrl: './transport-bar.component.html',
-  styleUrls: ['./transport-bar.component.scss'],
+  selector: 'app-info-bar',
+  templateUrl: './info-bar.component.html',
+  styleUrls: ['./info-bar.component.scss'],
 })
-export class TransportBarComponent extends BasicPageComponent implements OnInit {
+export class InfoBarComponent extends BasicPageComponent implements OnInit {
 
-  connections: {departure: Departure, minutesRemaining: number}[];
+  connections: {departure: Departure, minutesRemaining: number}[] = [];
+  rooms: string[] = [];
 
   constructor() { super('transport-bar'); }
 
@@ -27,8 +28,12 @@ export class TransportBarComponent extends BasicPageComponent implements OnInit 
           // filter out connections that have already departed or are departing right now
           .filter(conn => conn.minutesRemaining > 0)
           // show just as much as desired
-          .slice(0, this.config.transportBar.count);
+          .slice(0, this.config.infobar.public_transport.count);
       }
+    );
+
+    this.api.feeds.freeRooms.now.subscribe(
+      rooms => { this.rooms = rooms; }
     );
   }
 
