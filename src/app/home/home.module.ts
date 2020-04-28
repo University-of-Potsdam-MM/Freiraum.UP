@@ -16,7 +16,7 @@ import {HintComponent} from '../components/hint/hint';
 import {ArticleComponent} from '../components/article/article';
 import {PipesModule} from '../pipes/pipes.module';
 import {LayoutModule} from '@angular/cdk/layout';
-import {TransportBarComponent} from './home-components/transport-bar/transport-bar.component';
+import {InfoBarComponent} from './home-components/transport-bar/info-bar.component';
 
 @NgModule({
   imports: [
@@ -42,7 +42,7 @@ import {TransportBarComponent} from './home-components/transport-bar/transport-b
     ResultsComponent,
     HintComponent,
     ArticleComponent,
-    TransportBarComponent,
+    InfoBarComponent,
     ...componentsList()
   ],
   entryComponents: [
@@ -52,7 +52,7 @@ import {TransportBarComponent} from './home-components/transport-bar/transport-b
     ResultsComponent,
     HintComponent,
     ArticleComponent,
-    TransportBarComponent,
+    InfoBarComponent,
     ...componentsList()
   ]
 })

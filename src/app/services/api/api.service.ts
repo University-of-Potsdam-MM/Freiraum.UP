@@ -78,8 +78,8 @@ export class ApiService {
     events: new Subject<EventsResponse>(),
     news: new Subject<NewsResponse>(),
     freeRooms: {
-      now: new Subject<FreeRoomsResponse>(),
-      soon: new Subject<FreeRoomsResponse>()
+      now: new Subject<string[]>(),
+      soon: new Subject<string[]>()
     },
     reservedRooms: {
       now: new Subject<FreeRoomsResponse>(),

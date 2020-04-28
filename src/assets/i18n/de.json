@@ -104,7 +104,8 @@
     "timeoutText": "Automatischer Modus wird in {{timeRemaining}} Sekunden fortgesetzt",
     "application_name": "Freiraum.UP",
     "university_name": "Universität Potsdam",
-    "room": "Raum"
+    "room": "Raum",
+    "currently_free": "Aktuell frei"
   },
   "buttons": {
     "next": "Vor",
