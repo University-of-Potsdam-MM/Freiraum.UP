@@ -1,0 +1,68 @@
+<div id="game" [ngSwitch]="currenState">
+
+  <ng-container *ngSwitchCase="states.NOT_STARTED">
+
+    <div class="ion-text-center">
+
+      <h1>
+        {{ "page.game.text" | translate }}
+      </h1>
+      <br>
+      <br>
+      <div>
+        <ion-button class="centered-img" size="large" (click)="startGame()" style="margin: 0 auto;">START</ion-button>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="states.STARTED">
+
+    <ion-progress-bar [value]="(timeLeft/10000)"></ion-progress-bar>
+
+    <div id="grid">
+      <ion-grid *ngIf="rects.length > 0">
+        <ion-row *ngFor="let row of rects">
+          <ion-col *ngFor="let rect of row">
+            <div [ngClass]="rect.animations"
+                 [class.target]="rect.isTarget"
+                 [class.clicked]="rect.clicked"
+                 class="grid-item"
+                 (click)="clicked(rect, $event)">
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="states.ENDED">
+    <div class="ion-text-center">
+      <h1 class="centered">
+       {{ "page.game.ended" | translate }}
+      </h1>
+      <div class="text-center align-items-center">
+        <ion-button size="large" class="ion-justify-content-center" (click)="reset()">
+          {{ "page.game.retry" | translate }}
+        </ion-button>
+      </div>
+      <h1 class="centered">
+        {{ "page.game.score" | translate }}: <b id="score">{{ score }}</b>
+      </h1>
+      <ng-container *ngIf="highscores.length > 5">
+        <h2 class="centered">
+          {{ "page.game.highscores" | translate }}
+        </h2>
+        <div class="text-center align-items-center">
+          <ion-list>
+            <ion-item *ngFor="let score of highscores.slice(0, 5); let i = index;" class="score">
+              <div class="centered" style="font-size: 20pt;">
+                <b>{{ i+1 }}.</b> {{ score }}
+              </div>
+            </ion-item>
+          </ion-list>
+        </div>
+      </ng-container>
+    </div>
+  </ng-container>
+
+</div>

@@ -48,4 +48,8 @@ export abstract class BasicPageComponent {
   onSelected() {
     console.log(`'onSelected()' not implemented for component '${this.name}'.`);
   }
+
+  onReset() {
+    console.log(`'onReset()' not implemented for component '${this.name}'.`);
+  }
 }

@@ -16,7 +16,8 @@ import {ConfigService} from './services/config/config.service';
 import {TimerService} from './services/timer/timer.service';
 import {ApiService, AuthorizationInterceptor} from './services/api/api.service';
 import {LayoutModule, MediaMatcher} from '@angular/cdk/layout';
-import {Platform} from "@angular/cdk/platform";
+import {Platform} from '@angular/cdk/platform';
+import {IonicStorageModule} from '@ionic/storage';
 
 export function TranslateLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -39,6 +40,7 @@ export function initConfig(config: ConfigService) {
     AppRoutingModule,
     ConfigComponentModule,
     HttpClientModule,
+    IonicStorageModule.forRoot(),
     TranslateModule.forRoot({
           loader: {
               provide: TranslateLoader,
