@@ -16,8 +16,11 @@ export class TimeoutModalComponent implements OnInit {
 
   config = ConfigService.config;
 
-  /* contains the timeout timer after it has veen started */
-  timeout: Subscription;
+  /* contains the timeout timer after it has been started */
+  timeout;
+
+  /* contains the timer after it has been started */
+  timer;
 
   /* time remaining for the modal */
   timeRemaining = this.config.general.timeout_modal_countdown_time;
@@ -31,7 +34,8 @@ export class TimeoutModalComponent implements OnInit {
   constructor(private modalCtrl: ModalController) { }
 
   ngOnInit() {
-    this.timeout = timer(0, 1000).subscribe(
+    this.timer = timer(0, 1000);
+    this.timeout = this.timer.subscribe(
       n => {
         this.timeRemaining = this.timeRemaining - 1;
         if (this.timeRemaining <= 0) {
@@ -41,10 +45,17 @@ export class TimeoutModalComponent implements OnInit {
     );
   }
 
+  stopTimer() {
+    this.timeout.unsubscribe();
+    clearTimeout(this.timeout);
+    this.timeout = null;
+  }
+
   /**
    * dismisses the modal with reason 'interaction
    */
   async dismissByInteraction() {
+    this.stopTimer();
     await this.modalCtrl.dismiss({reason: 'interaction'});
   }
 
@@ -52,6 +63,7 @@ export class TimeoutModalComponent implements OnInit {
    * dismisses the timeout by reason 'timeout'
    */
   async dismissByTimeout() {
+    this.stopTimer();
     await this.modalCtrl.dismiss({reason: 'timeout'});
   }
 
