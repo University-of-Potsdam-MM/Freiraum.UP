@@ -46,6 +46,8 @@ Eine Dokumentation der möglichen Optionen kann [hier](src/types/Config.ts) vorg
   1. ein dem Namen der Page in [page.config.ts](src/app/pages.config.ts) entsprechender Abschnitt in der Datei
      `src/assets/config.json` existiert.
   2. und in diesem Abschnitt das Attribut `disabled` entweder gar nicht erst definiert ist oder den Wert `false` hat.
+- Durch setzen des Attributes `force_enabled` in der zu einer Page gehörenden Sektion der `config.json` wird eine Page
+  aktiviert, auch wenn diese denn den aktuell gesetzten Wert von `config.general.interactive_mode` nicht unterstützt.
 
 ## Funktionsweise
 
