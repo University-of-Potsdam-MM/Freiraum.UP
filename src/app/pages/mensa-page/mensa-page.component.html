@@ -25,7 +25,7 @@
 <ng-container [ngSwitch]="config.general.interactiveMode">
     <!-- interactive view with ion segments -->
     <div *ngSwitchCase="true">
-        <div padding>
+        <div class="ion-padding">
             <ion-segment [(ngModel)]="selectedCanteenIndex">
                 <ng-container *ngFor="let canteen of config.mensa.canteens">
                     <ion-segment-button *ngIf="canteen.enabled"

@@ -111,7 +111,7 @@ export class GamePageComponent extends BasicPageComponent implements OnInit {
         }
       );
     } catch (e) {
-      console.log('Could not get highscores');
+      this.logger.info('Could not get highscores');
     }
   }
 
@@ -197,7 +197,7 @@ export class GamePageComponent extends BasicPageComponent implements OnInit {
     try {
       this.storage.set('highscores', this.highscores);
     } catch (e) {
-      console.log('Could not store highscores');
+      this.logger.info('Could not store highscores');
     }
   }
 

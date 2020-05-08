@@ -6,6 +6,7 @@ import {StaticInjectorService} from './static-injector';
 import * as moment from 'moment';
 import {TimerService} from '../../services/timer/timer.service';
 import {PageSelectedService} from '../../services/page-selected/page-selected.service';
+import {NGXLogger} from 'ngx-logger';
 
 /**
  * This abstract page provides some features that all pages use
@@ -23,10 +24,12 @@ export abstract class BasicPageComponent {
   /* provides access to the PageSelectedService */
   private pages: PageSelectedService;
 
-  /* holds the name of this page, set by constructor */
-  private name: string;
+  protected logger: NGXLogger;
 
-  constructor(name: string = 'noName') {
+  /* holds the name of this page, set by constructor */
+  private readonly name: string;
+
+  protected constructor(name: string = 'noName') {
     this.name = name;
 
     const injector: Injector = StaticInjectorService.getInjector();
@@ -35,6 +38,9 @@ export abstract class BasicPageComponent {
     this.api = injector.get<ApiService>(ApiService as Type<ApiService>);
     this.timerService = injector.get<TimerService>(TimerService as Type<TimerService>);
     this.pages = injector.get<PageSelectedService>(PageSelectedService as Type<PageSelectedService>);
+    this.logger = injector.get<NGXLogger>(NGXLogger as Type<NGXLogger>);
+
+    this.logger.info(`Created '${name}'.`);
 
     // calls the onSelect method if this page has been selected. Whether is has been selected will be detected with
     // help of the 'name' attribute. That's why we want to pass a name to the constructor.
@@ -46,10 +52,10 @@ export abstract class BasicPageComponent {
 
   // method stub for the method that is called once the page is selected
   onSelected() {
-    console.log(`'onSelected()' not implemented for component '${this.name}'.`);
+    this.logger.info(`'onSelected()' not implemented for component '${this.name}'.`);
   }
 
   onReset() {
-    console.log(`'onReset()' not implemented for component '${this.name}'.`);
+    this.logger.info(`'onReset()' not implemented for component '${this.name}'.`);
   }
 }

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Ad, AdsConfig} from '../../../types/Ads';
 import * as moment from 'moment';
+import {NGXLogger} from 'ngx-logger';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,8 @@ export class AdsService {
 
   config;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+              private logger: NGXLogger) { }
 
   filterAds(ads: Ad[]) {
     return ads.filter(
@@ -44,10 +46,10 @@ export class AdsService {
                   endDate: moment(ad.endDate).toISOString()
                 });
               } catch (error) {
-                  console.log(`HTML for ad '${ad.name}' could not be loaded.`);
+                  this.logger.info(`HTML for ad '${ad.name}' could not be loaded.`);
               }
             } else {
-              console.log('Ad element not properly formatted');
+              this.logger.info('Ad element not properly formatted');
             }
           }
           rs(this.filterAds(ads));

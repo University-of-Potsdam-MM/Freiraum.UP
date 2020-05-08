@@ -34,6 +34,7 @@
     "geojson": "^0.5.0",
     "moment": "^2.24.0",
     "ng-dynamic-component": "^5.0.6",
+    "ngx-logger": "^4.1.9",
     "rxjs": "~6.5.1",
     "tslib": "^1.11.1",
     "twitter-widgets": "^2.0.0",

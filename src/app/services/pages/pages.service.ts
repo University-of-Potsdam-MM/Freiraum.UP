@@ -22,7 +22,7 @@ export class PagesService {
 
   constructor(private pageSelected: PageSelectedService) {
     this.pages = pagesList
-      // filter out pages that dont support the current value of interactiveMode
+      // filter out pages that dont support the current value of interactiveMode except they are force_enabled
       .filter(
         p => {
           let forceEnabled = false;
@@ -42,8 +42,6 @@ export class PagesService {
           return item1order - item2order || (item1.name < item2.name ? -1 : (item1.name > item2.name ? 1 : 0));
         }
       );
-    console.log(this.pages)
-
     this.pages[0].selected = true;
   }
 
