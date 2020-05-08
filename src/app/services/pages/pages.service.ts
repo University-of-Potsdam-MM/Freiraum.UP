@@ -24,7 +24,11 @@ export class PagesService {
     this.pages = pagesList
       // filter out pages that dont support the current value of interactiveMode
       .filter(
-        p => p.interactiveModes.includes(ConfigService.config.general.interactiveMode)
+        p => {
+          let forceEnabled = false;
+          try { forceEnabled = this.config[p.name].force_enabled; } catch (e) { /* dont care, will stay false */ }
+          return p.interactiveModes.includes(ConfigService.config.general.interactiveMode) || forceEnabled;
+        }
       )
       // filter out pages that are either not configured via config.json or that are marked as disabled
       .filter(
