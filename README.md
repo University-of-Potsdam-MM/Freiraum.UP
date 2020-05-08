@@ -41,6 +41,12 @@ für manche Gebäude der Universität Potsdam. Diese können bereits verwendet w
 verwendende Token in `config.api.authorization` eingetragen werden. 
 Eine Dokumentation der möglichen Optionen kann [hier](src/types/Config.ts) vorgefunden werden.
 
+- Die in der Anwendung verwendeten Texte können im Verzeichnis [/i18n](src/assets/i18n) angepasst werden
+- Eine Page ist **aktiviert** wenn
+  1. ein dem Namen der Page in [page.config.ts](src/app/pages.config.ts) entsprechender Abschnitt in der Datei
+     `src/assets/config.json` existiert.
+  2. und in diesem Abschnitt das Attribut `disabled` entweder gar nicht erst definiert ist oder den Wert `false` hat.
+
 ## Funktionsweise
 
 Die in der Anwendung aktiven Seiten können in der Datei `src/app/pages.config.ts` angepasst werden.
@@ -61,7 +67,7 @@ wird als Objekt der folgenden Form konfiguriert.
 - `icon`: definiert das zu verwendende material design icon.
 - `interactiveModes`: bestimmt, für welche Werte von `config.general.interactiveMode` die Seite aktiv sein soll. [true, false] würde also bedeuten, die Seite ist sowohl im interaktiven als auch nicht-interaktiven Modus benutzbar. Muss ein Array sein.
 
-Die so definierten Komponenten werden in der Hauptkomponente `src/app/home/home.page.ts` importiert und dann eingebettet.
+Die so definierten Komponenten werden in der Hauptkomponente `src/app/home/home.page.ts` automatisch importiert und dann eingebettet.
 
 ## Erstellung neuer Seiten
 
