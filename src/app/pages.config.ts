@@ -52,22 +52,8 @@ export const pagesList: PageItem[] = [
   {
     component: TwitterPageComponent,
     name: 'twitter',
-    customTitle: '@unipotsdam',
     icon: 'logo-twitter',
-    inputs: {
-      channel: 'twitter-up'
-    },
-    interactiveModes: [false]
-  },
-  {
-    component: TwitterPageComponent,
-    name: 'twitter',
-    customTitle: '@astaup',
-    icon: 'logo-twitter',
-    inputs: {
-      channel: 'twitter-asta'
-    },
-    interactiveModes: [false]
+    interactiveModes: [false, true]
   },
   {
     component: PublicTransportPageComponent,

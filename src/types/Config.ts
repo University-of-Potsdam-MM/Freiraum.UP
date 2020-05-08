@@ -132,7 +132,7 @@ export interface EventsConfig extends PageConfig {}
 
 export interface TwitterConfig extends PageConfig {
   // contains the channels that can be used by the TwitterPage
-  channels: {[name: string]: string};
+  feeds: {name: string; url: string}[];
 }
 
 export interface MensaConfig extends PageConfig {
