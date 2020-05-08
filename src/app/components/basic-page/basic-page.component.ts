@@ -40,7 +40,7 @@ export abstract class BasicPageComponent {
     this.pages = injector.get<PageSelectedService>(PageSelectedService as Type<PageSelectedService>);
     this.logger = injector.get<NGXLogger>(NGXLogger as Type<NGXLogger>);
 
-    this.logger.info(`Created '${name}'.`);
+    this.info(`Created '${name}'.`);
 
     // calls the onSelect method if this page has been selected. Whether is has been selected will be detected with
     // help of the 'name' attribute. That's why we want to pass a name to the constructor.
@@ -52,10 +52,16 @@ export abstract class BasicPageComponent {
 
   // method stub for the method that is called once the page is selected
   onSelected() {
-    this.logger.info(`'onSelected()' not implemented for component '${this.name}'.`);
+    this.info(`'onSelected()' not implemented.`);
   }
 
   onReset() {
-    this.logger.info(`'onReset()' not implemented for component '${this.name}'.`);
+    this.info(`'onReset()' not implemented.`);
   }
+
+  protected info(message, ...additional)  { this.logger.info(`[${this.name}]: ${message}; ${additional}`); }
+  protected debug(message, ...additional) { this.logger.debug(`[${this.name}]: ${message}; ${additional}`); }
+  protected error(message, ...additional) { this.logger.error(`[${this.name}]: ${message}; ${additional}`); }
+  protected fatal(message, ...additional) { this.logger.fatal(`[${this.name}]: ${message}; ${additional}`); }
+  protected log(message, ...additional)   { this.logger.log(`[${this.name}]: ${message}; ${additional}`); }
 }
