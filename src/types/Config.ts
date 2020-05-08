@@ -12,8 +12,9 @@ export interface Config {
   rooms: RoomsConfig;
   events: EventsConfig;
   transport: TransportConfig;
-  campusmap: CampusMapConfig;
+  campusMap: CampusMapConfig;
   mensa: MensaConfig;
+  ads: AdsPageConfig;
 }
 
 export interface GeneralConfig {
@@ -104,7 +105,11 @@ export interface Location {
   level: number;
 }
 
-export interface NewsConfig {
+export interface PageConfig {
+  disabled?: boolean;
+}
+
+export interface NewsConfig extends PageConfig {
   // list of news categories
   categories: {
     // Name MUST correspond to the NewsSource names used by the newsAPI
@@ -115,27 +120,29 @@ export interface NewsConfig {
 }
 
 // tslint:disable-next-line:no-empty-interface
-export interface RoomsConfig {}
+export interface RoomsConfig extends PageConfig {}
 
 // tslint:disable-next-line:no-empty-interface
-export interface EventsConfig {}
+export interface EventsConfig extends PageConfig {}
 
-export interface TwitterConfig {
+export interface TwitterConfig extends PageConfig {
   // contains the channels that can be used by the TwitterPage
   channels: {[name: string]: string};
 }
 
-export interface MensaConfig {
+export interface MensaConfig extends PageConfig {
   // list of the canteens that are available in the application
   canteens: {enabled: boolean, name: string}[];
   // filename with extension of the icons that will used for each category
   icons: {[name: string]: string};
 }
 
-export interface CampusMapConfig {
+export interface CampusMapConfig extends PageConfig {
   // List of the campus that will be displayed
   campi: Campus[];
 }
+
+export interface AdsPageConfig extends PageConfig {}
 
 export interface Campus {
   // id of one of the campus

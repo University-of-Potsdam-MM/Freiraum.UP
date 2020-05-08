@@ -91,6 +91,9 @@
       "ended": "Die Zeit ist leider vorbei!",
       "score": "Dein Punktestand",
       "highscores": "Die Top 5 bisher:"
+    },
+    "campusMap": {
+      "title": "Campus"
     }
   },
   "words": {

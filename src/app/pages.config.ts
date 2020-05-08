@@ -19,12 +19,12 @@ export const pagesList: PageItem[] = [
     icon: 'pizza',
     interactiveModes: [true, false]
   },
-  // {
-  //   component: EventsPageComponent,
-  //   name: 'events',
-  //   icon: 'calendar',
-  //   interactiveModes: [true, false]
-  // },
+  {
+    component: EventsPageComponent,
+    name: 'events',
+    icon: 'calendar',
+    interactiveModes: [true, false]
+  },
   {
     component: CampusMapPageComponent,
     name: 'campusMap',

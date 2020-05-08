@@ -15,12 +15,27 @@ export const componentsList = () => {
 })
 export class PagesService {
 
+  private config = ConfigService.config;
+
   /* fills the services pages array with pages that support the current value of 'interactiveMode' */
-  public pages = pagesList.filter(
-    p => p.interactiveModes.includes(ConfigService.config.general.interactiveMode)
-  );
+  public pages;
 
   constructor(private pageSelected: PageSelectedService) {
+    this.pages = pagesList
+      // filter out pages that dont support the current value of interactiveMode
+      .filter(
+        p => p.interactiveModes.includes(ConfigService.config.general.interactiveMode)
+      )
+      // sort pages first by order (if given) and secondly by name
+      .sort(
+        (item1, item2) => {
+          const item1order = this.config[item1.name] && this.config[item1.name].order !== undefined ? this.config[item1.name].order : 999;
+          const item2order = this.config[item2.name] && this.config[item2.name].order !== undefined ? this.config[item2.name].order : 999;
+          return item1order - item2order || (item1.name < item2.name ? -1 : (item1.name > item2.name ? 1 : 0));
+        }
+      );
+    console.log(this.pages)
+
     this.pages[0].selected = true;
   }
 
