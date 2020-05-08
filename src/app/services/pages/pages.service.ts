@@ -26,11 +26,15 @@ export class PagesService {
       .filter(
         p => p.interactiveModes.includes(ConfigService.config.general.interactiveMode)
       )
-      // sort pages first by order (if given) and secondly by name
+      // filter out pages that are either not configured via config.json or that are marked as disabled
+      .filter(
+        p => this.config[p.name] && (this.config[p.name].disabled === false || this.config[p.name].disabled === undefined)
+      )
+      // sort pages first by order (if present) and secondly by name
       .sort(
         (item1, item2) => {
-          const item1order = this.config[item1.name] && this.config[item1.name].order !== undefined ? this.config[item1.name].order : 999;
-          const item2order = this.config[item2.name] && this.config[item2.name].order !== undefined ? this.config[item2.name].order : 999;
+          const item1order = this.config[item1.name] && (this.config[item1.name].order !== undefined) ? this.config[item1.name].order : 999;
+          const item2order = this.config[item2.name] && (this.config[item2.name].order !== undefined) ? this.config[item2.name].order : 999;
           return item1order - item2order || (item1.name < item2.name ? -1 : (item1.name > item2.name ? 1 : 0));
         }
       );

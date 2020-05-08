@@ -106,7 +106,11 @@ export interface Location {
 }
 
 export interface PageConfig {
+  // add this option with 'true' as value to a pages config to disable it
   disabled?: boolean;
+  // add this attribute to any pages config to specify its order of appearance. If no order is given, pages are sorted
+  // alphabetically.
+  order?: number;
 }
 
 export interface NewsConfig extends PageConfig {
