@@ -19,6 +19,7 @@ import {LayoutModule, MediaMatcher} from '@angular/cdk/layout';
 import {Platform} from '@angular/cdk/platform';
 import {IonicStorageModule} from '@ionic/storage';
 import {LoggerModule, NgxLoggerLevel} from 'ngx-logger';
+import {environment} from "../environments/environment";
 
 export function TranslateLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -42,7 +43,13 @@ export function initConfig(config: ConfigService) {
     ConfigComponentModule,
     HttpClientModule,
     IonicStorageModule.forRoot(),
-    LoggerModule.forRoot({level: NgxLoggerLevel.DEBUG}),
+    LoggerModule.forRoot({
+      level: environment.production ? NgxLoggerLevel.WARN : NgxLoggerLevel.DEBUG,
+      // serverLoggingUrl: '/api/logs',
+      // serverLogLevel: NgxLoggerLevel.OFF,
+      enableSourceMaps: true,
+      disableConsoleLogging: environment.production
+    }),
     TranslateModule.forRoot({
           loader: {
               provide: TranslateLoader,
