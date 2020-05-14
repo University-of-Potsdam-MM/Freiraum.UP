@@ -1,9 +1,9 @@
 <ion-card>
-  <ion-card-header class="ion-text-wrap" color="primary">
+  <ion-card-header class="title" color="primary">
     {{ event.Event.name }}
   </ion-card-header>
 
-  <ion-card-content class="ion-text-wrap">
+  <ion-card-content class="ion-text-wrap" style="font-size: 2em;">
     <ion-img [src]="event.Event.pic"></ion-img>
     <div class="list-item" [innerHTML]="event.Event.description"></div>
   </ion-card-content>

@@ -4,13 +4,13 @@
   </ion-card>
 
   <ion-card *ngIf="!config.general.interactiveMode">
-    <ion-card-header color="primary">
+    <ion-card-header color="primary" class="title">
       {{ "words."+options.when | translate }}
       (Ab {{ moment(timerService.timeslots[options.when].begin).format('HH:mm') }} {{ "words.oclock" | translate }})
     </ion-card-header>
     <ion-card-content>
       <ion-grid >
-        <ion-row id="headers">
+        <ion-row id="headers" class="list-item">
           <ion-col col-2>
             {{ "page.rooms-reserved.time" | translate }}
           </ion-col>
@@ -22,7 +22,7 @@
           </ion-col>
         </ion-row>
 
-        <ion-row *ngFor="let reservation of reservations">
+        <ion-row *ngFor="let reservation of reservations" class="list-item">
           <ng-container>
             <ion-col col-2>
               {{ moment(reservation.startTime).format("LT") }} - {{ moment(reservation.endTime).format("LT") }}

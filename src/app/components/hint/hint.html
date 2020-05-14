@@ -1,11 +1,11 @@
 <ng-template #defaultTemplate>
-  <ion-card>
+  <ion-card class="title">
 
-    <ion-card-header *ngIf="hintTextI18nKey">
+    <ion-card-header *ngIf="hintTextI18nKey" class="ion-text-center title" color="primary">
       <ion-icon [name]="hintIcon" margin-right></ion-icon> {{ hintTypeI18nKey | translate }}
     </ion-card-header>
 
-    <ion-card-content class="ion-text-center">
+    <ion-card-content class="ion-text-center title">
       {{ hintTextI18nKey | translate }}
     </ion-card-content>
 

@@ -8,9 +8,11 @@
   </ion-segment>
 </div>
 
-<!--<div *ngIf="!config.general.interactiveMode" class="title">-->
-<!--    {{ newsForNewsSource[selectedNewsSourceId].newsSourceName }}-->
-<!--</div>-->
+<div *ngIf="!config.general.interactiveMode" class="title">
+    <ng-container *ngIf="newsReady">
+        {{ newsForNewsSource[selectedNewsSourceId].newsSourceName }}
+    </ng-container>
+</div>
 
 <ng-template #results let-news="items">
   <div id="news-container">
