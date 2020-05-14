@@ -1,0 +1,10 @@
+#news-container {
+    display: flex;
+    flex-wrap: wrap;
+
+    .news-item {
+        flex: 1 0 41%;
+        margin: 5px;
+    }
+}
+

@@ -128,7 +128,9 @@ export interface NewsConfig extends PageConfig {
 export interface RoomsConfig extends PageConfig {}
 
 // tslint:disable-next-line:no-empty-interface
-export interface EventsConfig extends PageConfig {}
+export interface EventsConfig extends PageConfig {
+  filter_events_until: {amount: number, unit: string};
+}
 
 export interface TwitterConfig extends PageConfig {
   // contains the channels that can be used by the TwitterPage

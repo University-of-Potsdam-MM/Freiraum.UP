@@ -13,10 +13,11 @@ import {MenuComponent} from './home-components/menu/menu.component';
 import {TimeoutModalComponent} from './home-components/timeout-modal/timeout-modal.component';
 import {ResultsComponent} from '../components/results/results';
 import {HintComponent} from '../components/hint/hint';
-import {ArticleComponent} from '../components/article/article';
+import {NewsComponent} from '../components/news/news.component';
 import {PipesModule} from '../pipes/pipes.module';
 import {LayoutModule} from '@angular/cdk/layout';
 import {InfoBarComponent} from './home-components/transport-bar/info-bar.component';
+import {EventComponent} from '../components/event/event.component';
 
 @NgModule({
   imports: [
@@ -41,7 +42,8 @@ import {InfoBarComponent} from './home-components/transport-bar/info-bar.compone
     TimeoutModalComponent,
     ResultsComponent,
     HintComponent,
-    ArticleComponent,
+    NewsComponent,
+    EventComponent,
     InfoBarComponent,
     ...componentsList()
   ],
@@ -51,7 +53,8 @@ import {InfoBarComponent} from './home-components/transport-bar/info-bar.compone
     TimeoutModalComponent,
     ResultsComponent,
     HintComponent,
-    ArticleComponent,
+    NewsComponent,
+    EventComponent,
     InfoBarComponent,
     ...componentsList()
   ]

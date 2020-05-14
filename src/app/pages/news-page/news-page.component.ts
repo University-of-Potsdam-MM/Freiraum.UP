@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {ConfigService} from '../../services/config/config.service';
 import {BasicPageComponent} from '../../components/basic-page/basic-page.component';
-import {NewsItem, NewsResponse, NewsSource} from '../../../types/news.response';
+import {NewsItem, NewsResponse} from '../../../types/news.response';
+import {iterableArray} from '../../util/iterableArray';
 
 @Component({
   selector: 'app-news-page',
@@ -10,55 +10,55 @@ import {NewsItem, NewsResponse, NewsSource} from '../../../types/news.response';
 })
 export class NewsPageComponent extends BasicPageComponent implements OnInit {
 
-  news: NewsItem[] = [];
-  filteredNews: NewsItem[] = [];
-  newsSources: {id: number, name: string}[] = [];
-  selectedNewsSourceId: number;
-  selectedNewsSourceName: string;
+  newsForNewsSource: {[newsSourceId: string]: {newsSourceName: string, items: NewsItem[]}} = {};
+  newsSourcesList: string[];
+  newsSourcesIterable: IterableIterator<string>;
+  selectedNewsSourceId: string;
+  newsReady = false;
 
   constructor() { super('news'); }
 
-  /**
-   * filters the currently available news by the selected newsSource
-   * @param selectedNewsSourceId: id of the selected newsSource
-   */
-  filterNews(selectedNewsSourceId: string) {
-    this.filteredNews = this.news.filter(n => {
-      return n.NewsSource.id === parseInt(selectedNewsSourceId, 10);
-    });
+  ngOnInit() {
+    this.getNews();
   }
 
-  ngOnInit() {
+  getNews() {
     this.api.feeds.news.subscribe(
-      (response: NewsResponse) => {
-        this.news = response.vars.news;
+      (r: NewsResponse) => {
+        const startDate = this.moment().subtract(4, 'week');
+        const endDate = this.moment().add(4, 'weeks');
+        // tslint:disable-next-line:forin
+        for (const newsSourceId in r.vars.newsSources) {
+          // get news for this newsSource
+          const news = r.vars.news
+            .filter(item => item.NewsSource.id === parseInt(newsSourceId, 10))
+            .filter(item => this.moment.unix(parseInt(item.News.time, 10)).isBetween(startDate, endDate));
 
-        // converting single newsSources object to array of objects for convenience
-        Object.keys(response.vars.newsSources).forEach(
-          key => {
-            this.newsSources.push(
-              {
-                id: parseInt(key, 10),
-                name: response.vars.newsSources[key]
-              }
-            );
+          // only add this newsSource if there actually are news for it
+          if (news.length > 0) {
+            this.newsForNewsSource[newsSourceId] = {
+              newsSourceName: r.vars.newsSources[newsSourceId],
+              items: news
+            };
           }
-        );
-
-        // select first newsSource by default
-        this.selectedNewsSourceId = this.newsSources[0].id;
-        this.filterNews(this.selectedNewsSourceId.toString());
+        }
+        this.newsSourcesList = Object.keys(this.newsForNewsSource);
+        this.newsSourcesIterable = iterableArray(this.newsSourcesList);
+        this.selectedNewsSourceId = this.newsSourcesList[0];
+        this.newsReady = true;
       }
     );
   }
 
+  onSelectedByInteraction(event) {
+    this.selectedNewsSourceId = event;
+    this.newsSourcesIterable = iterableArray(
+      this.newsSourcesList,
+      this.newsSourcesList.findIndex(i => i === event)
+    );
+  }
+
   onSelected() {
-    if (this.selectedNewsSourceId >= this.newsSources.length) {
-      this.selectedNewsSourceId = 0;
-    } else {
-      this.selectedNewsSourceId += 1;
-    }
-    this.filterNews(this.selectedNewsSourceId.toString());
-    this.selectedNewsSourceName = this.newsSources.find(source => source.id === this.selectedNewsSourceId).name;
+    this.selectedNewsSourceId = this.newsSourcesIterable.next().value;
   }
 }

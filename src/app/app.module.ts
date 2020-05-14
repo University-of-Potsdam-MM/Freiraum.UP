@@ -19,7 +19,7 @@ import {LayoutModule, MediaMatcher} from '@angular/cdk/layout';
 import {Platform} from '@angular/cdk/platform';
 import {IonicStorageModule} from '@ionic/storage';
 import {LoggerModule, NgxLoggerLevel} from 'ngx-logger';
-import {environment} from "../environments/environment";
+import {environment} from '../environments/environment';
 
 export function TranslateLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
