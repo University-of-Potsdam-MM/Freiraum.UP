@@ -7,7 +7,7 @@ import {BasicPageComponent} from '../../components/basic-page/basic-page.compone
   styleUrls: ['./reserved-rooms-page.component.scss'],
 })
 export class ReservedRoomsPageComponent extends BasicPageComponent implements OnInit {
-
+  keys = Object.keys;
   reservedRooms = {};
 
   constructor() { super('rooms-reserved'); }

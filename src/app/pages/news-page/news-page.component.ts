@@ -59,6 +59,8 @@ export class NewsPageComponent extends BasicPageComponent implements OnInit {
   }
 
   onSelected() {
-    this.selectedNewsSourceId = this.newsSourcesIterable.next().value;
+    if (this.newsReady) {
+      this.selectedNewsSourceId = this.newsSourcesIterable.next().value;
+    }
   }
 }

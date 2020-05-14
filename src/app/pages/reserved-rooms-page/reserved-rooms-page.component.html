@@ -22,7 +22,6 @@
           </ion-col>
         </ion-row>
 
-
         <ion-row *ngFor="let reservation of reservations">
           <ng-container>
             <ion-col col-2>
@@ -41,10 +40,8 @@
   </ion-card>
 </ng-template>
 
-<results [items]="reservedRooms.now"
-         [options]="{when: 'now'}"
-         [template]="roomReservationsTemplate"></results>
-
-<results [items]="reservedRooms.soon"
-         [options]="{when: 'soon'}"
-         [template]="roomReservationsTemplate"></results>
+<ng-container *ngFor="let slot of keys(reservedRooms)">
+  <results [items]="reservedRooms[slot]"
+           [options]="{when: slot}"
+           [template]="roomReservationsTemplate"></results>
+</ng-container>
