@@ -36,7 +36,7 @@ export interface IFeature {
 
 export interface IGeo {
   crs: ICrs;
-  features: IFeature&GeoJsonObject[];
+  features: IFeature & GeoJsonObject[];
   type: string;
 }
 
