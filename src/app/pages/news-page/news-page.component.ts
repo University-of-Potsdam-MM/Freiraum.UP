@@ -11,7 +11,8 @@ import {iterableArray} from '../../util/iterableArray';
 export class NewsPageComponent extends BasicPageComponent implements OnInit {
 
   newsForNewsSource: {[newsSourceId: string]: {newsSourceName: string, items: NewsItem[]}} = {};
-  newsSourcesList: string[];
+  newsSourceNameMapping = {};
+  newsSourcesList: string[] = [];
   newsSourcesIterable: IterableIterator<string>;
   selectedNewsSourceId: string;
   newsReady = false;
@@ -33,15 +34,28 @@ export class NewsPageComponent extends BasicPageComponent implements OnInit {
           const news = r.vars.news
             .filter(item => item.NewsSource.id === parseInt(newsSourceId, 10))
             .filter(item => this.moment.unix(parseInt(item.News.time, 10)).isBetween(startDate, endDate));
-
+          const newsSourceName = r.vars.newsSources[newsSourceId];
           // only add this newsSource if there actually are news for it
           if (news.length > 0) {
-            this.newsForNewsSource[newsSourceId] = {
-              newsSourceName: r.vars.newsSources[newsSourceId],
-              items: news
-            };
+            const toBeCombined = this.config.news.combine.find(v => v.categories.includes(newsSourceName));
+            if (toBeCombined) {
+              if (this.newsForNewsSource[toBeCombined.newId]) {
+                this.newsForNewsSource[toBeCombined.newId].items.push(...news);
+              } else {
+                this.newsForNewsSource[toBeCombined.newId] = {
+                  newsSourceName: toBeCombined.name,
+                  items: news
+                };
+              }
+            } else {
+              this.newsForNewsSource[newsSourceId] = {
+                newsSourceName,
+                items: news
+              };
+            }
           }
         }
+
         this.newsSourcesList = Object.keys(this.newsForNewsSource);
         this.newsSourcesIterable = iterableArray(this.newsSourcesList);
         this.selectedNewsSourceId = this.newsSourcesList[0];

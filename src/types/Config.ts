@@ -122,6 +122,7 @@ export interface NewsConfig extends PageConfig {
     // switches this specific NewsSource on or off
     enabled: boolean
   }[];
+  combine: {name: string, newId: number, categories: string[]}[];
 }
 
 // tslint:disable-next-line:no-empty-interface
