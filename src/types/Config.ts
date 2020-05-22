@@ -9,7 +9,8 @@ export interface Config {
   infobar: InfoBarConfig;
   news: NewsConfig;
   twitter: TwitterConfig;
-  rooms: RoomsConfig;
+  roomsFree: RoomsFreeConfig;
+  lectures: LecturesConfig;
   events: EventsConfig;
   transport: TransportConfig;
   campusMap: CampusMapConfig;
@@ -125,8 +126,17 @@ export interface NewsConfig extends PageConfig {
   combine: {name: string, newId: number, categories: string[]}[];
 }
 
+export type AvailableTimeslot = 'now' | 'soon';
+
 // tslint:disable-next-line:no-empty-interface
-export interface RoomsConfig extends PageConfig {}
+export interface RoomsFreeConfig extends PageConfig {
+  timeslots: AvailableTimeslot[];
+}
+
+export interface LecturesConfig extends PageConfig {
+  timeslots: AvailableTimeslot[];
+}
+
 
 // tslint:disable-next-line:no-empty-interface
 export interface EventsConfig extends PageConfig {

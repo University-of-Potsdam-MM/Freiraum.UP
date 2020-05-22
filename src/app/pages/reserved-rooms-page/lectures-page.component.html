@@ -1,9 +1,5 @@
 <ng-template #roomReservationsTemplate let-reservations="items" let-options="options">
-  <ion-card *ngIf="config.general.interactiveMode">
-
-  </ion-card>
-
-  <ion-card *ngIf="!config.general.interactiveMode">
+  <ion-card>
     <ion-card-header color="primary" class="title">
       {{ "words."+options.when | translate }}
       (Ab {{ moment(timerService.timeslots[options.when].begin).format('HH:mm') }} {{ "words.oclock" | translate }})
@@ -12,13 +8,13 @@
       <ion-grid >
         <ion-row id="headers" class="list-item">
           <ion-col col-2>
-            {{ "page.rooms-reserved.time" | translate }}
+            {{ "page.lectures.time" | translate }}
           </ion-col>
           <ion-col col-2>
-            {{ "page.rooms-reserved.room" | translate }}
+            {{ "page.lectures.room" | translate }}
           </ion-col>
           <ion-col col-auto>
-            {{ "page.rooms-reserved.reservation_title" | translate }}
+            {{ "page.lectures.reservation_title" | translate }}
           </ion-col>
         </ion-row>
 
@@ -40,8 +36,15 @@
   </ion-card>
 </ng-template>
 
-<ng-container *ngFor="let slot of keys(reservedRooms)">
-  <results [items]="reservedRooms[slot]"
+<ng-container *ngIf="config.general.interactiveMode">
+  <results *ngFor="let slot of keys(reservedRooms)"
+           [items]="reservedRooms[slot]"
            [options]="{when: slot}"
+           [template]="roomReservationsTemplate"></results>
+</ng-container>
+
+<ng-container *ngIf="!config.general.interactiveMode">
+  <results [items]="reservedRooms[selectedTimeslot]"
+           [options]="{when: selectedTimeslot}"
            [template]="roomReservationsTemplate"></results>
 </ng-container>

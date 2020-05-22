@@ -82,8 +82,8 @@ export class ApiService {
       soon: new Subject<string[]>()
     },
     reservedRooms: {
-      now: new Subject<FreeRoomsResponse>(),
-      soon: new Subject<FreeRoomsResponse>()
+      now: new Subject<ReservedRoomsResponse>(),
+      soon: new Subject<ReservedRoomsResponse>()
     },
     campusMapData: new Subject<CampusMapDataResponse>()
   };

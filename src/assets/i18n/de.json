@@ -62,7 +62,7 @@
       "title": "Freie Räume",
       "no_rooms": "In diesem Zeitabschnitt sind keine freien Räume verfügbar"
     },
-    "rooms-reserved": {
+    "lectures": {
       "title": "Veranstaltungen",
       "time": "Uhrzeit",
       "room": "Raum",
