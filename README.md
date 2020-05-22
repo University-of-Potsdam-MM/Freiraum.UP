@@ -84,12 +84,16 @@ einzufügen müssen zwei Schritte erfolgen:
 
 - Erstellen eines HTML-Dokuments für die Anzeige (z.B. `src/assets/ads/meine-anzeige.html`). Der Inhalt des Dokuments kann frei
   gestaltet werden. Es können auch CSS-Regeln und Klassen der Anwendung selbst verwendet werden.
-- Erstellen eines Eintrags für die Anzeige in der Datei [ads-config.json](src/assets/ads/ads-config.json). Ein solcher Eintrag
+- Erstellen eines Eintrags für die Anzeige in der Datei `/src/assets/ads/ads-config.json`. Ein solcher Eintrag
   muss wie folgt gestaltet sein:
     ```js
     {
-      "name": "sample-ad.html", // der exakte Name des HTML-Dokuments
-      "startDate": "2020-04-01", // Datum, ab wann die Anzeige gezeigt werden soll
-      "endDate": "2020-04-30" // Datum, bis zu dem die Anzeige gezeigt werden soll
-    }   
+      "ads": [
+        {
+          "name": "sample-ad.html", // der exakte Name des HTML-Dokuments
+          "startDate": "2020-04-01", // Datum, ab wann die Anzeige gezeigt werden soll
+          "endDate": "2020-04-30" // Datum, bis zu dem die Anzeige gezeigt werden soll
+        }
+      ]
+    }
     ```
