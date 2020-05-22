@@ -205,7 +205,6 @@ export class ApiService {
           try {
             this.feedFunctions[endpointName]();
           } catch (error) {
-            console.log(error)
             this.logger.error(`Could not call feed function for ednpoint '${endpointName}'`);
           }
         }
