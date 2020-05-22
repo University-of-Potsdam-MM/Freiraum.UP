@@ -26,7 +26,6 @@ export class LecturesPageComponent extends BasicPageComponent implements OnInit 
         }
       );
     }
-
   }
 
   onSelected() {

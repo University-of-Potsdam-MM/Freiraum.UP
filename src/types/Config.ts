@@ -9,7 +9,7 @@ export interface Config {
   infobar: InfoBarConfig;
   news: NewsConfig;
   twitter: TwitterConfig;
-  roomsFree: RoomsFreeConfig;
+  rooms: RoomsConfig;
   lectures: LecturesConfig;
   events: EventsConfig;
   transport: TransportConfig;
@@ -129,7 +129,7 @@ export interface NewsConfig extends PageConfig {
 export type AvailableTimeslot = 'now' | 'soon';
 
 // tslint:disable-next-line:no-empty-interface
-export interface RoomsFreeConfig extends PageConfig {
+export interface RoomsConfig extends PageConfig {
   timeslots: AvailableTimeslot[];
 }
 

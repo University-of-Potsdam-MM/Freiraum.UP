@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {BasicPageComponent} from '../../components/basic-page/basic-page.component';
-import {FreeRoomsResponse} from '../../../types/freeRooms.response';
 
 @Component({
   selector: 'app-rooms-page',
@@ -11,7 +10,7 @@ export class RoomsPageComponent extends BasicPageComponent implements OnInit {
 
   rooms = {};
 
-  constructor() { super('rooms-free'); }
+  constructor() { super('rooms'); }
 
   ngOnInit() {
     for (const timeslot of ['now', 'soon']) {
@@ -22,5 +21,4 @@ export class RoomsPageComponent extends BasicPageComponent implements OnInit {
       );
     }
   }
-
 }
