@@ -14,7 +14,7 @@ export class RoomsPageComponent extends BasicPageComponent implements OnInit {
 
   ngOnInit() {
     for (const timeslot of ['now', 'soon']) {
-      this.api.feeds.freeRooms[timeslot].subscribe(
+      this.api.feeds.rooms[timeslot].subscribe(
         (response) => {
           this.rooms[timeslot] = response;
         }

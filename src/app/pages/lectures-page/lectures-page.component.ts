@@ -20,7 +20,7 @@ export class LecturesPageComponent extends BasicPageComponent implements OnInit 
     this.timeslotIterator = iterableArray(this.config.lectures.timeslots);
     this.selectedTimeslot = this.config.lectures.timeslots[0];
     for (const timeslot of this.config.lectures.timeslots) {
-      this.api.feeds.reservedRooms[timeslot].subscribe(
+      this.api.feeds.lectures[timeslot].subscribe(
         (reservedRooms) => {
           this.reservedRooms[timeslot] = reservedRooms;
         }

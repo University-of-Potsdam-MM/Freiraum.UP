@@ -32,7 +32,7 @@ export class InfoBarComponent extends BasicPageComponent implements OnInit {
       }
     );
 
-    this.api.feeds.freeRooms.now.subscribe(
+    this.api.feeds.rooms.now.subscribe(
       rooms => { this.rooms = rooms; }
     );
   }
