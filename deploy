@@ -1,0 +1,55 @@
+#!/usr/bin/env sh
+
+set -o nounset
+set -o errexit
+
+warn () { printf "%s: %s" "$0" "$@" >&2; }
+die () { rc=$1; shift; warn "$@"; exit "$rc"; }
+
+[ -z "$BEARER_TOKEN" ]     && die "Token \$BEARER_TOKEN undefined!";
+[ -z "$SSH_DEPLOY_HOSTS" ] && die "Deploy servers (\$SSH_DEPLOY_HOSTS) undefined!";
+[ -z "$ADS_REPO_URL" ]     && warn "Ads  (\$SSH_DEPLOY_HOSTS) undefined!";
+
+workingDir=$(pwd)
+targetDir="platforms/browser/www/"
+deployDir="deploy"
+configDir="configs"
+
+# prepare different versions for different configs
+# will create a directory structure like
+# deploy/
+#  ├─ haus-4/
+#  └─ haus-6/
+# which will then be deployed to the servers entirely
+mkdir "$deployDir"
+for config in "$configDir"/*.config.dist.json; do
+  # replace token in config
+  sed -i "s/API_TOKEN/Bearer $BEARER_TOKEN/g" "$config"
+
+  # derive name of this deploy from config file name
+  configName=$(echo "$config" | cut -d '.' -f 1) # haus-X.config.dist.json -> haus-X
+
+  # create subdirectory for this version and descend into it
+  deploySubDir="$deployDir/$configName"
+  mkdir "$deploySubDir"
+  cd "$deploySubDir"
+
+  # copy files over
+  cp --link --recursive "$targetDir" .
+
+  # clone corresponding branch of ads repo to destination if ADS_REPO_URL is set
+  if [ -n "$ADS_REPO_URL" ]; then
+    git clone --branch "$configName" "$ADS_REPO_URL" assets/ads || die "Could not clone ads-repo for $config!"
+  fi
+
+  # copy corresponding config over
+  cp --link "$config" assets/config.json
+
+  cd "$workingDir"
+done
+
+# deploy to servers
+cd "$deployDir"
+for server in $SSH_DEPLOY_HOSTS; do
+    tar cfz - ./* | ssh -i /root/.ssh/id_rsa "gitup-deploy@$server";
+done
