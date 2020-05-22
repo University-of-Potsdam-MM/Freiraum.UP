@@ -15,12 +15,12 @@ targetDir="platforms/browser/www/"
 deployDir="deploy"
 configDir="configs"
 
-# prepare different versions for different configs
-# will create a directory structure like
-# deploy/
-#  ├─ haus-4/
-#  └─ haus-6/
-# which will then be deployed to the servers entirely
+# Prepare different versions for different configs
+# The following will create a directory structure like
+#   deploy/
+#    ├─ haus-X/
+#    └─ haus-Y/
+# the content of which will then be deployed to the defined servers
 mkdir "$deployDir"
 for config in "$configDir"/*.config.dist.json; do
   # replace token in config
