@@ -42,14 +42,13 @@
     <!-- non interactive view as list -->
     <div *ngSwitchCase="false">
         <ng-container *ngFor="let canteen of enabledCanteens">
-            <ion-card *ngIf="meals[canteen.name]?.length > 0 && selectedCanteenIndex == config.mensa.canteens.indexOf(canteen)">
+            <ion-card *ngIf="selectedCanteenIndex == config.mensa.canteens.indexOf(canteen)">
                 <ion-card-header color="primary" class="mensa-title">
                     {{ "page.mensa.canteenNames." + canteen.name | translate  }}
                 </ion-card-header>
                 <ion-card-content>
                     <results [items]="meals[canteen.name]"
-                             [template]="results"
-                             [showHintIfNoItems]="false">
+                             [template]="results">
                     </results>
                 </ion-card-content>
             </ion-card>
