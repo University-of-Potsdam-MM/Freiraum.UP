@@ -162,6 +162,7 @@ export class ApiService {
                 response.rooms4TimeResponse.return.map(formatRoomName)
               );
             } catch (e) {
+              this.logger.log(`No rooms for timeslot '${slot}'`);
               this.feeds.rooms[slot].next([]);
             }
           }
@@ -184,6 +185,7 @@ export class ApiService {
                 )
               );
             } catch (e) {
+              this.logger.log(`No lectures for timeslot '${slot}'`);
               this.feeds.lectures[slot].next([]);
             }
           }

@@ -136,6 +136,7 @@
     ]
   },
   "campusMap": {
+    "disabled": true,
     "campi": [
       {
         "id": 1,

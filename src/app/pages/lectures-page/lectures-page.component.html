@@ -1,9 +1,5 @@
 <ng-template #roomReservationsTemplate let-reservations="items" let-options="options">
   <ion-card>
-    <ion-card-header color="primary" class="title">
-      {{ "words."+options.when | translate }}
-      (Ab {{ moment(timerService.timeslots[options.when].begin).format('HH:mm') }} {{ "words.oclock" | translate }})
-    </ion-card-header>
     <ion-card-content>
       <ion-grid >
         <ion-row id="headers" class="list-item">
@@ -36,15 +32,13 @@
   </ion-card>
 </ng-template>
 
-<ng-container *ngIf="config.general.interactiveMode">
-  <results *ngFor="let slot of keys(reservedRooms)"
-           [items]="reservedRooms[slot]"
-           [options]="{when: slot}"
-           [template]="roomReservationsTemplate"></results>
-</ng-container>
+<ion-segment [(ngModel)]="selectedTimeslot">
+  <ion-segment-button *ngFor="let timeslot of config.lectures.timeslots; let i = index" [value]="timeslot">
+    {{ timeslot | timeslot }}
+  </ion-segment-button>
+</ion-segment>
 
-<ng-container *ngIf="!config.general.interactiveMode">
-  <results [items]="reservedRooms[selectedTimeslot]"
-           [options]="{when: selectedTimeslot}"
-           [template]="roomReservationsTemplate"></results>
-</ng-container>
+<results [items]="reservedRooms[selectedTimeslot]"
+         [options]="{when: selectedTimeslot}"
+         [noResultsHint]="'page.lectures.no_lectures'"
+         [template]="roomReservationsTemplate"></results>

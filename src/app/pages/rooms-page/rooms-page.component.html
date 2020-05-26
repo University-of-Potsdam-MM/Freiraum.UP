@@ -2,11 +2,7 @@
   <div id="now" style="width: 100%;">
     <ion-card>
       <ion-card-header color="primary" class="title">
-        {{ "words.now" | translate }}
-        (
-        {{ moment(timerService.timeslots.now.begin).format('HH:mm') }} -
-        {{ moment(timerService.timeslots.now.end).format('HH:mm') }}
-        )
+        {{ 'now' | timeslot }}
       </ion-card-header>
       <ion-card-content>
         <results [items]="rooms['now']" [template]="freeRoomsTemplate"></results>
@@ -16,11 +12,7 @@
   <div id="soon" style="width: 100%;">
     <ion-card>
       <ion-card-header color="primary" class="title">
-        {{ "words.soon" | translate }}
-        (
-        {{ moment(timerService.timeslots.soon.begin).format('HH:mm') }} -
-        {{ moment(timerService.timeslots.soon.end).format('HH:mm') }}
-        )
+        {{ 'soon' | timeslot }}
       </ion-card-header>
       <ion-card-content>
         <results [items]="rooms['soon']" [template]="freeRoomsTemplate"></results>

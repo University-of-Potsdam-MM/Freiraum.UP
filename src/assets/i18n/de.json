@@ -58,7 +58,7 @@
     "events": {
       "title": "Events"
     },
-    "rooms-free": {
+    "rooms": {
       "title": "Freie Räume",
       "no_rooms": "In diesem Zeitabschnitt sind keine freien Räume verfügbar"
     },
@@ -66,7 +66,8 @@
       "title": "Veranstaltungen",
       "time": "Uhrzeit",
       "room": "Raum",
-      "reservation_title": "Veranstaltung"
+      "reservation_title": "Veranstaltung",
+      "no_lectures": "Keine Veranstaltungen im gewählten Zeitraum."
     },
     "mensa": {
       "title": "Mensa",
@@ -117,6 +118,7 @@
     "cancel": "Abbrechen"
   },
   "hint": {
-    "no_results": "Keine Informationen verfügbar"
+    "noResultsFound": "Keine Informationen verfügbar",
+    "noResultsError": "Da ist was schief gelaufen!"
   }
 }

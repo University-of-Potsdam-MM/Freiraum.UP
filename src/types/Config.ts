@@ -125,6 +125,8 @@ export interface NewsConfig extends PageConfig {
     enabled: boolean
   }[];
   combine: {name: string, newId: number, categories: string[]}[];
+  // how many entries to show
+  showOnly: boolean;
 }
 
 export type AvailableTimeslot = 'now' | 'soon';
@@ -140,7 +142,10 @@ export interface LecturesConfig extends PageConfig {
 
 // tslint:disable-next-line:no-empty-interface
 export interface EventsConfig extends PageConfig {
+  // filters events until [amount] [units] in the future (e.g. 4 weeks)
   filter_events_until: {amount: number, unit: string};
+  // how many entries to show
+  showOnly: boolean;
 }
 
 export interface TwitterConfig extends PageConfig {

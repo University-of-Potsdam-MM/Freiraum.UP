@@ -16,9 +16,9 @@
 
 <ng-template #results let-news="items">
   <div id="news-container">
-        <ng-container *ngFor="let n of news">
-          <news [news]="n" class="news-item"></news>
-        </ng-container>
+    <ng-container *ngFor="let n of news.slice(0, config.news.showOnly ? config.news.showOnly : news.length)">
+      <news [news]="n" class="news-item"></news>
+    </ng-container>
   </div>
 </ng-template>
 

@@ -39,7 +39,7 @@ export const pagesList: PageItem[] = [
   },
   {
     component: RoomsPageComponent,
-    name: 'rooms-free',
+    name: 'rooms',
     icon: 'book',
     interactiveModes: [true, false]
   },
