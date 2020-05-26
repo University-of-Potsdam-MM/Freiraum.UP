@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {BasicPageComponent} from '../../components/basic-page/basic-page.component';
 import {iterableArray} from '../../util/iterableArray';
-import {ReservedRoomsResponse} from '../../../types/reservedRooms.response';
+import {IRoomReservation, ReservedRoomsResponse} from '../../../types/reservedRooms.response';
 
 @Component({
   selector: 'app-lectures-page',
@@ -10,7 +10,7 @@ import {ReservedRoomsResponse} from '../../../types/reservedRooms.response';
 })
 export class LecturesPageComponent extends BasicPageComponent implements OnInit {
   keys = Object.keys;
-  reservedRooms: {[timeslot: string]: ReservedRoomsResponse} = {};
+  reservedRooms: {[timeslot: string]: IRoomReservation[]} = {};
   timeslotIterator;
   selectedTimeslot;
 
