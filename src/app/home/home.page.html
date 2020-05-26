@@ -67,4 +67,4 @@
   </div>
 </ion-content>
 
-<app-info-bar></app-info-bar>
+<app-info-bar *ngIf="config.infobar!==undefined && !config.infobar.disabled"></app-info-bar>

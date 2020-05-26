@@ -41,7 +41,7 @@ export interface GeneralConfig {
   time_format: string;
 }
 
-export interface InfoBarConfig {
+export interface InfoBarConfig extends PageConfig {
   public_transport: {
     display: boolean;
     count: number
@@ -67,7 +67,7 @@ export interface ApiConfig {
   endpoints: {[name: string]: {url: string, frequency?: number}};
 }
 
-export interface TransportConfig {
+export interface TransportConfig extends PageConfig {
   // how many departures to show on one page
   count: number;
   // station_id to be used
@@ -109,6 +109,7 @@ export interface Location {
 export interface PageConfig {
   // add this option with 'true' as value to a pages config to disable it
   disabled?: boolean;
+  // enable page even when disabled through not matching "interactiveMode"
   force_enabled?: boolean;
   // add this attribute to any pages config to specify its order of appearance. If no order is given, pages are sorted
   // alphabetically.
@@ -137,7 +138,6 @@ export interface LecturesConfig extends PageConfig {
   timeslots: AvailableTimeslot[];
 }
 
-
 // tslint:disable-next-line:no-empty-interface
 export interface EventsConfig extends PageConfig {
   filter_events_until: {amount: number, unit: string};
@@ -160,6 +160,8 @@ export interface CampusMapConfig extends PageConfig {
   campi: Campus[];
 }
 
+// Just empty for the moment
+// tslint:disable-next-line:no-empty-interface
 export interface AdsPageConfig extends PageConfig {}
 
 export interface Campus {

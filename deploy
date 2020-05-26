@@ -6,9 +6,12 @@ set -o errexit
 warn () { printf "%s: %s" "$0" "$@" >&2; }
 die () { rc=$1; shift; warn "$@"; exit "$rc"; }
 
+npm install -g jq || die "Could not install jq."
+
 [ -z "$BEARER_TOKEN" ]     && die "Token \$BEARER_TOKEN undefined!";
 [ -z "$SSH_DEPLOY_HOSTS" ] && die "Deploy servers (\$SSH_DEPLOY_HOSTS) undefined!";
-[ -z "$ADS_REPO_URL" ]     && warn "Ads  (\$SSH_DEPLOY_HOSTS) undefined!";
+
+[ -z "$ADS_REPO_URL" ]     && warn "Ads  (\$ADS_REPO_URL) undefined!";
 
 workingDir=$(pwd)
 targetDir="platforms/browser/www/"
@@ -23,8 +26,9 @@ configDir="configs"
 # the content of which will then be deployed to the defined servers
 mkdir "$deployDir"
 for config in "$configDir"/*.config.dist.json; do
-  # replace token in config
-  sed -i "s/API_TOKEN/Bearer $BEARER_TOKEN/g" "$config"
+  # set token in config
+  jq ".api.authorization=\"$BEARER_TOKEN\"" > "$config.temp" || die "Could not set \$BEARER_TOKEN in $config."
+  mv "$config.temp" "$config"
 
   # derive name of this deploy from config file name
   configName=$(echo "$config" | cut -d '.' -f 1) # haus-X.config.dist.json -> haus-X
@@ -39,7 +43,14 @@ for config in "$configDir"/*.config.dist.json; do
 
   # clone corresponding branch of ads repo to destination if ADS_REPO_URL is set
   if [ -n "$ADS_REPO_URL" ]; then
-    git clone --branch "$configName" "$ADS_REPO_URL" assets/ads || die "Could not clone ads-repo for $config!"
+    git clone --branch "$configName" "$ADS_REPO_URL" assets/ads || warn "Cloning ads repo failed."
+
+    # if ads dir is non existent or empty we disable ads-page by removing the ads-config-element
+    if [ ! -d assets/ads ] || [ -z "$(ls -A assets/ads)" ]; then
+      warn "Ads directory is empty. Disabling ads page."
+      jq ".ads.disabled=true" "$config" > "$config.temp" || die "Could not disable ads-page."
+      mv "$config.temp" "$config" || die "Could not disable ads-page."
+    fi
   fi
 
   # copy corresponding config over
