@@ -10,7 +10,9 @@
 
 <div *ngIf="!config.general.interactiveMode" class="title">
     <ng-container *ngIf="newsReady">
-        {{ newsForNewsSource[selectedNewsSourceId].newsSourceName }}
+        <div class="ion-text-center" style="font-weight: bold; color: var(--ion-color-primary);">
+            - {{ newsForNewsSource[selectedNewsSourceId].newsSourceName }} -
+        </div>
     </ng-container>
 </div>
 

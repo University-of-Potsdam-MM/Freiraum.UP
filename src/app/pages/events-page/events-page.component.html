@@ -10,7 +10,9 @@
 
 <div *ngIf="!config.general.interactiveMode" class="title">
     <ng-container *ngIf="eventsReady">
-        {{ eventsForPlace[selectedPlaceId].placeName }}
+        <div class="ion-text-center" style="font-weight: bold; color: var(--ion-color-primary);">
+            - {{ eventsForPlace[selectedPlaceId].placeName }} -
+        </div>
     </ng-container>
 </div>
 
