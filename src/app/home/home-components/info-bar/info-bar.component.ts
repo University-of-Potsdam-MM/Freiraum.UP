@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {BasicPageComponent} from '../../../components/basic-page/basic-page.component';
-import {Departure} from '../../../../types/publicTransport.response';
+import {Departure, PublicTransportResponse} from '../../../../types/publicTransport.response';
 
 @Component({
   selector: 'app-info-bar',
@@ -16,7 +16,7 @@ export class InfoBarComponent extends BasicPageComponent implements OnInit {
 
   ngOnInit() {
     this.api.feeds.publicTransport.subscribe(
-      response => {
+      (response: PublicTransportResponse) => {
         this.connections = response.Departure
           // map departures to new object containing the remaining time
           .map(dep => {
@@ -28,7 +28,7 @@ export class InfoBarComponent extends BasicPageComponent implements OnInit {
           // filter out connections that have already departed or are departing right now
           .filter(conn => conn.minutesRemaining > 0)
           // show just as much as desired
-          .slice(0, this.config.infobar.public_transport.count);
+          .slice(0, this.config.footer.public_transport.count);
       }
     );
 

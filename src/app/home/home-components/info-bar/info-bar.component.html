@@ -1,5 +1,5 @@
 <div id="info-bar">
-    <div *ngIf="config.infobar.public_transport.display">
+    <div *ngIf="config.footer.public_transport?.display">
         <ion-badge *ngFor="let conn of connections"
                    [class.cancelled]="conn.departure.cancelled">
           <ng-container *ngFor="let product of config.transport.meansOfTransport">
@@ -18,7 +18,7 @@
         </ion-badge>
     </div>
 
-    <div *ngIf="config.infobar.rooms_free.display">
+    <div *ngIf="config.footer.rooms_free?.display">
         <ion-label style="font-size: 2em;">
             {{ "words.currently_free" | translate }}:
         </ion-label>
@@ -27,5 +27,13 @@
                 {{ room }}
             </span>
         </ion-badge>
+    </div>
+
+    <div *ngIf="config.footer.running_text?.display" class="marquee">
+        <p>
+          <ion-icon *ngIf="config.footer.running_text.icon_before" [name]="config.footer.running_text.icon_before"></ion-icon>
+          {{ config.footer.running_text.textI18nKey | translate }}
+          <ion-icon *ngIf="config.footer.running_text.icon_after" [name]="config.footer.running_text.icon_after"></ion-icon>
+        </p>
     </div>
 </div>

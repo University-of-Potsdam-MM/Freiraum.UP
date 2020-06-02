@@ -6,7 +6,7 @@ export interface Config {
   api: ApiConfig;
 
   // configuration of the available pages
-  infobar: InfoBarConfig;
+  footer: FooterConfig;
   news: NewsConfig;
   twitter: TwitterConfig;
   rooms: RoomsConfig;
@@ -41,13 +41,19 @@ export interface GeneralConfig {
   time_format: string;
 }
 
-export interface InfoBarConfig extends PageConfig {
+export interface FooterConfig extends PageConfig {
   public_transport: {
     display: boolean;
     count: number
   };
   rooms_free: {
     display: boolean;
+  };
+  running_text: {
+    display: boolean;
+    textI18nKey: string;
+    icon_before: string;
+    icon_after: string;
   };
 }
 

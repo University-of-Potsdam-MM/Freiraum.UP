@@ -120,5 +120,8 @@
   "hint": {
     "noResultsFound": "Keine Informationen verfügbar",
     "noResultsError": "Da ist was schief gelaufen!"
+  },
+  "footer": {
+    "corona": "Es wird gebeten, zur Eindämmung des Coronavirus den empfohlenen Mindestabstand von 1,5 Metern einzuhalten. Danke!"
   }
 }

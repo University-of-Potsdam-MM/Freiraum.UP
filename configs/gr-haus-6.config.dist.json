@@ -55,7 +55,7 @@
       }
     }
   },
-  "infobar": {
+  "footer": {
     "public_transport": {
       "display": true,
       "count": 5
