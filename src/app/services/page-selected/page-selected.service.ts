@@ -11,6 +11,7 @@ import {Subject} from 'rxjs';
 export class PageSelectedService {
 
   public selected: Subject<string> = new Subject<string>();
+  public title: Subject<string> = new Subject<string>();
 
   constructor() { }
 }

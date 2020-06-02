@@ -75,6 +75,7 @@ export class NewsPageComponent extends BasicPageComponent implements OnInit {
   onSelected() {
     if (this.newsReady) {
       this.selectedNewsSourceId = this.newsSourcesIterable.next().value;
+      this.customTitle = this.newsForNewsSource[this.selectedNewsSourceId].newsSourceName;
     }
   }
 }

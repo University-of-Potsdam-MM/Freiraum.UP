@@ -8,14 +8,6 @@
   </ion-segment>
 </div>
 
-<div *ngIf="!config.general.interactiveMode" class="title">
-    <ng-container *ngIf="eventsReady">
-        <div class="ion-text-center" style="font-weight: bold; color: var(--ion-color-primary);">
-            - {{ eventsForPlace[selectedPlaceId].placeName }} -
-        </div>
-    </ng-container>
-</div>
-
 <ng-template #results let-events="items">
   <div id="events-container">
         <ng-container *ngFor="let e of events.slice(0, config.events.showOnly ? config.events.showOnly : events.length)">

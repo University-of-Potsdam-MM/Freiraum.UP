@@ -7,6 +7,7 @@ import * as moment from 'moment';
 import {TimerService} from '../../services/timer/timer.service';
 import {PageSelectedService} from '../../services/page-selected/page-selected.service';
 import {NGXLogger} from 'ngx-logger';
+import {TranslateService} from "@ngx-translate/core";
 
 /**
  * This abstract page provides some features that all pages use
@@ -22,12 +23,16 @@ export abstract class BasicPageComponent {
   /* provides access to the TimerService */
   protected timerService: TimerService;
   /* provides access to the PageSelectedService */
-  private pages: PageSelectedService;
+  protected pages: PageSelectedService;
+  /* provides access to the TranslateService */
+  protected translate: TranslateService;
 
   protected logger: NGXLogger;
 
   /* holds the name of this page, set by constructor */
   private readonly name: string;
+
+  customTitle = '';
 
   protected constructor(name: string = 'noName') {
     this.name = name;
@@ -38,6 +43,7 @@ export abstract class BasicPageComponent {
     this.api = injector.get<ApiService>(ApiService as Type<ApiService>);
     this.timerService = injector.get<TimerService>(TimerService as Type<TimerService>);
     this.pages = injector.get<PageSelectedService>(PageSelectedService as Type<PageSelectedService>);
+    this.translate = injector.get<TranslateService>(TranslateService as Type<TranslateService>);
     this.logger = injector.get<NGXLogger>(NGXLogger as Type<NGXLogger>);
 
     this.info(`Created '${name}'.`);
@@ -46,7 +52,10 @@ export abstract class BasicPageComponent {
     // help of the 'name' attribute. That's why we want to pass a name to the constructor.
     this.pages.selected.subscribe(
       selected => {
-        if (selected === name) { this.onSelected(); }}
+        if (selected === name) {
+          this.onSelected();
+          this.pages.title.next(this.customTitle);
+        }}
     );
   }
 

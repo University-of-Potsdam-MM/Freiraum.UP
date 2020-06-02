@@ -32,7 +32,7 @@
   </ion-card>
 </ng-template>
 
-<ion-segment [(ngModel)]="selectedTimeslot">
+<ion-segment [(ngModel)]="selectedTimeslot" *ngIf="config.general.interactiveMode">
   <ion-segment-button *ngFor="let timeslot of config.lectures.timeslots; let i = index" [value]="timeslot" style="font-size: 1.5em;">
     {{ timeslot | timeslot }}
   </ion-segment-button>

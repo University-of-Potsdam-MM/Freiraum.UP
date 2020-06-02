@@ -31,6 +31,7 @@ export class LecturesPageComponent extends BasicPageComponent implements OnInit 
   onSelected() {
     if (this.timeslotIterator) {
       this.selectedTimeslot = this.timeslotIterator.next().value;
+      this.customTitle = this.translate.instant('words.' + this.selectedTimeslot);
     }
   }
 

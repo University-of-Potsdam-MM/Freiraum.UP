@@ -59,6 +59,7 @@ export class EventsPageComponent extends BasicPageComponent implements OnInit {
   onSelected() {
     if (this.eventsReady) {
       this.selectedPlaceId = this.placesIterable.next().value;
+      this.customTitle = this.eventsForPlace[this.selectedPlaceId].placeName;
     }
   }
 }

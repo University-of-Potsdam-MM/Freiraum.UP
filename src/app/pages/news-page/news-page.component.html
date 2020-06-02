@@ -8,14 +8,6 @@
   </ion-segment>
 </div>
 
-<div *ngIf="!config.general.interactiveMode" class="title">
-    <ng-container *ngIf="newsReady">
-        <div class="ion-text-center" style="font-weight: bold; color: var(--ion-color-primary);">
-            - {{ newsForNewsSource[selectedNewsSourceId].newsSourceName }} -
-        </div>
-    </ng-container>
-</div>
-
 <ng-template #results let-news="items">
   <div id="news-container">
     <ng-container *ngFor="let n of news.slice(0, config.news.showOnly ? config.news.showOnly : news.length)">
