@@ -26,8 +26,7 @@
   <ion-list>
     <ion-item *ngFor="let room of rooms">
       <div class="list-item">
-        {{ "words.room" | translate }}
-        {{ room }}
+        {{ room | roomName }}
       </div>
     </ion-item>
   </ion-list>

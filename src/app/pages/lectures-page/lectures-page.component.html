@@ -3,13 +3,13 @@
     <ion-card-content>
       <ion-grid >
         <ion-row id="headers" class="list-item">
-          <ion-col col-2>
+          <ion-col col-3 class="lectures-header">
             {{ "page.lectures.time" | translate }}
           </ion-col>
-          <ion-col col-2>
+          <ion-col col-3 class="lectures-header">
             {{ "page.lectures.room" | translate }}
           </ion-col>
-          <ion-col col-auto>
+          <ion-col col-auto class="lectures-header">
             {{ "page.lectures.reservation_title" | translate }}
           </ion-col>
         </ion-row>
@@ -20,7 +20,7 @@
               {{ moment(reservation.startTime).format("LT") }} - {{ moment(reservation.endTime).format("LT") }}
             </ion-col>
             <ion-col col-2>
-              {{ reservation.roomList.room }}
+              {{ reservation.roomList.room | roomName }}
             </ion-col>
             <ion-col col-auto>
               {{ reservation.veranstaltung }}
@@ -33,7 +33,7 @@
 </ng-template>
 
 <ion-segment [(ngModel)]="selectedTimeslot">
-  <ion-segment-button *ngFor="let timeslot of config.lectures.timeslots; let i = index" [value]="timeslot">
+  <ion-segment-button *ngFor="let timeslot of config.lectures.timeslots; let i = index" [value]="timeslot" style="font-size: 1.5em;">
     {{ timeslot | timeslot }}
   </ion-segment-button>
 </ion-segment>

@@ -53,10 +53,6 @@ function filterByTimeslot(reservations: IRoomReservation[], timeslot: Timeslot) 
   );
 }
 
-function formatRoomName(room: string) {
-  return room.split('.').slice(2, 4).join('.');
-}
-
 @Injectable({
   providedIn: 'root'
 })
@@ -159,7 +155,7 @@ export class ApiService {
           (response: FreeRoomsResponse) => {
             try {
               this.feeds.rooms[slot].next(
-                response.rooms4TimeResponse.return.map(formatRoomName)
+                response.rooms4TimeResponse.return
               );
             } catch (e) {
               this.logger.log(`No rooms for timeslot '${slot}'`);

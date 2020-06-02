@@ -54,6 +54,7 @@ export interface FooterConfig extends PageConfig {
     textI18nKey: string;
     icon_before: string;
     icon_after: string;
+    speed: number;
   };
 }
 
