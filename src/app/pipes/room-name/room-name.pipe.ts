@@ -10,8 +10,7 @@ export class RoomNamePipe implements PipeTransform {
 
   transform(value: string, ...args: any[]): any {
     const parts = value.split('.');
-    console.log(parts);
-    let parsed = '';
+    let parsed = value;
     switch (parts.length) {
       case 3: {
         if (parts[2].includes('S')) {
@@ -26,9 +25,7 @@ export class RoomNamePipe implements PipeTransform {
         parsed = `${this.translate.instant('words.room')} ${parts[2]}.${parts[3]}`;
         break;
       }
-      default: {
-        parsed = value;
-      }
+      default: {}
     }
     return parsed;
   }

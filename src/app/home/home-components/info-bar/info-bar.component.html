@@ -27,7 +27,7 @@
         </ion-label>
         <ion-badge *ngFor="let room of rooms">
             <span class="badge-text">
-                {{ room }}
+                {{ room | roomName }}
             </span>
         </ion-badge>
     </div>
