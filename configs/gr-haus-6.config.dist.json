@@ -6,10 +6,13 @@
     "timeout_time": 20,
     "timeout_modal_countdown_time": 10,
     "timeslot_update_frequency": 60,
-    "time_update_frequency":  1,
+    "time_update_frequency": 1,
     "time_format": "lll",
     "location": {
-      "coordinates": [52.3932515, 13.1283403],
+      "coordinates": [
+        52.3932515,
+        13.1283403
+      ],
       "campus_name": "Griebnitzsee",
       "campus_name_short": "griebnitzsee",
       "campus": 3,
@@ -26,7 +29,7 @@
     }
   },
   "api": {
-    "authorization": "API_TOKEN",
+    "authorization": "",
     "base_url": "https://apiup.uni-potsdam.de/endpoints/",
     "default_frequency": 300,
     "endpoints": {
@@ -35,23 +38,23 @@
         "frequency": 60
       },
       "lectures": {
-        "url":"https://apiup.uni-potsdam.de/endpoints/roomsAPI/1.0/reservations"
+        "url": "https://apiup.uni-potsdam.de/endpoints/roomsAPI/1.0/reservations"
       },
-      "rooms":{
-        "url":"https://apiup.uni-potsdam.de/endpoints/roomsAPI/1.0/rooms4Time"
+      "rooms": {
+        "url": "https://apiup.uni-potsdam.de/endpoints/roomsAPI/1.0/rooms4Time"
       },
       "news": {
-        "url":"https://apiup.uni-potsdam.de/endpoints/newsAPI/news/"
+        "url": "https://apiup.uni-potsdam.de/endpoints/newsAPI/news/"
       },
-      "events":{
-        "url":"https://apiup.uni-potsdam.de/endpoints/newsAPI/events/"
+      "events": {
+        "url": "https://apiup.uni-potsdam.de/endpoints/newsAPI/events/"
       },
       "maps": {
-        "url":"https://apiup.uni-potsdam.de/endpoints/mapsAPI",
+        "url": "https://apiup.uni-potsdam.de/endpoints/mapsAPI",
         "frequency": 7200
       },
-      "mensa":{
-        "url":"https://apiup.uni-potsdam.de/endpoints/mensaAPI/meals"
+      "mensa": {
+        "url": "https://apiup.uni-potsdam.de/endpoints/mensaAPI/meals"
       }
     }
   },
@@ -64,7 +67,7 @@
       "display": true
     }
   },
-  "transport":{
+  "transport": {
     "station_id": "900230003",
     "count": 10,
     "station_name": "S-Griebnitzsee",
@@ -85,16 +88,49 @@
   },
   "news": {
     "categories": [
-      {"name": "Uni Nachrichten", "enabled": true, "textOnly": true},
-      {"name": "Uni Medienmitteilungen", "enabled": true, "textOnly": true},
-      {"name": "Zur Quelle", "enabled": true, "textOnly": true},
-      {"name": "speakUP", "enabled": true},
-      {"name": "AStA Pressemitteilungen", "enabled": true},
-      {"name": "AStA Thementexte", "enabled": true},
-      {"name": "AStA Protokolle", "enabled": true, "textOnly": true}
+      {
+        "name": "Uni Nachrichten",
+        "enabled": true,
+        "textOnly": true
+      },
+      {
+        "name": "Uni Medienmitteilungen",
+        "enabled": true,
+        "textOnly": true
+      },
+      {
+        "name": "Zur Quelle",
+        "enabled": true,
+        "textOnly": true
+      },
+      {
+        "name": "speakUP",
+        "enabled": true
+      },
+      {
+        "name": "AStA Pressemitteilungen",
+        "enabled": true
+      },
+      {
+        "name": "AStA Thementexte",
+        "enabled": true
+      },
+      {
+        "name": "AStA Protokolle",
+        "enabled": true,
+        "textOnly": true
+      }
     ],
     "combine": [
-      {"name": "AStA", "newId": 99, "categories":  ["AStA Pressemitteilungen", "AStA Thementexte", "AStA Protokolle"]}
+      {
+        "name": "AStA",
+        "newId": 99,
+        "categories": [
+          "AStA Pressemitteilungen",
+          "AStA Thementexte",
+          "AStA Protokolle"
+        ]
+      }
     ]
   },
   "events": {
@@ -105,10 +141,22 @@
   },
   "mensa": {
     "canteens": [
-      {"name": "Griebnitzsee", "enabled": true},
-      {"name": "UlfsCafe", "enabled": true},
-      {"name": "Golm", "enabled": false},
-      {"name": "NeuesPalais", "enabled": false}
+      {
+        "name": "Griebnitzsee",
+        "enabled": true
+      },
+      {
+        "name": "UlfsCafe",
+        "enabled": true
+      },
+      {
+        "name": "Golm",
+        "enabled": false
+      },
+      {
+        "name": "NeuesPalais",
+        "enabled": false
+      }
     ],
     "icons": {
       "Regional": "su_regional.png",
@@ -126,7 +174,7 @@
     "force_enabled": true,
     "feeds": [
       {
-        "name":"twitter-up",
+        "name": "twitter-up",
         "url": "https://twitter.com/unipotsdam?ref_src=twsrc%5Etfw"
       },
       {
@@ -140,15 +188,21 @@
     "campi": [
       {
         "id": 1,
-        "name": "neuespalais" ,
+        "name": "neuespalais",
         "pretty_name": "Neues Palais",
         "coordinates": {
           "latitude": 52.40105,
           "longitude": 13.01207
         },
         "lat_long_bounds": [
-          [52.4038, 13.0078],
-          [52.39706, 13.01884]
+          [
+            52.4038,
+            13.0078
+          ],
+          [
+            52.39706,
+            13.01884
+          ]
         ]
       },
       {
@@ -160,8 +214,14 @@
           "longitude": 12.96941
         },
         "lat_long_bounds": [
-          [52.413, 12.9721],
-          [52.4057, 12.9802]
+          [
+            52.413,
+            12.9721
+          ],
+          [
+            52.4057,
+            12.9802
+          ]
         ]
       },
       {
@@ -173,18 +233,34 @@
           "longitude": 13.1288
         },
         "lat_long_bounds": [
-          [52.3945, 13.1258],
-          [52.3912, 13.1338]
+          [
+            52.3945,
+            13.1258
+          ],
+          [
+            52.3912,
+            13.1338
+          ]
         ]
       }
     ]
   },
   "rooms": {
-    "timeslots": ["now", "soon"]
+    "timeslots": [
+      "now",
+      "soon"
+    ]
   },
   "lectures": {
-    "timeslots": ["now", "soon"]
+    "timeslots": [
+      "now",
+      "soon"
+    ]
   },
-  "game": {"disabled": true},
-  "ads": {}
+  "game": {
+    "disabled": true
+  },
+  "ads": {
+    "disabled": true
+  }
 }
