@@ -63,5 +63,5 @@ done
 # deploy to servers
 cd "$deployDir"
 for server in $SSH_DEPLOY_HOSTS; do
-    tar cfz - ./* > d # | ssh -i /root/.ssh/id_rsa "gitup-deploy@$server";
+    tar cfz - ./* | ssh -i /root/.ssh/id_rsa "gitup-deploy@$server";
 done
