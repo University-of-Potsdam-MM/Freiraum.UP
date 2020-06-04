@@ -7,7 +7,7 @@ import * as moment from 'moment';
 import {TimerService} from '../../services/timer/timer.service';
 import {PageSelectedService} from '../../services/page-selected/page-selected.service';
 import {NGXLogger} from 'ngx-logger';
-import {TranslateService} from "@ngx-translate/core";
+import {TranslateService} from '@ngx-translate/core';
 
 /**
  * This abstract page provides some features that all pages use

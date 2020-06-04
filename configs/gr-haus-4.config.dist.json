@@ -65,6 +65,12 @@
     },
     "rooms_free": {
       "display": true
+    },
+    "running_text": {
+      "display": true,
+      "textI18nKey": "footer.corona",
+      "icon_before": "warning",
+      "icon_after": "warning"
     }
   },
   "transport": {
