@@ -50,13 +50,15 @@ export abstract class BasicPageComponent {
 
     // calls the onSelect method if this page has been selected. Whether is has been selected will be detected with
     // help of the 'name' attribute. That's why we want to pass a name to the constructor.
-    this.pages.selected.subscribe(
-      selected => {
-        if (selected === name) {
-          this.onSelected();
-          this.pages.title.next(this.customTitle);
-        }}
-    );
+    if (!this.config.general.interactiveMode) {
+      this.pages.selected.subscribe(
+        selected => {
+          if (selected === name) {
+            this.onSelected();
+            this.pages.title.next(this.customTitle);
+          }}
+      );
+    }
   }
 
   // method stub for the method that is called once the page is selected
