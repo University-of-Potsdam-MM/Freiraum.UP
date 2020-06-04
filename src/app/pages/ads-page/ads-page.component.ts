@@ -25,7 +25,7 @@ export class AdsPageComponent extends BasicPageComponent implements OnInit {
   async ngOnInit() {
     this.adsService.getAds()
       .then(ads => this.ads = ads)
-      .catch(error => console.log(error));
+      .catch(error => this.error(error));
   }
 
   onSelected() {

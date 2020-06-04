@@ -8,15 +8,9 @@
   </ion-segment>
 </div>
 
-<div *ngIf="!config.general.interactiveMode" class="title">
-    <ng-container *ngIf="eventsReady">
-        {{ eventsForPlace[selectedPlaceId].placeName }}
-    </ng-container>
-</div>
-
 <ng-template #results let-events="items">
   <div id="events-container">
-        <ng-container *ngFor="let e of events">
+        <ng-container *ngFor="let e of events.slice(0, config.events.showOnly ? config.events.showOnly : events.length)">
           <event [event]="e" class="events-item"></event>
         </ng-container>
   </div>

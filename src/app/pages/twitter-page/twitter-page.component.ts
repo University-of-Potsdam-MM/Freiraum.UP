@@ -23,6 +23,7 @@ export class TwitterPageComponent extends BasicPageComponent implements AfterVie
     this.selectedFeedIndex = this.selectedFeedIndex < this.feeds.length - 1
       ? this.selectedFeedIndex + 1
       : 0;
+    this.customTitle = '@' + this.feeds[this.selectedFeedIndex].name;
   }
 
 }

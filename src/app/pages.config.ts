@@ -4,7 +4,7 @@ import {EventsPageComponent} from './pages/events-page/events-page.component';
 import {CampusMapPageComponent} from './pages/campus-map-page/campus-map-page.component';
 import {NewsPageComponent} from './pages/news-page/news-page.component';
 import {RoomsPageComponent} from './pages/rooms-page/rooms-page.component';
-import {ReservedRoomsPageComponent} from './pages/reserved-rooms-page/reserved-rooms-page.component';
+import {LecturesPageComponent} from './pages/lectures-page/lectures-page.component';
 import {TwitterPageComponent} from './pages/twitter-page/twitter-page.component';
 import {PublicTransportPageComponent} from './pages/public-transport-page/public-transport-page.component';
 import {AdsPageComponent} from './pages/ads-page/ads-page.component';
@@ -39,13 +39,13 @@ export const pagesList: PageItem[] = [
   },
   {
     component: RoomsPageComponent,
-    name: 'rooms-free',
+    name: 'rooms',
     icon: 'book',
     interactiveModes: [true, false]
   },
   {
-    component: ReservedRoomsPageComponent,
-    name: 'rooms-reserved',
+    component: LecturesPageComponent,
+    name: 'lectures',
     icon: 'time',
     interactiveModes: [true, false]
   },

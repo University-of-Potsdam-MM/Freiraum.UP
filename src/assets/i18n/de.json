@@ -58,15 +58,16 @@
     "events": {
       "title": "Events"
     },
-    "rooms-free": {
+    "rooms": {
       "title": "Freie Räume",
       "no_rooms": "In diesem Zeitabschnitt sind keine freien Räume verfügbar"
     },
-    "rooms-reserved": {
+    "lectures": {
       "title": "Veranstaltungen",
       "time": "Uhrzeit",
       "room": "Raum",
-      "reservation_title": "Veranstaltung"
+      "reservation_title": "Veranstaltung",
+      "no_lectures": "Keine Veranstaltungen im gewählten Zeitraum."
     },
     "mensa": {
       "title": "Mensa",
@@ -108,6 +109,8 @@
     "application_name": "Freiraum.UP",
     "university_name": "Universität Potsdam",
     "room": "Raum",
+    "lecture_room": "Hörsaal",
+    "seminar_room": "Seminarraum",
     "currently_free": "Aktuell frei"
   },
   "buttons": {
@@ -117,6 +120,12 @@
     "cancel": "Abbrechen"
   },
   "hint": {
-    "no_results": "Keine Informationen verfügbar"
+    "noResultsFound": "Keine Informationen verfügbar",
+    "noResultsError": "Da ist was schief gelaufen!"
+  },
+  "footer": {
+    "next_departures": "Nächste Abfahrten",
+    "currently_free": "Aktuell frei",
+    "corona": "Es wird gebeten, zur Eindämmung des Coronavirus den empfohlenen Mindestabstand von 1,5 Metern einzuhalten. Danke!"
   }
 }

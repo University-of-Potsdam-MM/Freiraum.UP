@@ -4,6 +4,7 @@ import {IonSlides} from '@ionic/angular';
 import {ConfigService} from '../../../services/config/config.service';
 import {TimerService} from '../../../services/timer/timer.service';
 import {BreakpointObserver} from '@angular/cdk/layout';
+import {PageSelectedService} from "../../../services/page-selected/page-selected.service";
 
 /**
  * This component displays an interactive menu in interactive mode and an active page indicator in non interactive mode.
@@ -26,6 +27,8 @@ export class MenuComponent implements OnInit {
 
   /* uses global pagesConfig object to retrieve list of available pages */
   pageList = this.pages.pages;
+
+  customTitle = '';
 
   /* setter for setting the number of visible slides */
   @Input() set visibleSlides(slides) {
@@ -56,6 +59,7 @@ export class MenuComponent implements OnInit {
   };
 
   constructor(private pages: PagesService,
+              private selected: PageSelectedService,
               private timer: TimerService) {
     this.visibleSlides = 3;
   }
@@ -65,6 +69,8 @@ export class MenuComponent implements OnInit {
     this.timer.showNextPage.subscribe(next => this.slides.slideNext());
     // use progress from TimerService in progress-bar
     this.timer.progress.subscribe(p => { this.progress = p; });
+    // set custom title received from pageSelected service
+    this.selected.title.subscribe(t => { this.customTitle = t; });
   }
 
   onIonSlideDidChange(event) {

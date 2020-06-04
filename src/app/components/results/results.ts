@@ -23,15 +23,14 @@ export class ResultsComponent {
   _options = {};
 
   @Input() template: TemplateRef<any>;
-
-  @Input() hints: {errorHint: string; noResultsHint: string} = {
-    errorHint: 'hint.noResultsError',
-    noResultsHint: 'hint.noResultsFound'
-  };
-
+  @Input() error = false;
+  @Input() errorHint = 'hint.noResultsError';
+  @Input() errorIcon = 'warning';
+  @Input() noResultsHint = 'hint.noResultsFound';
+  @Input() noResultsIcon = 'information-circle-outline';
   @Input() customHint = undefined;
-
   @Input() showHintIfNoItems = true;
+  @Input() showHintIfError = false;
 
   constructor() {}
 

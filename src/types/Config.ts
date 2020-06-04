@@ -6,10 +6,11 @@ export interface Config {
   api: ApiConfig;
 
   // configuration of the available pages
-  infobar: InfoBarConfig;
+  footer: FooterConfig;
   news: NewsConfig;
   twitter: TwitterConfig;
   rooms: RoomsConfig;
+  lectures: LecturesConfig;
   events: EventsConfig;
   transport: TransportConfig;
   campusMap: CampusMapConfig;
@@ -40,13 +41,20 @@ export interface GeneralConfig {
   time_format: string;
 }
 
-export interface InfoBarConfig {
+export interface FooterConfig extends PageConfig {
   public_transport: {
     display: boolean;
     count: number
   };
   rooms_free: {
     display: boolean;
+  };
+  running_text: {
+    display: boolean;
+    textI18nKey: string;
+    icon_before: string;
+    icon_after: string;
+    speed: number;
   };
 }
 
@@ -66,7 +74,7 @@ export interface ApiConfig {
   endpoints: {[name: string]: {url: string, frequency?: number}};
 }
 
-export interface TransportConfig {
+export interface TransportConfig extends PageConfig {
   // how many departures to show on one page
   count: number;
   // station_id to be used
@@ -108,6 +116,7 @@ export interface Location {
 export interface PageConfig {
   // add this option with 'true' as value to a pages config to disable it
   disabled?: boolean;
+  // enable page even when disabled through not matching "interactiveMode"
   force_enabled?: boolean;
   // add this attribute to any pages config to specify its order of appearance. If no order is given, pages are sorted
   // alphabetically.
@@ -122,14 +131,28 @@ export interface NewsConfig extends PageConfig {
     // switches this specific NewsSource on or off
     enabled: boolean
   }[];
+  combine: {name: string, newId: number, categories: string[]}[];
+  // how many entries to show
+  showOnly: boolean;
+}
+
+export type AvailableTimeslot = 'now' | 'soon';
+
+// tslint:disable-next-line:no-empty-interface
+export interface RoomsConfig extends PageConfig {
+  timeslots: AvailableTimeslot[];
+}
+
+export interface LecturesConfig extends PageConfig {
+  timeslots: AvailableTimeslot[];
 }
 
 // tslint:disable-next-line:no-empty-interface
-export interface RoomsConfig extends PageConfig {}
-
-// tslint:disable-next-line:no-empty-interface
 export interface EventsConfig extends PageConfig {
+  // filters events until [amount] [units] in the future (e.g. 4 weeks)
   filter_events_until: {amount: number, unit: string};
+  // how many entries to show
+  showOnly: boolean;
 }
 
 export interface TwitterConfig extends PageConfig {
@@ -149,6 +172,8 @@ export interface CampusMapConfig extends PageConfig {
   campi: Campus[];
 }
 
+// Just empty for the moment
+// tslint:disable-next-line:no-empty-interface
 export interface AdsPageConfig extends PageConfig {}
 
 export interface Campus {

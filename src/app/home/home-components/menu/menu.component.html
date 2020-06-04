@@ -25,6 +25,7 @@
               <div *ngIf="page.customTitle">
                 {{ page.customTitle }}
               </div>
+              {{ customTitle }}
             </ion-col>
           </ion-grid>
 
@@ -45,13 +46,13 @@
               [options]="{loop: true}">
     <ion-slide *ngFor="let page of pageList">
       <span *ngIf="page.selected" style="font-size: 3em; color: var(--ion-color-primary);">
-      <ion-icon [name]="page.icon"></ion-icon>
-      <span *ngIf="!page.customTitle">
-        {{ page.name | pageName }}
-      </span>
-      <span *ngIf="page.customTitle">
-        {{ page.customTitle }}
-      </span>
+        <ion-icon [name]="page.icon"></ion-icon>
+        <span *ngIf="!customTitle">
+          {{ page.name | pageName }}
+        </span>
+        <span *ngIf="customTitle">
+          {{ page.name | pageName }} ({{ customTitle }})
+        </span>
       </span>
     </ion-slide>
   </ion-slides>

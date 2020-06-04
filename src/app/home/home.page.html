@@ -67,4 +67,9 @@
   </div>
 </ion-content>
 
-<app-info-bar></app-info-bar>
+<!-- footer at the bottom of the application -->
+<ion-footer *ngIf="config.footer!==undefined && !config.footer.disabled">
+  <app-info-bar></app-info-bar>
+</ion-footer>
+
+

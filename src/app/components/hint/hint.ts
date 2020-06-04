@@ -19,7 +19,7 @@ export class HintComponent implements OnInit {
   hintTextI18nKey: string;
 
   @Input()
-  hintIcon = 'warning';
+  hintIcon = 'information-circle-outline';
 
   @Input()
   hintCustomTemplate = undefined;
