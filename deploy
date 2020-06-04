@@ -3,14 +3,14 @@
 set -o nounset
 set -o errexit
 
-warn () { printf "%s: %s" "$0" "$@" >&2; }
-die () { rc=$1; shift; warn "$@"; exit "$rc"; }
+warn () { echo "$0:" "$@" >&2; }
+die () { rc=$1; shift; echo "$0 ($rc):" "$@"; exit "$rc"; }
 
-[ -x "$(command -v jq)" ] || npm install -g jq || die "Could not install jq."
+[ -x "$(command -v jq)" ] || npm install -g jq || die 1 "Could not install jq."
 
-[ -z "$BEARER_TOKEN" ]     && die "Token \$BEARER_TOKEN undefined!";
-[ -z "$SSH_DEPLOY_HOSTS" ] && die "Deploy servers (\$SSH_DEPLOY_HOSTS) undefined!";
-[ -z "$SSH_DEPLOY_USER" ]  && die "Deploy user (\$SSH_DEPLOY_USER) undefined!";
+[ -z "$BEARER_TOKEN" ]     && die 1 "Token \$BEARER_TOKEN undefined!";
+[ -z "$SSH_DEPLOY_HOSTS" ] && die 1 "Deploy servers (\$SSH_DEPLOY_HOSTS) undefined!";
+[ -z "$SSH_DEPLOY_USER" ]  && die 1 "Deploy user (\$SSH_DEPLOY_USER) undefined!";
 
 [ -z "$ADS_REPO_URL" ]     && warn "Ads  (\$ADS_REPO_URL) undefined!";
 
@@ -54,8 +54,8 @@ for config in "$configDir"/*.config.dist.json; do
     if [ ! -d "$deploySubDir/$adsSubdir" ] || [ -z "$(ls -A "$deploySubDir/$adsSubdir")" ]; then
       warn "Ads directory is empty. Disabling ads page."
       tempConfig="$(mktemp)"
-      jq ".ads.disabled=true" "$config" > "$tempConfig" || die "Could not disable ads-page."
-      mv "$tempConfig" "$config" || die "Could not disable ads-page."
+      jq ".ads.disabled=true" "$config" > "$tempConfig" || die 1 "Could not disable ads-page."
+      mv "$tempConfig" "$config" || die 1 "Could not disable ads-page."
     fi
   fi
 
@@ -66,5 +66,5 @@ done
 # deploy to servers
 cd "$deployDir"
 for deployHost in $SSH_DEPLOY_HOSTS; do
-    tar cfz - ./* > depl #| ssh -i /root/.ssh/id_rsa "$SSH_DEPLOY_USER@$deployHost";
+    tar cfz - ./* | ssh -i /root/.ssh/id_rsa "$SSH_DEPLOY_USER@$deployHost";
 done
