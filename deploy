@@ -1,0 +1,70 @@
+#!/usr/bin/env sh
+
+set -o nounset
+set -o errexit
+
+warn () { echo "$0:" "$@" >&2; }
+die () { rc=$1; shift; echo "$0 ($rc):" "$@"; exit "$rc"; }
+
+[ -x "$(command -v jq)" ] || npm install -g jq || die 1 "Could not install jq."
+
+[ -z "$BEARER_TOKEN" ]     && die 1 "Token \$BEARER_TOKEN undefined!";
+[ -z "$SSH_DEPLOY_HOSTS" ] && die 1 "Deploy servers (\$SSH_DEPLOY_HOSTS) undefined!";
+[ -z "$SSH_DEPLOY_USER" ]  && die 1 "Deploy user (\$SSH_DEPLOY_USER) undefined!";
+
+[ -z "$ADS_REPO_URL" ]     && warn "Ads  (\$ADS_REPO_URL) undefined!";
+
+# absolute paths
+workingDir=$(pwd)
+targetDir="$workingDir/platforms/browser/www"
+deployDir="$workingDir/deploy.d"
+configDir="$workingDir/configs"
+
+# relative paths
+adsSubdir="assets/ads"
+
+# Prepare different versions for different configs
+# The following will create a directory structure like
+#   deploy/
+#    ├─ haus-X/
+#    └─ haus-Y/
+# the content of which will then be deployed to the defined servers
+mkdir "$deployDir"
+for config in "$configDir"/*.config.dist.json; do
+  # set token in config
+  tempConfig="$(mktemp)"
+  jq ".api.authorization=\"$BEARER_TOKEN\"" "$config" > "$tempConfig" || die "Could not set \$BEARER_TOKEN in $config."
+  mv "$tempConfig" "$config"
+
+  # derive name of this deploy from config file name
+  deployName=$(echo "${config##*/}" | cut -d '.' -f 1) # haus-X.config.dist.json -> haus-X
+
+  # create subdirectory for this version and descend into it
+  deploySubDir="$deployDir/$deployName"
+  mkdir "$deploySubDir"
+
+  # copy files over
+  cp --recursive "$targetDir"/* "$deploySubDir"
+
+  # clone corresponding branch of ads repo to destination if ADS_REPO_URL is set
+  if [ -n "$ADS_REPO_URL" ]; then
+    git clone --branch "$deployName" "$ADS_REPO_URL" "$deploySubDir/$adsSubdir" || warn "Cloning ads repo failed."
+
+    # if ads dir is non existent or empty we disable ads-page by removing the ads-config-element
+    if [ ! -d "$deploySubDir/$adsSubdir" ] || [ -z "$(ls -A "$deploySubDir/$adsSubdir")" ]; then
+      warn "Ads directory is empty. Disabling ads page."
+      tempConfig="$(mktemp)"
+      jq ".ads.disabled=true" "$config" > "$tempConfig" || die 1 "Could not disable ads-page."
+      mv "$tempConfig" "$config" || die 1 "Could not disable ads-page."
+    fi
+  fi
+
+  # finally copy corresponding config over
+  cp "$config" "$deploySubDir/assets/config.json"
+done
+
+# deploy to servers
+cd "$deployDir"
+for deployHost in $SSH_DEPLOY_HOSTS; do
+    tar cfz - ./* | ssh -i /root/.ssh/id_rsa "$SSH_DEPLOY_USER@$deployHost";
+done

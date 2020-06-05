@@ -1,0 +1,28 @@
+<ng-template #defaultTemplate let-items="items">
+  {{ items | json }}
+</ng-template>
+
+<ng-template #itemsTemplate>
+  <ng-template [ngTemplateOutlet]="template || defaultTemplate"
+               [ngTemplateOutletContext]="{items: _items, options: _options}">
+  </ng-template>
+</ng-template>
+
+<ng-template #noItemsTemplate>
+  <hint *ngIf="!error && showHintIfNoItems"
+        [hintTextI18nKey]="noResultsHint"
+        [hintIcon]="noResultsIcon"
+        [hintCustomTemplate]="customHint">
+  </hint>
+
+  <hint *ngIf="error && showHintIfError"
+        [hintTextI18nKey]="errorHint"
+        [hintIcon]="errorIcon"
+        [hintCustomTemplate]="customHint">
+  </hint>
+</ng-template>
+
+<ng-container *ngIf="_items.length > 0;
+                      then itemsTemplate;
+                      else noItemsTemplate">
+</ng-container>

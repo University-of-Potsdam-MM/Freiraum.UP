@@ -1,0 +1,63 @@
+#menu-container {
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  margin-top: 50px;
+
+  #loading-bar {
+    order: 0;
+  }
+
+  #menu {
+    order: 1;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    position:relative;
+
+    #button-previous {
+      order: 0;
+      position:absolute;
+      left:0;
+      margin: 2rem 0.2rem;
+    }
+
+    #slides {
+      order: 1;
+      width: 90%;
+
+      ion-icon {
+        text-align: center;
+        font-size: 64px;
+      }
+
+      .swiper-slide-active {
+        color: var(--ion-color-primary);
+        font-size: 200%;
+        font-weight: bold;
+      }
+
+      .swiper-slide:not(.swiper-slide-active) {
+        color: var(--ion-color-secondary);
+      }
+    }
+
+    #button-next {
+      order: 2;
+      position:absolute;
+      right:0;
+      margin: 2rem 0.2rem;
+    }
+    .nonInteractiveMenuPageName {
+      font-size: 3em;
+    }
+  }
+
+  .navigation_button {
+    height: 75px;
+    width: 75px;
+  }
+
+}
+

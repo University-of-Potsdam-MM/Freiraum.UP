@@ -1,0 +1,42 @@
+#header_wrapper {
+
+  background-color: var(--ion-color-upgrey);
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  #logo_wrapper {
+    order: 0;
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+
+    #banner {
+      background-color: var(--ion-color-primary);
+      width: 100%;
+      height: 10%;
+    }
+
+    #logo_image {
+      width: 50%;
+    }
+  }
+
+  #info_wrapper {
+    order: 1;
+    display: flex;
+    flex-direction: column;
+
+    #building_name {
+      order: 0;
+      font-size: 3em;
+      color: #003f60;
+    }
+
+    #time {
+      order: 1;
+      font-size: 2.5em;
+    }
+  }
+}

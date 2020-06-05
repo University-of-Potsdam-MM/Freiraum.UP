@@ -1,0 +1,32 @@
+<ion-card>
+  <ion-card-header class="ion-text-wrap" color="primary">
+    <span class="title">
+      {{ news.News.headline }}
+    </span>
+  </ion-card-header>
+
+  <ion-card-content *ngIf="news.News.text ||
+                           news.News.description ||
+                           news.News.DateString"
+                    class="ion-text-wrap">
+    <ng-container *ngIf="(news.NewsSource.name == 'Uni Nachrichten' ||
+                          news.NewsSource.name == 'Uni Medienmitteilungen' ||
+                          news.NewsSource.name == 'Zur Quelle' ||
+                          news.NewsSource.name == 'AstA Protokolle');
+                          then textOnly else descriptionOnly">
+    </ng-container>
+
+    <ng-template #textOnly>
+      <div class="list-item" [innerHTML]="news.News.text"></div>
+    </ng-template>
+    <ng-template #descriptionOnly>
+      <div class="list-item" [innerHTML]="news.News.description"></div>
+    </ng-template>
+  </ion-card-content>
+
+  <ion-card-subtitle color="--ion-color-secondary">
+      <div *ngIf="news.News.DateString" class="news-date">
+      {{ "page.news.articlePublished" | translate }} {{ news.News.DateString }}
+    </div>
+  </ion-card-subtitle>
+</ion-card>

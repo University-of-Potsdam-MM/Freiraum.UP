@@ -1,0 +1,57 @@
+<ng-template #results let-meals="items">
+    <ion-list>
+        <ion-item *ngFor="let meal of meals">
+            <!-- thumbnails -->
+            <ion-avatar slot="start">
+                <ion-slides>
+                  <ion-slide *ngFor="let t of meal.type">
+                    <ion-img [src]="'assets/mensa_icons/'+config.mensa.icons[t]"></ion-img>
+                  </ion-slide>
+                </ion-slides>
+            </ion-avatar>
+            <!-- title -->
+            <ion-label class="ion-text-wrap">
+                <div class="meal-title">
+                    {{ meal.title }}
+                </div>
+                <div class="meal-description">
+                    {{ meal.description }}
+                </div>
+            </ion-label>
+        </ion-item>
+    </ion-list>
+</ng-template>
+
+<ng-container [ngSwitch]="config.general.interactiveMode">
+    <!-- interactive view with ion segments -->
+    <div *ngSwitchCase="true">
+        <div class="ion-padding">
+            <ion-segment [(ngModel)]="selectedCanteenIndex">
+                <ng-container *ngFor="let canteen of enabledCanteens">
+                    <ion-segment-button [value]="config.mensa.canteens.indexOf(canteen)">
+                        {{ 'page.mensa.canteenNames.' + canteen.name | translate }}
+                    </ion-segment-button>
+                </ng-container>
+            </ion-segment>
+        </div>
+
+        <results [items]="meals[config.mensa.canteens[selectedCanteenIndex].name]"
+                 [template]="results"></results>
+    </div>
+
+    <!-- non interactive view as list -->
+    <div *ngSwitchCase="false">
+        <ng-container *ngFor="let canteen of enabledCanteens">
+            <ion-card *ngIf="selectedCanteenIndex == config.mensa.canteens.indexOf(canteen)">
+                <ion-card-header color="primary" class="mensa-title">
+                    {{ "page.mensa.canteenNames." + canteen.name | translate  }}
+                </ion-card-header>
+                <ion-card-content>
+                    <results [items]="meals[canteen.name]"
+                             [template]="results">
+                    </results>
+                </ion-card-content>
+            </ion-card>
+        </ng-container>
+    </div>
+</ng-container>

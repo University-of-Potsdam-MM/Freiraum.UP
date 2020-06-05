@@ -1,0 +1,9 @@
+.rooms-free-wrapper {
+  display: flex;
+}
+
+@media only screen and (max-width: 1080px) {
+  .rooms-free-wrapper {
+    display: block;
+  }
+}

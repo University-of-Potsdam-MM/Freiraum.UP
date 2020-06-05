@@ -1,0 +1,16 @@
+<ion-card>
+  <ion-card-header style="font-size: 4em;" color="primary">
+    {{ event.Event.name }}
+  </ion-card-header>
+
+  <ion-card-content class="ion-text-wrap" style="font-size: 1.5em;">
+    <ion-img *ngIf="event.Event.pic" [src]="event.Event.pic"></ion-img>
+    <div class="list-item" [innerHTML]="event.Event.description"></div>
+  </ion-card-content>
+
+  <ion-card-subtitle color="--ion-color-secondary">
+    <div *ngIf="event.Event.DateString" class="news-date">
+      {{ "page.news.articlePublished" | translate }} {{ event.Event.DateString }}
+    </div>
+  </ion-card-subtitle>
+</ion-card>

@@ -1,0 +1,21 @@
+<div id="header_wrapper">
+
+  <div id="logo_wrapper">
+    <div id="banner"></div>
+    <div id="logo_image">
+      <img src="assets/imgs/logo_uni_potsdam.svg">
+    </div>
+  </div>
+
+  <div id="info_wrapper" align="right">
+    <div id="building_name">
+      {{ "words.campus" | translate }} {{ config.general.location.campus_name }}
+      <br>
+      {{ "words.building" | translate }} {{ config.general.location.building }}
+    </div>
+
+    <div id="time">
+      {{ timer.now | async }}
+    </div>
+  </div>
+</div>
