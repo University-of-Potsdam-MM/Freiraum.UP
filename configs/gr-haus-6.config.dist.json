@@ -1,0 +1,272 @@
+{
+  "general": {
+    "interactiveMode": false,
+    "default_language": "de",
+    "page_switching_frequency": 15,
+    "timeout_time": 20,
+    "timeout_modal_countdown_time": 10,
+    "timeslot_update_frequency": 60,
+    "time_update_frequency": 1,
+    "time_format": "lll",
+    "location": {
+      "coordinates": [
+        52.3932515,
+        13.1283403
+      ],
+      "campus_name": "Griebnitzsee",
+      "campus_name_short": "griebnitzsee",
+      "campus": 3,
+      "building": 6,
+      "level": 0
+    },
+    "operation_time": {
+      "on": "08:00",
+      "off": "22:00"
+    },
+    "layout": {
+      "content_width_landscape": "80%",
+      "breakpoint_landscape": "1080"
+    }
+  },
+  "api": {
+    "authorization": "",
+    "base_url": "https://apiup.uni-potsdam.de/endpoints/",
+    "default_frequency": 300,
+    "endpoints": {
+      "transport": {
+        "url": "https://apiup.uni-potsdam.de/endpoints/transportAPI/2.0/departureBoard",
+        "frequency": 60
+      },
+      "lectures": {
+        "url": "https://apiup.uni-potsdam.de/endpoints/roomsAPI/1.0/reservations"
+      },
+      "rooms": {
+        "url": "https://apiup.uni-potsdam.de/endpoints/roomsAPI/1.0/rooms4Time"
+      },
+      "news": {
+        "url": "https://apiup.uni-potsdam.de/endpoints/newsAPI/news/"
+      },
+      "events": {
+        "url": "https://apiup.uni-potsdam.de/endpoints/newsAPI/events/"
+      },
+      "maps": {
+        "url": "https://apiup.uni-potsdam.de/endpoints/mapsAPI",
+        "frequency": 7200
+      },
+      "mensa": {
+        "url": "https://apiup.uni-potsdam.de/endpoints/mensaAPI/meals"
+      }
+    }
+  },
+  "footer": {
+    "public_transport": {
+      "display": true,
+      "count": 5
+    },
+    "rooms_free": {
+      "display": true
+    },
+    "running_text": {
+      "display": true,
+      "textI18nKey": "footer.corona",
+      "icon_before": "warning",
+      "icon_after": "warning"
+    }
+  },
+  "transport": {
+    "station_id": "900230003",
+    "count": 10,
+    "station_name": "S-Griebnitzsee",
+    "meansOfTransport": [
+      {
+        "name": "RB",
+        "iconFileName": "bahn.svg"
+      },
+      {
+        "name": "S",
+        "iconFileName": "s-bahn.svg"
+      },
+      {
+        "name": "Bus",
+        "iconFileName": "bus.svg"
+      }
+    ]
+  },
+  "news": {
+    "categories": [
+      {
+        "name": "Uni Nachrichten",
+        "enabled": true,
+        "textOnly": true
+      },
+      {
+        "name": "Uni Medienmitteilungen",
+        "enabled": true,
+        "textOnly": true
+      },
+      {
+        "name": "Zur Quelle",
+        "enabled": true,
+        "textOnly": true
+      },
+      {
+        "name": "speakUP",
+        "enabled": true
+      },
+      {
+        "name": "AStA Pressemitteilungen",
+        "enabled": true
+      },
+      {
+        "name": "AStA Thementexte",
+        "enabled": true
+      },
+      {
+        "name": "AStA Protokolle",
+        "enabled": true,
+        "textOnly": true
+      }
+    ],
+    "combine": [
+      {
+        "name": "AStA",
+        "newId": 99,
+        "categories": [
+          "AStA Pressemitteilungen",
+          "AStA Thementexte",
+          "AStA Protokolle"
+        ]
+      }
+    ]
+  },
+  "events": {
+    "filter_events_until": {
+      "amount": 4,
+      "unit": "months"
+    }
+  },
+  "mensa": {
+    "canteens": [
+      {
+        "name": "Griebnitzsee",
+        "enabled": true
+      },
+      {
+        "name": "UlfsCafe",
+        "enabled": true
+      },
+      {
+        "name": "Golm",
+        "enabled": false
+      },
+      {
+        "name": "NeuesPalais",
+        "enabled": false
+      }
+    ],
+    "icons": {
+      "Regional": "su_regional.png",
+      "Rind": "su_rind_r.png",
+      "Hahn": "su_hahn_g.png",
+      "Schwein": "su_schwein_s.png",
+      "Vegetarisch": "su_vegetarisch_v.png",
+      "Alkohol": "su_alkohol_a.png",
+      "Knoblauch": "su_knoblauch_k.png",
+      "Fisch": "su_fisch_f.png",
+      "Vegan": "su_vegan_w.png"
+    }
+  },
+  "twitter": {
+    "force_enabled": true,
+    "feeds": [
+      {
+        "name": "twitter-up",
+        "url": "https://twitter.com/unipotsdam?ref_src=twsrc%5Etfw"
+      },
+      {
+        "name": "twitter-asta",
+        "url": "https://twitter.com/unipotsdam/lists/freiraum-306?ref_src=twsrc%5Etfw"
+      }
+    ]
+  },
+  "campusMap": {
+    "disabled": true,
+    "campi": [
+      {
+        "id": 1,
+        "name": "neuespalais",
+        "pretty_name": "Neues Palais",
+        "coordinates": {
+          "latitude": 52.40105,
+          "longitude": 13.01207
+        },
+        "lat_long_bounds": [
+          [
+            52.4038,
+            13.0078
+          ],
+          [
+            52.39706,
+            13.01884
+          ]
+        ]
+      },
+      {
+        "id": 2,
+        "name": "golm",
+        "pretty_name": "Golm",
+        "coordinates": {
+          "latitude": 52.41527,
+          "longitude": 12.96941
+        },
+        "lat_long_bounds": [
+          [
+            52.413,
+            12.9721
+          ],
+          [
+            52.4057,
+            12.9802
+          ]
+        ]
+      },
+      {
+        "id": 3,
+        "name": "griebnitzsee",
+        "pretty_name": "Griebnitzsee",
+        "coordinates": {
+          "latitude": 52.39281,
+          "longitude": 13.1288
+        },
+        "lat_long_bounds": [
+          [
+            52.3945,
+            13.1258
+          ],
+          [
+            52.3912,
+            13.1338
+          ]
+        ]
+      }
+    ]
+  },
+  "rooms": {
+    "timeslots": [
+      "now",
+      "soon"
+    ]
+  },
+  "lectures": {
+    "timeslots": [
+      "now",
+      "soon"
+    ]
+  },
+  "game": {
+    "disabled": true
+  },
+  "ads": {
+    "disabled": true
+  }
+}

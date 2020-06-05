@@ -1,0 +1,46 @@
+<ng-template #results let-deps="items">
+  <ion-list>
+    <ion-item *ngFor="let dep of deps">
+      <ion-avatar slot="start">
+        <ng-container *ngFor="let product of config.transport.meansOfTransport">
+          <ion-icon *ngIf="dep.Product.catOut.trim() == product.name"
+                    [src]="'assets/icon/'+product.iconFileName"
+                    style="zoom:3.0;">
+          </ion-icon>
+        </ng-container>
+      </ion-avatar>
+      <ion-label>
+        <h1 >
+          {{ dep.name }}
+          <ng-container *ngIf="dep.Product.catOut.trim() !== 'Bus'">
+            {{ 'words.from' | translate }}
+            <span>
+              <span *ngIf="dep.track && !dep.rtTrack">
+                {{ 'page.publicTransport.track' | translate }} {{ dep.track }}
+              </span>
+              <span *ngIf="dep.track && dep.rtTrack">
+                {{ 'page.publicTransport.track' | translate }} {{ dep.rtTrack }}
+              </span>
+            </span>
+          </ng-container>
+        </h1>
+        <p style="font-size: 1.5em;">
+          <span>
+           {{ dep.direction}}
+           </span>
+        </p>
+      </ion-label>
+
+      <ion-badge slot="end">
+        <ion-badge *ngIf="!dep.cancelled">
+          {{ moment(dep.time, "HH:mm:ss").format("HH:mm") }}
+        </ion-badge>
+        <ion-badge *ngIf="dep.cancelled" class="cancelled">
+          {{ "page.publicTransport.cancelled" | translate }}
+        </ion-badge>
+      </ion-badge>
+    </ion-item>
+  </ion-list>
+</ng-template>
+
+<results [items]="departures" [template]="results"></results>

@@ -1,0 +1,75 @@
+<!-- header of the application -->
+<ion-header no-border>
+  <ion-toolbar>
+
+    <!-- show a blue stripe in interactive mode -->
+    <div class="stripe" *ngIf="config.general.interactiveMode">&nbsp;</div>
+
+    <!-- use blue stripe as loading bar in non interactive mode -->
+    <div class="stripe" *ngIf="!config.general.interactiveMode">
+      <ion-progress-bar [value]="progress"
+                        style="height: 20px;">
+      </ion-progress-bar>
+    </div>
+
+    <!-- contains logo, university name and an active page indicator in non interactive mode -->
+    <div id="header_wrapper">
+      <img id="logo" src="assets/imgs/logo_uni_potsdam.svg">
+
+      <span class="title no-wrap">
+        {{ "words.university_name" | translate }}
+        &nbsp;-&nbsp;
+        {{ "words.application_name" | translate }}
+      </span>
+
+      <!-- using a compact version of the app-menu as page indicator -->
+      <span *ngIf="!config.general.interactiveMode" class="title">
+        <app-menu></app-menu>
+      </span>
+    </div>
+
+    <!-- shows location and current time below the header -->
+    <div id="info_wrapper" [style.width]="contentWidthPercent">
+      <span id="location" class="header_text no-wrap">
+        {{ config.general.location.campus_name }} - {{ "words.building" | translate }} {{ config.general.location.building }}
+      </span>
+
+      <span id="time" class="header_text no-wrap">
+        {{ timer.now | async }}
+      </span>
+    </div>
+
+    <!-- shows the full version of the menu interactive mode -->
+    <div id="menu"
+         *ngIf="config.general.interactiveMode"
+         [style.width]="contentWidthPercent">
+      <app-menu (touched)="timer.startTimeout()"
+                [visibleSlides]="visibleSlides"
+                [progress]="progress">
+      </app-menu>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<div style="height: 2.5%;">&nbsp;</div>
+
+<!-- content of the application, Pages from pagesConfig are embedded here -->
+<ion-content class="content">
+
+  <div id="content-wrapper"
+       [style.width]="contentWidthPercent">
+    <div *ngFor="let p of pages" [style.display]="p.selected ? 'block' : 'none'">
+      <!-- uses ndc-dynamic component to embed pages from pagesConfig -->
+      <ndc-dynamic [ndcDynamicComponent]="p.component"
+                   [ndcDynamicInputs]="p.inputs">
+      </ndc-dynamic>
+    </div>
+  </div>
+</ion-content>
+
+<!-- footer at the bottom of the application -->
+<ion-footer *ngIf="config.footer!==undefined && !config.footer.disabled">
+  <app-info-bar></app-info-bar>
+</ion-footer>
+
+

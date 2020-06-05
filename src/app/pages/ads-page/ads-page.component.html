@@ -1,0 +1,6 @@
+<!-- if there are ads, include the currently selected one -->
+<div *ngIf="ads.length > 0; else noAds" [innerHTML]="ads[currentAdIndex].html"></div>
+
+<ng-template #noAds>
+    <hint hintTextI18nKey="page.ads.noAds" ></hint>
+</ng-template>

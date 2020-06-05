@@ -1,5 +1,8 @@
 {
-	"page": {
+  "header": {
+    "university": "Universität Potsdam"
+  },
+  "page": {
 		"home":{
 			"title": "Home"
 		},
@@ -10,7 +13,7 @@
         "en": "Englisch"
       }
     },
-    "campus-map": {
+    "campusMap": {
       "title": "Campus",
       "sites-at-this-campus": "Orte am Campus",
       "chose_campus": "Campus wählen",
@@ -30,16 +33,20 @@
         "sport": "Sport"
       }
     },
-    "transport": {
+    "publicTransport": {
       "title": "Nahverkehr",
       "departures_from": "Abfahrten ab:",
       "disclaimer": "Alle Daten werden mit freundlicher Unterstützung des VBB genutzt.",
       "journeys": "Fahrten ab",
       "track": "Gleis",
-      "cancelled": "Fällt aus"
+      "cancelled": "Fällt aus",
+      "means_of_transport": "Verkehrsmittel",
+      "direction": "Richtung",
+      "time_of_departure": "Abfahrtszeit"
     },
     "ads": {
-      "title": "Anzeigen"
+      "title": "Anzeigen",
+      "noAds": "Es sind keine Anzeigen hinterlegt."
     },
     "facebook": {
       "title": "Facebook"
@@ -51,24 +58,32 @@
     "events": {
       "title": "Events"
     },
-    "rooms-free": {
+    "rooms": {
       "title": "Freie Räume",
       "no_rooms": "In diesem Zeitabschnitt sind keine freien Räume verfügbar"
     },
-    "rooms-booked": {
+    "lectures": {
       "title": "Veranstaltungen",
       "time": "Uhrzeit",
       "room": "Raum",
-      "reservation_title": "Veranstaltung"
+      "reservation_title": "Veranstaltung",
+      "no_lectures": "Keine Veranstaltungen im gewählten Zeitraum."
     },
     "mensa": {
-      "title": "Mensa"
+      "title": "Mensa",
+      "canteenNames": {
+        "NeuesPalais": "Mensa Neues Palais",
+        "Golm": "Mensa Golm",
+        "Griebnitzsee": "Mensa Griebnitzsee",
+        "UlfsCafe": "Ulfs Café"
+      }
     },
-    "twitter-up": {
-      "title": "@unipotsdam"
-    },
-    "twitter-asta": {
-      "title": "@astaup"
+    "twitter": {
+      "title": "Twitter",
+      "channels": {
+        "twitter-up": "@unipotsdam",
+        "twitter-asta": "@astaup"
+      }
     },
     "game": {
       "title": "Spiel",
@@ -77,14 +92,26 @@
       "ended": "Die Zeit ist leider vorbei!",
       "score": "Dein Punktestand",
       "highscores": "Die Top 5 bisher:"
+    },
+    "campusMap": {
+      "title": "Campus"
     }
-	},
+  },
   "words": {
     "campus": "Campus",
     "building": "Haus",
     "now": "Jetzt",
     "soon": "Demnächst",
-    "oclock": "Uhr"
+    "oclock": "Uhr",
+    "to": "nach",
+    "from": "von",
+    "timeoutText": "Automatischer Modus wird in {{timeRemaining}} Sekunden fortgesetzt",
+    "application_name": "Freiraum.UP",
+    "university_name": "Universität Potsdam",
+    "room": "Raum",
+    "lecture_room": "Hörsaal",
+    "seminar_room": "Seminarraum",
+    "currently_free": "Aktuell frei"
   },
   "buttons": {
     "next": "Vor",
@@ -93,6 +120,12 @@
     "cancel": "Abbrechen"
   },
   "hint": {
-    "no_results": "Keine Informationen verfügbar"
+    "noResultsFound": "Keine Informationen verfügbar",
+    "noResultsError": "Da ist was schief gelaufen!"
+  },
+  "footer": {
+    "next_departures": "Nächste Abfahrten",
+    "currently_free": "Aktuell frei",
+    "corona": "Es wird gebeten, zur Eindämmung des Coronavirus den empfohlenen Mindestabstand von 1,5 Metern einzuhalten. Danke!"
   }
 }
