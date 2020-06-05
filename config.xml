@@ -2,7 +2,7 @@
 <widget id="elis.freiraumup" version="5.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Freiraum.UP</name>
     <description>The Freiraum.UP application..</description>
-    <author email="elis-info@lists.cs.uni-potsdam.de" href="https://www.uni-potsdam.de/de/elis/uebersi2cht">eLiS-Team</author>
+    <author email="elis-info@lists.cs.uni-potsdam.de" href="https://www.uni-potsdam.de/de/elis/uebersicht">eLiS-Team</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
