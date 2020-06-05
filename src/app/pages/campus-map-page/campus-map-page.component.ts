@@ -16,7 +16,7 @@ function initializeLeafletMap() {
   // create map object
   const map = L.map('map').fitWorld();
   L.tileLayer(
-    'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '© <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap-Mitwirkende</a> und www.uni-potsdam.de',
       maxZoom: 18
     }).addTo(map);
