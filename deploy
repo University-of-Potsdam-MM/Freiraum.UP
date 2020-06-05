@@ -43,7 +43,7 @@ for config in "$configDir"/*.config.dist.json; do
   # copy files over
   cp --recursive "$targetDir"/* "$deploySubDir"
 
-  sed -i "s#<base href=\"/\" />#<base href=\"freiraumup/$deployName\"/>#g" "$deploySubDir/index.html" || die 1 "Could not change base href"
+  sed -i "s#<base href=\"/\" />#<base href=\"/freiraumup/$deployName/\"/>#g" "$deploySubDir/index.html" || die 1 "Could not change base href"
 
   # clone corresponding branch of ads repo to destination if ADS_REPO_URL is set
   if [ -n "$ADS_REPO_URL" ]; then
