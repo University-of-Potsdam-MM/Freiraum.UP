@@ -17,7 +17,7 @@ function initializeLeafletMap() {
   const map = L.map('map').fitWorld();
   L.tileLayer(
     'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: 'www.uni-potsdam.de',
+      attribution: '© <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap-Mitwirkende</a> und www.uni-potsdam.de',
       maxZoom: 18
     }).addTo(map);
   return map;
