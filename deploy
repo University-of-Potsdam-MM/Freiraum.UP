@@ -44,7 +44,7 @@ for config in "$configDir"/*.config.dist.json; do
   mkdir "$deploySubDir"
 
   # copy files over
-  cp --link --recursive "$targetDir"/* "$deploySubDir"
+  cp --recursive "$targetDir"/* "$deploySubDir"
 
   # clone corresponding branch of ads repo to destination if ADS_REPO_URL is set
   if [ -n "$ADS_REPO_URL" ]; then
@@ -60,7 +60,7 @@ for config in "$configDir"/*.config.dist.json; do
   fi
 
   # finally copy corresponding config over
-  cp --link "$config" "$deploySubDir/assets/config.json"
+  cp "$config" "$deploySubDir/assets/config.json"
 done
 
 # deploy to servers
