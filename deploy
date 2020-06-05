@@ -6,12 +6,9 @@ set -o errexit
 warn () { echo "$0:" "$@" >&2; }
 die () { rc=$1; shift; echo "$0 ($rc):" "$@"; exit "$rc"; }
 
-[ -x "$(command -v jq)" ] || npm install -g jq || die 1 "Could not install jq."
-
 [ -z "$BEARER_TOKEN" ]     && die 1 "Token \$BEARER_TOKEN undefined!";
 [ -z "$SSH_DEPLOY_HOSTS" ] && die 1 "Deploy servers (\$SSH_DEPLOY_HOSTS) undefined!";
 [ -z "$SSH_DEPLOY_USER" ]  && die 1 "Deploy user (\$SSH_DEPLOY_USER) undefined!";
-
 [ -z "$ADS_REPO_URL" ]     && warn "Ads  (\$ADS_REPO_URL) undefined!";
 
 # absolute paths
