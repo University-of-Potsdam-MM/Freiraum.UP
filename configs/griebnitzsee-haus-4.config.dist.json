@@ -177,7 +177,7 @@
     }
   },
   "twitter": {
-    "enabled": false,
+    "disabled": true,
     "feeds": [
       {
         "name": "twitter-up",
@@ -190,7 +190,7 @@
     ]
   },
   "campusMap": {
-    "enabled": false,
+    "disabled": true,
     "campi": [
       {
         "id": 1,
@@ -264,7 +264,7 @@
     ]
   },
   "game": {
-    "disabled": false
+
   },
   "ads": {
     "disabled": true
