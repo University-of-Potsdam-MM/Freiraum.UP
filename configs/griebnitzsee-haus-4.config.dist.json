@@ -65,6 +65,12 @@
     },
     "rooms_free": {
       "display": true
+    },
+    "running_text": {
+      "display": true,
+      "textI18nKey": "footer.corona",
+      "icon_before": "warning",
+      "icon_after": "warning"
     }
   },
   "transport": {
@@ -171,7 +177,7 @@
     }
   },
   "twitter": {
-    "force_enabled": true,
+    "disabled": true,
     "feeds": [
       {
         "name": "twitter-up",
@@ -184,6 +190,7 @@
     ]
   },
   "campusMap": {
+    "disabled": true,
     "campi": [
       {
         "id": 1,
@@ -257,7 +264,7 @@
     ]
   },
   "game": {
-    "disabled": false
+
   },
   "ads": {
     "disabled": true

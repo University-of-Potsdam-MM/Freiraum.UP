@@ -6,7 +6,7 @@
 #  * SSH_KNOWN_HOSTS (hosts keys of the servers to which the artifacts should be deployed; `ssh-keyscan hostname`)
 # except SSH_DEPLOY_HOSTS and SSH_DEPLOY_KEY all variables can be set in the Group
 
-image: node:11
+image: node:12
 
 stages:
   - prepare
@@ -77,6 +77,7 @@ deploy-production:
     - echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
     - chmod 644 ~/.ssh/known_hosts
   script:
+    - apt-get update && apt-get install -y jq
     - ./deploy
   # uncomment to only deploy manually and not on every push
   #when: manual

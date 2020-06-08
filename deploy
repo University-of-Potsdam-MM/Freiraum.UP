@@ -3,20 +3,22 @@
 set -o nounset
 set -o errexit
 
-warn () { printf "%s: %s" "$0" "$@" >&2; }
-die () { rc=$1; shift; warn "$@"; exit "$rc"; }
+warn () { echo "$0:" "$@" >&2; }
+die () { rc=$1; shift; echo "$0 ($rc):" "$@"; exit "$rc"; }
 
-[ -x "$(command -v jq)" ] || npm install -g jq || die "Could not install jq."
-
-[ -z "$BEARER_TOKEN" ]     && die "Token \$BEARER_TOKEN undefined!";
-[ -z "$SSH_DEPLOY_HOSTS" ] && die "Deploy servers (\$SSH_DEPLOY_HOSTS) undefined!";
-
+[ -z "$BEARER_TOKEN" ]     && die 1 "Token \$BEARER_TOKEN undefined!";
+[ -z "$SSH_DEPLOY_HOSTS" ] && die 1 "Deploy servers (\$SSH_DEPLOY_HOSTS) undefined!";
+[ -z "$SSH_DEPLOY_USER" ]  && die 1 "Deploy user (\$SSH_DEPLOY_USER) undefined!";
 [ -z "$ADS_REPO_URL" ]     && warn "Ads  (\$ADS_REPO_URL) undefined!";
 
+# absolute paths
 workingDir=$(pwd)
-targetDir="platforms/browser/www/"
-deployDir="deploy.d"
-configDir="configs"
+targetDir="$workingDir/platforms/browser/www"
+deployDir="$workingDir/deploy.d"
+configDir="$workingDir/configs"
+
+# relative paths
+adsSubdir="assets/ads"
 
 # Prepare different versions for different configs
 # The following will create a directory structure like
@@ -27,41 +29,41 @@ configDir="configs"
 mkdir "$deployDir"
 for config in "$configDir"/*.config.dist.json; do
   # set token in config
-  jq ".api.authorization=\"$BEARER_TOKEN\"" "$config" > "$config.temp" || die "Could not set \$BEARER_TOKEN in $config."
-  mv "$config.temp" "$config"
+  tempConfig="$(mktemp)"
+  jq ".api.authorization=\"Bearer $BEARER_TOKEN\"" "$config" > "$tempConfig" || die "Could not set \$BEARER_TOKEN in $config."
+  mv "$tempConfig" "$config"
 
   # derive name of this deploy from config file name
-  configName=$(echo "${config##*/}" | cut -d '.' -f 1) # haus-X.config.dist.json -> haus-X
+  deployName=$(echo "${config##*/}" | cut -d '.' -f 1) # haus-X.config.dist.json -> haus-X
 
   # create subdirectory for this version and descend into it
-  deploySubDir="$deployDir/$configName"
+  deploySubDir="$deployDir/$deployName"
   mkdir "$deploySubDir"
-  cd "$deploySubDir"
 
   # copy files over
-  cp --link --recursive "$workingDir/$targetDir" .
+  cp --recursive "$targetDir"/* "$deploySubDir"
+
+  sed -i "s#<base href=\"/\" />#<base href=\"/freiraumup/$deployName/\"/>#g" "$deploySubDir/index.html" || die 1 "Could not change base href"
 
   # clone corresponding branch of ads repo to destination if ADS_REPO_URL is set
   if [ -n "$ADS_REPO_URL" ]; then
-    git clone --branch "$configName" "$ADS_REPO_URL" assets/ads || warn "Cloning ads repo failed."
+    git clone --branch "$deployName" "$ADS_REPO_URL" "$deploySubDir/$adsSubdir" || warn "Cloning ads repo failed."
 
     # if ads dir is non existent or empty we disable ads-page by removing the ads-config-element
-    if [ ! -d assets/ads ] || [ -z "$(ls -A assets/ads)" ]; then
+    if [ ! -d "$deploySubDir/$adsSubdir" ] || [ -z "$(ls -A "$deploySubDir/$adsSubdir")" ]; then
       warn "Ads directory is empty. Disabling ads page."
-      jq ".ads.disabled=true" "$workingDir/$config" > "$workingDir/$config.temp" || die "Could not disable ads-page."
-      mv "$workingDir/$config.temp" "$workingDir/$config" || die "Could not disable ads-page."
+      tempConfig="$(mktemp)"
+      jq ".ads.disabled=true" "$config" > "$tempConfig" || die 1 "Could not disable ads-page."
+      mv "$tempConfig" "$config" || die 1 "Could not disable ads-page."
     fi
   fi
 
-  # copy corresponding config over
-  echo "$workingDir/$config" "$workingDir/$deploySubDir/www/assets/config.json"
-  cp --link "$workingDir/$config" "$workingDir/$deploySubDir/www/assets/config.json"
-
-  cd "$workingDir"
+  # finally copy corresponding config over
+  cp "$config" "$deploySubDir/assets/config.json"
 done
 
 # deploy to servers
 cd "$deployDir"
-for server in $SSH_DEPLOY_HOSTS; do
-    tar cfz - ./* | ssh -i /root/.ssh/id_rsa "gitup-deploy@$server";
+for deployHost in $SSH_DEPLOY_HOSTS; do
+    tar cfz - ./* | ssh -i /root/.ssh/id_rsa "$SSH_DEPLOY_USER@$deployHost";
 done
