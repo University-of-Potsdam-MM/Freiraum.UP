@@ -57,7 +57,7 @@ export const pagesList: PageItem[] = [
   },
   {
     component: PublicTransportPageComponent,
-    name: 'publicTransport',
+    name: 'transport',
     icon: 'train',
     interactiveModes: [true, false]
   },

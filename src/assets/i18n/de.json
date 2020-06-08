@@ -33,7 +33,7 @@
         "sport": "Sport"
       }
     },
-    "publicTransport": {
+    "transport": {
       "title": "Nahverkehr",
       "departures_from": "Abfahrten ab:",
       "disclaimer": "Alle Daten werden mit freundlicher Unterstützung des VBB genutzt.",
