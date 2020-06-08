@@ -31,6 +31,8 @@ test
 <!--    </ion-scroll>-->
 <!--  </ng-container>-->
 <!--</div>-->
-
-<div id="map"></div>
+<div leaflet style="height: 300px;"
+     (leafletMapReady)="onMapReady($event)"
+     [leafletOptions]="options"
+     [leafletLayersControl]="layersControl"></div>
 

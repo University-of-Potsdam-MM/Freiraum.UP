@@ -18,6 +18,7 @@ import {PipesModule} from '../pipes/pipes.module';
 import {LayoutModule} from '@angular/cdk/layout';
 import {InfoBarComponent} from './home-components/info-bar/info-bar.component';
 import {EventComponent} from '../components/event/event.component';
+import {LeafletModule} from "@asymmetrik/ngx-leaflet";
 
 @NgModule({
   imports: [
@@ -33,7 +34,8 @@ import {EventComponent} from '../components/event/event.component';
     ]),
     TranslateModule,
     DynamicModule.withComponents(componentsList()),
-    PipesModule
+    PipesModule,
+    LeafletModule
   ],
   declarations: [
     HomePage,

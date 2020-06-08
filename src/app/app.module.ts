@@ -20,6 +20,7 @@ import {Platform} from '@angular/cdk/platform';
 import {IonicStorageModule} from '@ionic/storage';
 import {LoggerModule, NgxLoggerLevel} from 'ngx-logger';
 import {environment} from '../environments/environment';
+import {LeafletModule} from "@asymmetrik/ngx-leaflet";
 
 export function TranslateLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -50,6 +51,7 @@ export function initConfig(config: ConfigService) {
       enableSourceMaps: true,
       disableConsoleLogging: environment.production
     }),
+    LeafletModule,
     TranslateModule.forRoot({
           loader: {
               provide: TranslateLoader,

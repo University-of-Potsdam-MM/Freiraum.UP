@@ -6,7 +6,7 @@ import 'leaflet-easybutton';
 import 'leaflet-rotatedmarker';
 import 'leaflet-search';
 import {Campus} from '../../../types/Config';
-import {PopupEvent} from 'leaflet';
+import {circle, latLng, polygon, PopupEvent, tileLayer} from 'leaflet';
 import {CampusMapDataResponse, IMapsResponseObject} from '../../../types/campusMapData.response';
 
 /**
@@ -37,16 +37,41 @@ export class CampusMapPageComponent extends BasicPageComponent implements OnInit
   selectedCampus: Campus;
   featuresAtCampus = {};
 
-  constructor(private translate: TranslateService) { super('campusMap'); }
+  options = {
+    layers: [
+      tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: '...' })
+    ],
+    zoom: 5,
+    center: latLng(46.879966, -121.726909)
+  };
 
-  clicked(e) { console.log(e); }
+  invalidate() {
+    this.map.invalidateSize();
+  }
+
+  onMapReady(map) {
+    this.map = map;
+    setTimeout(() => { this.invalidate(); }, 1000);
+  }
+
+  layersControl = {
+    baseLayers: {
+      'Open Street Map': tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: '...' }),
+      'Open Cycle Map': tileLayer('http://{s}.tile.opencyclemap.org/cycle/{z}/{x}/{y}.png', { maxZoom: 18, attribution: '...' })
+    },
+    overlays: {
+      'Big Circle': circle([ 46.95, -122 ], { radius: 5000 }),
+      'Big Square': polygon([[ 46.8, -121.55 ], [ 46.9, -121.55 ], [ 46.9, -121.7 ], [ 46.8, -121.7 ]])
+    }
+  };
+
+  constructor() { super('campusMap'); }
 
   ngOnInit() {
     if (!this.map) {
-      this.map = initializeLeafletMap();
-      this.log(this.map)
+      // this.map = initializeLeafletMap();
 
-      this.loadMapData(this.map);
+      // this.loadMapData(this.map);
 
       // // add marker for position
       // // TODO: add custom icon: https://leafletjs.com/examples/custom-icons/
@@ -58,13 +83,13 @@ export class CampusMapPageComponent extends BasicPageComponent implements OnInit
       // ).addTo(this.map);
     }
 
-    this.map.invalidateSize(true);
+    // this.map.invalidateSize(true);
 
     // select default campus first as specified in config
-    this.selectedCampus = this.getDefaultCampus();
+    // this.selectedCampus = this.getDefaultCampus();
 
     // fit bounds to default campus
-    this.moveToCampus(this.selectedCampus);
+    // this.moveToCampus(this.selectedCampus);
   }
 
   /**
