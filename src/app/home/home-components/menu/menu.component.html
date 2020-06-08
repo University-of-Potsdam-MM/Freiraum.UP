@@ -45,7 +45,7 @@
   <ion-slides (ionSlideDidChange)="onIonSlideDidChange($event)"
               [options]="{loop: true}">
     <ion-slide *ngFor="let page of pageList">
-      <span *ngIf="page.selected" style="font-size: 3em; color: var(--ion-color-primary);">
+      <span *ngIf="page.selected" class="nonInteractiveMenuPageName">
         <ion-icon [name]="page.icon"></ion-icon>
         <span *ngIf="!customTitle">
           {{ page.name | pageName }}

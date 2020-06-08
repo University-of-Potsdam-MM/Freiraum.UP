@@ -49,9 +49,7 @@
       right:0;
       margin: 2rem 0.2rem;
     }
-    .nonInteractiveMenuPageName {
-      font-size: 3em;
-    }
+
   }
 
   .navigation_button {
@@ -61,3 +59,7 @@
 
 }
 
+.nonInteractiveMenuPageName {
+  font-size: 2em;
+  color: var(--ion-color-primary);
+}
