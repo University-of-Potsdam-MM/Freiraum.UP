@@ -21,6 +21,9 @@ im Format 16:9 entwickelt.
 ## Lokales Ausführen
 
 ```bash
+# Abhängigkeiten installieren
+$ npm install
+# Server starten und Anwendung ausführen
 $ ionic serve 
 ```
 
