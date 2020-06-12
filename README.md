@@ -1,6 +1,6 @@
-# Freiraum.UP (ionic 4)
+# Freiraum.UP
 
-Dies ist die Neuimplementierung der Anwendung *Freiraum.UP* in ionic 4.
+Dies ist die Neuimplementierung der Anwendung *Freiraum.UP*.
 
 ![img](screenshots/Freiraum.UP.png)
 
