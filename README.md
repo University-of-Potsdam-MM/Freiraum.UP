@@ -69,7 +69,7 @@ wird als Objekt der folgenden Form konfiguriert.
 
 - `component`: verweist auf die zu verwendende Komponente.
 - `name`: legt den internen Namen der Komponente fest.
-- `icon`: definiert das zu verwendende material design icon.
+- `icon`: definiert das zu verwendende [material design icon](https://ionicons.com/).
 - `interactiveModes`: bestimmt, für welche Werte von `config.general.interactiveMode` die Seite aktiv sein soll. [true, false] würde also bedeuten, die Seite ist sowohl im interaktiven als auch nicht-interaktiven Modus benutzbar. Muss ein Array sein.
 
 Die so definierten Komponenten werden in der Hauptkomponente `src/app/home/home.page.ts` automatisch importiert und dann eingebettet.
