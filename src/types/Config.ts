@@ -39,10 +39,13 @@ export interface GeneralConfig {
   time_update_frequency: number;
   // momentjs format of the current time that is shown in the header
   time_format: string;
-
+  // defines when the screensaver should be shown. If it should never be shown just use "00:00-24:00".
   operation_time: {
+    // how often the current time should be checked for being within the defined boundaries (in seconds)
     check_frequency: number,
+    // begin of the operation time, in format hh:mm. E.g. "08:00"
     on: string,
+    // end of the operation time,  in format hh:mm. E.g. "22:00"
     off: string
   };
 }
