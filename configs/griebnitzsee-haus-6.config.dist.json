@@ -20,6 +20,7 @@
       "level": 0
     },
     "operation_time": {
+      "check_frequency": 60,
       "on": "08:00",
       "off": "22:00"
     },

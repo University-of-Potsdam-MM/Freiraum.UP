@@ -39,6 +39,12 @@ export interface GeneralConfig {
   time_update_frequency: number;
   // momentjs format of the current time that is shown in the header
   time_format: string;
+
+  operation_time: {
+    check_frequency: number,
+    on: string,
+    off: string
+  };
 }
 
 export interface FooterConfig extends PageConfig {

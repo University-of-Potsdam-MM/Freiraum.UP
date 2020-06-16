@@ -26,7 +26,7 @@ import {ScreenSaverComponent} from './home-components/screen-saver/screen-saver.
 export class HomePage implements AfterViewInit {
 
   config = ConfigService.config;
-  screenSaverModal;
+  screenSaverModal = null;
 
   /* Gets the pages that are to be used in the application */
   pages: PageItem[] = this.pageService.pages;
@@ -94,6 +94,10 @@ export class HomePage implements AfterViewInit {
     await modal.present();
   }
 
+  /**
+   * shows a screensaver modal if we're not in the defined operation time right now
+   * @param inOperationTime: boolean
+   */
   async showScreenSaverModal(inOperationTime) {
     if (!inOperationTime) {
       if (this.screenSaverModal === null) {
@@ -101,11 +105,10 @@ export class HomePage implements AfterViewInit {
           component: ScreenSaverComponent,
           cssClass: 'fullscreen-modal'
         });
+        this.screenSaverModal.onWillDismiss().then(
+          d => { this.screenSaverModal = null; }
+        );
         await this.screenSaverModal.present();
-      }
-    } else {
-      if (this.screenSaverModal !== null) {
-        this.screenSaverModal.dismiss();
       }
     }
   }

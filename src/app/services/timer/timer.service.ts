@@ -52,8 +52,11 @@ export class TimerService {
     );
   }
 
+  /**
+   * starts the timer responsible for checking whether the application should be active right now
+   */
   startOperationTimeWatcher() {
-    timer(0, 60 * 1000).subscribe(
+    timer(0, 1000 * this.config.general.operation_time.check_frequency).subscribe(
       n => {
         this.isInOperationTime.next(this.checkOperationTime());
       }
