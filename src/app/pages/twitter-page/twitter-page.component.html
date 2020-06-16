@@ -1,5 +1,10 @@
-<a data-chrome="noheader noscrollbar transparent noborders nofooter"
-   class="twitter-timeline"
-   data-dnt="true"
-   [href]="config.twitter.channels[channel]">
-</a>
+<ng-container *ngFor="let feed of this.feeds, let i = index">
+    <div [style.display]="i == selectedFeedIndex ? 'block' : 'none'">
+        <a data-chrome="noheader noscrollbar transparent noborders nofooter"
+            class="twitter-timeline"
+            data-dnt="true"
+            style="margin: auto;"
+            [href]="feed.url">
+        </a>
+    </div>
+</ng-container>

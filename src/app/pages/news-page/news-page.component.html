@@ -1,23 +1,24 @@
-<div>
-  <ion-segment [(ngModel)]="selectedNewsSourceId" (ngModelChange)="filterNews($event)">
-    <ng-container *ngFor="let source of newsSources">
-      <ion-segment-button [value]="source.id">
-        {{ source.name }}
+<div *ngIf="config.general.interactiveMode">
+  <ion-segment [(ngModel)]="selectedNewsSourceId"
+               (ngModelChange)="onSelectedByInteraction($event)">
+      <ion-segment-button *ngFor="let newsSourceId of newsSourcesList"
+                          [value]="newsSourceId">
+        {{ newsForNewsSource[newsSourceId].newsSourceName }}
       </ion-segment-button>
-    </ng-container>
   </ion-segment>
 </div>
 
 <ng-template #results let-news="items">
-  <div class="news-container">
-        <ng-container *ngFor="let n of news">
-          <article [article]="n" [articleType]="'news'"></article>
-        </ng-container>
+  <div id="news-container">
+    <ng-container *ngFor="let n of news.slice(0, config.news.showOnly ? config.news.showOnly : news.length)">
+      <news [news]="n" class="news-item"></news>
+    </ng-container>
   </div>
 </ng-template>
 
 <div id="newslist">
-    <results [items]="filteredNews"
+    <results *ngIf="newsReady"
+             [items]="newsForNewsSource[selectedNewsSourceId].items"
              [template]="results">
     </results>
 </div>

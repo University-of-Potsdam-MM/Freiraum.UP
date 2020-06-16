@@ -9,17 +9,20 @@ import {DynamicModule} from 'ng-dynamic-component';
 import {componentsList} from '../services/pages/pages.service';
 import {TranslateModule} from '@ngx-translate/core';
 import {HeaderComponent} from './home-components/header/header.component';
-import {LoadingbarComponent} from './home-components/loadingbar/loadingbar.component';
 import {MenuComponent} from './home-components/menu/menu.component';
 import {TimeoutModalComponent} from './home-components/timeout-modal/timeout-modal.component';
 import {ResultsComponent} from '../components/results/results';
 import {HintComponent} from '../components/hint/hint';
-import {ArticleComponent} from '../components/article/article';
+import {NewsComponent} from '../components/news/news.component';
 import {PipesModule} from '../pipes/pipes.module';
+import {LayoutModule} from '@angular/cdk/layout';
+import {InfoBarComponent} from './home-components/info-bar/info-bar.component';
+import {EventComponent} from '../components/event/event.component';
 import {ScreenSaverComponent} from './home-components/screen-saver/screen-saver.component';
 
 @NgModule({
   imports: [
+    LayoutModule,
     CommonModule,
     FormsModule,
     IonicModule,
@@ -36,24 +39,26 @@ import {ScreenSaverComponent} from './home-components/screen-saver/screen-saver.
   declarations: [
     HomePage,
     HeaderComponent,
-    LoadingbarComponent,
     MenuComponent,
     TimeoutModalComponent,
     ScreenSaverComponent,
     ResultsComponent,
     HintComponent,
-    ArticleComponent,
+    NewsComponent,
+    EventComponent,
+    InfoBarComponent,
     ...componentsList()
   ],
   entryComponents: [
     HeaderComponent,
-    LoadingbarComponent,
     MenuComponent,
     TimeoutModalComponent,
     ScreenSaverComponent,
     ResultsComponent,
     HintComponent,
-    ArticleComponent,
+    NewsComponent,
+    EventComponent,
+    InfoBarComponent,
     ...componentsList()
   ]
 })

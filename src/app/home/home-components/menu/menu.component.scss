@@ -3,8 +3,6 @@
   flex-direction: column;
   overflow: auto;
   margin-top: 50px;
-  width: 90%;
-  margin-left: 5%;
 
   #loading-bar {
     order: 0;
@@ -27,6 +25,7 @@
 
     #slides {
       order: 1;
+      width: 90%;
 
       ion-icon {
         text-align: center;
@@ -35,6 +34,7 @@
 
       .swiper-slide-active {
         color: var(--ion-color-primary);
+        font-size: 200%;
         font-weight: bold;
       }
 
@@ -49,6 +49,17 @@
       right:0;
       margin: 2rem 0.2rem;
     }
+
   }
+
+  .navigation_button {
+    height: 75px;
+    width: 75px;
+  }
+
 }
 
+.nonInteractiveMenuPageName {
+  font-size: 2em;
+  color: var(--ion-color-primary);
+}

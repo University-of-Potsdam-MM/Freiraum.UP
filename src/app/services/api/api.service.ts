@@ -12,7 +12,8 @@ import {FreeRoomsResponse} from '../../../types/freeRooms.response';
 import {IRoomReservation, ReservedRoomsResponse} from '../../../types/reservedRooms.response';
 import {CampusMapDataResponse} from '../../../types/campusMapData.response';
 import {TimerService} from '../timer/timer.service';
-import {ITimeslot} from '../../../types/Config';
+import {Timeslot} from '../../../types/Config';
+import {NGXLogger} from "ngx-logger";
 
 @Injectable()
 export class AuthorizationInterceptor implements HttpInterceptor {
@@ -27,6 +28,29 @@ export class AuthorizationInterceptor implements HttpInterceptor {
     }
     return next.handle(req);
   }
+}
+
+function buildRoomRequest(timeslot) {
+  return {
+    format: 'json',
+    campus: ConfigService.config.general.location.campus.toString(),
+    building: ConfigService.config.general.location.building.toString(),
+    startTime: timeslot.begin,
+    endTime: timeslot.end
+  };
+}
+
+function filterByTimeslot(reservations: IRoomReservation[], timeslot: Timeslot) {
+  if (!Array.isArray(reservations)) {
+    reservations = [reservations];
+  }
+  return reservations.filter(
+    (r: IRoomReservation) => {
+      const d = moment(r.startTime) >= moment(timeslot.begin) &&
+              moment(timeslot.begin) >= moment(r.startTime);
+      return d;
+    }
+  );
 }
 
 @Injectable({
@@ -50,160 +74,140 @@ export class ApiService {
     publicTransport: new Subject<PublicTransportResponse>(),
     events: new Subject<EventsResponse>(),
     news: new Subject<NewsResponse>(),
-    freeRooms: {
-      now: new Subject<FreeRoomsResponse>(),
-      soon: new Subject<FreeRoomsResponse>()
+    rooms: {
+      now: new Subject<string[]>(),
+      soon: new Subject<string[]>()
     },
-    reservedRooms: {
-      now: new Subject<FreeRoomsResponse>(),
-      soon: new Subject<FreeRoomsResponse>()
+    lectures: {
+      now: new Subject<IRoomReservation[]>(),
+      soon: new Subject<IRoomReservation[]>()
     },
     campusMapData: new Subject<CampusMapDataResponse>()
   };
 
-  mensa() {
-    for (const canteen of this.config.mensa.canteens) {
-      this.http.get(
-        this.config.api.endpoints.mensa.url,
-        {params: {location: canteen.name}}
-      ).subscribe(
-        (response: MensaResponse) => {
-          response.meal = response.meal.filter(
-            meal => this.today.isSame(meal.date, 'date')
-          );
-          return this.feeds.mensa[canteen.name].next(response);
-        }
-      );
-    }
-  }
-
-  publicTransport() {
-    this.http.get(
-      this.config.api.endpoints.transport.url,
-      {
-        params: {
-          maxJourneys: this.config.transport.count.toString(),
-          format: 'json',
-          id: this.config.transport.station_id,
-          time: moment().format('HH:mm:ss')
-        }
-      }
-    ).subscribe(
-      (response: PublicTransportResponse) => {
-        this.feeds.publicTransport.next(response);
-      }
-    );
-  }
-
-  events() {
-    this.http.get(
-      this.config.api.endpoints.events.url
-    ).subscribe(
-      (response: EventsResponse) => {
-        this.feeds.events.next(response);
-      }
-    );
-  }
-
-  news() {
-    this.http.get(
-      this.config.api.endpoints.news.url
-    ).subscribe(
-      (response: NewsResponse) => {
-        this.feeds.news.next(response);
-      }
-    );
-  }
-
-  campusMapData() {
-    this.http.get(
-      this.config.api.endpoints.maps.url
-    ).subscribe(
-      (response: CampusMapDataResponse) => {
-        this.feeds.campusMapData.next(response);
-      }
-    );
-  }
-
-  buildRoomRequest(timeslot) {
-    return {
-      format: 'json',
-      campus: this.config.general.location.campus.toString(),
-      building: this.config.general.location.building.toString(),
-      startTime: timeslot.begin,
-      endTime: timeslot.end
-    };
-  }
-
-  freeRooms() {
-    for (const slot of ['now', 'soon']) {
-      this.http.get(
-      this.config.api.endpoints.freeRooms.url,
-        {
-          params: this.buildRoomRequest(this.timerService.timeslots[slot])
-        }).subscribe(
-        (response: FreeRoomsResponse) => {
-          try {
-            this.feeds.freeRooms[slot].next(response.rooms4TimeResponse.return);
-          } catch (e) {
-            this.feeds.freeRooms[slot].next([]);
-          }
-        }
-      );
-    }
-  }
-
-  filterByTimeslot(reservations: IRoomReservation[], timeslot: ITimeslot) {
-    if (!Array.isArray(reservations)) {
-      reservations = [reservations];
-    }
-    return reservations.filter(
-      (r: IRoomReservation) => {
-        const d = moment(r.startTime) >= moment(timeslot.begin) &&
-                moment(timeslot.begin) >= moment(r.startTime);
-        return d;
-      }
-    );
-  }
-
-  reservedRooms() {
-    for (const slot of ['now', 'soon']) {
-      this.http.get(
-      this.config.api.endpoints.reservedRooms.url,
-        {
-          params: this.buildRoomRequest(this.timerService.timeslots[slot])
-        }).subscribe(
-        (response: ReservedRoomsResponse) => {
-          try {
-            this.feeds.reservedRooms[slot].next(
-              this.filterByTimeslot(
-                response.reservationsResponse.return,
-                this.timerService.timeslots[slot]
-              )
+  feedFunctions: {[feedName: string]: () => void} = {
+    mensa: () => {
+      for (const canteen of this.config.mensa.canteens) {
+        this.http.get(
+          this.config.api.endpoints.mensa.url,
+          {params: {location: canteen.name}}
+        ).subscribe(
+          (response: MensaResponse) => {
+            response.meal = response.meal.filter(
+              meal => this.today.isSame(meal.date, 'date')
             );
-          } catch (e) {
-            this.feeds.reservedRooms[slot].next([]);
+            this.feeds.mensa[canteen.name].next(response);
+          }
+        );
+      }
+    },
+    transport: () => {
+      this.http.get(
+        this.config.api.endpoints.transport.url,
+        {
+          params: {
+            maxJourneys: this.config.transport.count.toString(),
+            format: 'json',
+            id: this.config.transport.station_id,
+            time: moment().format('HH:mm:ss')
           }
         }
+      ).subscribe(
+        (response: PublicTransportResponse) => {
+          this.feeds.publicTransport.next(response);
+        }
       );
+    },
+    events: () => {
+      this.http.get(
+        this.config.api.endpoints.events.url
+      ).subscribe(
+        (response: EventsResponse) => {
+          this.feeds.events.next(response);
+        }
+      );
+    },
+    news: () => {
+      this.http.get(
+        this.config.api.endpoints.news.url
+      ).subscribe(
+        (response: NewsResponse) => {
+          this.feeds.news.next(response);
+        }
+      );
+    },
+    maps: () => {
+      this.http.get(
+        this.config.api.endpoints.maps.url
+      ).subscribe(
+        (response: CampusMapDataResponse) => {
+          this.feeds.campusMapData.next(response);
+        }
+      );
+    },
+    rooms: () => {
+      for (const slot of ['now', 'soon']) {
+        this.http.get(
+        this.config.api.endpoints.rooms.url,
+          {
+            params: buildRoomRequest(this.timerService.timeslots[slot])
+          }).subscribe(
+          (response: FreeRoomsResponse) => {
+            try {
+              this.feeds.rooms[slot].next(
+                response.rooms4TimeResponse.return
+              );
+            } catch (e) {
+              this.logger.log(`No rooms for timeslot '${slot}'`);
+              this.feeds.rooms[slot].next([]);
+            }
+          }
+        );
+      }
+    },
+    lectures: () => {
+      for (const slot of this.config.lectures.timeslots) {
+        this.http.get(
+          this.config.api.endpoints.lectures.url,
+          {
+            params: buildRoomRequest(this.timerService.timeslots[slot])
+          }).subscribe(
+          (response: ReservedRoomsResponse) => {
+            try {
+              this.feeds.lectures[slot].next(
+                filterByTimeslot(
+                  response.reservationsResponse.return,
+                  this.timerService.timeslots[slot]
+                )
+              );
+            } catch (e) {
+              this.logger.log(`No lectures for timeslot '${slot}'`);
+              this.feeds.lectures[slot].next([]);
+            }
+          }
+        );
+      }
     }
-  }
+  };
 
   constructor(private http: HttpClient,
+              private logger: NGXLogger,
               private timerService: TimerService) {}
 
   init() {
-    this.timer = timer(0, 60 * 1000).subscribe(
-      () => {
-        this.reservedRooms();
-        this.freeRooms();
-        this.campusMapData();
-        this.news();
-        this.events();
-        this.publicTransport();
-        this.mensa();
-      }
-    );
+    for (const endpointName in this.config.api.endpoints) {
+      const endpoint = this.config.api.endpoints[endpointName];
+      const frequency = endpoint.frequency !== undefined ? endpoint.frequency : this.config.api.default_frequency;
+      timer(0, frequency * 1000).subscribe(
+        n => {
+          try {
+            this.feedFunctions[endpointName]();
+          } catch (error) {
+            this.logger.error(`Could not call feed function for ednpoint '${endpointName}'`);
+          }
+        }
+      );
+    }
   }
 
 }

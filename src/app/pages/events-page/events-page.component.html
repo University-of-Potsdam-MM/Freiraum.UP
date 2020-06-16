@@ -1,23 +1,24 @@
-<div>
-  <ion-segment [(ngModel)]="selectedPlaceId" (ngModelChange)="filterEvents($event)">
-    <ng-container *ngFor="let place of places">
-      <ion-segment-button [value]="place.id">
-        {{ place.name }}
+<div *ngIf="config.general.interactiveMode">
+  <ion-segment [(ngModel)]="selectedPlaceId"
+               (ngModelChange)="onSelectedByInteraction($event)">
+      <ion-segment-button *ngFor="let placeId of placesList"
+                          [value]="placeId">
+        {{ eventsForPlace[placeId].placeName }}
       </ion-segment-button>
-    </ng-container>
   </ion-segment>
 </div>
 
-<ng-template #results let-event="items">
-  <div class="events-container">
-        <ng-container *ngFor="let e of events">
-          <article [article]="e" [articleType]="'event'"></article>
+<ng-template #results let-events="items">
+  <div id="events-container">
+        <ng-container *ngFor="let e of events.slice(0, config.events.showOnly ? config.events.showOnly : events.length)">
+          <event [event]="e" class="events-item"></event>
         </ng-container>
   </div>
 </ng-template>
 
 <div id="newslist">
-    <results [items]="filteredEvents"
+    <results *ngIf="eventsReady"
+             [items]="eventsForPlace[selectedPlaceId].items"
              [template]="results">
     </results>
 </div>

@@ -33,7 +33,7 @@
         "sport": "Sport"
       }
     },
-    "publicTransport": {
+    "transport": {
       "title": "Nahverkehr",
       "departures_from": "Abfahrten ab:",
       "disclaimer": "Alle Daten werden mit freundlicher Unterstützung des VBB genutzt.",
@@ -45,7 +45,8 @@
       "time_of_departure": "Abfahrtszeit"
     },
     "ads": {
-      "title": "Anzeigen"
+      "title": "Anzeigen",
+      "noAds": "Es sind keine Anzeigen hinterlegt."
     },
     "facebook": {
       "title": "Facebook"
@@ -57,15 +58,16 @@
     "events": {
       "title": "Events"
     },
-    "rooms-free": {
+    "rooms": {
       "title": "Freie Räume",
       "no_rooms": "In diesem Zeitabschnitt sind keine freien Räume verfügbar"
     },
-    "rooms-reserved": {
+    "lectures": {
       "title": "Veranstaltungen",
       "time": "Uhrzeit",
       "room": "Raum",
-      "reservation_title": "Veranstaltung"
+      "reservation_title": "Veranstaltung",
+      "no_lectures": "Keine Veranstaltungen im gewählten Zeitraum."
     },
     "mensa": {
       "title": "Mensa",
@@ -90,6 +92,9 @@
       "ended": "Die Zeit ist leider vorbei!",
       "score": "Dein Punktestand",
       "highscores": "Die Top 5 bisher:"
+    },
+    "campusMap": {
+      "title": "Campus"
     }
   },
   "words": {
@@ -100,7 +105,13 @@
     "oclock": "Uhr",
     "to": "nach",
     "from": "von",
-    "timeoutText": "Automatischer Modus wird in {{timeRemaining}} Sekunden fortgesetzt"
+    "timeoutText": "Automatischer Modus wird in {{timeRemaining}} Sekunden fortgesetzt",
+    "application_name": "Freiraum.UP",
+    "university_name": "Universität Potsdam",
+    "room": "Raum",
+    "lecture_room": "Hörsaal",
+    "seminar_room": "Seminarraum",
+    "currently_free": "Aktuell frei"
   },
   "buttons": {
     "next": "Vor",
@@ -109,6 +120,12 @@
     "cancel": "Abbrechen"
   },
   "hint": {
-    "no_results": "Keine Informationen verfügbar"
+    "noResultsFound": "Keine Informationen verfügbar",
+    "noResultsError": "Da ist was schief gelaufen!"
+  },
+  "footer": {
+    "next_departures": "Nächste Abfahrten",
+    "currently_free": "Aktuell frei",
+    "corona": "Infektionsschutz: Bitte rechts gehen und den empfohlenen Abstand von 1,5 Metern einhalten. Danke!"
   }
 }

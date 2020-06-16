@@ -25,6 +25,24 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
+@import '~animate.css/animate.min.css';
+
+.title {
+  font-size: 3em;
+}
+
+.list-item {
+  font-size: 2em;
+}
+
+.hint-title {
+  font-size: 2em;
+}
+
+.hint-text {
+  font-size: 1.5em;
+}
+
 .fullscreen-modal {
     div.modal-wrapper {
         position: absolute;

@@ -3,23 +3,30 @@ import {ConfigService} from '../config/config.service';
 import {Observable, ReplaySubject, Subject, timer} from 'rxjs';
 import * as moment from 'moment';
 
+/**
+ * This service manages various timing tasks in the background.
+ * With the method 'startAll()' all timers are started at once.
+ * The timers can then be observed via ReplaySubject form the outside.
+ */
 @Injectable({
   providedIn: 'root'
 })
 export class TimerService {
 
-  progressTimer;
-  timeslotTimer;
-  timeoutTimer;
+  private progressTimer;
+  private timeslotTimer;
+  private timeoutTimer;
 
-  now: Subject<string> = new Subject<string>();
-  progress: Subject<number> = new Subject<number>();
-  timeoutEnded: Subject<void> = new Subject<void>();
-  showNextPage: Subject<boolean> = new Subject<boolean>();
-  isInOperationTime: ReplaySubject<boolean> = new ReplaySubject<boolean>();
+  /* these subjects are regularly updated by the timers of this service */
+  public now: Subject<string> = new Subject<string>();
+  public progress: Subject<number> = new Subject<number>();
+  public timeoutEnded: Subject<void> = new Subject<void>();
+  public showNextPage: Subject<void> = new Subject<void>();
+  public isInOperationTime: ReplaySubject<boolean> = new ReplaySubject<boolean>();
 
   protected config = ConfigService.config;
 
+  /* timeslots containing the current timeslot and the next timeslot. Timeslots always span 2 hours. */
   public timeslots = {
     now: {begin: '', end: ''},
     soon: {begin: '', end: ''}
@@ -27,6 +34,9 @@ export class TimerService {
 
   constructor() {}
 
+  /**
+   * starts all timers at once
+   */
   startAll() {
     this.startNowTimer();
     this.startTimeslotUpdate();
@@ -50,35 +60,49 @@ export class TimerService {
     );
   }
 
+  /**
+   * starts the timer responsible for displaying the current time. The time is displayed in the frontend.
+   */
   startNowTimer() {
     timer(0, this.config.general.time_update_frequency * 1000).subscribe(
       n => {
-        this.now.next(moment().format('lll'));
+        this.now.next(moment().format(this.config.general.time_format));
       }
     );
   }
 
+  /**
+   * starts the timer responsible for updating the progress value. This value is used to display a progress
+   * bar in the frontend.
+   */
   startProgressTimer() {
     this.progressTimer = timer(0, 1000).subscribe(
       n => {
         // guard for undefined state
         if (n <= 0) { return; }
 
-        const seconds = n % this.config.general.page_switching_frequency;
-        const shouldShowNextPage = seconds === 0;
-        const progress = Math.trunc((seconds / this.config.general.page_switching_frequency) * 100);
+        const seconds = (n % this.config.general.page_switching_frequency);
+        const shouldShowNextPage = (seconds === 0);
+        const progress = (seconds / this.config.general.page_switching_frequency);
 
-        if (shouldShowNextPage) { this.showNextPage.next(true); }
+        if (shouldShowNextPage) { this.showNextPage.next(); }
         this.progress.next(progress);
       }
     );
   }
 
+  /**
+   * stops the progress timer and sets it to zero. Is used only in interactive mode to stop the application upon
+   * user input.
+   */
   stopProgressTimer() {
     this.progressTimer.unsubscribe();
     this.progress.next(0);
   }
 
+  /**
+   * starts the timer responsible for updating the timeslots. A timeslot always spans two hours.
+   */
   startTimeslotUpdate() {
     this.timeslotTimer = timer(0, this.config.general.timeslot_update_frequency * 1000).subscribe(
       n => {
@@ -101,6 +125,9 @@ export class TimerService {
     );
   }
 
+  /**
+   * starts the timeout timer when user input is registered. Each subsequent user input resets the timer
+   */
   startTimeout() {
     if (this.config.general.interactiveMode) {
       this.stopProgressTimer();

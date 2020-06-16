@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {BasicPageComponent} from '../../components/basic-page/basic-page.component';
-import {EventItem, EventsResponse} from '../../../types/events.response';
-import * as moment from 'moment';
+import {EventItem} from '../../../types/events.response';
+import {iterableArray} from '../../util/iterableArray';
 
 @Component({
   selector: 'app-events-page',
@@ -10,56 +10,56 @@ import * as moment from 'moment';
 })
 export class EventsPageComponent extends BasicPageComponent implements OnInit {
 
-  events: EventItem[] = [];
-  places: {id: number, name: string}[] = [];
-  selectedPlaceId;
-  filteredEvents: EventItem[] = [];
+  eventsForPlace: {[placeId: string]: {placeName: string, items: EventItem[]}} = {};
+  placesList: string[];
+  placesIterable: IterableIterator<string>;
+  selectedPlaceId: string;
+  eventsReady = false;
 
-  constructor() { super(); }
-
-  /**
-   * filters the currently available events by the selected place
-   * @param selectedPlaceId: id of the selected place
-   */
-  filterEvents(selectedPlaceId: string) {
-    this.filteredEvents = this.events.filter(n => {
-      return n.Place.id === parseInt(selectedPlaceId, 10);
-    });
-  }
+  constructor() { super('events'); }
 
   ngOnInit(): void {
+    this.getEvents();
+  }
+
+  getEvents() {
     this.api.feeds.events.subscribe(
-      (response: EventsResponse) => {
+      r => {
+        const startDate = this.moment().subtract(4, 'week');
+        const endDate = this.moment().add(8, 'weeks');
 
-        const temp = response;
-        // replacing localized datestring with iso datestring
-        temp.vars.events.forEach(
-          e =>  e.Event.DateString = moment(e.Event.DateString, 'MMMM, DD.MM.YYYY, HH:mm', 'de').toISOString()
-        );
+        for (const eventPlaceId in r.vars.places) {
+          const events = r.vars.events
+            .filter(event => event.Event.place_id === eventPlaceId)
+            .filter(event => this.moment.unix(parseInt(event.Event.startTime, 10)).isBetween(startDate, endDate));
 
-        // filtering for recent events only and sorting by descending date
-        this.events = temp.vars.events
-          .filter(
-            (event: EventItem) => moment(event.Event.DateString).isAfter(moment().subtract(2, 'year'))
-          ).sort(
-          (a, b) =>  moment(b.Event.DateString).unix() - moment(a.Event.DateString).unix()
-          );
-
-        // converting single places object to array of objects for convenience
-        Object.keys(response.vars.places).forEach(
-          key => {
-            this.places.push(
-              {
-                id: parseInt(key, 10),
-                name: response.vars.places[key]
-              }
-            );
+          if (events.length > 0) {
+            this.eventsForPlace[eventPlaceId] = {
+              placeName: r.vars.places[eventPlaceId],
+              items: events
+            };
           }
-        );
-
-        // select first place by default
-        this.selectedPlaceId = this.places[0].id;
+        }
+        this.placesList = Object.keys(this.eventsForPlace);
+        this.placesIterable = iterableArray(this.placesList);
+        this.selectedPlaceId = this.placesList[0];
+        this.eventsReady = true;
       }
     );
+  }
+
+  onSelectedByInteraction(event) {
+    this.selectedPlaceId = event;
+    this.placesIterable = iterableArray(
+      this.placesList,
+      this.placesList.findIndex(i => i === event)
+    );
+  }
+
+  onSelected() {
+    if (this.eventsReady) {
+      this.selectedPlaceId = this.placesIterable.next().value;
+      this.customTitle = this.eventsForPlace[this.selectedPlaceId].placeName;
+    }
   }
 }

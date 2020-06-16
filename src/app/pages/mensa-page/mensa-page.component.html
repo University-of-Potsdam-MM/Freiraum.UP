@@ -11,12 +11,12 @@
             </ion-avatar>
             <!-- title -->
             <ion-label class="ion-text-wrap">
-                <span>
+                <div class="meal-title">
                     {{ meal.title }}
-                </span>
-                <h1>
+                </div>
+                <div class="meal-description">
                     {{ meal.description }}
-                </h1>
+                </div>
             </ion-label>
         </ion-item>
     </ion-list>
@@ -25,11 +25,10 @@
 <ng-container [ngSwitch]="config.general.interactiveMode">
     <!-- interactive view with ion segments -->
     <div *ngSwitchCase="true">
-        <div padding>
+        <div class="ion-padding">
             <ion-segment [(ngModel)]="selectedCanteenIndex">
-                <ng-container *ngFor="let canteen of config.mensa.canteens">
-                    <ion-segment-button *ngIf="canteen.enabled"
-                                        [value]="config.mensa.canteens.indexOf(canteen)">
+                <ng-container *ngFor="let canteen of enabledCanteens">
+                    <ion-segment-button [value]="config.mensa.canteens.indexOf(canteen)">
                         {{ 'page.mensa.canteenNames.' + canteen.name | translate }}
                     </ion-segment-button>
                 </ng-container>
@@ -42,15 +41,14 @@
 
     <!-- non interactive view as list -->
     <div *ngSwitchCase="false">
-        <ng-container *ngFor="let canteen of config.mensa.canteens">
-            <ion-card *ngIf="canteen.enabled && meals[canteen.name]?.length > 0">
-                <ion-card-header color="primary">
-                    <h1>{{ "page.mensa.canteenNames." + canteen.name | translate  }}</h1>
+        <ng-container *ngFor="let canteen of enabledCanteens">
+            <ion-card *ngIf="selectedCanteenIndex == config.mensa.canteens.indexOf(canteen)">
+                <ion-card-header color="primary" class="mensa-title">
+                    {{ "page.mensa.canteenNames." + canteen.name | translate  }}
                 </ion-card-header>
                 <ion-card-content>
                     <results [items]="meals[canteen.name]"
-                             [template]="results"
-                             [showHintIfNoItems]="false">
+                             [template]="results">
                     </results>
                 </ion-card-content>
             </ion-card>

@@ -6,7 +6,7 @@
 #  * SSH_KNOWN_HOSTS (hosts keys of the servers to which the artifacts should be deployed; `ssh-keyscan hostname`)
 # except SSH_DEPLOY_HOSTS and SSH_DEPLOY_KEY all variables can be set in the Group
 
-image: node:11
+image: node:12
 
 stages:
   - prepare
@@ -77,16 +77,8 @@ deploy-production:
     - echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
     - chmod 644 ~/.ssh/known_hosts
   script:
-    # prepare deployment
-    - mv -f platforms/browser/www/assets/config.json.template-gr_haus4 platforms/browser/www/assets/config.json
-    - perl -pi -e 's|<title>Ionic App</title>|<title>Freiraum.UP, Griebnitzsee Haus 4</title>|' platforms/browser/www/index.html
-    - if [ -z "$BEARER_TOKEN" ]; then echo "not all tokens are defined."; exit 1; fi
-    - perl -pi -e "s|\"<add_api_token_here>\"|\"Bearer $BEARER_TOKEN\"|" platforms/browser/www/assets/config.json
-    # deploy to servers
-    - if [ -z "$SSH_DEPLOY_HOSTS" ]; then echo "no servers (SSH_DEPLOY_HOSTS) defined."; exit 1; fi
-    - for server in $SSH_DEPLOY_HOSTS; do
-        tar cfz - platforms/browser/www/ | ssh -i /root/.ssh/id_rsa gitup-deploy@$server;
-      done
+    - apt-get update && apt-get install -y jq
+    - ./deploy
   # uncomment to only deploy manually and not on every push
   #when: manual
   #allow_failure: false

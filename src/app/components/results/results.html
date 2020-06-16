@@ -9,8 +9,15 @@
 </ng-template>
 
 <ng-template #noItemsTemplate>
-  <hint *ngIf="showHintIfNoItems"
-        hintTextI18nKey="hint.no_results"
+  <hint *ngIf="!error && showHintIfNoItems"
+        [hintTextI18nKey]="noResultsHint"
+        [hintIcon]="noResultsIcon"
+        [hintCustomTemplate]="customHint">
+  </hint>
+
+  <hint *ngIf="error && showHintIfError"
+        [hintTextI18nKey]="errorHint"
+        [hintIcon]="errorIcon"
         [hintCustomTemplate]="customHint">
   </hint>
 </ng-template>

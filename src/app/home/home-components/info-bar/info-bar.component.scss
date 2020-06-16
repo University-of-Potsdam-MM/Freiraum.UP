@@ -1,0 +1,42 @@
+#info-bar {
+  background-color: var(--ion-color-upgrey);
+
+  ion-badge {
+    background-color: var(--ion-color-secondary);
+    color: var(--ion-color-primary);
+    margin-right: 2%;
+
+    .badge-icon {
+      display: none;
+      font-size: 2em;
+    }
+
+    .badge-text {
+      font-size: 2em;
+    }
+  }
+
+  .cancelled {
+      text-decoration: line-through;
+  }
+
+  .marquee {
+    width: 100%;
+	line-height: 20px;
+	background-color: var(--ion-color-upgrey);
+    color: var(--ion-color-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+  .marquee p {
+      font-size: 1.5em;
+      display: inline-block;
+      padding-left: 100%;
+  }
+  @keyframes marquee {
+      0%   { transform: translate(0, 0); }
+      100% { transform: translate(-100%, 0); }
+  }
+
+}

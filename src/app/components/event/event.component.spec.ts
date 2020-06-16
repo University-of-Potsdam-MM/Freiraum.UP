@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { ReservedRoomsPageComponent } from './reserved-rooms-page.component';
+import { EventComponent } from './event.component';
 
-describe('ReservedRoomsPageComponent', () => {
-  let component: ReservedRoomsPageComponent;
-  let fixture: ComponentFixture<ReservedRoomsPageComponent>;
+describe('EventComponent', () => {
+  let component: EventComponent;
+  let fixture: ComponentFixture<EventComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ReservedRoomsPageComponent ],
+      declarations: [ EventComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ReservedRoomsPageComponent);
+    fixture = TestBed.createComponent(EventComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

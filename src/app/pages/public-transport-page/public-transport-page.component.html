@@ -1,113 +1,46 @@
 <ng-template #results let-deps="items">
-  <h1>
-    {{ "page.publicTransport.departures_from" | translate }} {{ station }}
-  </h1>
-
   <ion-list>
     <ion-item *ngFor="let dep of deps">
       <ion-avatar slot="start">
-        <ion-icon *ngIf="dep.Product.catOut.trim() == 'RB'"
-                    src="assets/icon/bahn.svg"
-                    style="zoom:2.0;">
-        </ion-icon>
-        <ion-icon *ngIf="dep.Product.catOut.trim() == 'S'"
-                  src="assets/icon/s-bahn.svg"
-                  style="zoom:2.0;">
-        </ion-icon>
-        <ion-icon *ngIf="dep.Product.catOut.trim() == 'Bus'"
-                  src="assets/icon/bus.svg"
-                  style="zoom:2.0;">
-        </ion-icon>
+        <ng-container *ngFor="let product of config.transport.meansOfTransport">
+          <ion-icon *ngIf="dep.Product.catOut.trim() == product.name"
+                    [src]="'assets/icon/'+product.iconFileName"
+                    class="transport-icon">
+          </ion-icon>
+        </ng-container>
       </ion-avatar>
+      <ion-label>
+        <h1 >
+          {{ dep.name }}
+          <ng-container *ngIf="dep.Product.catOut.trim() !== 'Bus'">
+            {{ 'words.from' | translate }}
+            <span>
+              <span *ngIf="dep.track && !dep.rtTrack">
+                {{ 'page.transport.track' | translate }} {{ dep.track }}
+              </span>
+              <span *ngIf="dep.track && dep.rtTrack">
+                {{ 'page.transport.track' | translate }} {{ dep.rtTrack }}
+              </span>
+            </span>
+          </ng-container>
+        </h1>
+        <p style="font-size: 1.5em;">
+          <span>
+           {{ dep.direction}}
+           </span>
+        </p>
+      </ion-label>
 
-      <div class="emphasis">
-        {{ dep.name }}
-      </div>
-      &nbsp;
-      {{ 'words.to' | translate }}
-      &nbsp;
-      <div class="emphasis">
-        {{ dep.direction}}
-      </div>
-      &nbsp;
-      <ng-container *ngIf="dep.Product.catOut.trim() !== 'Bus'">
-        {{ 'words.from' | translate }}
-        &nbsp;
-        <div class="emphasis">
-          <div *ngIf="dep.track && !dep.rtTrack">
-            {{ 'page.publicTransport.track' | translate }} {{ dep.track }}
-          </div>
-          <div *ngIf="dep.track && dep.rtTrack">
-            {{ 'page.publicTransport.track' | translate }} {{ dep.rtTrack }}
-          </div>
-        </div>
-      </ng-container>
-
-      <ion-badge slot="end" class="emphasis">
-        <ion-badge *ngIf="!dep.cancelled" style="font-weight: 300;">
+      <ion-badge slot="end">
+        <ion-badge *ngIf="!dep.cancelled">
           {{ moment(dep.time, "HH:mm:ss").format("HH:mm") }}
         </ion-badge>
         <ion-badge *ngIf="dep.cancelled" class="cancelled">
-          {{ "page.publicTransport.cancelled" | translate }}
+          {{ "page.transport.cancelled" | translate }}
         </ion-badge>
       </ion-badge>
     </ion-item>
   </ion-list>
-
-<!--  <ion-grid>
-    <ion-row>
-      <ion-col>{{ 'page.publicTransport.means_of_transport' | translate }}</ion-col>
-      <ion-col>{{ 'page.publicTransport.direction' | translate }}</ion-col>
-      <ion-col>{{ 'page.publicTransport.track' | translate }}</ion-col>
-      <ion-col>{{ 'page.publicTransport.time_of_departure' | translate }}</ion-col>
-    </ion-row>
-    <ion-row *ngFor="let dep of deps">
-      &lt;!&ndash; product &ndash;&gt;
-      <ion-col>
-        <ion-avatar item-start *ngIf="dep.Product['catOut']">
-          <ion-icon *ngIf="dep.Product.catOut.trim() == 'RB'"
-                    src="assets/icon/bahn.svg"
-                    style="zoom:2.0;">
-          </ion-icon>
-          <ion-icon *ngIf="dep.Product.catOut.trim() == 'S'"
-                    src="assets/icon/s-bahn.svg"
-                    style="zoom:2.0;">
-          </ion-icon>
-          <ion-icon *ngIf="dep.Product.catOut.trim() == 'Bus'"
-                    src="assets/icon/bus.svg"
-                    style="zoom:2.0;">
-          </ion-icon>
-        </ion-avatar>
-        <h2 *ngIf="dep.name">
-          {{ dep.name }}
-        </h2>
-      </ion-col>
-      &lt;!&ndash; direction&ndash;&gt;
-      <ion-col>
-        <p *ngIf="dep.direction">
-          {{ dep.direction }}
-        </p>
-      </ion-col>
-      &lt;!&ndash; track &ndash;&gt;
-      <ion-col>
-        <span *ngIf="dep.track && !dep.rtTrack">
-          {{ dep.track }}
-        </span>
-        <span *ngIf="dep.track && dep.rtTrack">
-          {{ dep.rtTrack }}
-        </span>
-      </ion-col>
-      &lt;!&ndash; departure time &ndash;&gt;
-      <ion-col>
-        <ion-badge *ngIf="!dep.cancelled" style="font-weight: 300;" item-end>
-          {{ moment(dep.time, "HH:mm:ss").format("HH:mm") }}
-        </ion-badge>
-        <ion-badge *ngIf="dep.cancelled" item-end class="cancelled">
-          {{ "page.publicTransport.cancelled" | translate }}
-        </ion-badge>
-      </ion-col>
-    </ion-row>
-  </ion-grid>-->
 </ng-template>
 
 <results [items]="departures" [template]="results"></results>
