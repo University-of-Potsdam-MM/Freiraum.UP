@@ -50,19 +50,30 @@ export interface GeneralConfig {
   };
 }
 
+// Configuration of the footer section at the bottom of the application
 export interface FooterConfig extends PageConfig {
+  // configures the public transport section
   public_transport: {
+    // whether it should be displayed
     display: boolean;
+    // how many items to show
     count: number
   };
+  // configures the free rooms section
   rooms_free: {
+    // whether it should be displayed
     display: boolean;
   };
+  // configures the running text section
   running_text: {
+    // whether it should be displayed
     display: boolean;
+    // text to be shown. Must be the key to a text defined in one of the i18n files.
     textI18nKey: string;
+    // optionally a md-icon can be shown before and after the text
     icon_before: string;
     icon_after: string;
+    // the speed at which the text should be running
     speed: number;
   };
 }
