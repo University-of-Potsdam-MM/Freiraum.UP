@@ -18,6 +18,7 @@ import {PipesModule} from '../pipes/pipes.module';
 import {LayoutModule} from '@angular/cdk/layout';
 import {InfoBarComponent} from './home-components/info-bar/info-bar.component';
 import {EventComponent} from '../components/event/event.component';
+import {ScreenSaverComponent} from './home-components/screen-saver/screen-saver.component';
 
 @NgModule({
   imports: [
@@ -40,6 +41,7 @@ import {EventComponent} from '../components/event/event.component';
     HeaderComponent,
     MenuComponent,
     TimeoutModalComponent,
+    ScreenSaverComponent,
     ResultsComponent,
     HintComponent,
     NewsComponent,
@@ -51,6 +53,7 @@ import {EventComponent} from '../components/event/event.component';
     HeaderComponent,
     MenuComponent,
     TimeoutModalComponent,
+    ScreenSaverComponent,
     ResultsComponent,
     HintComponent,
     NewsComponent,

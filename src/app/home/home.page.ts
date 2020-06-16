@@ -9,6 +9,7 @@ import {TimerService} from '../services/timer/timer.service';
 import {ModalController} from '@ionic/angular';
 import {TimeoutModalComponent} from './home-components/timeout-modal/timeout-modal.component';
 import {BreakpointObserver, BreakpointState} from '@angular/cdk/layout';
+import {ScreenSaverComponent} from './home-components/screen-saver/screen-saver.component';
 
 /**
  * This component contains the actual application. It consists of two elements:
@@ -25,6 +26,7 @@ import {BreakpointObserver, BreakpointState} from '@angular/cdk/layout';
 export class HomePage implements AfterViewInit {
 
   config = ConfigService.config;
+  screenSaverModal = null;
 
   /* Gets the pages that are to be used in the application */
   pages: PageItem[] = this.pageService.pages;
@@ -67,6 +69,10 @@ export class HomePage implements AfterViewInit {
           : '100%';
         this.visibleSlides = this.landscape ? 5 : 3;
       });
+
+    this.timer.isInOperationTime.subscribe(
+      inOperationTime => { this.showScreenSaverModal(inOperationTime); }
+    );
   }
 
   /**
@@ -86,5 +92,24 @@ export class HomePage implements AfterViewInit {
         }
       });
     await modal.present();
+  }
+
+  /**
+   * shows a screensaver modal if we're not in the defined operation time right now
+   * @param inOperationTime: boolean
+   */
+  async showScreenSaverModal(inOperationTime) {
+    if (!inOperationTime) {
+      if (this.screenSaverModal === null) {
+        this.screenSaverModal = await this.modalController.create({
+          component: ScreenSaverComponent,
+          cssClass: 'fullscreen-modal'
+        });
+        this.screenSaverModal.onWillDismiss().then(
+          d => { this.screenSaverModal = null; }
+        );
+        await this.screenSaverModal.present();
+      }
+    }
   }
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {ConfigService} from '../config/config.service';
-import {Observable, Subject, timer} from 'rxjs';
+import {Observable, ReplaySubject, Subject, timer} from 'rxjs';
 import * as moment from 'moment';
 
 /**
@@ -22,6 +22,7 @@ export class TimerService {
   public progress: Subject<number> = new Subject<number>();
   public timeoutEnded: Subject<void> = new Subject<void>();
   public showNextPage: Subject<void> = new Subject<void>();
+  public isInOperationTime: ReplaySubject<boolean> = new ReplaySubject<boolean>();
 
   protected config = ConfigService.config;
 
@@ -40,6 +41,26 @@ export class TimerService {
     this.startNowTimer();
     this.startTimeslotUpdate();
     this.startProgressTimer();
+    this.startOperationTimeWatcher();
+  }
+
+  checkOperationTime(): boolean {
+    const format = 'hh:mm';
+    return moment().isBetween(
+      moment(this.config.general.operation_time.on, format),
+      moment(this.config.general.operation_time.off, format)
+    );
+  }
+
+  /**
+   * starts the timer responsible for checking whether the application should be active right now
+   */
+  startOperationTimeWatcher() {
+    timer(0, 1000 * this.config.general.operation_time.check_frequency).subscribe(
+      n => {
+        this.isInOperationTime.next(this.checkOperationTime());
+      }
+    );
   }
 
   /**
