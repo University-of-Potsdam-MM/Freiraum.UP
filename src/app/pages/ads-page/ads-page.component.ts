@@ -23,9 +23,7 @@ export class AdsPageComponent extends BasicPageComponent implements OnInit {
               private breakpointObserver: BreakpointObserver) { super('ads'); }
 
   async ngOnInit() {
-    this.adsService.getAds()
-      .then(ads => this.ads = ads)
-      .catch(error => this.error(error));
+    this.adsService.ads().subscribe(ads => this.ads = ads);
   }
 
   onSelected() {
