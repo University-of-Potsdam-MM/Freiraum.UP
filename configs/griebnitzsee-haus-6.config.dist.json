@@ -268,6 +268,9 @@
     "disabled": true
   },
   "ads": {
-    "disabled": true
+    "disabled": true,
+    "update_frequency": 3600,
+    "adsConfig": "ads-config.json",
+    "url": "https://musang.soft.cs.uni-potsdam.de/freiraumup_ads/griebnitzsee-haus-6/"
   }
 }
