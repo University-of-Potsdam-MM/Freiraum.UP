@@ -3,11 +3,11 @@ import {HttpClient} from '@angular/common/http';
 import {Ad, AdsConfig} from '../../../types/Ads';
 import * as moment from 'moment';
 import {NGXLogger} from 'ngx-logger';
-import {Observable, Observer, ReplaySubject, timer} from "rxjs";
-import {ConfigService} from "../config/config.service";
+import {Observable, Observer, ReplaySubject, timer} from 'rxjs';
+import {ConfigService} from '../config/config.service';
 
 function isAd(ad: any): ad is Ad {
-  return ad.name && ad.startDate && ad.endDate && ad.url;
+  return ad.name && ad.startDate && ad.endDate && ad.file;
 }
 
 @Injectable({
@@ -46,7 +46,7 @@ export class AdsService {
 
         try {
           const adHTML = await this.http.get<string>(
-            ad.url,
+            this.config.ads.url + ad.file,
             // @ts-ignore 'text' is a valid responseType
             {responseType: 'text'}
           ).toPromise();
@@ -74,7 +74,15 @@ export class AdsService {
     let adsConfig: AdsConfig = null;
 
     try {
-      adsConfig = await this.http.get<AdsConfig>(this.config.ads.config_file_url).toPromise();
+      let url;
+      // if (this.config.ads.config_file_url) {
+      url = this.config.ads.url + this.config.ads.adsConfig;
+      // }
+      // else {
+      //   // if url is not given in the config we try to deduce it
+      //   url = `${this.config.general.location.campus_name_short}-haus-${this.config.general.location.building}`;
+      // }
+      adsConfig = await this.http.get<AdsConfig>(url).toPromise();
     } catch (error) {
       this.logger.error('Could not get ads config');
     }

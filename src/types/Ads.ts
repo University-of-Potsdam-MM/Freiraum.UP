@@ -2,7 +2,7 @@ export type AdsConfig = AdConfig[];
 
 export interface AdConfig {
   name: string;
-  url: string;
+  file: string;
   startDate: string;
   endDate: string;
 }

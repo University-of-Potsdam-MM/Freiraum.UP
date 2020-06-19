@@ -195,8 +195,10 @@ export interface CampusMapConfig extends PageConfig {
 export interface AdsPageConfig extends PageConfig {
   // how often the ads should be updated (in seconds)
   update_frequency: number;
+  // ads config file name
+  adsConfig: string;
   // URL of the ads config file. Must be a JSON file matching the interface 'AdConfig'
-  config_file_url: string;
+  url: string;
 }
 
 export interface Campus {
