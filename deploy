@@ -9,16 +9,12 @@ die () { rc=$1; shift; echo "$0 ($rc):" "$@"; exit "$rc"; }
 [ -z "$BEARER_TOKEN" ]     && die 1 "Token \$BEARER_TOKEN undefined!";
 [ -z "$SSH_DEPLOY_HOSTS" ] && die 1 "Deploy servers (\$SSH_DEPLOY_HOSTS) undefined!";
 [ -z "$SSH_DEPLOY_USER" ]  && die 1 "Deploy user (\$SSH_DEPLOY_USER) undefined!";
-[ -z "$ADS_REPO_URL" ]     && warn "Ads  (\$ADS_REPO_URL) undefined!";
 
 # absolute paths
 workingDir=$(pwd)
 targetDir="$workingDir/platforms/browser/www"
 deployDir="$workingDir/deploy.d"
 configDir="$workingDir/configs"
-
-# relative paths
-adsSubdir="assets/ads"
 
 # Prepare different versions for different configs
 # The following will create a directory structure like
@@ -43,20 +39,8 @@ for config in "$configDir"/*.config.dist.json; do
   # copy files over
   cp --recursive "$targetDir"/* "$deploySubDir"
 
+  # Change the base href of the index.html file
   sed -i "s#<base href=\"/\" />#<base href=\"/freiraumup/$deployName/\"/>#g" "$deploySubDir/index.html" || die 1 "Could not change base href"
-
-  # clone corresponding branch of ads repo to destination if ADS_REPO_URL is set
-  if [ -n "$ADS_REPO_URL" ]; then
-    git clone --branch "$deployName" "$ADS_REPO_URL" "$deploySubDir/$adsSubdir" || warn "Cloning ads repo failed."
-
-    # if ads dir is non existent or empty we disable ads-page by removing the ads-config-element
-    if [ ! -d "$deploySubDir/$adsSubdir" ] || [ -z "$(ls -A "$deploySubDir/$adsSubdir")" ]; then
-      warn "Ads directory is empty. Disabling ads page."
-      tempConfig="$(mktemp)"
-      jq ".ads.disabled=true" "$config" > "$tempConfig" || die 1 "Could not disable ads-page."
-      mv "$tempConfig" "$config" || die 1 "Could not disable ads-page."
-    fi
-  fi
 
   # finally copy corresponding config over
   cp "$config" "$deploySubDir/assets/config.json"

@@ -1,10 +1,15 @@
-export interface AdsConfig {
-  ads: {name: string, startDate: string, endDate: string}[];
+export type AdsConfig = AdConfig[];
+
+export interface AdConfig {
+  name: string;
+  file: string;
+  startDate: string;
+  endDate: string;
 }
 
 export interface Ad {
+  name: string;
   html: string;
-  fitForLandscape: boolean;
   startDate: string;
   endDate: string;
 }

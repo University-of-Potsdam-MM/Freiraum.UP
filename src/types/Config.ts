@@ -192,9 +192,14 @@ export interface CampusMapConfig extends PageConfig {
   campi: Campus[];
 }
 
-// Just empty for the moment
-// tslint:disable-next-line:no-empty-interface
-export interface AdsPageConfig extends PageConfig {}
+export interface AdsPageConfig extends PageConfig {
+  // how often the ads should be updated (in seconds)
+  update_frequency: number;
+  // ads config file name
+  adsConfig: string;
+  // URL of the ads config file. Must be a JSON file matching the interface 'AdConfig'
+  url: string;
+}
 
 export interface Campus {
   // id of one of the campus
