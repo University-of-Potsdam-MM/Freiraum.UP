@@ -90,13 +90,12 @@ einzufügen müssen zwei Schritte erfolgen:
 - Erstellen eines Eintrags für die Anzeige in der Datei `/src/assets/ads/ads-config.json`. Ein solcher Eintrag
   muss wie folgt gestaltet sein:
     ```js
-    {
-      "ads": [
-        {
-          "name": "sample-ad.html", // der exakte Name des HTML-Dokuments
-          "startDate": "2020-04-01", // Datum, ab wann die Anzeige gezeigt werden soll
-          "endDate": "2020-04-30" // Datum, bis zu dem die Anzeige gezeigt werden soll
-        }
-      ]
-    }
+    [
+      {
+        "file": "meine-anzeige.html", // der exakte Name des HTML-Dokuments
+        "name": "Eine Beispielanzeige", // ein frei wählbarere Name - für debugging
+        "startDate": "2020-04-01", // Datum, ab wann die Anzeige gezeigt werden soll
+        "endDate": "2020-04-30" // Datum, bis zu dem die Anzeige gezeigt werden soll
+      }
+    ]
     ```
