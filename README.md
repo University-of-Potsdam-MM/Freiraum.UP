@@ -82,20 +82,42 @@ Um auf die Funktionen der abstrakten Seite (`src/app/components/basic-page`) zug
 
 ## Anzeigen
 
-Die Seite `AdsPage` kann vordefinierte Anzeigen aus dem Verzeichnis `src/assets/ads` anzeigen. Um eine solche Anzeige
-einzufügen müssen zwei Schritte erfolgen:
+Die Seite `AdsPage` kann Anzeigen darstellen, die von einer vordefinierten URL abgerufen werden. Dazu muss die Konfiguration der `AdsPage` in der `config.json` zum Beispiel folgendes enthalten:
 
-- Erstellen eines HTML-Dokuments für die Anzeige (z.B. `src/assets/ads/meine-anzeige.html`). Der Inhalt des Dokuments kann frei
-  gestaltet werden. Es können auch CSS-Regeln und Klassen der Anwendung selbst verwendet werden.
-- Erstellen eines Eintrags für die Anzeige in der Datei `/src/assets/ads/ads-config.json`. Ein solcher Eintrag
-  muss wie folgt gestaltet sein:
-    ```js
-    [
-      {
-        "file": "meine-anzeige.html", // der exakte Name des HTML-Dokuments
-        "name": "Eine Beispielanzeige", // ein frei wählbarere Name - für debugging
-        "startDate": "2020-04-01", // Datum, ab wann die Anzeige gezeigt werden soll
-        "endDate": "2020-04-30" // Datum, bis zu dem die Anzeige gezeigt werden soll
-      }
-    ]
-    ```
+```js
+"ads": {
+  // Legt fest, dass die verfügbaren Anzeigen jede Stunde geholt werden
+  "update_frequency": 3600,
+  // Legt die Datei fest, die unter 'url' vorzufinden ist und die Anzeigen definiert.
+  // Sie könnte also auch "ads.json" oder nur "anzeigen" heißen. Wichtig ist nur, dass der
+  // hier verwendete Bezeichner dem Namen der tatsächlichen Datei entspricht-
+  "adsConfig": "ads-config.json",
+  // url, unter der sich die ads-config.json und die Anzeigen in Form von HTML-Dateien befinden 
+  "url": "https://die.url.fuer.ads.de/"
+}
+```
+
+Der im Hintergrund laufende `AdsService` ruft dann zuerst die Datei `${url}${adsConfig}` ab. Diese sollte die Anzeigen im folgenden Format enthalten:
+
+```js
+[
+  {
+    // ein Name, der für debugging verwendet werden kann
+    "name": "Werbung für irgendwas",
+    // der exakte Name der HTML-Datei, die unter ${url} gefunden werden kann
+    "file": "sample-ad0.html",
+    // Datum, ab dem die Anzeige gezeigt werden soll
+    "startDate": "2020-04-01",
+    // Datum, bis zu dem die Anzeige gezeigt werden soll
+    "endDate": "2020-04-30"
+  },
+  {
+    "name": "Werbung für irgendwas anderes",
+    "file": "sample-ad1.html",
+    "startDate": "2020-04-01",
+    "endDate": "2020-04-30"
+  }
+]
+```
+
+Die hier beschriebenen Anzeigen werden dann sukzessive per HTTP-GET an `${url}${file}` geholt und, falls sie im Moment angezeigt werden sollen, in der `AdsPage` eingebunden.
