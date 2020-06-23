@@ -1,8 +1,12 @@
 # Freiraum.UP
 
+[TOC]
+
+## Vorstellung
+
 Dies ist die Neuimplementierung der Anwendung *Freiraum.UP*.
 
-![img](screenshots/Freiraum.UP.png)
+![img](documentation/Freiraum.UP.png)
 
 Die Anwendung bietet eine Übersicht im Alltag der Studierenden. Freiraum.UP beinhaltet aktuell die Funktionen:
 
@@ -73,6 +77,8 @@ wird als Objekt der folgenden Form konfiguriert.
 - `interactiveModes`: bestimmt, für welche Werte von `config.general.interactiveMode` die Seite aktiv sein soll. [true, false] würde also bedeuten, die Seite ist sowohl im interaktiven als auch nicht-interaktiven Modus benutzbar. Muss ein Array sein.
 
 Die so definierten Komponenten werden in der Hauptkomponente `src/app/home/home.page.ts` automatisch importiert und dann eingebettet.
+
+![Komponenten](documentation/Komponenten.svg)
 
 ## Erstellung neuer Seiten
 
