@@ -1,7 +1,5 @@
 # Freiraum.UP
 
-[TOC]
-
 ## Vorstellung
 
 Dies ist die Neuimplementierung der Anwendung *Freiraum.UP*.
