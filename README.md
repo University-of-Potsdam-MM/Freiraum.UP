@@ -22,7 +22,7 @@ im Format 16:9 entwickelt.
 
 ## Lokales Ausführen
 
-```bash
+```shell script
 # Abhängigkeiten installieren
 $ npm install
 # Server starten und Anwendung ausführen
@@ -31,7 +31,7 @@ $ ionic serve
 
 ## Build
 
-```bash
+```shell script
 $ npm install -g cordova ionic
 $ ionic cordova platform add browser  
 $ ionic cordova prepare browser
@@ -124,4 +124,34 @@ Der im Hintergrund laufende `AdsService` ruft dann zuerst die Datei `${url}${ads
 ]
 ```
 
-Die hier beschriebenen Anzeigen werden dann sukzessive per HTTP-GET an `${url}${file}` geholt und, falls sie im Moment angezeigt werden sollen, in der `AdsPage` eingebunden.
+Die hier beschriebenen Anzeigen werden dann sukzessive per HTTP-GET an `${url}${file}` geholt und, falls sie im Moment 
+angezeigt werden sollen, in der `AdsPage` eingebunden.
+
+## Deployment
+
+### Manuell
+
+Das Deployment der Anwendung erfolgt für den Browser mittels:
+
+```shell script
+# nur beim ersten Mal notwendig
+$ ionic cordova platform add browser
+$ ionic cordova prepare browser
+$ ionic cordova build browser --release
+```
+
+Das Ergebnis dieser Befehle ist unter anderem das Verzeichnis `/platforms/browser/www`. Der Inhalt dieses Verzeichnisses 
+muss mittels eines Webservers zugänglich gemacht werden.
+
+### Automatisch mittels CICD
+
+Alternativ besteht auch die Möglichkeit, die Anwendung von GitLab mittels CICD deployen zu lassen. Der Ablauf des 
+automatischen Deployments wird mit der Datei [.gitlab-ci.yml](./.gitlab-ci.yml) gesteuert. Aktuell wird die Anwendung 
+dadurch bei jedem Push auf den `master` automatisch gebaut, getestet und anschließend mittels der im dazugehörigen 
+GitLab-Projekt definierten Umgebungsvariablen deployed (siehe das Skript [deploy](./deploy)).
+
+Die benötigten Umgebungsvariablen sind:
+
+- `$BEARER_TOKEN`: Das Token, mit dem der `ApiService` der Anwendung Informationen von den verschiedenen APIs beziehen kann
+- `$SSH_DEPLOY_HOSTS`: Adresse der Hosts, auf denen die Anwendung deployed werden soll
+- `$SSH_DEPLOY_USER`: Der Benutzer auf den jeweiligen Hosts, welcher das letztliche Deployment abwickelt
