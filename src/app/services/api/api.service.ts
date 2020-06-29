@@ -1,7 +1,7 @@
 import {Injectable, OnInit} from '@angular/core';
 import {HttpClient, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 import {ConfigService} from '../config/config.service';
-import {Observable, Subject, timer} from 'rxjs';
+import {Observable, ReplaySubject, Subject, timer} from 'rxjs';
 import * as moment from 'moment';
 
 import {Meal, MensaResponse} from '../../../types/mensa.response';
@@ -82,7 +82,7 @@ export class ApiService {
       now: new Subject<IRoomReservation[]>(),
       soon: new Subject<IRoomReservation[]>()
     },
-    campusMapData: new Subject<CampusMapDataResponse>()
+    campusMapData: new ReplaySubject<CampusMapDataResponse>()
   };
 
   feedFunctions: {[feedName: string]: () => void} = {

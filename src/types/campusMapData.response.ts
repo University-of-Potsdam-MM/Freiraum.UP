@@ -1,4 +1,5 @@
 import {GeoJsonObject} from 'geojson';
+import {Campus} from "./Config";
 
 export interface ICrsProperties {
   name: string;
@@ -21,6 +22,10 @@ export interface IProperties {
   end: string;
   altitudeMode: string;
   begin: string;
+
+  campus: Campus;
+  category: string;
+  title: string;
 }
 
 export interface IGeometry {
@@ -36,7 +41,7 @@ export interface IFeature {
 
 export interface IGeo {
   crs: ICrs;
-  features: IFeature & GeoJsonObject[];
+  features: (IFeature & GeoJsonObject)[];
   type: string;
 }
 
