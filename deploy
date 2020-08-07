@@ -40,7 +40,7 @@ for config in "$configDir"/*.config.dist.json; do
   cp --recursive "$targetDir"/* "$deploySubDir"
 
   # Change the base href of the index.html file
-  sed -i "s#<base href=\"/\" />#<base href=\"/freiraumup/$deployName/\"/>#g" "$deploySubDir/index.html" || die 1 "Could not change base href"
+  sed -i "s#<base href=\"/\" />#<base href=\"/$deployName/\"/>#g" "$deploySubDir/index.html" || die 1 "Could not change base href"
 
   # finally copy corresponding config over
   cp "$config" "$deploySubDir/assets/config.json"
